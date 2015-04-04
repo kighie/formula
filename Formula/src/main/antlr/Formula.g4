@@ -1,4 +1,4 @@
-/** 
+/*
  * Copyright (c) 2012 IkChan Kwon kighie@gmail.com
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,10 @@ options {
 	language = Java;
 }
 
+// use command line option : -package kr.simula.formula.antlr
 
 @parser::header {
-	package kr.simula.formula.antlr;
+//	package kr.simula.formula.antlr;
 	
 	import java.util.List;
 	import java.util.LinkedList;
@@ -61,7 +62,7 @@ options {
 }
 
 @lexer::header {
-	package kr.simula.formula.antlr;
+//	package kr.simula.formula.antlr;
 }
 
 
@@ -97,7 +98,7 @@ funcCallExp returns [Gettable result]
 methodCallExp returns [Node result]
 	: qualifiedName 	{ Ref parent = $qualifiedName.result; }
 	'.' IDENT 			{ String methodName = $IDENT.text; }
-	'(' (arguments 		{ $result = handler.methodCall(parent, methodName, $arguments.nodeList) ; })? ')'
+	'(' arguments? ')'	{ $result = handler.methodCall(parent, methodName, $arguments.nodeList) ; }
 	;
 
 arguments  returns [List<Node> nodeList]
