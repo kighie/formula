@@ -47,7 +47,6 @@ public class FormulaException extends RuntimeException {
 	 */
 	public FormulaException(String message) {
 		super(message);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
