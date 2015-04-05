@@ -15,7 +15,7 @@
 package kr.simula.formula.func.logic;
 
 import kr.simula.formula.core.annotation.Arguments;
-import kr.simula.formula.def.AbstractFunction;
+import kr.simula.formula.func.AbstractFunction;
 
 /**
  * <pre>

@@ -110,4 +110,10 @@ public class MathTests extends ExpressionTests {
 		}
 	}
 
+	@Test
+	public void MOD(){
+		testExpression("=MOD(17,3)", new BigDecimal("2"));
+		testExpression("=MOD(29, 4)", new BigDecimal("1"));
+	}
+
 }

@@ -32,9 +32,15 @@ public class ExpressionBuilderTests extends ExpressionTests {
 	public void buildLiteralNumeric(){
 		testExpression("=1+3 * (4 + 15) - 31.5 / 10", new BigDecimal("54.85"));
 		testExpression("=(1+3 * 4 + 15 - 30 / 10)", new BigDecimal(25));
-		testExpression("=(1+3 * 4 + 15 - 30 % 10)", new BigDecimal(28));
+		testExpression("=(1+3 * 4 + 15 - 30 % / 10)", new BigDecimal("27.97"));
 		
 		testExpression("=(5 * -3 + 7)", new BigDecimal(-8));
+	}
+
+	@Test
+	public void buildNumericOp(){
+		testExpression("=2^3", new BigDecimal("8"));
+		testExpression("=2^8 / 2^5", new BigDecimal("8"));
 	}
 
 	@Test

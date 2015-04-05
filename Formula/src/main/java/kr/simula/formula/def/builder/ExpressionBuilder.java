@@ -41,7 +41,7 @@ import org.antlr.v4.runtime.TokenStream;
  * @author Ikchan Kwon
  *
  */
-public class ExpressionBuilder extends FormulaHandlerFactory implements FormulaBuilder {
+public class ExpressionBuilder implements FormulaBuilder, FormulaHandlerFactory {
 
 	protected BlockHelper blockHelper;
 	protected LiteralHelper literalHelper = new DefaultLiteralHelper();

@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.def;
+package kr.simula.formula.func;
 
 import kr.simula.formula.FormulaException;
 import kr.simula.formula.core.Function;

@@ -1,6 +1,9 @@
 // Generated from FormulaScript.g4 by ANTLR 4.4
 package kr.simula.formula.antlr;
 
+	
+	import kr.simula.formula.script.*;
+	import kr.simula.formula.script.build.*;
 
 
 //	package kr.simula.formula.antlr;
@@ -21,25 +24,35 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface FormulaScriptListener extends ParseTreeListener {
 	/**
-	 * Enter a parse tree produced by {@link FormulaScriptParser#formulaTerm}.
+	 * Enter a parse tree produced by {@link FormulaScriptParser#decodeStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterFormulaTerm(@NotNull FormulaScriptParser.FormulaTermContext ctx);
+	void enterDecodeStatement(@NotNull FormulaScriptParser.DecodeStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link FormulaScriptParser#formulaTerm}.
+	 * Exit a parse tree produced by {@link FormulaScriptParser#decodeStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitFormulaTerm(@NotNull FormulaScriptParser.FormulaTermContext ctx);
+	void exitDecodeStatement(@NotNull FormulaScriptParser.DecodeStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link FormulaScriptParser#comparison}.
+	 * Enter a parse tree produced by {@link FormulaScriptParser#exponential}.
 	 * @param ctx the parse tree
 	 */
-	void enterComparison(@NotNull FormulaScriptParser.ComparisonContext ctx);
+	void enterExponential(@NotNull FormulaScriptParser.ExponentialContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link FormulaScriptParser#comparison}.
+	 * Exit a parse tree produced by {@link FormulaScriptParser#exponential}.
 	 * @param ctx the parse tree
 	 */
-	void exitComparison(@NotNull FormulaScriptParser.ComparisonContext ctx);
+	void exitExponential(@NotNull FormulaScriptParser.ExponentialContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaScriptParser#assignBodyExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignBodyExpr(@NotNull FormulaScriptParser.AssignBodyExprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaScriptParser#assignBodyExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignBodyExpr(@NotNull FormulaScriptParser.AssignBodyExprContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FormulaScriptParser#formulaExpression}.
 	 * @param ctx the parse tree
@@ -51,6 +64,26 @@ public interface FormulaScriptListener extends ParseTreeListener {
 	 */
 	void exitFormulaExpression(@NotNull FormulaScriptParser.FormulaExpressionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link FormulaScriptParser#methodCallStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterMethodCallStatement(@NotNull FormulaScriptParser.MethodCallStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaScriptParser#methodCallStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitMethodCallStatement(@NotNull FormulaScriptParser.MethodCallStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaScriptParser#importStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterImportStatement(@NotNull FormulaScriptParser.ImportStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaScriptParser#importStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitImportStatement(@NotNull FormulaScriptParser.ImportStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link FormulaScriptParser#additiveExpression}.
 	 * @param ctx the parse tree
 	 */
@@ -60,16 +93,6 @@ public interface FormulaScriptListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAdditiveExpression(@NotNull FormulaScriptParser.AdditiveExpressionContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link FormulaScriptParser#qualifiedName}.
-	 * @param ctx the parse tree
-	 */
-	void enterQualifiedName(@NotNull FormulaScriptParser.QualifiedNameContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FormulaScriptParser#qualifiedName}.
-	 * @param ctx the parse tree
-	 */
-	void exitQualifiedName(@NotNull FormulaScriptParser.QualifiedNameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FormulaScriptParser#notExpression}.
 	 * @param ctx the parse tree
@@ -101,6 +124,116 @@ public interface FormulaScriptListener extends ParseTreeListener {
 	 */
 	void exitMultiplicative(@NotNull FormulaScriptParser.MultiplicativeContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link FormulaScriptParser#type}.
+	 * @param ctx the parse tree
+	 */
+	void enterType(@NotNull FormulaScriptParser.TypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaScriptParser#type}.
+	 * @param ctx the parse tree
+	 */
+	void exitType(@NotNull FormulaScriptParser.TypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaScriptParser#percent}.
+	 * @param ctx the parse tree
+	 */
+	void enterPercent(@NotNull FormulaScriptParser.PercentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaScriptParser#percent}.
+	 * @param ctx the parse tree
+	 */
+	void exitPercent(@NotNull FormulaScriptParser.PercentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaScriptParser#stringExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterStringExpression(@NotNull FormulaScriptParser.StringExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaScriptParser#stringExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitStringExpression(@NotNull FormulaScriptParser.StringExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaScriptParser#block}.
+	 * @param ctx the parse tree
+	 */
+	void enterBlock(@NotNull FormulaScriptParser.BlockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaScriptParser#block}.
+	 * @param ctx the parse tree
+	 */
+	void exitBlock(@NotNull FormulaScriptParser.BlockContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaScriptParser#methodCallExp}.
+	 * @param ctx the parse tree
+	 */
+	void enterMethodCallExp(@NotNull FormulaScriptParser.MethodCallExpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaScriptParser#methodCallExp}.
+	 * @param ctx the parse tree
+	 */
+	void exitMethodCallExp(@NotNull FormulaScriptParser.MethodCallExpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaScriptParser#formulaExpressionBase}.
+	 * @param ctx the parse tree
+	 */
+	void enterFormulaExpressionBase(@NotNull FormulaScriptParser.FormulaExpressionBaseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaScriptParser#formulaExpressionBase}.
+	 * @param ctx the parse tree
+	 */
+	void exitFormulaExpressionBase(@NotNull FormulaScriptParser.FormulaExpressionBaseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaScriptParser#formulaTerm}.
+	 * @param ctx the parse tree
+	 */
+	void enterFormulaTerm(@NotNull FormulaScriptParser.FormulaTermContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaScriptParser#formulaTerm}.
+	 * @param ctx the parse tree
+	 */
+	void exitFormulaTerm(@NotNull FormulaScriptParser.FormulaTermContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaScriptParser#comparison}.
+	 * @param ctx the parse tree
+	 */
+	void enterComparison(@NotNull FormulaScriptParser.ComparisonContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaScriptParser#comparison}.
+	 * @param ctx the parse tree
+	 */
+	void exitComparison(@NotNull FormulaScriptParser.ComparisonContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaScriptParser#loopCondition}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoopCondition(@NotNull FormulaScriptParser.LoopConditionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaScriptParser#loopCondition}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoopCondition(@NotNull FormulaScriptParser.LoopConditionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaScriptParser#qualifiedName}.
+	 * @param ctx the parse tree
+	 */
+	void enterQualifiedName(@NotNull FormulaScriptParser.QualifiedNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaScriptParser#qualifiedName}.
+	 * @param ctx the parse tree
+	 */
+	void exitQualifiedName(@NotNull FormulaScriptParser.QualifiedNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaScriptParser#ifStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterIfStatement(@NotNull FormulaScriptParser.IfStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaScriptParser#ifStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitIfStatement(@NotNull FormulaScriptParser.IfStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link FormulaScriptParser#funcCallExp}.
 	 * @param ctx the parse tree
 	 */
@@ -121,15 +254,15 @@ public interface FormulaScriptListener extends ParseTreeListener {
 	 */
 	void exitLogicalExpression(@NotNull FormulaScriptParser.LogicalExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link FormulaScriptParser#stringExpression}.
+	 * Enter a parse tree produced by {@link FormulaScriptParser#foreachStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterStringExpression(@NotNull FormulaScriptParser.StringExpressionContext ctx);
+	void enterForeachStatement(@NotNull FormulaScriptParser.ForeachStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link FormulaScriptParser#stringExpression}.
+	 * Exit a parse tree produced by {@link FormulaScriptParser#foreachStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitStringExpression(@NotNull FormulaScriptParser.StringExpressionContext ctx);
+	void exitForeachStatement(@NotNull FormulaScriptParser.ForeachStatementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FormulaScriptParser#operatorExpression}.
 	 * @param ctx the parse tree
@@ -151,15 +284,25 @@ public interface FormulaScriptListener extends ParseTreeListener {
 	 */
 	void exitFormulaScript(@NotNull FormulaScriptParser.FormulaScriptContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link FormulaScriptParser#methodCallExp}.
+	 * Enter a parse tree produced by {@link FormulaScriptParser#assignStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterMethodCallExp(@NotNull FormulaScriptParser.MethodCallExpContext ctx);
+	void enterAssignStatement(@NotNull FormulaScriptParser.AssignStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link FormulaScriptParser#methodCallExp}.
+	 * Exit a parse tree produced by {@link FormulaScriptParser#assignStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitMethodCallExp(@NotNull FormulaScriptParser.MethodCallExpContext ctx);
+	void exitAssignStatement(@NotNull FormulaScriptParser.AssignStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaScriptParser#variableDecl}.
+	 * @param ctx the parse tree
+	 */
+	void enterVariableDecl(@NotNull FormulaScriptParser.VariableDeclContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaScriptParser#variableDecl}.
+	 * @param ctx the parse tree
+	 */
+	void exitVariableDecl(@NotNull FormulaScriptParser.VariableDeclContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FormulaScriptParser#arguments}.
 	 * @param ctx the parse tree
@@ -170,14 +313,4 @@ public interface FormulaScriptListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitArguments(@NotNull FormulaScriptParser.ArgumentsContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link FormulaScriptParser#formulaExpressionBase}.
-	 * @param ctx the parse tree
-	 */
-	void enterFormulaExpressionBase(@NotNull FormulaScriptParser.FormulaExpressionBaseContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FormulaScriptParser#formulaExpressionBase}.
-	 * @param ctx the parse tree
-	 */
-	void exitFormulaExpressionBase(@NotNull FormulaScriptParser.FormulaExpressionBaseContext ctx);
 }

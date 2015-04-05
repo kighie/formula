@@ -19,6 +19,16 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface FormulaListener extends ParseTreeListener {
 	/**
+	 * Enter a parse tree produced by {@link FormulaParser#exponential}.
+	 * @param ctx the parse tree
+	 */
+	void enterExponential(@NotNull FormulaParser.ExponentialContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaParser#exponential}.
+	 * @param ctx the parse tree
+	 */
+	void exitExponential(@NotNull FormulaParser.ExponentialContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link FormulaParser#formulaTerm}.
 	 * @param ctx the parse tree
 	 */
@@ -108,6 +118,16 @@ public interface FormulaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFuncCallExp(@NotNull FormulaParser.FuncCallExpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaParser#percent}.
+	 * @param ctx the parse tree
+	 */
+	void enterPercent(@NotNull FormulaParser.PercentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaParser#percent}.
+	 * @param ctx the parse tree
+	 */
+	void exitPercent(@NotNull FormulaParser.PercentContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FormulaParser#logicalExpression}.
 	 * @param ctx the parse tree

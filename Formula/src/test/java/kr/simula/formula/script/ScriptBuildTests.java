@@ -1,4 +1,4 @@
-/* ******************************************************************************
+/* 
  * Copyright (c) 2012 IkChan Kwon kighie@gmail.com
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,23 +12,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.func;
-
+package kr.simula.formula.script;
 
 /**
- * <pre>
- * </pre>
- * @author Ikchan Kwon
- *
+ * <pre></pre>
+ * @author kighie@gmail.com
+ * @since 1.0
  */
-@SuppressWarnings("serial")
-public abstract class LogicalFunction extends AbstractFunction<Boolean> {
-
-	/**
-	 * @param returnType
-	 */
-	public LogicalFunction() {
-		super(Boolean.class);
-	}
+public class ScriptBuildTests {
 
 }

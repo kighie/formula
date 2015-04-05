@@ -19,7 +19,6 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 
 import kr.simula.formula.core.RtException;
-import kr.simula.formula.def.AbstractFunction;
 
 /**
  * <pre>

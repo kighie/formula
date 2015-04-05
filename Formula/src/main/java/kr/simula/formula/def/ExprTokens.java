@@ -25,11 +25,13 @@ public interface ExprTokens {
 	String LIT_DATE 		= "LIT_DATE";
 	String LIT_STRING 		= "LIT_STRING";
 	String OP_NUM_NEGATION 	= "OP_NUM_NEGATION";
+	String OP_PERCENT 		= "OP_PERCENT";
 	String OP_MINUS 		= "OP_MINUS";
 	String OP_PLUS 			= "OP_PLUS";
 	String OP_MULTI 		= "OP_MULTI";
 	String OP_DIVIDE 		= "OP_DIVIDE";
-	String OP_MOD 			= "OP_MOD";
+//	String OP_MOD 			= "OP_MOD";
+	String OP_POW			= "OP_POW";
 	String OP_NOT	 		= "OP_NOT";
 	String OP_AND	 		= "OP_AND";
 	String OP_OR	 		= "OP_OR";

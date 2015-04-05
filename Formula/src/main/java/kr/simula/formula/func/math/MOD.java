@@ -12,8 +12,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.func;
+package kr.simula.formula.func.math;
 
+import java.math.BigDecimal;
+
+import kr.simula.formula.core.annotation.Arguments;
+import kr.simula.formula.func.NumericFunction;
+import kr.simula.formula.func.base.MathFunctions;
 
 /**
  * <pre>
@@ -21,14 +26,15 @@ package kr.simula.formula.func;
  * @author Ikchan Kwon
  *
  */
-@SuppressWarnings("serial")
-public abstract class LogicalFunction extends AbstractFunction<Boolean> {
 
-	/**
-	 * @param returnType
-	 */
-	public LogicalFunction() {
-		super(Boolean.class);
+public class MOD extends NumericFunction{
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	@Arguments({BigDecimal.class, BigDecimal.class})
+	public BigDecimal eval(Object... args) {
+		checkArgCount(args, 2);
+		return MathFunctions.mod(toDecimal(args[0]), toDecimal(args[1]));
 	}
 
 }

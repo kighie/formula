@@ -140,12 +140,25 @@ unary  returns [Node result]
 		}
 	;
 
-multiplicative returns [Node result]
-    :	unary 	{ $result = $unary.result;  }
+percent  returns [Node result]
+	:	unary 	{ $result = $unary.result;  }
+    	('%' {$result = handler.operator(ExprTokens.OP_PERCENT, $result); } )?
+    ;
+
+    
+exponential returns [Node result]
+    :	percent 	{ $result = $percent.result;  }
     	(
-    		'*' 		op2 = unary 	{$result = handler.operator(ExprTokens.OP_MULTI, $result, $op2.result); }
-    		| '/' 		op2 = unary  	{$result = handler.operator(ExprTokens.OP_DIVIDE, $result, $op2.result); }
-    		| '%'		op2 = unary  	{$result = handler.operator(ExprTokens.OP_MOD, $result, $op2.result); }
+    		'^'		op2 = percent  	{$result = handler.operator(ExprTokens.OP_POW, $result, $op2.result); }
+    	)*
+    ;
+    
+multiplicative returns [Node result]
+    :	exponential 	{ $result = $exponential.result;  }
+    	(
+    		'*' 		op2 = exponential 	{$result = handler.operator(ExprTokens.OP_MULTI, $result, $op2.result); }
+    		| '/' 		op2 = exponential  	{$result = handler.operator(ExprTokens.OP_DIVIDE, $result, $op2.result); }
+//    		| '%'		op2 = exponential  	{$result = handler.operator(ExprTokens.OP_MOD, $result, $op2.result); }
     	)*
     ;
     

@@ -39,9 +39,10 @@ public class DefaultBinaryOperatorHelper extends BinaryOperatorHelper {
 	protected void initDefaults() {
 		super.initDefaults();
 
+		setFactory(ExprTokens.OP_POW, new DecimalBinaryOperatorFactory(POW));
 		setFactory(ExprTokens.OP_MULTI, new DecimalBinaryOperatorFactory(MULTIFLY));
 		setFactory(ExprTokens.OP_DIVIDE, new DecimalBinaryOperatorFactory(DIVIDE));
-		setFactory(ExprTokens.OP_MOD, new DecimalBinaryOperatorFactory(MOD));
+//		setFactory(ExprTokens.OP_MOD, new DecimalBinaryOperatorFactory(MOD));
 		setFactory(ExprTokens.OP_PLUS, new DecimalBinaryOperatorFactory(ADD));
 		setFactory(ExprTokens.OP_MINUS, new DecimalBinaryOperatorFactory(SUBTRACT));
 		setFactory(ExprTokens.OP_EQ, new CompareBinaryOperatorFactory(EQUALS));
@@ -55,6 +56,18 @@ public class DefaultBinaryOperatorHelper extends BinaryOperatorHelper {
 		setFactory(ExprTokens.OP_CONCAT, new StringBinaryOperatorFactory(CONCAT));
 	}
 
+
+	public static final Binary<BigDecimal,BigDecimal,BigDecimal> POW = new Binary<BigDecimal,BigDecimal,BigDecimal>() {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public BigDecimal eval(BigDecimal val1, BigDecimal val2) {
+				return val1.pow(val2.intValueExact());
+			}
+			
+			public String toString() { return "POW";};
+	};
+	
 	public static final Binary<BigDecimal,BigDecimal,BigDecimal> MULTIFLY = new Binary<BigDecimal,BigDecimal,BigDecimal>() {
 			private static final long serialVersionUID = 1L;
 
@@ -77,16 +90,16 @@ public class DefaultBinaryOperatorHelper extends BinaryOperatorHelper {
 		public String toString() { return "DIVIDE";};
 	};
 
-	public static final Binary<BigDecimal, BigDecimal, BigDecimal> MOD = new Binary<BigDecimal, BigDecimal, BigDecimal>() {
-		private static final long serialVersionUID = 1L;
-
-		@Override
-		public BigDecimal eval(BigDecimal val1, BigDecimal val2) {
-			return val1.remainder(val2);
-		}
-
-		public String toString() { return "MOD";};
-	};
+//	public static final Binary<BigDecimal, BigDecimal, BigDecimal> MOD = new Binary<BigDecimal, BigDecimal, BigDecimal>() {
+//		private static final long serialVersionUID = 1L;
+//
+//		@Override
+//		public BigDecimal eval(BigDecimal val1, BigDecimal val2) {
+//			return val1.remainder(val2);
+//		}
+//
+//		public String toString() { return "MOD";};
+//	};
 	
 	public static final Binary<BigDecimal, BigDecimal, BigDecimal> ADD = new Binary<BigDecimal, BigDecimal, BigDecimal>() {
 		private static final long serialVersionUID = 1L;

@@ -15,6 +15,7 @@
 package kr.simula.formula.def.builder;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import kr.simula.formula.core.Operator.Unary;
 import kr.simula.formula.core.factory.helper.UnaryOperatorHelper;
@@ -29,11 +30,14 @@ import kr.simula.formula.def.ExprTokens;
  */
 public class DefaultUnaryOperatorHelper extends UnaryOperatorHelper {
 	
+	private final static BigDecimal DEC100 = new BigDecimal("100");
+	
 	@Override
 	protected void initDefaults() {
 		super.initDefaults();
 
 		setFactory(ExprTokens.OP_NUM_NEGATION, new DecimalUnaryOperatorFactory(NEGATE));
+		setFactory(ExprTokens.OP_PERCENT, new DecimalUnaryOperatorFactory(PERCENT));
 		setFactory(ExprTokens.OP_NOT, new LogicalUnaryOperatorFactory(NOT));
 	}
 	
@@ -47,6 +51,18 @@ public class DefaultUnaryOperatorHelper extends UnaryOperatorHelper {
 		};
 		
 		public String toString() { return "NEGATE";}
+
+	};
+
+	public static final Unary<BigDecimal,BigDecimal> PERCENT = new Unary<BigDecimal,BigDecimal>() {
+		private static final long serialVersionUID = 1L;
+
+		@Override
+		public BigDecimal eval(BigDecimal val) {
+			return val.divide(DEC100, val.scale()+2 , RoundingMode.HALF_UP);
+		};
+		
+		public String toString() { return "PERCENT";}
 
 	};
 	

@@ -27,6 +27,18 @@ public class FormulaBaseListener implements FormulaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterExponential(@NotNull FormulaParser.ExponentialContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExponential(@NotNull FormulaParser.ExponentialContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFormulaTerm(@NotNull FormulaParser.FormulaTermContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -130,6 +142,18 @@ public class FormulaBaseListener implements FormulaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFuncCallExp(@NotNull FormulaParser.FuncCallExpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPercent(@NotNull FormulaParser.PercentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPercent(@NotNull FormulaParser.PercentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
