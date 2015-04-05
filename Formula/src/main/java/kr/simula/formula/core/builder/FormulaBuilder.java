@@ -24,9 +24,9 @@ import kr.simula.formula.core.Node;
  */
 public interface FormulaBuilder {
 
-	Node buildExpression(String expression);
+	Node build(String expression);
 
-	Node buildExpression(String expression, RootBuildContext rootContext);
+	Node build(String expression, RootBuildContext rootContext);
 	
 	
 }

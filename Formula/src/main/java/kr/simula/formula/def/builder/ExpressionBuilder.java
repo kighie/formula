@@ -19,7 +19,6 @@ import kr.simula.formula.antlr.FormulaParser;
 import kr.simula.formula.antlr.FormulaParser.FormulaExpressionContext;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.builder.FormulaBuilder;
-import kr.simula.formula.core.builder.FormulaHandler;
 import kr.simula.formula.core.builder.FormulaHandlerFactory;
 import kr.simula.formula.core.builder.RootBuildContext;
 import kr.simula.formula.core.factory.helper.BinaryOperatorHelper;
@@ -41,7 +40,7 @@ import org.antlr.v4.runtime.TokenStream;
  * @author Ikchan Kwon
  *
  */
-public class ExpressionBuilder implements FormulaBuilder, FormulaHandlerFactory {
+public class ExpressionBuilder implements FormulaBuilder, FormulaHandlerFactory<ExpressionHandler> {
 
 	protected BlockHelper blockHelper;
 	protected LiteralHelper literalHelper = new DefaultLiteralHelper();
@@ -53,28 +52,28 @@ public class ExpressionBuilder implements FormulaBuilder, FormulaHandlerFactory 
 	
 	
 	@Override
-	public FormulaHandler newHandler(RootBuildContext rootContext) {
+	public ExpressionHandler newHandler(RootBuildContext rootContext) {
 		return new ExpressionHandler(rootContext, 
 				blockHelper, literalHelper, refHelper, binaryOperatorHelper, unaryOperatorHelper, 
 				functionCallHelper, methodCallHelper);
 	}
 	
 	@Override
-	public FormulaHandler newHandler() {
+	public ExpressionHandler newHandler() {
 		return newHandler(new RootBuildContext() );
 	}
 
 	
 	
 	@Override
-	public Node buildExpression(String expression) {
-		FormulaHandler handler = newHandler();
+	public Node build(String expression) {
+		ExpressionHandler handler = newHandler();
 		return buildExpression(handler, expression);
 	}
 	
 	@Override
-	public Node buildExpression(String expression, RootBuildContext rootContext) {
-		FormulaHandler handler = newHandler(rootContext);
+	public Node build(String expression, RootBuildContext rootContext) {
+		ExpressionHandler handler = newHandler(rootContext);
 		return buildExpression(handler, expression);
 	}
 
@@ -86,7 +85,7 @@ public class ExpressionBuilder implements FormulaBuilder, FormulaHandlerFactory 
 	 * @param expression
 	 * @return
 	 */
-	public Node buildExpression(FormulaHandler handler, String expression){
+	private Node buildExpression(ExpressionHandler handler, String expression){
 		CharStream input = new ANTLRInputStream(expression);
 		FormulaLexer lexer = new FormulaLexer(input);
 		TokenStream tokenStream = new CommonTokenStream(lexer);

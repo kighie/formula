@@ -36,7 +36,7 @@ public class ExpressionTests {
 	}
 
 	protected Node buildExpression(String expr){
-		Node exprNode = builder.buildExpression(expr);
+		Node exprNode = builder.build(expr);
 		return exprNode;
 	}
 
@@ -45,7 +45,7 @@ public class ExpressionTests {
 	}
 	
 	protected Object eval(String expr, Context context){
-		Node exprNode = builder.buildExpression(expr);
+		Node exprNode = builder.build(expr);
 		System.out.println();
 		System.out.println(exprNode.getExpression());
 		System.out.println(exprNode);

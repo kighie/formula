@@ -16,11 +16,12 @@ package kr.simula.formula.script.build;
 
 import kr.simula.formula.core.builder.FormulaHandler;
 
+
 /**
  * <pre></pre>
  * @author kighie@gmail.com
  * @since 1.0
  */
-public interface FormulaScriptHandler {
+public interface FormulaScriptHandler extends FormulaHandler {
 	
 }
