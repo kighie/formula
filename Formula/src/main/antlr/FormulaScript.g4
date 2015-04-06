@@ -30,7 +30,7 @@ import Formula;
 @parser::header {
 	
 	import kr.simula.formula.script.*;
-	import kr.simula.formula.script.build.*;
+	import kr.simula.formula.script.statement.*;
 }
 
 @parser::members {
@@ -56,10 +56,10 @@ formulaScript
 block [Block stmtHolder]
 	: 
 	(
-		ifStatement				{ $stmtHolder.append($ifStatement); }
-		| foreachStatement		{ $stmtHolder.append($foreachStatement); }
-		| assignStatement		{ $stmtHolder.append($assignStatement); }
-		| methodCallStatement	{ $stmtHolder.append($methodCallStatement); }
+		ifStatement				{ $stmtHolder.append($ifStatement.ifstmt); }
+		| foreachStatement		{ $stmtHolder.append($foreachStatement.stmt); }
+		| assignStatement		{ $stmtHolder.append($assignStatement.stmt); }
+		| methodCallStatement	{ $stmtHolder.append($methodCallStatement.stmt); }
 	)*
 	;
 	
@@ -67,13 +67,13 @@ block [Block stmtHolder]
  * statements
  *************************************** */
 
-ifStatement 
-	: 'if' '(' logicalExpression ')' '{'  block? '}'
-	( 'elseif' '(' logicalExpression ')' '{' block? '}')*
-	( 'else' '{' block? '}')?
+ifStatement returns [IfStatement ifstmt]
+	: 'if' '(' logicalExpression ')' {$ifstmt = (IfStatement)handler.statement(ScriptTokens.IF); }'{'  block[$ifstmt]? '}'
+	( 'elseif' '(' logicalExpression ')' '{' block[$ifstmt]? '}')*
+	( 'else' '{' block[$ifstmt]? '}')?
 	;
 
-decodeStatement 
+decodeStatement  returns [Statement stmt]
 	: 'decode' '(' IDENT|qualifiedName ')' '{'
 		(
 			BOOLEAN 			//{ $result = handler.literal( ExprTokens.LIT_BOOLEAN, $BOOLEAN.text); }
@@ -84,13 +84,13 @@ decodeStatement
 	'}'
 	;
 
-foreachStatement 
+foreachStatement returns [Statement stmt]
 	: 'foreach' '(' loopCondition ')' '{'
-		block?
+		//block?
 	'}'
 	;
 	
-loopCondition
+loopCondition 
 	: IDENT 
 	(
 		( ':' var=IDENT )
@@ -98,14 +98,14 @@ loopCondition
 	)	
 	;
 
-methodCallStatement
+methodCallStatement  returns [Statement stmt]
 	: methodCallExp END_OF_STMT
 	;
 	
 /* *************************************
  * assign
  *************************************** */
-assignStatement
+assignStatement  returns [Statement stmt]
 	: (IDENT|qualifiedName) ':=' ( formulaExpressionBase | decodeStatement )
 	END_OF_STMT
 	; 

@@ -12,12 +12,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.def.builder;
+package kr.simula.formula.expr;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
 
-import kr.simula.formula.ExpressionTests;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.func.base.MathFunctions;
 import kr.simula.formula.util.StopWatch;
@@ -30,7 +29,7 @@ import org.junit.Test;
  * @author Ikchan Kwon
  *
  */
-public class FunctionBuildTests extends ExpressionTests {
+public class FunctionBuildTests extends AbstractExpressionTests {
 
 	private StopWatch stopwatch = new StopWatch();
 

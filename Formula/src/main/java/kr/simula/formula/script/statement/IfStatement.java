@@ -23,7 +23,7 @@ import kr.simula.formula.core.Gettable;
  * @author Ikchan Kwon
  *
  */
-public class IfStatement extends AbstractStatement {
+public class IfStatement extends AbstractBlockStatement {
 
 	private Gettable<Boolean> condition;
 	
@@ -37,16 +37,17 @@ public class IfStatement extends AbstractStatement {
 
 	@Override
 	public String getExpression() {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder buf = new StringBuilder();
+		buf.append("if(").append(condition.getExpression()).append(") {\n");
+		getBodyExpression(buf);
+		buf.append("}");
+		return buf.toString();
 	}
 	
 	@Override
 	public void eval(Context context) {
 		if( condition.get(context) ){
-			
+			evalBody(context);
 		}
-	}
-
-	
+	}	
 }

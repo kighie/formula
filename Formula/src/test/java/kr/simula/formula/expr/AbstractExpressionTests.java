@@ -12,12 +12,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula;
+package kr.simula.formula.expr;
 
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Node;
-import kr.simula.formula.def.builder.ExpressionBuilder;
+import kr.simula.formula.expr.builder.ExpressionBuilder;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -27,7 +27,7 @@ import org.junit.BeforeClass;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class ExpressionTests {
+public abstract class AbstractExpressionTests {
 	protected static ExpressionBuilder builder;
 	
 	@BeforeClass

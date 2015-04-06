@@ -16,7 +16,7 @@ package kr.simula.formula.func;
 
 import java.math.BigDecimal;
 
-import kr.simula.formula.ExpressionTests;
+import kr.simula.formula.expr.AbstractExpressionTests;
 
 import org.junit.Test;
 
@@ -26,7 +26,7 @@ import org.junit.Test;
  * @author Ikchan Kwon
  *
  */
-public class LogicalTests  extends ExpressionTests {
+public class LogicalTests  extends AbstractExpressionTests {
 
 	@Test
 	public void AND(){

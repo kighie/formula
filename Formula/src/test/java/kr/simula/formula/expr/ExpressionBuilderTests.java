@@ -12,11 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.def.builder;
+package kr.simula.formula.expr;
 
 import java.math.BigDecimal;
-
-import kr.simula.formula.ExpressionTests;
 
 import org.junit.Test;
 
@@ -26,7 +24,7 @@ import org.junit.Test;
  * @author Ikchan Kwon
  *
  */
-public class ExpressionBuilderTests extends ExpressionTests {
+public class ExpressionBuilderTests extends AbstractExpressionTests {
 
 	@Test
 	public void buildLiteralNumeric(){

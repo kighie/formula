@@ -12,9 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.def.builder;
+package kr.simula.formula.script.statement;
 
-import kr.simula.formula.core.factory.helper.FunctionCallHelper;
+import java.util.LinkedList;
+import java.util.List;
+
+import kr.simula.formula.core.Block;
+import kr.simula.formula.core.Context;
+import kr.simula.formula.core.Statement;
 
 /**
  * <pre>
@@ -22,20 +27,24 @@ import kr.simula.formula.core.factory.helper.FunctionCallHelper;
  * @author Ikchan Kwon
  *
  */
-public class DefaultFunctionCallHelper extends FunctionCallHelper {
+public abstract class AbstractBlockStatement extends AbstractStatement implements Block {
+	private List<Statement> stmtList = new LinkedList<Statement>();
 	
-	protected final static String FUNC_CLASSPATH = "kr.simula.formula.func";
-
 	@Override
-	protected final void initDefaults() {
-		super.initDefaults();
-
-		loadAndRegisterFunctions(this.getClass().getClassLoader(), FUNC_CLASSPATH);
-		
-		initCustomFunctions();
+	public void append(Statement node) {
+		stmtList.add(node);
+	}
+	
+	protected void getBodyExpression(StringBuilder buf ) {
+		for(Statement stmt : stmtList){
+			buf.append(stmt.getExpression()).append("\n");
+		}
+	}
+	
+	protected void evalBody(Context context){
+		for(Statement stmt : stmtList){
+			stmt.eval(context);
+		}
 	}
 
-	protected void initCustomFunctions(){
-		
-	}
 }

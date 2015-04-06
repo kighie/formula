@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.def.builder;
+package kr.simula.formula.expr.builder;
 
 import kr.simula.formula.antlr.FormulaLexer;
 import kr.simula.formula.antlr.FormulaParser;

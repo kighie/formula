@@ -16,7 +16,7 @@ package kr.simula.formula.func;
 
 import java.math.BigDecimal;
 
-import kr.simula.formula.ExpressionTests;
+import kr.simula.formula.expr.AbstractExpressionTests;
 
 import org.junit.Test;
 
@@ -25,7 +25,7 @@ import org.junit.Test;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class MathTests extends ExpressionTests {
+public class MathTests extends AbstractExpressionTests {
 
 	@Test
 	public void ABS(){
