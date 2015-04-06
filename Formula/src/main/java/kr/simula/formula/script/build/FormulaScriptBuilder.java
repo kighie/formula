@@ -46,7 +46,7 @@ import org.antlr.v4.runtime.TokenStream;
  */
 public class FormulaScriptBuilder implements FormulaBuilder, FormulaHandlerFactory<FormulaScriptHandler> {
 
-	protected BlockHelper blockHelper = new BlockHelper();
+	protected BlockHelper blockHelper = new ScriptBlockHelper();
 	protected StatementHelper statementHelper = new StatementHelper();
 	protected LiteralHelper literalHelper = new ExprLiteralHelper();
 	protected RefHelper refHelper = new RefHelper();

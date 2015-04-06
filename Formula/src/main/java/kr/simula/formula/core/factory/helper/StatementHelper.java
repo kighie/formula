@@ -16,6 +16,10 @@ package kr.simula.formula.core.factory.helper;
 
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.Statement;
+import kr.simula.formula.core.builder.BuildContext;
+import kr.simula.formula.core.builder.BuildException;
+import kr.simula.formula.core.factory.BlockFactory;
+import kr.simula.formula.core.factory.StatementFactory;
 
 /**
  * <pre>
@@ -23,17 +27,23 @@ import kr.simula.formula.core.Statement;
  * @author Ikchan Kwon
  *
  */
-public class StatementHelper {
+public class StatementHelper extends AbstractHelper<StatementFactory> {
+
+
 
 	/**<pre>
 	 * </pre>
+	 * @param current
 	 * @param token
 	 * @param args
 	 * @return
 	 */
-	public Statement create(String token, Node[] args) {
-		// TODO Auto-generated method stub
-		return null;
+	public Statement create(BuildContext context, String token, Node[] args) {
+		StatementFactory factory = factories.get(token);
+		if(factory == null){
+			throw new BuildException("StatementFactory for " + token + " is not registered.");
+		}
+		return factory.create(context, token, args);
 	}
 
 }

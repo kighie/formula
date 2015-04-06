@@ -20,8 +20,10 @@ package kr.simula.formula.core;
  * @date 2012. 10. 11.
  * @since	1.0
  */
-public interface Block extends Statement {
+public interface Block extends Node {
 	
 	void append(Statement node);
+	
+	void eval(Context context);
 	
 }

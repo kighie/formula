@@ -49,17 +49,40 @@ import Formula;
  *************************************** */
 
 formulaScript returns [Script script]
-	: importStatement*
-		variableDecl*
+	: { $script = (Script)handler.block(ScriptTokens.SCRIPT); }
+		(importStatement 	{ $script.append($importStatement.stmt); })*
+		blockContents[$script]
+		EOF
+	  { handler.endBlock();}
 	;
 
-block [Block stmtHolder]
+/* *************************************
+ * import
+ *************************************** */
+importStatement	returns [Statement stmt]
+	: 'import' qualifiedName END_OF_STMT
+	;
+
+/* *************************************
+ * declare
+ *************************************** */
+variableDecl	returns [Statement stmt]
+	: type IDENT assignBodyExpr?
+	END_OF_STMT
+	;
+
+type : IDENT | qualifiedName ;
+
+
+
+blockContents [Block stmtHolder]
 	: 
 	(
 		ifStatement				{ $stmtHolder.append($ifStatement.ifstmt); }
 		| foreachStatement		{ $stmtHolder.append($foreachStatement.stmt); }
 		| assignStatement		{ $stmtHolder.append($assignStatement.stmt); }
 		| methodCallStatement	{ $stmtHolder.append($methodCallStatement.stmt); }
+		| variableDecl 			{ $stmtHolder.append($variableDecl.stmt); }
 	)*
 	;
 	
@@ -68,9 +91,9 @@ block [Block stmtHolder]
  *************************************** */
 
 ifStatement returns [IfStatement ifstmt]
-	: 'if' '(' logicalExpression ')' {$ifstmt = (IfStatement)handler.statement(ScriptTokens.IF); }'{'  block[$ifstmt]? '}'
-	( 'elseif' '(' logicalExpression ')' '{' block[$ifstmt]? '}')*
-	( 'else' '{' block[$ifstmt]? '}')?
+	: 'if' '(' logicalExpression ')' {$ifstmt = (IfStatement)handler.statement(ScriptTokens.IF); }'{'  blockContents[$ifstmt]? '}'
+	( 'elseif' '(' logicalExpression ')' '{' blockContents[$ifstmt]? '}')*
+	( 'else' '{' blockContents[$ifstmt]? '}')?
 	;
 
 decodeStatement  returns [Statement stmt]
@@ -113,24 +136,7 @@ assignStatement  returns [Statement stmt]
 assignBodyExpr
 	: ':=' ( formulaExpressionBase | decodeStatement )
 	; 
-/* *************************************
- * import
- *************************************** */
-importStatement
-	: 'import' qualifiedName END_OF_STMT
-	;
-
-/* *************************************
- * declare
- *************************************** */
-variableDecl
-	: type IDENT assignBodyExpr?
-	END_OF_STMT
-	;
-
-type : IDENT | qualifiedName ;
-
-
+	
 
 /* *********************************************
 	Lexer rules

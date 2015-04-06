@@ -50,8 +50,6 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	
 	protected BuildContext current;
 	
-	protected Node rootNode;
-	
 	
 	/**
 	 * @param rootContext
@@ -70,8 +68,7 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 			UnaryOperatorHelper unaryOperatorHelper,
 			FunctionCallHelper functionCallHelper,
 			MethodCallHelper methodCallHelper, StatementHelper statementHelper) {
-		super();
-		this.rootContext = rootContext;
+		this.current = this.rootContext = rootContext;
 		this.blockHelper = blockHelper;
 		this.literalHelper = literalHelper;
 		this.refHelper = refHelper;
@@ -82,11 +79,6 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 		this.statementHelper = statementHelper;
 	}
 
-
-	@Override
-	public Node getRootNode() {
-		return rootNode;
-	}
 
 	@Override
 	public BuildContext current(){
@@ -111,8 +103,8 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	
 	@Override
 	public Block block(String token){
-		Block block = blockHelper.create(current, token);
 		beginScope();
+		Block block = blockHelper.create(current, token);
 		return block;
 	}
 	
@@ -161,6 +153,6 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	
 	@Override
 	public Statement statement(String token, Node... args) {
-		return statementHelper.create(token, args);
+		return statementHelper.create(current, token, args);
 	}
 }

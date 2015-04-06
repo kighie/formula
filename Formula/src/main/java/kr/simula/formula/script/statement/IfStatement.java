@@ -16,6 +16,7 @@ package kr.simula.formula.script.statement;
 
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.Statement;
 import kr.simula.formula.core.wrapper.AbstractBlock;
 
 /**
@@ -24,7 +25,7 @@ import kr.simula.formula.core.wrapper.AbstractBlock;
  * @author Ikchan Kwon
  *
  */
-public class IfStatement extends AbstractBlock {
+public class IfStatement extends AbstractBlock implements Statement{
 
 	private Gettable<Boolean> condition;
 	

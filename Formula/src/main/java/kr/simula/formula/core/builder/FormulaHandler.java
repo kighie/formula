@@ -31,14 +31,6 @@ public interface FormulaHandler {
 	
 	/**
 	 * <pre>
-	 * Gets root node.
-	 * </pre>
-	 * @return
-	 */
-	Node getRootNode();
-	
-	/**
-	 * <pre>
 	 * Gets the build time cursor context
 	 * </pre>
 	 * @return

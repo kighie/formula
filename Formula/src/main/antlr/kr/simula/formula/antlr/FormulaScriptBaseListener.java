@@ -80,18 +80,6 @@ public class FormulaScriptBaseListener implements FormulaScriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMethodCallStatement(@NotNull FormulaScriptParser.MethodCallStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitMethodCallStatement(@NotNull FormulaScriptParser.MethodCallStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterImportStatement(@NotNull FormulaScriptParser.ImportStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -104,6 +92,18 @@ public class FormulaScriptBaseListener implements FormulaScriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterMethodCallStatement(@NotNull FormulaScriptParser.MethodCallStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMethodCallStatement(@NotNull FormulaScriptParser.MethodCallStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterAdditiveExpression(@NotNull FormulaScriptParser.AdditiveExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -111,6 +111,18 @@ public class FormulaScriptBaseListener implements FormulaScriptListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitAdditiveExpression(@NotNull FormulaScriptParser.AdditiveExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBlockContents(@NotNull FormulaScriptParser.BlockContentsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBlockContents(@NotNull FormulaScriptParser.BlockContentsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -183,18 +195,6 @@ public class FormulaScriptBaseListener implements FormulaScriptListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitStringExpression(@NotNull FormulaScriptParser.StringExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterBlock(@NotNull FormulaScriptParser.BlockContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitBlock(@NotNull FormulaScriptParser.BlockContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -344,18 +344,6 @@ public class FormulaScriptBaseListener implements FormulaScriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAssignStatement(@NotNull FormulaScriptParser.AssignStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitAssignStatement(@NotNull FormulaScriptParser.AssignStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterVariableDecl(@NotNull FormulaScriptParser.VariableDeclContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -363,6 +351,18 @@ public class FormulaScriptBaseListener implements FormulaScriptListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitVariableDecl(@NotNull FormulaScriptParser.VariableDeclContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAssignStatement(@NotNull FormulaScriptParser.AssignStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAssignStatement(@NotNull FormulaScriptParser.AssignStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

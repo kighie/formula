@@ -12,7 +12,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.script;
+package kr.simula.formula.core.factory;
+
+import kr.simula.formula.core.Node;
+import kr.simula.formula.core.Statement;
+import kr.simula.formula.core.builder.BuildContext;
 
 /**
  * <pre>
@@ -20,10 +24,8 @@ package kr.simula.formula.script;
  * @author Ikchan Kwon
  *
  */
-public interface ScriptTokens {
-
-	String SCRIPT 		= "SCRIPT";
-	String IF 			= "if";
-	String ELSEIF 		= "elseif";
-	String ELSE 		= "else";
+public interface StatementFactory {
+	
+	Statement create(BuildContext context, String token, Node[] args);
+	
 }
