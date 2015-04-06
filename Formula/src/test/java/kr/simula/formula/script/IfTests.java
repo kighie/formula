@@ -1,4 +1,4 @@
-/* ******************************************************************************
+/* 
  * Copyright (c) 2012 IkChan Kwon kighie@gmail.com
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,30 +12,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.expr.builder;
+package kr.simula.formula.script;
 
-import kr.simula.formula.core.factory.helper.FunctionCallHelper;
+import org.junit.Test;
 
 /**
- * <pre>
- * </pre>
- * @author Ikchan Kwon
- *
+ * <pre></pre>
+ * @author kighie@gmail.com
+ * @since 1.0
  */
-public class DefaultFunctionCallHelper extends FunctionCallHelper {
-	
-	protected final static String FUNC_CLASSPATH = "kr.simula.formula.func";
+public class IfTests extends AbstractScriptTests {
 
-	@Override
-	protected final void initDefaults() {
-		super.initDefaults();
-
-		loadAndRegisterFunctions(this.getClass().getClassLoader(), FUNC_CLASSPATH);
-		
-		initCustomFunctions();
-	}
-
-	protected void initCustomFunctions(){
-		
+	@Test
+	public void basic(){
+		testScript("if(true) { }", null);
 	}
 }

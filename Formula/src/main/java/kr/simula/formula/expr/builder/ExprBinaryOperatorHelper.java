@@ -31,7 +31,7 @@ import kr.simula.formula.expr.ExprTokens;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class DefaultBinaryOperatorHelper extends BinaryOperatorHelper {
+public class ExprBinaryOperatorHelper extends BinaryOperatorHelper {
 
 	public static final MathContext DIVIDE_MATH_CONTEXT = new MathContext(10, RoundingMode.HALF_UP);
 	

@@ -28,7 +28,7 @@ import kr.simula.formula.expr.ExprTokens;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class DefaultUnaryOperatorHelper extends UnaryOperatorHelper {
+public class ExprUnaryOperatorHelper extends UnaryOperatorHelper {
 	
 	private final static BigDecimal DEC100 = new BigDecimal("100");
 	

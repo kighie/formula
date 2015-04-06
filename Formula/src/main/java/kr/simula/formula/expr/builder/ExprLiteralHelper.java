@@ -33,7 +33,7 @@ import kr.simula.formula.expr.ExprTokens;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class DefaultLiteralHelper extends LiteralHelper{
+public class ExprLiteralHelper extends LiteralHelper{
 
 	@Override
 	protected final void initDefaults(){
