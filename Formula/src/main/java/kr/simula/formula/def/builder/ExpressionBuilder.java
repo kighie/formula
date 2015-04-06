@@ -22,7 +22,6 @@ import kr.simula.formula.core.builder.FormulaBuilder;
 import kr.simula.formula.core.builder.FormulaHandlerFactory;
 import kr.simula.formula.core.builder.RootBuildContext;
 import kr.simula.formula.core.factory.helper.BinaryOperatorHelper;
-import kr.simula.formula.core.factory.helper.BlockHelper;
 import kr.simula.formula.core.factory.helper.FunctionCallHelper;
 import kr.simula.formula.core.factory.helper.LiteralHelper;
 import kr.simula.formula.core.factory.helper.MethodCallHelper;
@@ -42,7 +41,6 @@ import org.antlr.v4.runtime.TokenStream;
  */
 public class ExpressionBuilder implements FormulaBuilder, FormulaHandlerFactory<ExpressionHandler> {
 
-	protected BlockHelper blockHelper;
 	protected LiteralHelper literalHelper = new DefaultLiteralHelper();
 	protected RefHelper refHelper = new RefHelper();
 	protected BinaryOperatorHelper binaryOperatorHelper = new DefaultBinaryOperatorHelper();
@@ -54,7 +52,7 @@ public class ExpressionBuilder implements FormulaBuilder, FormulaHandlerFactory<
 	@Override
 	public ExpressionHandler newHandler(RootBuildContext rootContext) {
 		return new ExpressionHandler(rootContext, 
-				blockHelper, literalHelper, refHelper, binaryOperatorHelper, unaryOperatorHelper, 
+				literalHelper, refHelper, binaryOperatorHelper, unaryOperatorHelper, 
 				functionCallHelper, methodCallHelper);
 	}
 	

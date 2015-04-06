@@ -81,12 +81,6 @@ public class FormulaScriptParser extends Parser {
 	public ATN getATN() { return _ATN; }
 
 
-	  	private FormulaScriptHandler scriptHandler;
-	  	
-	  	
-	  	public void setScriptHandler(FormulaScriptHandler scriptHandler){
-	  		this.scriptHandler = scriptHandler;
-	  	}
 	  	
 
 
@@ -1497,13 +1491,13 @@ public class FormulaScriptParser extends Parser {
 
 	public static class ExponentialContext extends ParserRuleContext {
 		public Node result;
-		public UnaryContext unary;
-		public UnaryContext op2;
-		public List<UnaryContext> unary() {
-			return getRuleContexts(UnaryContext.class);
+		public PercentContext percent;
+		public PercentContext op2;
+		public List<PercentContext> percent() {
+			return getRuleContexts(PercentContext.class);
 		}
-		public UnaryContext unary(int i) {
-			return getRuleContext(UnaryContext.class,i);
+		public PercentContext percent(int i) {
+			return getRuleContext(PercentContext.class,i);
 		}
 		public ExponentialContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1526,8 +1520,8 @@ public class FormulaScriptParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(286); ((ExponentialContext)_localctx).unary = unary();
-			 ((ExponentialContext)_localctx).result =  ((ExponentialContext)_localctx).unary.result;  
+			setState(286); ((ExponentialContext)_localctx).percent = percent();
+			 ((ExponentialContext)_localctx).result =  ((ExponentialContext)_localctx).percent.result;  
 			setState(294);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -1535,7 +1529,7 @@ public class FormulaScriptParser extends Parser {
 				{
 				{
 				setState(288); match(T__23);
-				setState(289); ((ExponentialContext)_localctx).op2 = ((ExponentialContext)_localctx).unary = unary();
+				setState(289); ((ExponentialContext)_localctx).op2 = ((ExponentialContext)_localctx).percent = percent();
 				((ExponentialContext)_localctx).result =  handler.operator(ExprTokens.OP_POW, _localctx.result, ((ExponentialContext)_localctx).op2.result); 
 				}
 				}
@@ -2163,8 +2157,8 @@ public class FormulaScriptParser extends Parser {
 		"\u010e\3\2\2\2\u0116\u0111\3\2\2\2\u0117\u0118\3\2\2\2\u0118\u0119\b\25"+
 		"\1\2\u0119)\3\2\2\2\u011a\u011b\5(\25\2\u011b\u011e\b\26\1\2\u011c\u011d"+
 		"\7\32\2\2\u011d\u011f\b\26\1\2\u011e\u011c\3\2\2\2\u011e\u011f\3\2\2\2"+
-		"\u011f+\3\2\2\2\u0120\u0121\5(\25\2\u0121\u0128\b\27\1\2\u0122\u0123\7"+
-		"\n\2\2\u0123\u0124\5(\25\2\u0124\u0125\b\27\1\2\u0125\u0127\3\2\2\2\u0126"+
+		"\u011f+\3\2\2\2\u0120\u0121\5*\26\2\u0121\u0128\b\27\1\2\u0122\u0123\7"+
+		"\n\2\2\u0123\u0124\5*\26\2\u0124\u0125\b\27\1\2\u0125\u0127\3\2\2\2\u0126"+
 		"\u0122\3\2\2\2\u0127\u012a\3\2\2\2\u0128\u0126\3\2\2\2\u0128\u0129\3\2"+
 		"\2\2\u0129-\3\2\2\2\u012a\u0128\3\2\2\2\u012b\u012c\5,\27\2\u012c\u0137"+
 		"\b\30\1\2\u012d\u012e\7\20\2\2\u012e\u012f\5,\27\2\u012f\u0130\b\30\1"+

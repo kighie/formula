@@ -14,7 +14,16 @@
  */
 package kr.simula.formula.script.build;
 
-import kr.simula.formula.core.builder.FormulaHandler;
+import kr.simula.formula.core.builder.AbstractFormulaHandler;
+import kr.simula.formula.core.builder.RootBuildContext;
+import kr.simula.formula.core.factory.helper.BinaryOperatorHelper;
+import kr.simula.formula.core.factory.helper.BlockHelper;
+import kr.simula.formula.core.factory.helper.FunctionCallHelper;
+import kr.simula.formula.core.factory.helper.LiteralHelper;
+import kr.simula.formula.core.factory.helper.MethodCallHelper;
+import kr.simula.formula.core.factory.helper.RefHelper;
+import kr.simula.formula.core.factory.helper.StatementHelper;
+import kr.simula.formula.core.factory.helper.UnaryOperatorHelper;
 
 
 /**
@@ -22,6 +31,28 @@ import kr.simula.formula.core.builder.FormulaHandler;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public interface FormulaScriptHandler extends FormulaHandler {
+public class FormulaScriptHandler extends AbstractFormulaHandler {
+
+	/**
+	 * @param rootContext
+	 * @param blockHelper
+	 * @param literalHelper
+	 * @param refHelper
+	 * @param binaryOperatorHelper
+	 * @param unaryOperatorHelper
+	 * @param functionCallHelper
+	 * @param methodCallHelper
+	 * @param statementHelper
+	 */
+	public FormulaScriptHandler(RootBuildContext rootContext,
+			BlockHelper blockHelper, LiteralHelper literalHelper,
+			RefHelper refHelper, BinaryOperatorHelper binaryOperatorHelper,
+			UnaryOperatorHelper unaryOperatorHelper,
+			FunctionCallHelper functionCallHelper,
+			MethodCallHelper methodCallHelper, StatementHelper statementHelper) {
+		super(rootContext, blockHelper, literalHelper, refHelper, binaryOperatorHelper,
+				unaryOperatorHelper, functionCallHelper, methodCallHelper,
+				statementHelper);
+	}
 	
 }

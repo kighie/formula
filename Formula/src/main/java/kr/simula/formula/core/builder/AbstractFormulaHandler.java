@@ -21,12 +21,14 @@ import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Literal;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.Ref;
+import kr.simula.formula.core.Statement;
 import kr.simula.formula.core.factory.helper.BinaryOperatorHelper;
 import kr.simula.formula.core.factory.helper.BlockHelper;
 import kr.simula.formula.core.factory.helper.FunctionCallHelper;
 import kr.simula.formula.core.factory.helper.LiteralHelper;
 import kr.simula.formula.core.factory.helper.MethodCallHelper;
 import kr.simula.formula.core.factory.helper.RefHelper;
+import kr.simula.formula.core.factory.helper.StatementHelper;
 import kr.simula.formula.core.factory.helper.UnaryOperatorHelper;
 
 /**
@@ -44,7 +46,8 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	protected final UnaryOperatorHelper unaryOperatorHelper ;
 	protected final FunctionCallHelper functionCallHelper ;
 	protected final MethodCallHelper methodCallHelper ;
-
+	protected final StatementHelper statementHelper;
+	
 	protected BuildContext current;
 	
 	protected Node rootNode;
@@ -59,16 +62,16 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	 * @param unaryOperatorHelper
 	 * @param functionCallHelper
 	 * @param methodCallHelper
+	 * @param statementHelper
 	 */
 	public AbstractFormulaHandler(RootBuildContext rootContext,
 			BlockHelper blockHelper, LiteralHelper literalHelper,
 			RefHelper refHelper, BinaryOperatorHelper binaryOperatorHelper,
 			UnaryOperatorHelper unaryOperatorHelper,
 			FunctionCallHelper functionCallHelper,
-			MethodCallHelper methodCallHelper) {
+			MethodCallHelper methodCallHelper, StatementHelper statementHelper) {
 		super();
-		current = this.rootContext = rootContext;
-		
+		this.rootContext = rootContext;
 		this.blockHelper = blockHelper;
 		this.literalHelper = literalHelper;
 		this.refHelper = refHelper;
@@ -76,9 +79,10 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 		this.unaryOperatorHelper = unaryOperatorHelper;
 		this.functionCallHelper = functionCallHelper;
 		this.methodCallHelper = methodCallHelper;
+		this.statementHelper = statementHelper;
 	}
 
-	
+
 	@Override
 	public Node getRootNode() {
 		return rootNode;
@@ -154,5 +158,9 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	public Ref methodCall(Ref parent, String name, List<Node> args) {
 		return methodCallHelper.create(current, parent, name, args);
 	}
-
+	
+	@Override
+	public Statement statement(String token, Node... args) {
+		return statementHelper.create(token, args);
+	}
 }

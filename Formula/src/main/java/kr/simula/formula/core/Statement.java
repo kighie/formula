@@ -20,8 +20,8 @@ package kr.simula.formula.core;
  * @since	1.0
  * @param <T>
  */
-public interface Executable extends Node {
+public interface Statement extends Node {
 
-	void execute(Context context);
+	void eval(Context context);
 	
 }

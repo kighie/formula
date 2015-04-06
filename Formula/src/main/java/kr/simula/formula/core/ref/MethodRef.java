@@ -15,7 +15,7 @@
 package kr.simula.formula.core.ref;
 
 import kr.simula.formula.core.Context;
-import kr.simula.formula.core.Executable;
+import kr.simula.formula.core.Statement;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Ref;
@@ -29,7 +29,7 @@ import kr.simula.formula.core.util.RefUtils;
  * @author Ikchan Kwon
  *
  */
-public class MethodRef<T> extends ExternalRef<T> implements Ref, Gettable<T>, Executable {
+public class MethodRef<T> extends ExternalRef<T> implements Ref, Gettable<T>, Statement {
 
 	protected final Gettable<?> parent;
 	protected final Gettable<?>[] args;
@@ -82,7 +82,7 @@ public class MethodRef<T> extends ExternalRef<T> implements Ref, Gettable<T>, Ex
 	}
 
 	@Override
-	public void execute(Context context) {
+	public void eval(Context context) {
 		get(context);
 	}
 	

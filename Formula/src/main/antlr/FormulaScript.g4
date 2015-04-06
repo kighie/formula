@@ -34,12 +34,6 @@ import Formula;
 }
 
 @parser::members {
-  	private FormulaScriptHandler scriptHandler;
-  	
-  	
-  	public void setScriptHandler(FormulaScriptHandler scriptHandler){
-  		this.scriptHandler = scriptHandler;
-  	}
   	
 }
 
@@ -59,13 +53,13 @@ formulaScript
 		variableDecl*
 	;
 
-block 
+block [Block stmtHolder]
 	: 
 	(
-		ifStatement
-		| foreachStatement
-		| assignStatement
-		| methodCallStatement
+		ifStatement				{ $stmtHolder.append($ifStatement); }
+		| foreachStatement		{ $stmtHolder.append($foreachStatement); }
+		| assignStatement		{ $stmtHolder.append($assignStatement); }
+		| methodCallStatement	{ $stmtHolder.append($methodCallStatement); }
 	)*
 	;
 	

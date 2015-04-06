@@ -21,6 +21,7 @@ import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Literal;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.Ref;
+import kr.simula.formula.core.Statement;
 
 /**
  * @author kighie@gmail.com
@@ -135,5 +136,13 @@ public interface FormulaHandler {
 	 */
 	Ref methodCall(Ref parent, String name, List<Node> args);
 	
-	
+	/**
+	 * <pre>
+	 * Builds statements (variable/type declaration, assignment, method call, if , foreach, etc.)
+	 * </pre>
+	 * @param token
+	 * @param args
+	 * @return
+	 */
+	Statement statement(String token, Node ... args);
 }
