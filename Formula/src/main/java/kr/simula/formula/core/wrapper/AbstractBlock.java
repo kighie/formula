@@ -1,4 +1,4 @@
-/* ******************************************************************************
+/* 
  * Copyright (c) 2012 IkChan Kwon kighie@gmail.com
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.script.statement;
+package kr.simula.formula.core.wrapper;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -22,14 +22,18 @@ import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Statement;
 
 /**
- * <pre>
- * </pre>
- * @author Ikchan Kwon
- *
+ * <pre></pre>
+ * @author kighie@gmail.com
+ * @since 1.0
  */
-public abstract class AbstractBlockStatement extends AbstractStatement implements Block {
+public abstract class AbstractBlock implements Block {
 	private List<Statement> stmtList = new LinkedList<Statement>();
-	
+
+	@Override
+	public ValueType valueType() {
+		return ValueType.VOID;
+	}
+
 	@Override
 	public void append(Statement node) {
 		stmtList.add(node);

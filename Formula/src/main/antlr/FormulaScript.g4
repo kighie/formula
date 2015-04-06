@@ -48,7 +48,7 @@ import Formula;
  * Formula Script
  *************************************** */
 
-formulaScript
+formulaScript returns [Script script]
 	: importStatement*
 		variableDecl*
 	;

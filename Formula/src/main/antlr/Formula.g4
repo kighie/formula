@@ -28,7 +28,7 @@ options {
 	
 	import kr.simula.formula.core.*;
 	import kr.simula.formula.core.builder.*;
-	import kr.simula.formula.def.*;
+	import kr.simula.formula.expr.*;
 }
 
 @parser::members {

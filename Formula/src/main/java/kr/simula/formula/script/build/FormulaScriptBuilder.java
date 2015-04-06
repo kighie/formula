@@ -14,10 +14,30 @@
  */
 package kr.simula.formula.script.build;
 
+import kr.simula.formula.antlr.FormulaScriptLexer;
+import kr.simula.formula.antlr.FormulaScriptParser;
+import kr.simula.formula.antlr.FormulaScriptParser.FormulaScriptContext;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.builder.FormulaBuilder;
 import kr.simula.formula.core.builder.FormulaHandlerFactory;
 import kr.simula.formula.core.builder.RootBuildContext;
+import kr.simula.formula.core.factory.helper.BinaryOperatorHelper;
+import kr.simula.formula.core.factory.helper.BlockHelper;
+import kr.simula.formula.core.factory.helper.FunctionCallHelper;
+import kr.simula.formula.core.factory.helper.LiteralHelper;
+import kr.simula.formula.core.factory.helper.MethodCallHelper;
+import kr.simula.formula.core.factory.helper.RefHelper;
+import kr.simula.formula.core.factory.helper.StatementHelper;
+import kr.simula.formula.core.factory.helper.UnaryOperatorHelper;
+import kr.simula.formula.expr.builder.ExprBinaryOperatorHelper;
+import kr.simula.formula.expr.builder.ExprFunctionCallHelper;
+import kr.simula.formula.expr.builder.ExprLiteralHelper;
+import kr.simula.formula.expr.builder.ExprUnaryOperatorHelper;
+
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.TokenStream;
 
 /**
  * <pre></pre>
@@ -26,28 +46,50 @@ import kr.simula.formula.core.builder.RootBuildContext;
  */
 public class FormulaScriptBuilder implements FormulaBuilder, FormulaHandlerFactory<FormulaScriptHandler> {
 
-	@Override
-	public Node build(String expression) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Node build(String expression, RootBuildContext rootContext) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	protected BlockHelper blockHelper = new BlockHelper();
+	protected StatementHelper statementHelper = new StatementHelper();
+	protected LiteralHelper literalHelper = new ExprLiteralHelper();
+	protected RefHelper refHelper = new RefHelper();
+	protected BinaryOperatorHelper binaryOperatorHelper = new ExprBinaryOperatorHelper();
+	protected UnaryOperatorHelper unaryOperatorHelper = new ExprUnaryOperatorHelper();
+	protected FunctionCallHelper functionCallHelper = new ExprFunctionCallHelper();
+	protected MethodCallHelper methodCallHelper = new MethodCallHelper();
+	
 	@Override
 	public FormulaScriptHandler newHandler(RootBuildContext rootContext) {
-		// TODO Auto-generated method stub
-		return null;
+		FormulaScriptHandler handler = new FormulaScriptHandler(rootContext, 
+				blockHelper, literalHelper, refHelper, binaryOperatorHelper, 
+				unaryOperatorHelper, functionCallHelper, methodCallHelper, 
+				statementHelper);
+		
+		return handler;
 	}
 
 	@Override
 	public FormulaScriptHandler newHandler() {
-		// TODO Auto-generated method stub
-		return null;
+		return newHandler(new RootBuildContext());
 	}
 
+	@Override
+	public Node build(String expression) {
+		FormulaScriptHandler handler = newHandler();
+		return buildExpression(handler, expression);
+	}
+
+	@Override
+	public Node build(String expression, RootBuildContext rootContext) {
+		FormulaScriptHandler handler = newHandler(rootContext);
+		return buildExpression(handler, expression);
+	}
+
+
+	private Node buildExpression(FormulaScriptHandler handler, String expression){
+		CharStream input = new ANTLRInputStream(expression);
+		FormulaScriptLexer lexer = new FormulaScriptLexer(input);
+		TokenStream tokenStream = new CommonTokenStream(lexer);
+		FormulaScriptParser parser =new FormulaScriptParser(tokenStream);
+		parser.setHandler(handler);
+		FormulaScriptContext ctx = parser.formulaScript();
+		return ctx.script;
+	}
 }

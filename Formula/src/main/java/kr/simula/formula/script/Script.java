@@ -1,4 +1,4 @@
-/* ******************************************************************************
+/* 
  * Copyright (c) 2012 IkChan Kwon kighie@gmail.com
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,43 +12,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.script.statement;
+package kr.simula.formula.script;
 
 import kr.simula.formula.core.Context;
-import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.wrapper.AbstractBlock;
 
 /**
- * <pre>
- * </pre>
- * @author Ikchan Kwon
- *
+ * <pre></pre>
+ * @author kighie@gmail.com
+ * @since 1.0
  */
-public class IfStatement extends AbstractBlock {
+public class Script extends AbstractBlock{
 
-	private Gettable<Boolean> condition;
-	
-	/**
-	 * @param condition
-	 */
-	public IfStatement(Gettable<Boolean> condition) {
-		super();
-		this.condition = condition;
+	@Override
+	public void eval(Context context) {
+		evalBody(context);
 	}
 
 	@Override
 	public String getExpression() {
 		StringBuilder buf = new StringBuilder();
-		buf.append("if(").append(condition.getExpression()).append(") {\n");
 		getBodyExpression(buf);
-		buf.append("}");
 		return buf.toString();
 	}
-	
-	@Override
-	public void eval(Context context) {
-		if( condition.get(context) ){
-			evalBody(context);
-		}
-	}	
+
 }
