@@ -24,7 +24,7 @@ import java.util.Map;
  */
 public abstract class AbstractHelper<FACTORY_TYPE> {
 
-	protected HashMap<String, FACTORY_TYPE> factories = new HashMap<String, FACTORY_TYPE>();
+	protected final HashMap<String, FACTORY_TYPE> factories = new HashMap<String, FACTORY_TYPE>();
 	
 	
 	/**

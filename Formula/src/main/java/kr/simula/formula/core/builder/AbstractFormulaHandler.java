@@ -30,6 +30,7 @@ import kr.simula.formula.core.factory.helper.LiteralHelper;
 import kr.simula.formula.core.factory.helper.MethodCallHelper;
 import kr.simula.formula.core.factory.helper.RefHelper;
 import kr.simula.formula.core.factory.helper.StatementHelper;
+import kr.simula.formula.core.factory.helper.TypeHelper;
 import kr.simula.formula.core.factory.helper.UnaryOperatorHelper;
 
 /**
@@ -43,6 +44,7 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	protected final BlockHelper blockHelper;
 	protected final LiteralHelper literalHelper;
 	protected final RefHelper refHelper;
+	protected final TypeHelper typeHelper;
 	protected final BinaryOperatorHelper binaryOperatorHelper;
 	protected final UnaryOperatorHelper unaryOperatorHelper ;
 	protected final FunctionCallHelper functionCallHelper ;
@@ -61,6 +63,7 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	 * @param blockHelper
 	 * @param literalHelper
 	 * @param refHelper
+	 * @param typeHelper
 	 * @param binaryOperatorHelper
 	 * @param unaryOperatorHelper
 	 * @param functionCallHelper
@@ -70,15 +73,17 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	 */
 	public AbstractFormulaHandler(RootBuildContext rootContext,
 			BlockHelper blockHelper, LiteralHelper literalHelper,
-			RefHelper refHelper, BinaryOperatorHelper binaryOperatorHelper,
+			RefHelper refHelper, TypeHelper typeHelper,
+			BinaryOperatorHelper binaryOperatorHelper,
 			UnaryOperatorHelper unaryOperatorHelper,
 			FunctionCallHelper functionCallHelper,
 			MethodCallHelper methodCallHelper, StatementHelper statementHelper,
 			DeclarationHelper declarationHelper) {
-		this.rootContext = rootContext;
+		this.current = this.rootContext = rootContext;
 		this.blockHelper = blockHelper;
 		this.literalHelper = literalHelper;
 		this.refHelper = refHelper;
+		this.typeHelper = typeHelper;
 		this.binaryOperatorHelper = binaryOperatorHelper;
 		this.unaryOperatorHelper = unaryOperatorHelper;
 		this.functionCallHelper = functionCallHelper;
@@ -149,8 +154,13 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	}
 	
 	@Override
-	public Ref declare(String token, String type, String name) {
+	public Ref declare(String token, Class<?> type, String name) {
 		return declarationHelper.create(current, token, type, name);
+	}
+	
+	@Override
+	public Class<?> type(String typeQname) {
+		return typeHelper.getType(current, typeQname);
 	}
 	
 	@SuppressWarnings("rawtypes")

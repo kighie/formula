@@ -66,12 +66,20 @@ importStatement	returns [Statement stmt]
 /* *************************************
  * declare
  *************************************** */
-variableDecl	returns [Statement stmt]
-	: type IDENT assignBodyExpr?
+variableDecl	returns [VariableDeclStatement stmt]
+	: type IDENT 	
+	{ 
+		Ref varRef = handler.declare(ScriptTokens.VAR, $type.typeClz ,$IDENT.text); 
+		$stmt = (VariableDeclStatement)handler.statement(ScriptTokens.VAR_DECL, varRef);
+	}
+	( ':=' formulaExpressionBase {	$stmt.setValueNode($formulaExpressionBase.result); })?
 	END_OF_STMT
 	;
 
-type : IDENT | qualifiedName ;
+type returns [Class<?> typeClz]
+	: (IDENT 	{ $typeClz = handler.type($IDENT.text); })  
+	| (qualifiedName { $typeClz = handler.type($qualifiedName.text); }) 
+	;
 
 
 
@@ -148,9 +156,9 @@ assignStatement  returns [Statement stmt]
 	END_OF_STMT
 	; 
  
-assignBodyExpr
-	: ':=' ( formulaExpressionBase | decodeStatement )
-	; 
+//assignBodyExpr
+//	: ':=' ( formulaExpressionBase | decodeStatement )
+//	; 
 	
 
 /* *********************************************

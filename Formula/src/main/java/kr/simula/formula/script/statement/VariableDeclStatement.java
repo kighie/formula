@@ -16,8 +16,9 @@ package kr.simula.formula.script.statement;
 
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Gettable;
-import kr.simula.formula.core.QName;
-import kr.simula.formula.core.Ref;
+import kr.simula.formula.core.Node;
+import kr.simula.formula.core.ref.VariableRef;
+import kr.simula.formula.core.util.GettableUtils;
 
 /**
  * <pre>
@@ -25,36 +26,38 @@ import kr.simula.formula.core.Ref;
  * @author Ikchan Kwon
  *
  */
-public class VariableDeclaration extends AbstractStatement implements Ref {
-	private Class<?> type;
-	private QName qname;
+public class VariableDeclStatement extends AbstractStatement {
+	@SuppressWarnings("rawtypes")
+	private VariableRef varRef;
 	private Gettable<?> valueNode;
 	
 	/**
-	 * @param type
-	 * @param qname
+	 * @param varRef
 	 * @param valueNode
 	 */
-	public VariableDeclaration(Class<?> type, QName qname,
-			Gettable<?> valueNode) {
-		super();
-		this.type = type;
-		this.qname = qname;
+	public VariableDeclStatement(VariableRef<?> varRef, Gettable<?> valueNode) {
+		this.varRef = varRef;
 		this.valueNode = valueNode;
 	}
+	
+	@Override
+	public ValueType valueType() {
+		return varRef.valueType();
+	}
 
-	/**
-	 * @return the type
-	 */
-	public Class<?> getType() {
-		return type;
+	public Class<?> type(){
+		return varRef.type();
 	}
 	
 	/**
-	 * @return the qname
+	 * @param valueNode the valueNode to set
 	 */
-	public QName getQname() {
-		return qname;
+	public void setValueNode(Gettable<?> valueNode) {
+		this.valueNode = valueNode;
+	}
+
+	public void setValueNode(Node node) {
+		this.valueNode = GettableUtils.checkGettable(node);
 	}
 	
 	/**
@@ -64,20 +67,21 @@ public class VariableDeclaration extends AbstractStatement implements Ref {
 		return valueNode;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eval(Context context) {
 		if(valueNode != null){
 			Object value = valueNode.get(context);
-			context.setReference(qname, value);
+			varRef.set(context, value);
 		}
 	}
 	
 	@Override
 	public String getExpression() {
 		StringBuilder buf = new StringBuilder();
-		buf.append("VAR-DECL ").append(type.getName()).append(" ").append(qname);
+		buf.append("VAR-DECL ").append(varRef.type().getSimpleName()).append(" ").append(varRef.getExpression());
 		if(valueNode != null){
-			buf.append(" ").append(valueNode.getExpression());
+			buf.append(" := ").append(valueNode.getExpression());
 		}
 		return buf.toString();
 	}
@@ -85,10 +89,11 @@ public class VariableDeclaration extends AbstractStatement implements Ref {
 	@Override
 	public String toString() {
 		StringBuilder buf = new StringBuilder();
-		buf.append("VAR-DECL ").append(type.getName()).append(" ").append(qname);
+		buf.append("VAR-DECL ").append(varRef.toString());
 		if(valueNode != null){
 			buf.append(" ").append(valueNode.toString());
 		}
 		return buf.toString();
 	}
+
 }

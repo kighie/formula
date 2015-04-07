@@ -26,6 +26,7 @@ import kr.simula.formula.core.factory.helper.LiteralHelper;
 import kr.simula.formula.core.factory.helper.MethodCallHelper;
 import kr.simula.formula.core.factory.helper.RefHelper;
 import kr.simula.formula.core.factory.helper.StatementHelper;
+import kr.simula.formula.core.factory.helper.TypeHelper;
 import kr.simula.formula.core.factory.helper.UnaryOperatorHelper;
 import kr.simula.formula.expr.ExprTokens;
 
@@ -41,6 +42,7 @@ public class ExpressionHandler extends AbstractFormulaHandler implements ExprTok
 	 * @param blockHelper
 	 * @param literalHelper
 	 * @param refHelper
+	 * @param typeHelper
 	 * @param binaryOperatorHelper
 	 * @param unaryOperatorHelper
 	 * @param functionCallHelper
@@ -50,15 +52,17 @@ public class ExpressionHandler extends AbstractFormulaHandler implements ExprTok
 	 */
 	public ExpressionHandler(RootBuildContext rootContext,
 			BlockHelper blockHelper, LiteralHelper literalHelper,
-			RefHelper refHelper, BinaryOperatorHelper binaryOperatorHelper,
+			RefHelper refHelper, TypeHelper typeHelper,
+			BinaryOperatorHelper binaryOperatorHelper,
 			UnaryOperatorHelper unaryOperatorHelper,
 			FunctionCallHelper functionCallHelper,
 			MethodCallHelper methodCallHelper, StatementHelper statementHelper,
 			DeclarationHelper declarationHelper) {
-		super(rootContext, blockHelper, literalHelper, refHelper, binaryOperatorHelper,
-				unaryOperatorHelper, functionCallHelper, methodCallHelper,
-				statementHelper, declarationHelper);
+		super(rootContext, blockHelper, literalHelper, refHelper, typeHelper,
+				binaryOperatorHelper, unaryOperatorHelper, functionCallHelper,
+				methodCallHelper, statementHelper, declarationHelper);
 	}
+
 
 	@Override
 	public Block block(String token){

@@ -56,18 +56,6 @@ public class FormulaScriptBaseListener implements FormulaScriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAssignBodyExpr(@NotNull FormulaScriptParser.AssignBodyExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitAssignBodyExpr(@NotNull FormulaScriptParser.AssignBodyExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterFormulaExpression(@NotNull FormulaScriptParser.FormulaExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}

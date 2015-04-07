@@ -27,5 +27,6 @@ public interface ScriptTokens {
 	String ELSEIF 		= "elseif";
 	String ELSE 		= "else";
 	String MTHODE_CALL	= "MTHODE_CALL_STMT";
+	String VAR			= "VAR";
 	String VAR_DECL		= "VAR_DECL";
 }

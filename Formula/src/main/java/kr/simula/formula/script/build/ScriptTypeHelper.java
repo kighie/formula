@@ -1,4 +1,4 @@
-/* ******************************************************************************
+/* 
  * Copyright (c) 2012 IkChan Kwon kighie@gmail.com
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,27 +12,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.core.factory;
+package kr.simula.formula.script.build;
 
-import kr.simula.formula.core.Ref;
-import kr.simula.formula.core.builder.BuildContext;
+import kr.simula.formula.core.factory.helper.TypeHelper;
 
 /**
- * <pre>
- * </pre>
- * @author Ikchan Kwon
- *
+ * <pre></pre>
+ * @author kighie@gmail.com
+ * @since 1.0
  */
-public interface DeclarationFactory {
+public class ScriptTypeHelper extends TypeHelper {
 
-	/**<pre>
-	 * </pre>
-	 * @param context
-	 * @param token
-	 * @param type
-	 * @param name
-	 * @return
-	 */
-	Ref create(BuildContext context, Class<?> type, String name);
-
+	@Override
+	protected void initDefaults() {
+		// TODO Auto-generated method stub
+		super.initDefaults();
+	}
 }

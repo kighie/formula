@@ -50,7 +50,7 @@ public class MethodRef<T> extends ExternalRef<T> implements Ref, Gettable<T>, St
 		StringBuilder buf = new StringBuilder();
 		buf.append(qname).append("(");
 		for(Gettable<?> a : args){
-			buf.append(a).append(" ");
+			buf.append(a.getExpression()).append(" ");
 		}
 		buf.append(")");
 		return buf.toString();
@@ -94,7 +94,15 @@ public class MethodRef<T> extends ExternalRef<T> implements Ref, Gettable<T>, St
 	
 	@Override
 	public String toString() {
-		return "{mehtod:" + getExpression() + "}";
+		StringBuilder buf = new StringBuilder();
+		buf.append("{methodCall: ");
+		buf.append(qname).append("(");
+		for(Gettable<?> a : args){
+			buf.append(a.toString()).append(" ");
+		}
+		buf.append(")");
+		buf.append("}");
+		return buf.toString();
 	}
 	
 

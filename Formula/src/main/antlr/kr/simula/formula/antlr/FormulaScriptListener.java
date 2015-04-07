@@ -44,16 +44,6 @@ public interface FormulaScriptListener extends ParseTreeListener {
 	 */
 	void exitExponential(@NotNull FormulaScriptParser.ExponentialContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link FormulaScriptParser#assignBodyExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterAssignBodyExpr(@NotNull FormulaScriptParser.AssignBodyExprContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FormulaScriptParser#assignBodyExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitAssignBodyExpr(@NotNull FormulaScriptParser.AssignBodyExprContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link FormulaScriptParser#formulaExpression}.
 	 * @param ctx the parse tree
 	 */

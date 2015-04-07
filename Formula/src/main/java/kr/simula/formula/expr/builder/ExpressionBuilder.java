@@ -52,7 +52,7 @@ public class ExpressionBuilder implements FormulaBuilder, FormulaHandlerFactory<
 	@Override
 	public ExpressionHandler newHandler(RootBuildContext rootContext) {
 		return new ExpressionHandler(rootContext, 
-				null, literalHelper, refHelper, binaryOperatorHelper, unaryOperatorHelper, 
+				null, literalHelper, refHelper, null, binaryOperatorHelper, unaryOperatorHelper, 
 				functionCallHelper, methodCallHelper, null, null);
 	}
 	

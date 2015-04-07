@@ -35,12 +35,12 @@ public abstract class DeclarationHelper extends AbstractHelper<DeclarationFactor
 	 * @param name
 	 * @return
 	 */
-	public Ref create(BuildContext context, String token, String type, String name) {
+	public Ref create(BuildContext context, String token, Class<?> type, String name) {
 		DeclarationFactory factory = factories.get(token);
 		if(factory == null){
 			throw new BuildException("DeclarationFactory for " + token + " is not registered.");
 		}
-		return factory.create(context, token, type, name);
+		return factory.create(context, type, name);
 	}
 
 	

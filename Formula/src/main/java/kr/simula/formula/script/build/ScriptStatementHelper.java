@@ -20,10 +20,12 @@ import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.factory.StatementFactory;
 import kr.simula.formula.core.factory.helper.StatementHelper;
 import kr.simula.formula.core.ref.MethodRef;
+import kr.simula.formula.core.ref.VariableRef;
 import kr.simula.formula.core.util.GettableUtils;
 import kr.simula.formula.script.ScriptTokens;
 import kr.simula.formula.script.statement.IfStatement;
 import kr.simula.formula.script.statement.MethodCallStatement;
+import kr.simula.formula.script.statement.VariableDeclStatement;
 
 /**
  * <pre></pre>
@@ -50,6 +52,21 @@ public class ScriptStatementHelper extends StatementHelper {
 		}
 	};
 
+	static StatementFactory varDeclFactory = new StatementFactory() {
+		@Override
+		public VariableDeclStatement create(BuildContext context, String token, Node[] args) {
+			VariableRef<?> varRef = (VariableRef<?>)args[0];
+			
+			Gettable<?> valueNode = null;
+			if(args.length>1){
+				valueNode = (Gettable<?>)args[1];
+			}
+			
+			VariableDeclStatement stmt = new VariableDeclStatement(varRef, valueNode);
+			return stmt;
+		}
+	};
+
 	
 	//VariableDeclStatement
 	@Override
@@ -57,6 +74,7 @@ public class ScriptStatementHelper extends StatementHelper {
 		super.initDefaults();
 		setFactory(ScriptTokens.IF, ifFactory);
 		setFactory(ScriptTokens.MTHODE_CALL, methodCallFactory);
+		setFactory(ScriptTokens.VAR_DECL, varDeclFactory);
 	}
 	
 	

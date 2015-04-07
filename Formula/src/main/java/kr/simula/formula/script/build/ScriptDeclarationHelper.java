@@ -14,11 +14,12 @@
  */
 package kr.simula.formula.script.build;
 
+import kr.simula.formula.core.QName;
 import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.factory.DeclarationFactory;
 import kr.simula.formula.core.factory.helper.DeclarationHelper;
+import kr.simula.formula.core.ref.VariableRef;
 import kr.simula.formula.script.ScriptTokens;
-import kr.simula.formula.script.statement.VariableDeclaration;
 
 /**
  * <pre>
@@ -30,11 +31,13 @@ public class ScriptDeclarationHelper extends DeclarationHelper {
 
 	static DeclarationFactory varDeclFactory = new DeclarationFactory() {
 
+		@SuppressWarnings({ "rawtypes", "unchecked" })
 		@Override
-		public VariableDeclaration create(BuildContext context, String token, String type,
+		public VariableRef<?> create(BuildContext context, Class<?> type,
 				String name) {
-			// TODO Auto-generated method stub
-			return null;
+			VariableRef<?> var = new VariableRef(type,new QName(name));
+			context.registerRef(var.qualifiedName(), var);
+			return var;
 		}
 		
 	};
@@ -44,7 +47,7 @@ public class ScriptDeclarationHelper extends DeclarationHelper {
 	protected void initDefaults() {
 		super.initDefaults();
 		
-		setFactory(ScriptTokens.VAR_DECL, varDeclFactory);
+		setFactory(ScriptTokens.VAR, varDeclFactory);
 	}
 	
 }

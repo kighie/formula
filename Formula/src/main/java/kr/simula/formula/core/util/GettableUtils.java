@@ -48,10 +48,18 @@ public class GettableUtils {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static <T> Gettable<T> checkGettable(Node node, Class<T>type){
-		if(node instanceof Gettable
-				&& type.isAssignableFrom( ((Gettable) node).type() ) ){
-			return (Gettable<T>)node;
+		if(node instanceof Gettable){
+			Gettable gettable = (Gettable)node;
+			Class<?> nodeType = gettable.type();
+			if(nodeType == null && gettable instanceof ExternalRef){
+				return (Gettable<T>)node;
+			}
+			if(type.isAssignableFrom( nodeType )){
+				return (Gettable<T>)node;
+			}
 		}
+		
+		
 		throw new BuildException(node + " is not Gettable<" + type.getName() + ">");
 	}
 

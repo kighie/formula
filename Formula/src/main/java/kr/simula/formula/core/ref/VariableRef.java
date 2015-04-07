@@ -27,13 +27,13 @@ import kr.simula.formula.core.Settable;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public abstract class ScalaVariable<T> extends GenericRef implements Gettable<T>, Settable<T>{
+public class VariableRef<T> extends GenericRef implements Gettable<T>, Settable<T>{
 	protected Class<? extends T> valueType;
 	
 	/**
 	 * @param qname
 	 */
-	public ScalaVariable(Class<? extends T> valueType, QName qname) {
+	public VariableRef(Class<? extends T> valueType, QName qname) {
 		super(qname);
 		this.valueType = valueType;
 	}
@@ -54,7 +54,17 @@ public abstract class ScalaVariable<T> extends GenericRef implements Gettable<T>
 		return (T)context.getReference(qname);
 	}
 	
-	public static class StringVariable extends ScalaVariable<String>{
+	@Override
+	public String getExpression() {
+		return qname.toString();
+	}
+	
+	@Override
+	public String toString() {
+		return "{var:" + ((valueType != null) ? valueType.getSimpleName() : "Undefined") + " " + qname + "}";
+	}
+	
+	public static class StringVariable extends VariableRef<String>{
 		/**
 		 * @param qname
 		 * @param value
@@ -70,7 +80,7 @@ public abstract class ScalaVariable<T> extends GenericRef implements Gettable<T>
 	}
 	
 
-	public static class NumberVariable extends ScalaVariable<BigDecimal>{
+	public static class NumberVariable extends VariableRef<BigDecimal>{
 		/**
 		 * @param qname
 		 * @param value
@@ -85,7 +95,7 @@ public abstract class ScalaVariable<T> extends GenericRef implements Gettable<T>
 		}
 	}
 
-	public static class BooleanVariable extends ScalaVariable<Boolean>{
+	public static class BooleanVariable extends VariableRef<Boolean>{
 		/**
 		 * @param qname
 		 * @param value
@@ -100,7 +110,7 @@ public abstract class ScalaVariable<T> extends GenericRef implements Gettable<T>
 		}
 	}
 	
-	public static class DateVariable extends ScalaVariable<Date>{
+	public static class DateVariable extends VariableRef<Date>{
 		/**
 		 * @param qname
 		 * @param value
@@ -115,7 +125,7 @@ public abstract class ScalaVariable<T> extends GenericRef implements Gettable<T>
 		}
 	}
 
-	public static class ObjectVariable extends ScalaVariable<Object>{
+	public static class ObjectVariable extends VariableRef<Object>{
 		/**
 		 * @param qname
 		 * @param value

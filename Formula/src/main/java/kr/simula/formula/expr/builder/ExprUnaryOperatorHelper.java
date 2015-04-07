@@ -71,7 +71,7 @@ public class ExprUnaryOperatorHelper extends UnaryOperatorHelper {
 
 		@Override
 		public Boolean eval(Boolean val) {
-			return !val;
+			return (val != null) ? !val : true;
 		};
 		
 		public String toString() { return "NOT";}

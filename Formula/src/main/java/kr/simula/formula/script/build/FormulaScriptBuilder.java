@@ -50,7 +50,7 @@ public class FormulaScriptBuilder implements FormulaBuilder, FormulaHandlerFacto
 	protected BlockHelper blockHelper = new ScriptBlockHelper();
 	protected StatementHelper statementHelper = new ScriptStatementHelper();
 	protected DeclarationHelper declarationHelper = new ScriptDeclarationHelper();
-	
+	protected ScriptTypeHelper typeHelper = new ScriptTypeHelper();
 	protected LiteralHelper literalHelper = new ExprLiteralHelper();
 	protected RefHelper refHelper = new RefHelper();
 	protected BinaryOperatorHelper binaryOperatorHelper = new ExprBinaryOperatorHelper();
@@ -62,7 +62,7 @@ public class FormulaScriptBuilder implements FormulaBuilder, FormulaHandlerFacto
 	@Override
 	public FormulaScriptHandler newHandler(RootBuildContext rootContext) {
 		FormulaScriptHandler handler = new FormulaScriptHandler(rootContext, 
-				blockHelper, literalHelper, refHelper, binaryOperatorHelper, unaryOperatorHelper, 
+				blockHelper, literalHelper, refHelper, typeHelper, binaryOperatorHelper, unaryOperatorHelper, 
 				functionCallHelper, methodCallHelper, statementHelper, declarationHelper);
 		
 		return handler;
@@ -76,17 +76,17 @@ public class FormulaScriptBuilder implements FormulaBuilder, FormulaHandlerFacto
 	@Override
 	public Node build(String expression) {
 		FormulaScriptHandler handler = newHandler();
-		return buildExpression(handler, expression);
+		return buildScript(handler, expression);
 	}
 
 	@Override
 	public Node build(String expression, RootBuildContext rootContext) {
 		FormulaScriptHandler handler = newHandler(rootContext);
-		return buildExpression(handler, expression);
+		return buildScript(handler, expression);
 	}
 
 
-	private Node buildExpression(FormulaScriptHandler handler, String expression){
+	private Node buildScript(FormulaScriptHandler handler, String expression){
 		CharStream input = new ANTLRInputStream(expression);
 		FormulaScriptLexer lexer = new FormulaScriptLexer(input);
 		TokenStream tokenStream = new CommonTokenStream(lexer);

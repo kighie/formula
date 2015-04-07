@@ -115,7 +115,15 @@ public interface FormulaHandler {
 	 * @param name
 	 * @return
 	 */
-	Ref declare(String token, String type, String name);
+	Ref declare(String token, Class<?> type, String name);
+	
+	/**
+	 * <pre>
+	 * </pre>
+	 * @param typeQname
+	 * @return
+	 */
+	Class<?> type(String typeQname);
 	
 	/**
 	 * <pre>

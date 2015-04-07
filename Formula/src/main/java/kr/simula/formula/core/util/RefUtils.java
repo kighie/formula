@@ -158,4 +158,11 @@ public class RefUtils {
 		
 	}
 	
+	public static Class<?> toClass(String className){
+		try {
+			return Class.forName(className);
+		} catch (ClassNotFoundException e) {
+			throw new RtException(e);
+		}
+	}
 }
