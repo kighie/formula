@@ -36,4 +36,10 @@ public class Script extends AbstractBlock{
 		return buf.toString();
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder buf = new StringBuilder();
+		toBodyString(buf);
+		return buf.toString();
+	}
 }

@@ -47,7 +47,13 @@ public class MethodRef<T> extends ExternalRef<T> implements Ref, Gettable<T>, St
 
 	@Override
 	public String getExpression() {
-		return qname.toString();
+		StringBuilder buf = new StringBuilder();
+		buf.append(qname).append("(");
+		for(Gettable<?> a : args){
+			buf.append(a).append(" ");
+		}
+		buf.append(")");
+		return buf.toString();
 	}
 
 	@SuppressWarnings("unchecked")

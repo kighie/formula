@@ -12,13 +12,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.core.factory.helper;
+package kr.simula.formula.script.statement;
 
-import kr.simula.formula.core.Node;
-import kr.simula.formula.core.Statement;
-import kr.simula.formula.core.builder.BuildContext;
-import kr.simula.formula.core.builder.BuildException;
-import kr.simula.formula.core.factory.StatementFactory;
+import kr.simula.formula.core.Context;
+import kr.simula.formula.core.ref.MethodRef;
 
 /**
  * <pre>
@@ -26,23 +23,30 @@ import kr.simula.formula.core.factory.StatementFactory;
  * @author Ikchan Kwon
  *
  */
-public class StatementHelper extends AbstractHelper<StatementFactory> {
-
-
-
-	/**<pre>
-	 * </pre>
-	 * @param current
-	 * @param token
-	 * @param args
-	 * @return
+public class MethodCallStatement extends AbstractStatement {
+	
+	private MethodRef<?> methodRef;
+	
+	/**
+	 * @param methodRef
 	 */
-	public Statement create(BuildContext context, String token, Node[] args) {
-		StatementFactory factory = factories.get(token);
-		if(factory == null){
-			throw new BuildException("StatementFactory for " + token + " is not registered.");
-		}
-		return factory.create(context, token, args);
+	public MethodCallStatement(MethodRef<?> methodRef) {
+		this.methodRef = methodRef;
+	}
+
+	@Override
+	public void eval(Context context) {
+		methodRef.eval(context);
+	}
+	
+	@Override
+	public String getExpression() {
+		return methodRef.getExpression();
+	}
+	
+	@Override
+	public String toString() {
+		return methodRef.toString();
 	}
 
 }

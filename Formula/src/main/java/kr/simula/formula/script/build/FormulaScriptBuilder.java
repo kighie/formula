@@ -23,6 +23,7 @@ import kr.simula.formula.core.builder.FormulaHandlerFactory;
 import kr.simula.formula.core.builder.RootBuildContext;
 import kr.simula.formula.core.factory.helper.BinaryOperatorHelper;
 import kr.simula.formula.core.factory.helper.BlockHelper;
+import kr.simula.formula.core.factory.helper.DeclarationHelper;
 import kr.simula.formula.core.factory.helper.FunctionCallHelper;
 import kr.simula.formula.core.factory.helper.LiteralHelper;
 import kr.simula.formula.core.factory.helper.MethodCallHelper;
@@ -47,7 +48,9 @@ import org.antlr.v4.runtime.TokenStream;
 public class FormulaScriptBuilder implements FormulaBuilder, FormulaHandlerFactory<FormulaScriptHandler> {
 
 	protected BlockHelper blockHelper = new ScriptBlockHelper();
-	protected StatementHelper statementHelper = new StatementHelper();
+	protected StatementHelper statementHelper = new ScriptStatementHelper();
+	protected DeclarationHelper declarationHelper = new ScriptDeclarationHelper();
+	
 	protected LiteralHelper literalHelper = new ExprLiteralHelper();
 	protected RefHelper refHelper = new RefHelper();
 	protected BinaryOperatorHelper binaryOperatorHelper = new ExprBinaryOperatorHelper();
@@ -55,12 +58,12 @@ public class FormulaScriptBuilder implements FormulaBuilder, FormulaHandlerFacto
 	protected FunctionCallHelper functionCallHelper = new ExprFunctionCallHelper();
 	protected MethodCallHelper methodCallHelper = new MethodCallHelper();
 	
+	
 	@Override
 	public FormulaScriptHandler newHandler(RootBuildContext rootContext) {
 		FormulaScriptHandler handler = new FormulaScriptHandler(rootContext, 
-				blockHelper, literalHelper, refHelper, binaryOperatorHelper, 
-				unaryOperatorHelper, functionCallHelper, methodCallHelper, 
-				statementHelper);
+				blockHelper, literalHelper, refHelper, binaryOperatorHelper, unaryOperatorHelper, 
+				functionCallHelper, methodCallHelper, statementHelper, declarationHelper);
 		
 		return handler;
 	}

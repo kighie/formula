@@ -18,6 +18,7 @@ import kr.simula.formula.core.builder.AbstractFormulaHandler;
 import kr.simula.formula.core.builder.RootBuildContext;
 import kr.simula.formula.core.factory.helper.BinaryOperatorHelper;
 import kr.simula.formula.core.factory.helper.BlockHelper;
+import kr.simula.formula.core.factory.helper.DeclarationHelper;
 import kr.simula.formula.core.factory.helper.FunctionCallHelper;
 import kr.simula.formula.core.factory.helper.LiteralHelper;
 import kr.simula.formula.core.factory.helper.MethodCallHelper;
@@ -43,16 +44,18 @@ public class FormulaScriptHandler extends AbstractFormulaHandler {
 	 * @param functionCallHelper
 	 * @param methodCallHelper
 	 * @param statementHelper
+	 * @param declarationHelper
 	 */
 	public FormulaScriptHandler(RootBuildContext rootContext,
 			BlockHelper blockHelper, LiteralHelper literalHelper,
 			RefHelper refHelper, BinaryOperatorHelper binaryOperatorHelper,
 			UnaryOperatorHelper unaryOperatorHelper,
 			FunctionCallHelper functionCallHelper,
-			MethodCallHelper methodCallHelper, StatementHelper statementHelper) {
+			MethodCallHelper methodCallHelper, StatementHelper statementHelper,
+			DeclarationHelper declarationHelper) {
 		super(rootContext, blockHelper, literalHelper, refHelper, binaryOperatorHelper,
 				unaryOperatorHelper, functionCallHelper, methodCallHelper,
-				statementHelper);
+				statementHelper, declarationHelper);
 	}
-	
+
 }

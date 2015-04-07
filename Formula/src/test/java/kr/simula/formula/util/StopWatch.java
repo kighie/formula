@@ -33,6 +33,11 @@ public class StopWatch {
 		return System.currentTimeMillis() - start;
 	}
 	
+	public StopWatch reset(){
+		start();
+		return this;
+	}
+	
 	public String ellapsedTime(){
 		long ellapsed = ellapsed();
 		long second = ellapsed / 1000;

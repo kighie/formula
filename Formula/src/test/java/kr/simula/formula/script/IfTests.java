@@ -14,6 +14,12 @@
  */
 package kr.simula.formula.script;
 
+import java.math.BigDecimal;
+
+import kr.simula.formula.core.QName;
+import kr.simula.formula.core.RootContext;
+import kr.simula.formula.util.StopWatch;
+
 import org.junit.Test;
 
 /**
@@ -23,8 +29,45 @@ import org.junit.Test;
  */
 public class IfTests extends AbstractScriptTests {
 
+	static final String IF_BASIC = "if(PA=1) { System.out.println(\"PA==>1\"); } "
+			+ "elseif(PA=3){ System.out.println(\"PA=\" & (PA * 10)); } "
+			+ "elseif(PA=5) { System.out.println((PA+33) / 13); } "
+			+ "else { System.out.println( PA ); }";
+	
 	@Test
 	public void basic(){
-		testScript("if(true) { }", null);
+		StopWatch stopWatch = new StopWatch();
+		stopWatch.start();
+		
+		Script script = buildScript(IF_BASIC);
+		
+		System.out.println(script.getExpression());
+		System.out.println(stopWatch.ellapsedTime());
+		
+		RootContext context = new RootContext();
+		
+		context.setReference(new QName(new QName("System"), "out"), System.out);
+		context.setParameter("PA", new BigDecimal(1));
+		
+		script.eval(context);
+		
+		System.out.println(stopWatch.ellapsedTime());
+		
+		
+		context.setParameter("PA", new BigDecimal(3));
+		
+		script.eval(context);
+
+		System.out.println(stopWatch.ellapsedTime());
+		
+		context.setParameter("PA", new BigDecimal(5));
+		
+		script.eval(context);
+
+		System.out.println(stopWatch.ellapsedTime());
+		
+		context.setParameter("PA", 10);
+		script.eval(context);
+		System.out.println(stopWatch.ellapsedTime());
 	}
 }

@@ -52,8 +52,8 @@ public class ExpressionBuilder implements FormulaBuilder, FormulaHandlerFactory<
 	@Override
 	public ExpressionHandler newHandler(RootBuildContext rootContext) {
 		return new ExpressionHandler(rootContext, 
-				literalHelper, refHelper, binaryOperatorHelper, unaryOperatorHelper, 
-				functionCallHelper, methodCallHelper);
+				null, literalHelper, refHelper, binaryOperatorHelper, unaryOperatorHelper, 
+				functionCallHelper, methodCallHelper, null, null);
 	}
 	
 	@Override

@@ -12,13 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.core.factory.helper;
+package kr.simula.formula.script.build;
 
-import kr.simula.formula.core.Node;
-import kr.simula.formula.core.Statement;
-import kr.simula.formula.core.builder.BuildContext;
-import kr.simula.formula.core.builder.BuildException;
-import kr.simula.formula.core.factory.StatementFactory;
+import kr.simula.formula.core.factory.helper.DeclarationHelper;
 
 /**
  * <pre>
@@ -26,23 +22,6 @@ import kr.simula.formula.core.factory.StatementFactory;
  * @author Ikchan Kwon
  *
  */
-public class StatementHelper extends AbstractHelper<StatementFactory> {
-
-
-
-	/**<pre>
-	 * </pre>
-	 * @param current
-	 * @param token
-	 * @param args
-	 * @return
-	 */
-	public Statement create(BuildContext context, String token, Node[] args) {
-		StatementFactory factory = factories.get(token);
-		if(factory == null){
-			throw new BuildException("StatementFactory for " + token + " is not registered.");
-		}
-		return factory.create(context, token, args);
-	}
+public class ScriptDeclarationHelper extends DeclarationHelper {
 
 }

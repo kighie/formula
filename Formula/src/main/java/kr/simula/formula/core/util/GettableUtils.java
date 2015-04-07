@@ -57,9 +57,14 @@ public class GettableUtils {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static Gettable<Comparable<?>> checkComparableGettable(Node node){
-		if(node instanceof Gettable
-				&& Comparable.class.isAssignableFrom( ((Gettable) node).type() )){
-			return (Gettable<Comparable<?>>)node;
+		if(node instanceof Gettable){
+			Class<?> type = ((Gettable) node).type();
+			if(type == null && node instanceof ExternalRef){
+				return (Gettable<Comparable<?>>)node;
+			}
+			if(Comparable.class.isAssignableFrom( type )){
+				return (Gettable<Comparable<?>>)node;
+			}
 		}
 		throw new BuildException(node + " is not Gettable<Comparable>.");
 	}
@@ -151,9 +156,14 @@ public class GettableUtils {
 
 	@SuppressWarnings("unchecked")
 	public static Gettable<Boolean> getBooleanGettable(Gettable<?> node) {
-		if(Boolean.class.isAssignableFrom(node.type()) ){
+		Class<?> type = node.type();
+		if(type == null && node instanceof ExternalRef){
 			return (Gettable<Boolean>)node;
-		} 
+		}
+		if(Boolean.class.isAssignableFrom( type )){
+			return (Gettable<Boolean>)node;
+		}
+		
 		throw new BuildException(node + " is not Gettable<Boolean>.");
 	}
 

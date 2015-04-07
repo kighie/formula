@@ -105,6 +105,17 @@ public interface FormulaHandler {
 	 * @return
 	 */
 	Ref refer(Ref parent, String name);
+
+	/**
+	 * <pre>
+	 * Declares Ref(variable, type, ...)
+	 * </pre>
+	 * @param token
+	 * @param type
+	 * @param name
+	 * @return
+	 */
+	Ref declare(String token, String type, String name);
 	
 	/**
 	 * <pre>

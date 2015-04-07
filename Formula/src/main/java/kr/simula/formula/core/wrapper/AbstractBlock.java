@@ -50,5 +50,10 @@ public abstract class AbstractBlock implements Block {
 			stmt.eval(context);
 		}
 	}
-
+	
+	public void toBodyString(StringBuilder buf) {
+		for(Statement stmt : stmtList){
+			buf.append(stmt.toString()).append("\n");
+		}
+	}
 }

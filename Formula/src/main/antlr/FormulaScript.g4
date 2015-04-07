@@ -91,9 +91,24 @@ blockContents [Block stmtHolder]
  *************************************** */
 
 ifStatement returns [IfStatement ifstmt]
-	: 'if' '(' logicalExpression ')' {$ifstmt = (IfStatement)handler.statement(ScriptTokens.IF); }'{'  blockContents[$ifstmt]? '}'
-	( 'elseif' '(' logicalExpression ')' '{' blockContents[$ifstmt]? '}')*
-	( 'else' '{' blockContents[$ifstmt]? '}')?
+	: 'if' '(' logicalExpression ')' 
+		{
+			$ifstmt = (IfStatement)handler.statement(ScriptTokens.IF, $logicalExpression.result); 
+		}
+		'{'  blockContents[$ifstmt]? '}'
+	( 'elseif' '(' logicalExpression ')'
+		{
+			IfStatement.ElseIf elseIfStmt = $ifstmt.createElseIf($logicalExpression.result);
+		} 
+		'{' blockContents[elseIfStmt]? '}'
+	)*
+	( 'else' 
+		{
+			IfStatement.Else elseStmt = $ifstmt.checkOutElse();
+		}
+		'{' blockContents[elseStmt]? '}'
+		
+	)?
 	;
 
 decodeStatement  returns [Statement stmt]
@@ -122,7 +137,7 @@ loopCondition
 	;
 
 methodCallStatement  returns [Statement stmt]
-	: methodCallExp END_OF_STMT
+	: methodCallExp END_OF_STMT { $stmt = handler.statement(ScriptTokens.MTHODE_CALL, $methodCallExp.result); }
 	;
 	
 /* *************************************

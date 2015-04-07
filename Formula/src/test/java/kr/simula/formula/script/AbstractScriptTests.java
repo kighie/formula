@@ -15,11 +15,9 @@
 package kr.simula.formula.script;
 
 import kr.simula.formula.core.Context;
-import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.script.build.FormulaScriptBuilder;
 
-import org.junit.Assert;
 import org.junit.BeforeClass;
 
 /**
@@ -37,33 +35,29 @@ public abstract class AbstractScriptTests {
 	}
 	
 
-	protected Node buildScript(String expr){
-		Node exprNode = builder.build(expr);
+	protected Script buildScript(String expr){
+		Script exprNode = (Script)builder.build(expr);
 		return exprNode;
 	}
 
-	protected void testScript(String expr, Object expected){
-		testScript(expr, null, expected);
+	protected void testScript(String expr){
+		eval(expr, null);
 	}
 
-	protected void testScript(String expr, Context context, Object expected){
-		Object result = eval(expr, context);
-		System.out.println(result);
-		
-		Assert.assertEquals(expected, result);
+
+	protected void testScript(String expr, Context context){
+		eval(expr, context);
 	}
-	
-	protected Object eval(String expr, Context context){
+
+	protected void eval(String expr, Context context){
 		Node exprNode = builder.build(expr);
 		System.out.println();
 		System.out.println(exprNode.getExpression());
 		System.out.println(exprNode);
 		
-		Gettable<?> gettable = (Gettable<?>)exprNode;
+		Script script = (Script)exprNode;
 		
-		Object result = gettable.get(context);
-		
-		return result;
+		script.eval(context);
 	}
 	
 }

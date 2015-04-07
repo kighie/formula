@@ -138,6 +138,16 @@ public class RefUtils {
 		Method method;
 		try {
 			method = clz.getMethod(methodName,argTypes);
+		} catch ( NoSuchMethodException e) {
+			if(argTypes.length==1){
+				try {
+					method = clz.getMethod(methodName,new Class[]{Object.class});
+				} catch ( Exception e2) {
+					throw new RtException(e2);
+				}
+			} else {
+				throw new RtException(e);
+			}
 		} catch ( Exception e) {
 			throw new RtException(e);
 		}

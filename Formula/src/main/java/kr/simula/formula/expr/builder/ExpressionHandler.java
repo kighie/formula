@@ -19,10 +19,13 @@ import kr.simula.formula.core.builder.AbstractFormulaHandler;
 import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.builder.RootBuildContext;
 import kr.simula.formula.core.factory.helper.BinaryOperatorHelper;
+import kr.simula.formula.core.factory.helper.BlockHelper;
+import kr.simula.formula.core.factory.helper.DeclarationHelper;
 import kr.simula.formula.core.factory.helper.FunctionCallHelper;
 import kr.simula.formula.core.factory.helper.LiteralHelper;
 import kr.simula.formula.core.factory.helper.MethodCallHelper;
 import kr.simula.formula.core.factory.helper.RefHelper;
+import kr.simula.formula.core.factory.helper.StatementHelper;
 import kr.simula.formula.core.factory.helper.UnaryOperatorHelper;
 import kr.simula.formula.expr.ExprTokens;
 
@@ -32,6 +35,7 @@ import kr.simula.formula.expr.ExprTokens;
  */
 public class ExpressionHandler extends AbstractFormulaHandler implements ExprTokens {
 	
+
 	/**
 	 * @param rootContext
 	 * @param blockHelper
@@ -42,17 +46,18 @@ public class ExpressionHandler extends AbstractFormulaHandler implements ExprTok
 	 * @param functionCallHelper
 	 * @param methodCallHelper
 	 * @param statementHelper
+	 * @param declarationHelper
 	 */
 	public ExpressionHandler(RootBuildContext rootContext,
-			LiteralHelper literalHelper,
+			BlockHelper blockHelper, LiteralHelper literalHelper,
 			RefHelper refHelper, BinaryOperatorHelper binaryOperatorHelper,
 			UnaryOperatorHelper unaryOperatorHelper,
 			FunctionCallHelper functionCallHelper,
-			MethodCallHelper methodCallHelper) {
-		super(rootContext, null, literalHelper, refHelper, binaryOperatorHelper,
+			MethodCallHelper methodCallHelper, StatementHelper statementHelper,
+			DeclarationHelper declarationHelper) {
+		super(rootContext, blockHelper, literalHelper, refHelper, binaryOperatorHelper,
 				unaryOperatorHelper, functionCallHelper, methodCallHelper,
-				null);
-		// TODO Auto-generated constructor stub
+				statementHelper, declarationHelper);
 	}
 
 	@Override
