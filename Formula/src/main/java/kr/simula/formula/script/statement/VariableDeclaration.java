@@ -17,6 +17,7 @@ package kr.simula.formula.script.statement;
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.QName;
+import kr.simula.formula.core.Ref;
 
 /**
  * <pre>
@@ -24,7 +25,7 @@ import kr.simula.formula.core.QName;
  * @author Ikchan Kwon
  *
  */
-public class VariableDeclStatement extends AbstractStatement {
+public class VariableDeclaration extends AbstractStatement implements Ref {
 	private Class<?> type;
 	private QName qname;
 	private Gettable<?> valueNode;
@@ -34,7 +35,7 @@ public class VariableDeclStatement extends AbstractStatement {
 	 * @param qname
 	 * @param valueNode
 	 */
-	public VariableDeclStatement(Class<?> type, QName qname,
+	public VariableDeclaration(Class<?> type, QName qname,
 			Gettable<?> valueNode) {
 		super();
 		this.type = type;

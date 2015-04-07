@@ -16,7 +16,6 @@ package kr.simula.formula.script.build;
 
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Node;
-import kr.simula.formula.core.QName;
 import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.factory.StatementFactory;
 import kr.simula.formula.core.factory.helper.StatementHelper;
@@ -25,7 +24,6 @@ import kr.simula.formula.core.util.GettableUtils;
 import kr.simula.formula.script.ScriptTokens;
 import kr.simula.formula.script.statement.IfStatement;
 import kr.simula.formula.script.statement.MethodCallStatement;
-import kr.simula.formula.script.statement.VariableDeclStatement;
 
 /**
  * <pre></pre>
@@ -52,16 +50,6 @@ public class ScriptStatementHelper extends StatementHelper {
 		}
 	};
 
-//	static StatementFactory varDeclFactory = new StatementFactory() {
-//		@Override
-//		public VariableDeclStatement create(BuildContext context, String token, Node[] args) {
-//			QName typeName = (QName)args[0];
-//			String name = (String)args[1];
-//			QName typeName = (QName)args[0];
-//			VariableDeclStatement stmt = new VariableDeclStatement(methodRef);
-//			return stmt;
-//		}
-//	};
 	
 	//VariableDeclStatement
 	@Override

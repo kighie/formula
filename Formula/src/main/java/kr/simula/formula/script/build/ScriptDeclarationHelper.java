@@ -14,7 +14,11 @@
  */
 package kr.simula.formula.script.build;
 
+import kr.simula.formula.core.builder.BuildContext;
+import kr.simula.formula.core.factory.DeclarationFactory;
 import kr.simula.formula.core.factory.helper.DeclarationHelper;
+import kr.simula.formula.script.ScriptTokens;
+import kr.simula.formula.script.statement.VariableDeclaration;
 
 /**
  * <pre>
@@ -24,4 +28,23 @@ import kr.simula.formula.core.factory.helper.DeclarationHelper;
  */
 public class ScriptDeclarationHelper extends DeclarationHelper {
 
+	static DeclarationFactory varDeclFactory = new DeclarationFactory() {
+
+		@Override
+		public VariableDeclaration create(BuildContext context, String token, String type,
+				String name) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+	};
+	
+	
+	@Override
+	protected void initDefaults() {
+		super.initDefaults();
+		
+		setFactory(ScriptTokens.VAR_DECL, varDeclFactory);
+	}
+	
 }

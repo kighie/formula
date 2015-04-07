@@ -28,30 +28,30 @@ import kr.simula.formula.core.Settable;
  * @since 1.0
  */
 public abstract class ScalaVariable<T> extends GenericRef implements Gettable<T>, Settable<T>{
-	protected T value;
+	protected Class<? extends T> valueType;
 	
 	/**
 	 * @param qname
 	 */
-	public ScalaVariable(QName qname, T value) {
+	public ScalaVariable(Class<? extends T> valueType, QName qname) {
 		super(qname);
-		this.value = value;
+		this.valueType = valueType;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public Class<? extends T> type() {
-		return (Class<? extends T>)value.getClass();
+		return valueType;
 	}
 	
 	@Override
 	public void set(Context context, T value) {
-		this.value = value;
+		context.setReference(qname, value);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public T get(Context context) {
-		return value;
+		return (T)context.getReference(qname);
 	}
 	
 	public static class StringVariable extends ScalaVariable<String>{
@@ -59,8 +59,8 @@ public abstract class ScalaVariable<T> extends GenericRef implements Gettable<T>
 		 * @param qname
 		 * @param value
 		 */
-		public StringVariable(QName qname, String value) {
-			super(qname, value);
+		public StringVariable(QName qname) {
+			super(String.class, qname);
 		}
 		
 		@Override
@@ -75,8 +75,8 @@ public abstract class ScalaVariable<T> extends GenericRef implements Gettable<T>
 		 * @param qname
 		 * @param value
 		 */
-		public NumberVariable(QName qname, BigDecimal value) {
-			super(qname, value);
+		public NumberVariable(QName qname) {
+			super(BigDecimal.class, qname);
 		}
 		
 		@Override
@@ -90,8 +90,8 @@ public abstract class ScalaVariable<T> extends GenericRef implements Gettable<T>
 		 * @param qname
 		 * @param value
 		 */
-		public BooleanVariable(QName qname, Boolean value) {
-			super(qname, value);
+		public BooleanVariable(QName qname) {
+			super(Boolean.class, qname);
 		}
 		
 		@Override
@@ -105,8 +105,8 @@ public abstract class ScalaVariable<T> extends GenericRef implements Gettable<T>
 		 * @param qname
 		 * @param value
 		 */
-		public DateVariable(QName qname, Date value) {
-			super(qname, value);
+		public DateVariable(QName qname) {
+			super(Date.class, qname);
 		}
 		
 		@Override
@@ -115,4 +115,18 @@ public abstract class ScalaVariable<T> extends GenericRef implements Gettable<T>
 		}
 	}
 
+	public static class ObjectVariable extends ScalaVariable<Object>{
+		/**
+		 * @param qname
+		 * @param value
+		 */
+		public ObjectVariable(QName qname) {
+			super(Object.class, qname);
+		}
+		
+		@Override
+		public ValueType valueType() {
+			return ValueType.OBJECT;
+		}
+	}
 }
