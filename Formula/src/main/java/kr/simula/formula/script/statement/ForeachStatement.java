@@ -49,6 +49,7 @@ public class ForeachStatement extends AbstractBlock implements Statement{
 		return buf.toString();
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void eval(Context context) {
 		BlockContext blockCtx = new BlockContext(context);
@@ -73,6 +74,7 @@ public class ForeachStatement extends AbstractBlock implements Statement{
 	 * @param varRef
 	 * @param iterable
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void doEval(BlockContext blockCtx, VariableRef varRef, Iterable<?> iterable ) {
 		for( Object o : iterable ){
 			blockCtx.clear();
