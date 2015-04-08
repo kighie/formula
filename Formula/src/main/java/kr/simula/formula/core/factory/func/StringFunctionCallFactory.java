@@ -17,35 +17,48 @@ package kr.simula.formula.core.factory.func;
 import kr.simula.formula.core.Function;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.builder.BuildException;
-import kr.simula.formula.core.wrapper.FunctionCallWrapper.StringFunctionCallWrapper;
+import kr.simula.formula.core.wrapper.FunctionCallWrapper;
 
 public class StringFunctionCallFactory extends GenericFunctionCallFactory {
+
 
 	/**
 	 * @param function
 	 * @param validators
+	 * @param bArgsLateEval
 	 */
 	public StringFunctionCallFactory(Function<?> function,
-			ArgumentValidator<?>[] validators) {
-		super(function, validators);
+			ArgumentValidator<?>[] validators, boolean bArgsLateEval) {
+		super(function, validators, bArgsLateEval);
 	}
 
-//	/**
-//	 * @param function
-//	 * @param validators
-//	 * @param requiredArgCount
-//	 */
-//	public StringFunctionCallFactory(Function<?> function,
-//			ArgumentValidator<?>[] validators, int requiredArgCount) {
-//		super(function, validators, requiredArgCount);
-//	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	protected Gettable<?> createImpl(Function<?> function, Gettable<?>[] gettables) {
+	protected StringFunctionCallWrapper createImpl(Function<?> function, Gettable<?>[] gettables) {
 		if( !String.class.isAssignableFrom(function.getReturnType()) ){
 			throw new BuildException("Function " + functionName() + "'s return type must be String.");
 		}
 		return new StringFunctionCallWrapper((Function<String>)function, gettables);
 	}
+	
+
+
+	public static class StringFunctionCallWrapper extends FunctionCallWrapper<String> {
+		/**
+		 * @param function
+		 * @param args
+		 */
+		public StringFunctionCallWrapper(Function<String> function,
+				Gettable<?>[] args) {
+			super(function, args);
+		}
+		
+		@Override
+		public ValueType valueType() {
+			return ValueType.TEXT;
+		}
+		
+	}
+	
 }

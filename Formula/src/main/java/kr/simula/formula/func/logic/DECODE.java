@@ -22,37 +22,44 @@ import kr.simula.formula.func.AbstractFunction;
 
 /**
  * <pre>
+ * a := DECODE (varA, 1, 'returns A', 3, 'returns B', 10, 'returns C' ... );
  * </pre>
  * @author Ikchan Kwon
  *
  */
 @FunctionBuild(argsLateEval=true)
-public class IF extends AbstractFunction<Object> {
+public class DECODE extends AbstractFunction<Object>  {
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * @param returnType
 	 */
-	public IF() {
+	public DECODE() {
 		super(Object.class);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	@Arguments({Boolean.class, Object.class, Object.class})
+	@Arguments({ Object.class, Object.class, Object.class })
 	public Object eval(Object... args) {
 		checkArgCount(args, 2);
+		
 		Context context = (Context)args[0];
 		Gettable<?>[] gettables = (Gettable<?>[])args[1];
-		Gettable<Boolean> condition = (Gettable<Boolean>)gettables[0];
 		
-		if(condition.get(context)){
-			return gettables[1].get(context);
-		} else if(gettables.length>2) {
-			return gettables[2].get(context);
+		Object criteria = gettables[0].get(context);
+
+		int length = gettables.length;
+		int i=1;
+		Object when;
+		
+		for(;i<length;) {
+			when = gettables[i++].get(context);
+
+			if(criteria.equals(when)){
+				return (i<length) ? gettables[i].get(context) : null;
+			}
+			i++;
 		}
-		
 		return null;
 	}
-
 }

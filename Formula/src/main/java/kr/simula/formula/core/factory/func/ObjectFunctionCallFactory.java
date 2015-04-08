@@ -16,32 +16,45 @@ package kr.simula.formula.core.factory.func;
 
 import kr.simula.formula.core.Function;
 import kr.simula.formula.core.Gettable;
-import kr.simula.formula.core.wrapper.FunctionCallWrapper.ObjectFunctionCallWrapper;
+import kr.simula.formula.core.wrapper.FunctionCallWrapper;
 
 public class ObjectFunctionCallFactory extends GenericFunctionCallFactory {
+
+
 
 	/**
 	 * @param function
 	 * @param validators
+	 * @param bArgsLateEval
 	 */
 	public ObjectFunctionCallFactory(Function<?> function,
-			ArgumentValidator<?>[] validators) {
-		super(function, validators);
+			ArgumentValidator<?>[] validators, boolean bArgsLateEval) {
+		super(function, validators, bArgsLateEval);
 	}
 
-//	/**
-//	 * @param function
-//	 * @param validators
-//	 * @param requiredArgCount
-//	 */
-//	public ObjectFunctionCallFactory(Function<?> function,
-//			ArgumentValidator<?>[] validators, int requiredArgCount) {
-//		super(function, validators, requiredArgCount);
-//	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	protected Gettable<Object> createImpl(Function<?> function, Gettable<?>[] gettables) {
+	protected ObjectFunctionCallWrapper createImpl(Function<?> function, Gettable<?>[] gettables) {
 		return new ObjectFunctionCallWrapper((Function<Object>)function, gettables);
 	}
+	
+
+	public static class ObjectFunctionCallWrapper extends FunctionCallWrapper<Object> {
+		/**
+		 * @param function
+		 * @param args
+		 */
+		public ObjectFunctionCallWrapper(Function<Object> function,
+				Gettable<?>[] args) {
+			super(function, args);
+		}
+		
+		@Override
+		public ValueType valueType() {
+			return ValueType.OBJECT;
+		}
+		
+	}
+	
 }

@@ -15,6 +15,7 @@
 package kr.simula.formula.core.factory.helper;
 
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -28,6 +29,7 @@ import kr.simula.formula.core.Function;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.annotation.Arguments;
+import kr.simula.formula.core.annotation.FunctionBuild;
 import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.factory.FunctionCallFactory;
@@ -51,6 +53,11 @@ public class FunctionCallHelper extends AbstractHelper<FunctionCallFactory> {
 
 	protected static final Node[] EMPTY_NODE_ARRAY = new Node[0];
 	protected static final ArgumentValidator<?>[] EMPTY_VALIDATOR_ARRAY = new ArgumentValidator<?>[0];
+
+	@SuppressWarnings("rawtypes")
+	protected final static Class[] FACTORY_ARG_TYPES = new Class[]{Function.class, 
+		ArgumentValidator[].class, boolean.class};
+	
 	
 	protected Map<Class<?>, ArgumentValidator<?>> validatorMap;
 	
@@ -189,17 +196,42 @@ public class FunctionCallHelper extends AbstractHelper<FunctionCallFactory> {
 			Function<?> function, Class<?>[] argTypes) {
 		ArgumentValidator<?>[] validators = createValidators(argTypes);
 		
-		if(BigDecimal.class.isAssignableFrom(returnType)) {
-			return new NumericFunctionCallFactory(function, validators);
-		} else if(String.class.isAssignableFrom(returnType)){
-			return new StringFunctionCallFactory(function, validators);
-		} else if(Boolean.class.isAssignableFrom(returnType)){
-			return new BooleanFunctionCallFactory(function, validators);
-		} else if(Date.class.isAssignableFrom(returnType)){
-			return new DateFunctionCallFactory(function, validators);
-		} else {
-			return new ObjectFunctionCallFactory(function, validators);
+		FunctionCallFactory factory = null;
+		boolean bArgsLateEval = false;
+		
+		FunctionBuild fncBuild = function.getClass().getAnnotation(FunctionBuild.class);
+		
+		if(fncBuild != null){
+			Class<? extends FunctionCallFactory> clz = fncBuild.factory();
+			bArgsLateEval = fncBuild.argsLateEval();
+			
+			if(clz != FunctionCallFactory.class){
+				try {
+					Constructor<? extends FunctionCallFactory> ctrt = clz.getConstructor(FACTORY_ARG_TYPES);
+					factory = ctrt.newInstance(new Object[]{function, validators, bArgsLateEval});
+				} catch (Exception e) {
+					throw new BuildException("Cannot create FunctionCallFactory(" + clz.getName() +")" , e);
+				}
+			}
 		}
+		
+		if(factory != null){
+			return factory;
+		}
+		
+		if(BigDecimal.class.isAssignableFrom(returnType)) {
+			factory = new NumericFunctionCallFactory(function, validators, bArgsLateEval);
+		} else if(String.class.isAssignableFrom(returnType)){
+			factory = new StringFunctionCallFactory(function, validators, bArgsLateEval);
+		} else if(Boolean.class.isAssignableFrom(returnType)){
+			factory = new BooleanFunctionCallFactory(function, validators, bArgsLateEval);
+		} else if(Date.class.isAssignableFrom(returnType)){
+			factory = new DateFunctionCallFactory(function, validators, bArgsLateEval);
+		} else {
+			factory = new ObjectFunctionCallFactory(function, validators, bArgsLateEval);
+		}
+		
+		return factory;
 	}
 
 	public Gettable<?> create(BuildContext context,  String name , List<Node> args){

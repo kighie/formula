@@ -14,6 +14,7 @@
  */
 package kr.simula.formula.core;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -59,6 +60,11 @@ public class RootContext implements Context {
 	}
 	
 	public void setParameter(String name, Object value) {
+		if(value instanceof Number){
+			if(!(value instanceof BigDecimal)){
+				value = new BigDecimal(value.toString());
+			}
+		}
 		refMap.put(new QName(name), value);
 	}
 	

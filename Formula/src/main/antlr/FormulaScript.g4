@@ -119,16 +119,6 @@ ifStatement returns [IfStatement ifstmt]
 	)?
 	;
 
-decodeStatement  returns [Statement stmt]
-	: 'decode' '(' IDENT|qualifiedName ')' '{'
-		(
-			BOOLEAN 			//{ $result = handler.literal( ExprTokens.LIT_BOOLEAN, $BOOLEAN.text); }
-			| STRING_LITERAL	//{ $result = handler.literal( ExprTokens.LIT_STRING,  strip($STRING_LITERAL.text)); }
-			| NUMBER			//{ $result = handler.literal( ExprTokens.LIT_NUMBER, $NUMBER.text); }
-		) ':'
-	 	formulaTerm
-	'}'
-	;
 
 foreachStatement returns [Statement stmt]
 	: 'foreach' '(' loopCondition ')' '{'
@@ -148,11 +138,12 @@ methodCallStatement  returns [Statement stmt]
 	: methodCallExp END_OF_STMT { $stmt = handler.statement(ScriptTokens.MTHODE_CALL, $methodCallExp.result); }
 	;
 	
+	
 /* *************************************
  * assign
  *************************************** */
 assignStatement  returns [Statement stmt]
-	: (IDENT|qualifiedName) ':=' ( formulaExpressionBase | decodeStatement )
+	: (IDENT|qualifiedName) ':=' formulaExpressionBase
 	END_OF_STMT
 	; 
  

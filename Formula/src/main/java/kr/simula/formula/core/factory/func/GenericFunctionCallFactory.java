@@ -22,6 +22,7 @@ import kr.simula.formula.core.Node;
 import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.factory.FunctionCallFactory;
+import kr.simula.formula.core.wrapper.FunctionCallWrapper;
 
 /**
  * <pre></pre>
@@ -32,18 +33,26 @@ public abstract class GenericFunctionCallFactory implements FunctionCallFactory 
 
 	protected final Function<?> function;
 	protected final ArgumentValidator<?>[] validators;
-
+	protected final boolean bArgsLateEval;
 
 	public GenericFunctionCallFactory(Function<?> function,
-			ArgumentValidator<?>[] validators) {
+			ArgumentValidator<?>[] validators, boolean bArgsLateEval) {
 		this.function = function;
 		this.validators = validators;
+		this.bArgsLateEval = bArgsLateEval;
 	}
 	
 	public String functionName(){
 		return function.getClass().getSimpleName();
 	}
 	
+	/**
+	 * @return the bArgsLateEval
+	 */
+	public boolean isArgsLateEval() {
+		return bArgsLateEval;
+	}
+
 	protected Gettable<?>[] validateArgs(List<Node> args) {
 		int length = (args != null) ? args.size() : 0;
 		
@@ -67,9 +76,11 @@ public abstract class GenericFunctionCallFactory implements FunctionCallFactory 
 	}
 
 	@Override
-	public Gettable<?> create(BuildContext context, String fnName, List<Node> args) {
+	public FunctionCallWrapper<?> create(BuildContext context, String fnName, List<Node> args) {
 		Gettable<?>[] gettables = validateArgs(args);
-		return createImpl(function,gettables);
+		FunctionCallWrapper<?> wrapper = createImpl(function,gettables);
+		wrapper.setArgsLateEval(bArgsLateEval);
+		return wrapper;
 	}
 
 
@@ -79,5 +90,5 @@ public abstract class GenericFunctionCallFactory implements FunctionCallFactory 
 	 * @param gettables
 	 * @return
 	 */
-	protected abstract Gettable<?> createImpl(Function<?> function, Gettable<?>[] gettables);
+	protected abstract FunctionCallWrapper<?> createImpl(Function<?> function, Gettable<?>[] gettables);
 }

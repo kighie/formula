@@ -14,9 +14,6 @@
  */
 package kr.simula.formula.core.wrapper;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Function;
 import kr.simula.formula.core.Gettable;
@@ -31,7 +28,7 @@ public abstract class FunctionCallWrapper<T> implements Gettable<T>{
 
 	protected final Function<T> function;
 	protected final Gettable<?>[] args;
-	
+	protected boolean bArgsLateEval;
 	
 	/**
 	 * @param function
@@ -39,6 +36,20 @@ public abstract class FunctionCallWrapper<T> implements Gettable<T>{
 	public FunctionCallWrapper(Function<T> function, Gettable<?> ... args) {
 		this.function = function;
 		this.args = args;
+	}
+
+	/**
+	 * @return the bArgsLateEval
+	 */
+	public boolean isArgsLateEval() {
+		return bArgsLateEval;
+	}
+
+	/**
+	 * @param bArgsLateEval the bArgsLateEval to set
+	 */
+	public void setArgsLateEval(boolean bArgsLateEval) {
+		this.bArgsLateEval = bArgsLateEval;
 	}
 
 	@Override
@@ -64,6 +75,10 @@ public abstract class FunctionCallWrapper<T> implements Gettable<T>{
 	 */
 	@Override
 	public T get(Context context) {
+		if(bArgsLateEval){
+			return function.eval(context, args);
+		}
+		
 		Object[] argArr = new Object[args.length];
 		int i = 0;
 		for(Gettable<?> n : args){
@@ -83,89 +98,4 @@ public abstract class FunctionCallWrapper<T> implements Gettable<T>{
 		return buf.toString();
 	}
 	
-	public static class ObjectFunctionCallWrapper extends FunctionCallWrapper<Object> {
-		/**
-		 * @param function
-		 * @param args
-		 */
-		public ObjectFunctionCallWrapper(Function<Object> function,
-				Gettable<?>[] args) {
-			super(function, args);
-		}
-		
-		@Override
-		public ValueType valueType() {
-			return ValueType.OBJECT;
-		}
-		
-	}
-	
-	public static class NumericFunctionCallWrapper extends FunctionCallWrapper<BigDecimal> {
-		/**
-		 * @param function
-		 * @param args
-		 */
-		public NumericFunctionCallWrapper(Function<BigDecimal> function,
-				Gettable<?>[] args) {
-			super(function, args);
-		}
-		
-		@Override
-		public ValueType valueType() {
-			return ValueType.NUMERIC;
-		}
-		
-	}
-	
-
-	public static class StringFunctionCallWrapper extends FunctionCallWrapper<String> {
-		/**
-		 * @param function
-		 * @param args
-		 */
-		public StringFunctionCallWrapper(Function<String> function,
-				Gettable<?>[] args) {
-			super(function, args);
-		}
-		
-		@Override
-		public ValueType valueType() {
-			return ValueType.TEXT;
-		}
-		
-	}
-	
-	public static class BooleanFunctionCallWrapper extends FunctionCallWrapper<Boolean> {
-		/**
-		 * @param function
-		 * @param args
-		 */
-		public BooleanFunctionCallWrapper(Function<Boolean> function,
-				Gettable<?>[] args) {
-			super(function, args);
-		}
-		
-		@Override
-		public ValueType valueType() {
-			return ValueType.LOGICAL;
-		}
-		
-	}
-
-	public static class DateFunctionCallWrapper extends FunctionCallWrapper<Date> {
-		/**
-		 * @param function
-		 * @param args
-		 */
-		public DateFunctionCallWrapper(Function<Date> function,
-				Gettable<?>[] args) {
-			super(function, args);
-		}
-		
-		@Override
-		public ValueType valueType() {
-			return ValueType.DATE;
-		}
-		
-	}
 }

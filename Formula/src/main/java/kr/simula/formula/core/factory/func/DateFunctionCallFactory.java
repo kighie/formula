@@ -19,35 +19,44 @@ import java.util.Date;
 import kr.simula.formula.core.Function;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.builder.BuildException;
-import kr.simula.formula.core.wrapper.FunctionCallWrapper.DateFunctionCallWrapper;
+import kr.simula.formula.core.wrapper.FunctionCallWrapper;
 
 public class DateFunctionCallFactory extends GenericFunctionCallFactory {
 
 	/**
 	 * @param function
 	 * @param validators
+	 * @param bArgsLateEval
 	 */
 	public DateFunctionCallFactory(Function<?> function,
-			ArgumentValidator<?>[] validators) {
-		super(function, validators);
+			ArgumentValidator<?>[] validators, boolean bArgsLateEval) {
+		super(function, validators, bArgsLateEval);
 	}
 
-//	/**
-//	 * @param function
-//	 * @param validators
-//	 * @param requiredArgCount
-//	 */
-//	public DateFunctionCallFactory(Function<?> function,
-//			ArgumentValidator<?>[] validators, int requiredArgCount) {
-//		super(function, validators, requiredArgCount);
-//	}
-	
 	@SuppressWarnings("unchecked")
 	@Override
-	protected Gettable<?> createImpl(Function<?> function, Gettable<?>[] gettables) {
+	protected DateFunctionCallWrapper createImpl(Function<?> function, Gettable<?>[] gettables) {
 		if( !Date.class.isAssignableFrom(function.getReturnType()) ){
 			throw new BuildException("Function " + functionName() + "'s return type must be Date.");
 		}
 		return new DateFunctionCallWrapper((Function<Date>)function, gettables);
+	}
+	
+
+	public static class DateFunctionCallWrapper extends FunctionCallWrapper<Date> {
+		/**
+		 * @param function
+		 * @param args
+		 */
+		public DateFunctionCallWrapper(Function<Date> function,
+				Gettable<?>[] args) {
+			super(function, args);
+		}
+		
+		@Override
+		public ValueType valueType() {
+			return ValueType.DATE;
+		}
+		
 	}
 }

@@ -32,18 +32,6 @@ public class FormulaScriptBaseListener implements FormulaScriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDecodeStatement(@NotNull FormulaScriptParser.DecodeStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitDecodeStatement(@NotNull FormulaScriptParser.DecodeStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterExponential(@NotNull FormulaScriptParser.ExponentialContext ctx) { }
 	/**
 	 * {@inheritDoc}

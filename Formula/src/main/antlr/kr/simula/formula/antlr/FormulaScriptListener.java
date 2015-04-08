@@ -24,16 +24,6 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface FormulaScriptListener extends ParseTreeListener {
 	/**
-	 * Enter a parse tree produced by {@link FormulaScriptParser#decodeStatement}.
-	 * @param ctx the parse tree
-	 */
-	void enterDecodeStatement(@NotNull FormulaScriptParser.DecodeStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FormulaScriptParser#decodeStatement}.
-	 * @param ctx the parse tree
-	 */
-	void exitDecodeStatement(@NotNull FormulaScriptParser.DecodeStatementContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link FormulaScriptParser#exponential}.
 	 * @param ctx the parse tree
 	 */

@@ -18,8 +18,7 @@ import kr.simula.formula.antlr.FormulaScriptLexer;
 import kr.simula.formula.antlr.FormulaScriptParser;
 import kr.simula.formula.antlr.FormulaScriptParser.FormulaScriptContext;
 import kr.simula.formula.core.Node;
-import kr.simula.formula.core.builder.FormulaBuilder;
-import kr.simula.formula.core.builder.FormulaHandlerFactory;
+import kr.simula.formula.core.builder.AbstractFormulaBuilder;
 import kr.simula.formula.core.builder.RootBuildContext;
 import kr.simula.formula.core.factory.helper.BinaryOperatorHelper;
 import kr.simula.formula.core.factory.helper.BlockHelper;
@@ -45,7 +44,7 @@ import org.antlr.v4.runtime.TokenStream;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class FormulaScriptBuilder implements FormulaBuilder, FormulaHandlerFactory<FormulaScriptHandler> {
+public class FormulaScriptBuilder extends AbstractFormulaBuilder<FormulaScriptHandler> {
 
 	protected BlockHelper blockHelper = new ScriptBlockHelper();
 	protected StatementHelper statementHelper = new ScriptStatementHelper();
@@ -69,30 +68,15 @@ public class FormulaScriptBuilder implements FormulaBuilder, FormulaHandlerFacto
 	}
 
 	@Override
-	public FormulaScriptHandler newHandler() {
-		return newHandler(new RootBuildContext());
-	}
-
-	@Override
-	public Node build(String expression) {
-		FormulaScriptHandler handler = newHandler();
-		return buildScript(handler, expression);
-	}
-
-	@Override
-	public Node build(String expression, RootBuildContext rootContext) {
-		FormulaScriptHandler handler = newHandler(rootContext);
-		return buildScript(handler, expression);
-	}
-
-
-	private Node buildScript(FormulaScriptHandler handler, String expression){
+	protected Node build(FormulaScriptHandler handler, String expression) {
 		CharStream input = new ANTLRInputStream(expression);
 		FormulaScriptLexer lexer = new FormulaScriptLexer(input);
 		TokenStream tokenStream = new CommonTokenStream(lexer);
 		FormulaScriptParser parser =new FormulaScriptParser(tokenStream);
 		parser.setHandler(handler);
+		parser.addErrorListener(errorAdapter);
 		FormulaScriptContext ctx = parser.formulaScript();
 		return ctx.script;
 	}
+	
 }

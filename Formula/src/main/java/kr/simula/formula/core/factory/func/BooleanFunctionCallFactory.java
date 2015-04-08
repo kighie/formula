@@ -17,35 +17,46 @@ package kr.simula.formula.core.factory.func;
 import kr.simula.formula.core.Function;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.builder.BuildException;
-import kr.simula.formula.core.wrapper.FunctionCallWrapper.BooleanFunctionCallWrapper;
+import kr.simula.formula.core.wrapper.FunctionCallWrapper;
 
 public class BooleanFunctionCallFactory extends GenericFunctionCallFactory {
 
 	/**
 	 * @param function
 	 * @param validators
+	 * @param bArgsLateEval
 	 */
 	public BooleanFunctionCallFactory(Function<?> function,
-			ArgumentValidator<?>[] validators) {
-		super(function, validators);
+			ArgumentValidator<?>[] validators, boolean bArgsLateEval) {
+		super(function, validators, bArgsLateEval);
 	}
 
-//	/**
-//	 * @param function
-//	 * @param validators
-//	 * @param requiredArgCount
-//	 */
-//	public BooleanFunctionCallFactory(Function<?> function,
-//			ArgumentValidator<?>[] validators, int requiredArgCount) {
-//		super(function, validators, requiredArgCount);
-//	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
-	protected Gettable<?> createImpl(Function<?> function, Gettable<?>[] gettables) {
+	protected BooleanFunctionCallWrapper createImpl(Function<?> function, Gettable<?>[] gettables) {
 		if( !Boolean.class.isAssignableFrom(function.getReturnType()) ){
 			throw new BuildException("Function " + functionName() + "'s return type must be Boolean.");
 		}
 		return new BooleanFunctionCallWrapper((Function<Boolean>)function, gettables);
 	}
+	
+
+	public static class BooleanFunctionCallWrapper extends FunctionCallWrapper<Boolean> {
+		/**
+		 * @param function
+		 * @param args
+		 */
+		public BooleanFunctionCallWrapper(Function<Boolean> function,
+				Gettable<?>[] args) {
+			super(function, args);
+		}
+		
+		@Override
+		public ValueType valueType() {
+			return ValueType.LOGICAL;
+		}
+		
+	}
+
 }

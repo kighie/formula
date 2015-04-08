@@ -37,6 +37,13 @@ public class GettableUtils {
 			return new BigDecimal(input.toString());
 		}
 	};
+
+	public static final TypeConverter<Object, BigDecimal> OBJECT_TO_DECIMAL = new TypeConverter<Object, BigDecimal>(){
+		@Override
+		public BigDecimal convert(Object input) {
+			return new BigDecimal(input.toString());
+		}
+	};
 	
 
 	public static Gettable<?> checkGettable(Node node){
@@ -109,10 +116,16 @@ public class GettableUtils {
 		if(BigDecimal.class.isAssignableFrom(type) ){
 			return (Gettable<BigDecimal>)node;
 		}
-		
+
 		if(Number.class.isAssignableFrom(type) ){
 			return new DecimalGettableWrapper(NUMBER_TO_DECIMAL,node);
 		}
+
+		if(Object.class.isAssignableFrom(type) ){
+			return new DecimalGettableWrapper(OBJECT_TO_DECIMAL,node);
+		}
+		
+		
 		
 		throw new BuildException(node + " is not numeric node.");
 	}

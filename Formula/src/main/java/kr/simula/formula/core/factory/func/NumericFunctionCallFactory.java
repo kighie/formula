@@ -19,17 +19,18 @@ import java.math.BigDecimal;
 import kr.simula.formula.core.Function;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.builder.BuildException;
-import kr.simula.formula.core.wrapper.FunctionCallWrapper.NumericFunctionCallWrapper;
+import kr.simula.formula.core.wrapper.FunctionCallWrapper;
 
 public class NumericFunctionCallFactory extends GenericFunctionCallFactory {
 
 	/**
 	 * @param function
 	 * @param validators
+	 * @param bArgsLateEval
 	 */
 	public NumericFunctionCallFactory(Function<?> function,
-			ArgumentValidator<?>[] validators) {
-		super(function, validators);
+			ArgumentValidator<?>[] validators, boolean bArgsLateEval) {
+		super(function, validators, bArgsLateEval);
 	}
 
 //	/**
@@ -44,10 +45,29 @@ public class NumericFunctionCallFactory extends GenericFunctionCallFactory {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	protected Gettable<?> createImpl(Function<?> function, Gettable<?>[] gettables) {
+	protected NumericFunctionCallWrapper createImpl(Function<?> function, Gettable<?>[] gettables) {
 		if( !BigDecimal.class.isAssignableFrom(function.getReturnType()) ){
 			throw new BuildException("Function " + functionName() + "'s return type must be BigDecimal.");
 		}
 		return new NumericFunctionCallWrapper((Function<BigDecimal>)function, gettables);
 	}
+	
+
+	public static class NumericFunctionCallWrapper extends FunctionCallWrapper<BigDecimal> {
+		/**
+		 * @param function
+		 * @param args
+		 */
+		public NumericFunctionCallWrapper(Function<BigDecimal> function,
+				Gettable<?>[] args) {
+			super(function, args);
+		}
+		
+		@Override
+		public ValueType valueType() {
+			return ValueType.NUMERIC;
+		}
+		
+	}
+	
 }

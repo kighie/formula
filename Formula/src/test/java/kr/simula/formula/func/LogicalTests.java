@@ -16,7 +16,10 @@ package kr.simula.formula.func;
 
 import java.math.BigDecimal;
 
+import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.RootContext;
 import kr.simula.formula.expr.AbstractExpressionTests;
+import kr.simula.formula.util.StopWatch;
 
 import org.junit.Test;
 
@@ -42,8 +45,106 @@ public class LogicalTests  extends AbstractExpressionTests {
 	public void IF(){
 		testExpression("=IF(true, 'YES', 'NO')", "YES");
 		testExpression("=IF(false, 'YES', 'NO')", "NO");
-		testExpression("=IF(true, 10, 20) * 10", new BigDecimal(10));
 		testExpression("=IF(false, 10, 20)", new BigDecimal(20));
+		testExpression("=IF(true, 10, 20) * 10", new BigDecimal(100));
 	}
 
+	@Test
+	public void DECODE(){
+		String expr = "=DECODE(pA, "
+				+ "1, A1, "
+				+ "2, 'RTN'& pA, "
+				+ "3, pA*4,"
+				+ "4, 'CAL-' & pA/6, "
+				+ "5, pA^2,"
+				+ "6, 2*pA, "
+				+ "7, MOD(pA,2),"
+				+ "8  )";
+		
+		RootContext context = new RootContext();
+		context.setParameter("A1", "abcd");
+
+		context.setParameter("pA", 1);
+		testExpression(expr, context, "abcd");
+
+		context.setParameter("pA", 2);
+		testExpression(expr, context, "RTN2");
+
+		context.setParameter("pA", 3);
+		testExpression(expr, context, new BigDecimal(12));
+		
+		context.setParameter("pA", 4);
+		testExpression(expr, context, "CAL-0.6666666667");
+
+		context.setParameter("pA", 5);
+		testExpression(expr, context, new BigDecimal(25));
+
+		context.setParameter("pA", 6);
+		testExpression(expr, context, new BigDecimal(12));
+
+		context.setParameter("pA", 7);
+		testExpression(expr, context, new BigDecimal(1));
+
+		context.setParameter("pA", 8);
+		testExpression(expr, context, null);
+
+	}
+
+
+	@Test
+	public void DECODE_Performance(){
+		
+		StopWatch stopWatch = new StopWatch();
+		stopWatch.start();
+		
+		String expr = "=DECODE(pA, "
+				+ "1, 'A1', "
+				+ "2, 'RTN'& pA, "
+				+ "3, pA*4,"
+				+ "4, 'CAL-' & pA/6, "
+				+ "5, pA^2,"
+				+ "6, 2*pA, "
+				+ "7, MOD(pA,2),"
+				+ "8  )";
+		
+		Gettable<?> node = (Gettable<?>)buildExpression(expr);
+		
+		System.out.println("BUILD : " + stopWatch.ellapsedTime());
+		
+		System.out.println(node.getExpression());
+		
+		RootContext context = new RootContext();
+		
+		stopWatch.reset();
+		
+		for (int i = 0; i < 1000; i++) {
+			context.setParameter("pA", 1);
+			node.get(context);
+			context.setParameter("pA", 2);
+			node.get(context);
+			context.setParameter("pA", 3);
+			node.get(context);
+			context.setParameter("pA", 4);
+			node.get(context);
+			context.setParameter("pA", 5);
+			node.get(context);
+
+			context.setParameter("pA", 6);
+			node.get(context);
+			context.setParameter("pA", 7);
+			node.get(context);
+			context.setParameter("pA", 8);
+			node.get(context);
+		}
+		
+		System.out.println("RUN 1,000times : " + stopWatch.ellapsedTime());
+	}
+
+	
+	@Test
+	public void test(){
+		testExpression("=(1+3 * (4 - 15) - 31.5 / 10)/100", new BigDecimal("-0.3515"));
+		
+		System.out.println((1+3 * (4 - 15) - 31.5 / 10)/100);
+	}
 }
