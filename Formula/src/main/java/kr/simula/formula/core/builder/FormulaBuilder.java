@@ -22,11 +22,11 @@ import kr.simula.formula.core.Node;
  * @author Ikchan Kwon
  *
  */
-public interface FormulaBuilder {
+public interface FormulaBuilder<T extends Node> {
 
-	Node build(String expression);
+	T build(String expression);
 
-	Node build(String expression, RootBuildContext rootContext);
+	T build(String expression, RootBuildContext rootContext);
 	
 	
 }

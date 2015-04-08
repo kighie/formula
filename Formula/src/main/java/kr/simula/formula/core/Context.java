@@ -24,11 +24,18 @@ package kr.simula.formula.core;
  */
 public interface Context {
 
+	public static final Object NULL = new Object();
+	
 	Object getAttribute(String name);
 
 	Object getReference(QName name);
 	
 	void setReference(QName name, Object value);
+	
+	void setLocalVar(QName name, Object value);
+	
+	
+	void clear();
 	
 //	Object getVariable(QName name);
 //	

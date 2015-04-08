@@ -17,6 +17,7 @@ package kr.simula.formula.script.statement;
 import java.util.LinkedList;
 import java.util.List;
 
+import kr.simula.formula.core.BlockContext;
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Node;
@@ -96,20 +97,24 @@ public class IfStatement extends AbstractBlock implements Statement{
 	
 	@Override
 	public void eval(Context context) {
+		BlockContext blockCtx = new BlockContext(context);
+		
 		if( condition.get(context) ){
-			evalBody(context);
+			evalBody(blockCtx);
 			return;
 		} else if( elseIfList != null ){
 			for(ElseIf ef : elseIfList){
-				if( ef.elseIfCondition.get(context) ){
-					ef.eval(context);
+				blockCtx.clear();
+				if( ef.elseIfCondition.get(blockCtx) ){
+					ef.eval(blockCtx);
 					return;
 				}
 			}
 		}
 		
 		if( elseStmt != null ){
-			elseStmt.eval(context);
+			blockCtx.clear();
+			elseStmt.eval(blockCtx);
 		}
 	}
 	

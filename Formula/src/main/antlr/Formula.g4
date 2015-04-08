@@ -188,8 +188,10 @@ comparison returns [Node result]
 	: stringExpression  { $result = $stringExpression.result;  }
 	( 
 		'='  op2 = stringExpression {$result = handler.operator(ExprTokens.OP_EQ, $result, $op2.result); }
+		|'is'  op2 = stringExpression {$result = handler.operator(ExprTokens.OP_EQ, $result, $op2.result); }
 		|'!=' op2 = stringExpression {$result = handler.operator(ExprTokens.OP_NOT_EQ, $result, $op2.result); }
 		|'<>' op2 = stringExpression {$result = handler.operator(ExprTokens.OP_NOT_EQ, $result, $op2.result); }
+		|'is' 'not' op2 = stringExpression {$result = handler.operator(ExprTokens.OP_NOT_EQ, $result, $op2.result); }
 		|'>'  op2 = stringExpression {$result = handler.operator(ExprTokens.OP_GT, $result, $op2.result); }
 		|'>=' op2 = stringExpression {$result = handler.operator(ExprTokens.OP_EQ_GT, $result, $op2.result); }
 		|'<'  op2 = stringExpression {$result = handler.operator(ExprTokens.OP_LT, $result, $op2.result); }

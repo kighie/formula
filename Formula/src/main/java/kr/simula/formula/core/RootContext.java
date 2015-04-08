@@ -68,6 +68,11 @@ public class RootContext implements Context {
 		refMap.put(new QName(name), value);
 	}
 	
+	@Override
+	public void setLocalVar(QName name, Object value) {
+		setReference(name, value);
+	}
+
 	public Iterable<Entry<String, Object>> attributes() {
 		return attributes.entrySet();
 	}
@@ -76,6 +81,14 @@ public class RootContext implements Context {
 		return refMap.entrySet();
 	}
 
+	/* (non-Javadoc)
+	 * @see kr.simula.formula.core.Context#clear()
+	 */
+	@Override
+	public void clear() {
+		refMap.clear();
+	}
+	
 //	public Object getVariable(QName name) {
 //		return variables.get(name);
 //	}

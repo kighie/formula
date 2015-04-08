@@ -47,6 +47,10 @@ public class VariableRef<T> extends GenericRef implements Gettable<T>, Settable<
 	public void set(Context context, T value) {
 		context.setReference(qname, value);
 	}
+
+	public void setLocal(Context context, T value) {
+		context.setLocalVar(qname, value);
+	}
 	
 	@SuppressWarnings("unchecked")
 	@Override

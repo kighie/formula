@@ -73,6 +73,8 @@ public class VariableDeclStatement extends AbstractStatement {
 		if(valueNode != null){
 			Object value = valueNode.get(context);
 			varRef.set(context, value);
+		} else {
+			varRef.set(context, Context.NULL);
 		}
 	}
 	

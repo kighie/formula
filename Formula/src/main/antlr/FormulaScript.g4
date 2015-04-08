@@ -31,6 +31,7 @@ import Formula;
 	
 	import kr.simula.formula.script.*;
 	import kr.simula.formula.script.statement.*;
+	import kr.simula.formula.util.*;
 }
 
 @parser::members {
@@ -87,7 +88,7 @@ blockContents [Block stmtHolder]
 	: 
 	(
 		ifStatement				{ $stmtHolder.append($ifStatement.ifstmt); }
-		| foreachStatement		{ $stmtHolder.append($foreachStatement.stmt); }
+		| foreachStatement		{ $stmtHolder.append($foreachStatement.foreachStmt); }
 		| assignStatement		{ $stmtHolder.append($assignStatement.stmt); }
 		| methodCallStatement	{ $stmtHolder.append($methodCallStatement.stmt); }
 		| variableDecl 			{ $stmtHolder.append($variableDecl.stmt); }
@@ -120,19 +121,36 @@ ifStatement returns [IfStatement ifstmt]
 	;
 
 
-foreachStatement returns [Statement stmt]
-	: 'foreach' '(' loopCondition ')' '{'
-		//block?
-	'}'
+foreachStatement returns [ForeachStatement foreachStmt]
+	: 'foreach' '(' loopCondition ')' 
+		{
+			$foreachStmt = (ForeachStatement)handler.statement(ScriptTokens.FOREACH, $loopCondition.condition); 
+		}
+		'{' blockContents[$foreachStmt]? '}'
 	;
 	
-loopCondition 
-	: IDENT 
+loopCondition 	returns [LoopConditionStatement condition]
+	: type IDENT 
+	{ 
+		Ref varRef = handler.declare(ScriptTokens.VAR, $type.typeClz ,$IDENT.text); 
+		$condition = (LoopConditionStatement)handler.statement(ScriptTokens.LOOP_COND_DECL, varRef);
+	}
 	(
-		( ':' var=IDENT )
-		| ('=' from=NUMBER ':' to=NUMBER)
+		( ':' var=IDENT 
+			{
+				Ref iteratorRef = handler.refer( $var.text);
+				$condition.setIteratorRef(iteratorRef);
+			}
+		)
+		| ('=' from=NUMBER ':' to=NUMBER
+			{
+				Range range = Range.create($from.text, $to.text);
+				$condition.setRange(range);
+			}
+		)
 	)	
 	;
+
 
 methodCallStatement  returns [Statement stmt]
 	: methodCallExp END_OF_STMT { $stmt = handler.statement(ScriptTokens.MTHODE_CALL, $methodCallExp.result); }

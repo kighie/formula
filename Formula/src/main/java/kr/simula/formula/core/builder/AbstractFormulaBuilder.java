@@ -23,8 +23,8 @@ import kr.simula.formula.core.antlr.ParsingErrorAdapter;
  * @author Ikchan Kwon
  *
  */
-public abstract class AbstractFormulaBuilder<T extends FormulaHandler> 
-	implements FormulaBuilder, FormulaHandlerFactory<T> {
+public abstract class AbstractFormulaBuilder<N extends Node, H extends FormulaHandler> 
+	implements FormulaBuilder<N>, FormulaHandlerFactory<H> {
 	
 
 	protected final ParsingErrorAdapter errorAdapter = new ParsingErrorAdapter();
@@ -41,23 +41,23 @@ public abstract class AbstractFormulaBuilder<T extends FormulaHandler>
 	
 	
 	@Override
-	public T newHandler() {
+	public H newHandler() {
 		return newHandler(new RootBuildContext());
 	}
 
 	@Override
-	public Node build(String expression) {
-		T handler = newHandler();
+	public N build(String expression) {
+		H handler = newHandler();
 		return build(handler, expression);
 	}
 	
 	@Override
-	public Node build(String expression, RootBuildContext rootContext) {
-		T handler = newHandler(rootContext);
+	public N build(String expression, RootBuildContext rootContext) {
+		H handler = newHandler(rootContext);
 		return build(handler, expression);
 	}
 	
-	protected abstract Node build(T handler, String expression);
+	protected abstract N build(H handler, String expression);
 	
 	
 }

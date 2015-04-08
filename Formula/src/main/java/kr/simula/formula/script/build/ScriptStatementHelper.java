@@ -23,7 +23,9 @@ import kr.simula.formula.core.ref.MethodRef;
 import kr.simula.formula.core.ref.VariableRef;
 import kr.simula.formula.core.util.GettableUtils;
 import kr.simula.formula.script.ScriptTokens;
+import kr.simula.formula.script.statement.ForeachStatement;
 import kr.simula.formula.script.statement.IfStatement;
+import kr.simula.formula.script.statement.LoopConditionStatement;
 import kr.simula.formula.script.statement.MethodCallStatement;
 import kr.simula.formula.script.statement.VariableDeclStatement;
 
@@ -67,6 +69,25 @@ public class ScriptStatementHelper extends StatementHelper {
 		}
 	};
 
+	static StatementFactory loopCondFactory = new StatementFactory() {
+		@Override
+		public LoopConditionStatement create(BuildContext context, String token, Node[] args) {
+			VariableRef<?> varRef = (VariableRef<?>)args[0];
+			
+			LoopConditionStatement stmt = new LoopConditionStatement(varRef);
+			return stmt;
+		}
+	};
+
+	static StatementFactory foreachFactory = new StatementFactory() {
+		@Override
+		public ForeachStatement create(BuildContext context, String token, Node[] args) {
+			LoopConditionStatement loopCond = (LoopConditionStatement)args[0];
+			ForeachStatement stmt = new ForeachStatement(loopCond);
+			return stmt;
+		}
+	};
+
 	
 	//VariableDeclStatement
 	@Override
@@ -75,6 +96,8 @@ public class ScriptStatementHelper extends StatementHelper {
 		setFactory(ScriptTokens.IF, ifFactory);
 		setFactory(ScriptTokens.MTHODE_CALL, methodCallFactory);
 		setFactory(ScriptTokens.VAR_DECL, varDeclFactory);
+		setFactory(ScriptTokens.LOOP_COND_DECL, loopCondFactory);
+		setFactory(ScriptTokens.FOREACH, foreachFactory);
 	}
 	
 	

@@ -17,7 +17,7 @@ package kr.simula.formula.expr.builder;
 import kr.simula.formula.antlr.FormulaLexer;
 import kr.simula.formula.antlr.FormulaParser;
 import kr.simula.formula.antlr.FormulaParser.FormulaExpressionContext;
-import kr.simula.formula.core.Node;
+import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.builder.AbstractFormulaBuilder;
 import kr.simula.formula.core.builder.RootBuildContext;
 import kr.simula.formula.core.factory.helper.BinaryOperatorHelper;
@@ -26,6 +26,7 @@ import kr.simula.formula.core.factory.helper.LiteralHelper;
 import kr.simula.formula.core.factory.helper.MethodCallHelper;
 import kr.simula.formula.core.factory.helper.RefHelper;
 import kr.simula.formula.core.factory.helper.UnaryOperatorHelper;
+import kr.simula.formula.expr.Expr;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CharStream;
@@ -38,7 +39,7 @@ import org.antlr.v4.runtime.TokenStream;
  * @author Ikchan Kwon
  *
  */
-public class ExpressionBuilder extends AbstractFormulaBuilder<ExpressionHandler> {
+public class ExpressionBuilder extends AbstractFormulaBuilder<Expr, ExpressionHandler> {
 
 	protected LiteralHelper literalHelper = new ExprLiteralHelper();
 	protected RefHelper refHelper = new RefHelper();
@@ -64,7 +65,7 @@ public class ExpressionBuilder extends AbstractFormulaBuilder<ExpressionHandler>
 	 * @param expression
 	 * @return
 	 */
-	protected Node build(ExpressionHandler handler, String expression){
+	protected Expr build(ExpressionHandler handler, String expression){
 		CharStream input = new ANTLRInputStream(expression);
 		FormulaLexer lexer = new FormulaLexer(input);
 		TokenStream tokenStream = new CommonTokenStream(lexer);
@@ -72,6 +73,7 @@ public class ExpressionBuilder extends AbstractFormulaBuilder<ExpressionHandler>
 		parser.setHandler(handler);
 		parser.addErrorListener(errorAdapter);
 		FormulaExpressionContext ctx = parser.formulaExpression();
-		return ctx.result;
+		Expr expr = new Expr((Gettable<?>)ctx.result);
+		return expr;
 	}
 }

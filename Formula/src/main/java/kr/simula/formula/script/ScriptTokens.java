@@ -26,6 +26,8 @@ public interface ScriptTokens {
 	String IF 			= "if";
 	String ELSEIF 		= "elseif";
 	String ELSE 		= "else";
+	String FOREACH		= "foreach";
+	String LOOP_COND_DECL		= "LOOP_COND_DECL";
 	String MTHODE_CALL	= "MTHODE_CALL_STMT";
 	String VAR			= "VAR";
 	String VAR_DECL		= "VAR_DECL";
