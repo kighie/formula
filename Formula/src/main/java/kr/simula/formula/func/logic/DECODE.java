@@ -14,8 +14,6 @@
  */
 package kr.simula.formula.func.logic;
 
-import kr.simula.formula.core.Context;
-import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.annotation.Arguments;
 import kr.simula.formula.core.annotation.FunctionBuild;
 import kr.simula.formula.func.AbstractFunction;
@@ -23,11 +21,14 @@ import kr.simula.formula.func.AbstractFunction;
 /**
  * <pre>
  * a := DECODE (varA, 1, 'returns A', 3, 'returns B', 10, 'returns C' ... );
+ * 
+ * This class does not work. Just mark up.
+ * {@link DecodeFunctionCallWrapper} really works .
  * </pre>
  * @author Ikchan Kwon
  *
  */
-@FunctionBuild(argsLateEval=true)
+@FunctionBuild(factory=DecodeFunctionCallFactory.class)
 public class DECODE extends AbstractFunction<Object>  {
 	private static final long serialVersionUID = 1L;
 	
@@ -41,25 +42,7 @@ public class DECODE extends AbstractFunction<Object>  {
 	@Override
 	@Arguments({ Object.class, Object.class, Object.class })
 	public Object eval(Object... args) {
-		checkArgCount(args, 2);
-		
-		Context context = (Context)args[0];
-		Gettable<?>[] gettables = (Gettable<?>[])args[1];
-		
-		Object criteria = gettables[0].get(context);
-
-		int length = gettables.length;
-		int i=1;
-		Object when;
-		
-		for(;i<length;) {
-			when = gettables[i++].get(context);
-
-			if(criteria.equals(when)){
-				return (i<length) ? gettables[i].get(context) : null;
-			}
-			i++;
-		}
+		// DO NOTHING : Real work 
 		return null;
 	}
 }
