@@ -12,7 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.util;
+package kr.simula.formula.script.edit;
+
 
 /**
  * <pre>
@@ -20,33 +21,15 @@ package kr.simula.formula.util;
  * @author Ikchan Kwon
  *
  */
-public class StopWatch {
+public class FormulaScriptEditSupport {
+	static final String[] KEYWORDS = new String[]{
+		"if", "elseif", "else" , "foreach" , "decode", "import",
+		"and", "is", "not", "and", "or", "in", "return"
+	};
 	
-	private long start;
+	
+	public static String[] getKeywords() {
+		return KEYWORDS;
+	}
 
-	public long start(){
-		return start = System.currentTimeMillis();
-	}
-
-	public long ellapsed(){
-		return System.currentTimeMillis() - start;
-	}
-	
-	public StopWatch reset(){
-		start();
-		return this;
-	}
-	
-	public String ellapsedTime(){
-		long ellapsed = ellapsed();
-		long second = ellapsed / 1000;
-		long millisecond = ellapsed - second;
-		StringBuilder buf = new StringBuilder();
-		if(second>0){
-			buf.append(second).append("sec. ");
-		} 
-		
-		buf.append(millisecond).append("ms.");
-		return buf.toString();
-	}
 }

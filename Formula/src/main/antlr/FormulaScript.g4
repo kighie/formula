@@ -136,7 +136,7 @@ loopCondition 	returns [LoopConditionStatement condition]
 		$condition = (LoopConditionStatement)handler.statement(ScriptTokens.LOOP_COND_DECL, varRef);
 	}
 	(
-		( ':' var=IDENT 
+		( 'in' var=IDENT 
 			{
 				Ref iteratorRef = handler.refer( $var.text);
 				$condition.setIteratorRef(iteratorRef);

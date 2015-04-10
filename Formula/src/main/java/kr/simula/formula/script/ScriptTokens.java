@@ -14,13 +14,15 @@
  */
 package kr.simula.formula.script;
 
+import kr.simula.formula.expr.ExprTokens;
+
 /**
  * <pre>
  * </pre>
  * @author Ikchan Kwon
  *
  */
-public interface ScriptTokens {
+public interface ScriptTokens extends ExprTokens {
 
 	String SCRIPT 		= "SCRIPT";
 	String IF 			= "if";
