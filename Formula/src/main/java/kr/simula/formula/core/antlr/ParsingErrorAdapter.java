@@ -14,19 +14,15 @@
  */
 package kr.simula.formula.core.antlr;
 
-import java.util.BitSet;
 import java.util.LinkedList;
 import java.util.List;
 
 import kr.simula.formula.core.builder.BuildErrorListener;
 import kr.simula.formula.core.builder.BuildException;
 
-import org.antlr.v4.runtime.ANTLRErrorListener;
-import org.antlr.v4.runtime.Parser;
+import org.antlr.v4.runtime.BaseErrorListener;
 import org.antlr.v4.runtime.RecognitionException;
 import org.antlr.v4.runtime.Recognizer;
-import org.antlr.v4.runtime.atn.ATNConfigSet;
-import org.antlr.v4.runtime.dfa.DFA;
 
 /**
  * <pre>
@@ -34,7 +30,7 @@ import org.antlr.v4.runtime.dfa.DFA;
  * @author Ikchan Kwon
  *
  */
-public class ParsingErrorAdapter implements ANTLRErrorListener {
+public class ParsingErrorAdapter extends BaseErrorListener {
 
 	private List<BuildErrorListener> listeners = new LinkedList<BuildErrorListener>();
 	
@@ -51,33 +47,12 @@ public class ParsingErrorAdapter implements ANTLRErrorListener {
 	public void syntaxError(Recognizer<?, ?> recognizer,
 			Object offendingSymbol, int line, int charPositionInLine,
 			String msg, RecognitionException e) {
-//		System.out.println("ERR[syntaxError] : " + e);
-//		System.out.println("\t " + msg);
-		for(BuildErrorListener l : listeners){
-			l.syntaxError(line, charPositionInLine, msg);
+		if(listeners.size()>0){
+			for(BuildErrorListener l : listeners){
+				l.syntaxError(line, charPositionInLine, msg);
+			}
+		} else {
+			throw new BuildException(msg, e).setLocation(line, charPositionInLine);
 		}
-		
-		throw new BuildException(msg);
 	}
-
-	@Override
-	public void reportAmbiguity(Parser recognizer, DFA dfa, int startIndex,
-			int stopIndex, boolean exact, BitSet ambigAlts, ATNConfigSet configs) {
-//		System.out.println("ERR[reportAmbiguity] : " + dfa);
-	}
-
-	@Override
-	public void reportAttemptingFullContext(Parser recognizer, DFA dfa,
-			int startIndex, int stopIndex, BitSet conflictingAlts,
-			ATNConfigSet configs) {
-//		System.out.println("ERR[reportAttemptingFullContext] : " + dfa);
-
-	}
-
-	@Override
-	public void reportContextSensitivity(Parser recognizer, DFA dfa,
-			int startIndex, int stopIndex, int prediction, ATNConfigSet configs) {
-//		System.out.println("ERR[reportContextSensitivity] : " + dfa);
-	}
-
 }

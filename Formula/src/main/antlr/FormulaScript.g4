@@ -25,8 +25,6 @@ import Formula;
 
 // use command line option : -package kr.simula.formula.antlr
 
-
-
 @parser::header {
 	
 	import kr.simula.formula.script.*;

@@ -49,18 +49,19 @@ options {
 	}
 }
 
-
+/*
 @rulecatch {
 	catch (RecognitionException re) {
 	    throw re;
-	} 
+	}  
 	catch (BuildException dsle) {
 		TokenStream cts = (TokenStream)input;
 		dsle.setToken(cts.get(cts.index()));
 	    throw dsle;
 	}
 }
-
+ */
+ 
 @lexer::header {
 //	package kr.simula.formula.antlr;
 }

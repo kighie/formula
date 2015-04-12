@@ -14,10 +14,10 @@
  */
 package kr.simula.formula.core.builder;
 
-import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.CommonToken;
+import kr.simula.formula.core.SourceLocation;
+import kr.simula.formula.core.util.SourceLocationUtils;
+
 import org.antlr.v4.runtime.Token;
-import org.antlr.v4.runtime.misc.Interval;
 
 
 /**
@@ -32,7 +32,7 @@ public class BuildException extends RuntimeException {
 
 	private static final long serialVersionUID = 1050340953390702771L;
 	
-	private Token token;
+	private SourceLocation sourceLocation;
 	
 	/**
 	 * 
@@ -65,31 +65,50 @@ public class BuildException extends RuntimeException {
 	}
 
 
-	public void setToken(Token token) {
-		this.token = token;
+	public BuildException setLocation(SourceLocation token) {
+		this.sourceLocation = token;
+		return this;
+	}
+
+	public BuildException setLocation(int line, int charPositionInLine) {
+		this.sourceLocation = SourceLocationUtils.createSourceLocation(line, charPositionInLine);
+		return this;
+	}
+
+	public BuildException setLocation(int line, int charPositionInLine, 
+			int startIndex, int endIndex) {
+		this.sourceLocation = SourceLocationUtils.createSourceLocation(line, charPositionInLine, startIndex, endIndex);
+		return this;
+	}
+
+	public BuildException setLocation(Token token) {
+		this.sourceLocation = SourceLocationUtils.createSourceLocation(token);
+		return this;
 	}
 	
-	public Token getToken() {
-		return token;
+	public SourceLocation getLocation() {
+		return sourceLocation;
 	}
 	
 	@Override
 	public String toString() {
-		if(token != null){
+		if(sourceLocation != null){
 			StringBuilder buf = new StringBuilder();
 			buf.append(super.toString());
 			buf.append("\n");
-			buf.append( " at [").append(token.getLine()).append(",").append(token.getCharPositionInLine()).append("] ");
+			buf.append( " at [").append(sourceLocation.getLine()).append(",").append(sourceLocation.getCharPositionInLine()).append("] ");
 			
-			if(token instanceof CommonToken){
-				int index = ((CommonToken)token).getStartIndex();
-				buf.append("\n").append( token.getInputStream().getText(new Interval(0, index)) );
-			} else {
-				CharStream stream = token.getInputStream();
-				buf.append("\n").append( stream.getText(new Interval(0, stream.index())) );
+//			if(token instanceof CommonToken){
+//				int index = ((CommonToken)token).getStartIndex();
+//				buf.append("\n").append( token.getInputStream().getText(new Interval(0, index)) );
+//			} else {
+//				CharStream stream = token.getInputStream();
+//				buf.append("\n").append( stream.getText(new Interval(0, stream.index())) );
+//			}
+			String source = sourceLocation.getSource();
+			if(source != null){
+				buf.append(source);
 			}
-			
-			
 			return buf.toString();
 		} else {
 			return super.toString();
