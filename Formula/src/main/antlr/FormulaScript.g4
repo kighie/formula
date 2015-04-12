@@ -63,7 +63,7 @@ importStatement	returns [Statement stmt]
 	;
 
 /* *************************************
- * declare
+ * declare variable
  *************************************** */
 variableDecl	returns [VariableDeclStatement stmt]
 	: type IDENT 	
@@ -81,7 +81,31 @@ type returns [Class<?> typeClz]
 	;
 
 
+/* *************************************
+ * declare function
+ *************************************** */
+functionDecl	returns [VariableDeclStatement stmt]
+	: type IDENT '(' argsDecl ')' '{'
+	{ 
+		Ref varRef = handler.declare(ScriptTokens.VAR, $type.typeClz ,$IDENT.text); 
+		$stmt = (VariableDeclStatement)handler.statement(ScriptTokens.VAR_DECL, varRef);
+	}
+	'}'
+	;
 
+argsDecl returns [List<Ref> args]
+	: type IDENT 
+	(
+		',' type IDENT 
+	)*
+	;
+
+/* *************************************
+ * load function
+ *************************************** */
+ 
+ 
+ 
 blockContents [Block stmtHolder]
 	: 
 	(

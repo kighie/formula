@@ -33,6 +33,18 @@ public class FormulaScriptBaseListener implements FormulaScriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFunctionDecl(@NotNull FormulaScriptParser.FunctionDeclContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctionDecl(@NotNull FormulaScriptParser.FunctionDeclContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterExponential(@NotNull FormulaScriptParser.ExponentialContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -316,6 +328,18 @@ public class FormulaScriptBaseListener implements FormulaScriptListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFormulaScript(@NotNull FormulaScriptParser.FormulaScriptContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterArgsDecl(@NotNull FormulaScriptParser.ArgsDeclContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArgsDecl(@NotNull FormulaScriptParser.ArgsDeclContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
