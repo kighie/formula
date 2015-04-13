@@ -18,6 +18,7 @@ import java.io.Serializable;
 
 /**
  * <pre>
+ * Interface of Predefined Function written in java.
  * </pre>
  * @author Ikchan Kwon
  *

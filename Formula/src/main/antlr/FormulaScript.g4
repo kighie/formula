@@ -104,10 +104,12 @@ argsDecl returns [List<Ref> args]
 	;
 
 retrunStmt	[BlockStatement fnBlock] 
-	: 'return' formulaExpressionBase	
+	: { Node arg = null; }
+		'return' ( formulaExpressionBase { arg = $formulaExpressionBase.result; } )?
 	{ 
-		$fnBlock.append( handler.statement( ScriptTokens.RETURN, $formulaExpressionBase.result ) ); 
+		$fnBlock.append( handler.statement( ScriptTokens.RETURN, arg ) ); 
 	}
+	';'
 	;
 /* *************************************
  * load function
@@ -153,10 +155,10 @@ ifStatement returns [IfStatement ifstmt]
 	;
 
 
-foreachStatement returns [ForeachStatement foreachStmt]
+foreachStatement returns [BlockStatement foreachStmt]
 	: 'foreach' '(' loopCondition ')' 
 		{
-			$foreachStmt = (ForeachStatement)handler.statementBlock(ScriptTokens.FOREACH, $loopCondition.condition); 
+			$foreachStmt = handler.statementBlock(ScriptTokens.FOREACH, $loopCondition.condition); 
 		}
 		'{' blockContents[$foreachStmt]? '}'
 		{	handler.endBlock(); }

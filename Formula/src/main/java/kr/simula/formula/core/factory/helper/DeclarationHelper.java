@@ -72,6 +72,7 @@ public abstract class DeclarationHelper extends AbstractHelper<DeclarationFactor
 	 */
 	public BlockStatement createFn(BuildContext current, Class<?> retType, String name,
 			List<Ref> args) {
+		
 		return fnDeclFactory.create(current, retType, name, args);
 	}
 

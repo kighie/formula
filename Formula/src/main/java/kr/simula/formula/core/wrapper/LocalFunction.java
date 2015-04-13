@@ -12,15 +12,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.core.factory.func;
+package kr.simula.formula.core.wrapper;
 
 import java.util.List;
 
-import kr.simula.formula.core.BlockStatement;
 import kr.simula.formula.core.Context;
+import kr.simula.formula.core.Function;
 import kr.simula.formula.core.Ref;
-import kr.simula.formula.core.Statement;
-import kr.simula.formula.core.wrapper.LocalFunction;
+import kr.simula.formula.core.RtException;
+import kr.simula.formula.core.util.ValueTypeUtils;
 
 /**
  * <pre>
@@ -28,60 +28,60 @@ import kr.simula.formula.core.wrapper.LocalFunction;
  * @author Ikchan Kwon
  *
  */
-public class FunctionDeclStatement implements BlockStatement {
-	private final LocalFunction<?> localFunction;
+public class LocalFunction<O> extends AbstractBlock implements Function<O>{
+	private static final long serialVersionUID = 1L;
+	private Class<O> retType;
+	private String name;
+	private List<Ref> args;
+	private ValueType valueType;
+	
 	
 	/**
 	 * @param retType
 	 * @param name
 	 * @param args
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public FunctionDeclStatement(Class<?> retType, String name, List<Ref> args) {
-		localFunction = new LocalFunction(retType, name, args);
-	}
-
-	/**
-	 * @return the localFunction
-	 */
-	public LocalFunction<?> getLocalFunction() {
-		return localFunction;
+	public LocalFunction(Class<O> retType, String name, List<Ref> args) {
+		super();
+		this.retType = retType;
+		this.name = name;
+		this.args = args;
+		this.valueType = ValueTypeUtils.getValueType(retType);
 	}
 	
 	/**
 	 * @return the name
 	 */
 	public String getName() {
-		return localFunction.getName();
+		return name;
 	}
 
 	@Override
 	public ValueType valueType() {
-		return localFunction.valueType();
+		return valueType;
 	}
-
-	/**
-	 * <pre>
-	 * DO NOTHING
-	 * </pre>
-	 * @param context
-	 */
+	
 	@Override
-	public void eval(Context context) {
-		// DO NOTHING
+	public Class<O> getReturnType() {
+		return retType;
 	}
-
+	
 	@Override
 	public String getExpression() {
-		StringBuilder buf = new StringBuilder();
-		
-		// TODO 
-		return buf.toString();
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+
+	@Override
+	public O eval(Object... args) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public void append(Statement node) {
-		localFunction.append(node);
+	public void eval(Context context) {
+		throw new RtException("LocalFunction#eval(Context) is not applicable.");
 	}
-
+	
 }

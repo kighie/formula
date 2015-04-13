@@ -27,6 +27,7 @@ import kr.simula.formula.script.statement.ForeachStatement;
 import kr.simula.formula.script.statement.IfStatement;
 import kr.simula.formula.script.statement.LoopConditionStatement;
 import kr.simula.formula.script.statement.MethodCallStatement;
+import kr.simula.formula.script.statement.ReturnStatement;
 import kr.simula.formula.script.statement.VariableDeclStatement;
 
 /**
@@ -88,6 +89,20 @@ public class ScriptStatementHelper extends StatementHelper {
 		}
 	};
 
+	static StatementFactory returnFactory = new StatementFactory() {
+		@Override
+		public ReturnStatement create(BuildContext context, String token, Node[] args) {
+			Gettable<?> gettable = null;
+			
+			if(args != null && args.length > 0){
+				gettable = GettableUtils.checkGettable(args[0]);
+			}
+
+			ReturnStatement stmt = new ReturnStatement(gettable);
+			return stmt;
+		}
+	};
+
 	
 	//VariableDeclStatement
 	@Override
@@ -98,6 +113,7 @@ public class ScriptStatementHelper extends StatementHelper {
 		setFactory(ScriptTokens.VAR_DECL, varDeclFactory);
 		setFactory(ScriptTokens.LOOP_COND_DECL, loopCondFactory);
 		setFactory(ScriptTokens.FOREACH, foreachFactory);
+		setFactory(ScriptTokens.RETURN, returnFactory);
 	}
 	
 	

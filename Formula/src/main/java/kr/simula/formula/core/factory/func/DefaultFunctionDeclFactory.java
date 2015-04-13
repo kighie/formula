@@ -20,6 +20,7 @@ import kr.simula.formula.core.BlockStatement;
 import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.factory.FunctionDeclFactory;
+import kr.simula.formula.core.wrapper.LocalFunction;
 
 /**
  * <pre>
@@ -32,8 +33,12 @@ public class DefaultFunctionDeclFactory implements FunctionDeclFactory {
 	@Override
 	public BlockStatement create(BuildContext current, Class<?> retType, String name,
 			List<Ref> args) {
-		// TODO Auto-generated method stub
-		return null;
+		FunctionDeclStatement stmt = new FunctionDeclStatement(retType, name, args);
+		
+		LocalFunction localFunction = stmt.getLocalFunction();
+		current.registerLocalFn(name, localFunction);
+		
+		return stmt;
 	}
 
 }

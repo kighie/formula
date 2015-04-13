@@ -33,8 +33,9 @@ public class FunctionDeclTests extends AbstractScriptTests {
 	static final String BASIC 
 			= "number testFn(number argA, number argB) {"
 			+ "	System.out.println(argA & 'X' & argB);"
-			+ "	return argA * argB;"
-			+ "}";
+			+ "	return (argA * argB);"
+			+ "}"
+			+ "System.out.println( testFn(3, 4) );";
 	
 	@Test
 	public void basic(){
