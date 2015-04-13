@@ -24,4 +24,5 @@ public interface Ref extends Node {
 	
 	QName qualifiedName();
 
+	Class<?> type();
 }

@@ -18,6 +18,7 @@ import java.util.List;
 
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Function;
+import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.RtException;
 import kr.simula.formula.core.util.ValueTypeUtils;
@@ -34,6 +35,7 @@ public class LocalFunction<O> extends AbstractBlock implements Function<O>{
 	private String name;
 	private List<Ref> args;
 	private ValueType valueType;
+	private final QName returnValueKey;
 	
 	
 	/**
@@ -41,12 +43,12 @@ public class LocalFunction<O> extends AbstractBlock implements Function<O>{
 	 * @param name
 	 * @param args
 	 */
-	public LocalFunction(Class<O> retType, String name, List<Ref> args) {
-		super();
+	public LocalFunction(Class<O> retType, String name, List<Ref> args, QName returnValueKey) {
 		this.retType = retType;
 		this.name = name;
 		this.args = args;
 		this.valueType = ValueTypeUtils.getValueType(retType);
+		this.returnValueKey = returnValueKey;
 	}
 	
 	/**
@@ -66,22 +68,40 @@ public class LocalFunction<O> extends AbstractBlock implements Function<O>{
 		return retType;
 	}
 	
+	/**
+	 * @return the args
+	 */
+	public List<Ref> getArgs() {
+		return args;
+	}
+	
 	@Override
 	public String getExpression() {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder buf = new StringBuilder();
+		buf.append(retType.getSimpleName()).append(" ").append(name).append("(");
+		for(Ref n : args){
+			buf.append(" ").append(n.getExpression());
+		}
+		buf.append(") {");
+		getBodyExpression(buf);
+		buf.append("}");
+		return buf.toString();
 	}
 	
 
 	@Override
 	public O eval(Object... args) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new RtException("LocalFunction#eval(Object[]) is not applicable.");
 	}
 
 	@Override
 	public void eval(Context context) {
-		throw new RtException("LocalFunction#eval(Context) is not applicable.");
+		evalBody(context);
 	}
-	
+
+	@SuppressWarnings("unchecked")
+	public O getReturnValue(Context context){
+		O value = (O)context.getReference(returnValueKey);
+		return value;
+	}
 }

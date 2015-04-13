@@ -16,14 +16,21 @@ package kr.simula.formula.script.build;
 
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Node;
+import kr.simula.formula.core.QName;
+import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.builder.BuildContext;
+import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.factory.StatementFactory;
 import kr.simula.formula.core.factory.helper.StatementHelper;
 import kr.simula.formula.core.ref.MethodRef;
 import kr.simula.formula.core.ref.VariableRef;
 import kr.simula.formula.core.util.GettableUtils;
+import kr.simula.formula.core.wrapper.SettableRefWrapper;
 import kr.simula.formula.script.ScriptTokens;
+import kr.simula.formula.script.statement.AssignStatement;
 import kr.simula.formula.script.statement.ForeachStatement;
+import kr.simula.formula.script.statement.FunctionCallStatement;
+import kr.simula.formula.script.statement.FunctionDeclStatement;
 import kr.simula.formula.script.statement.IfStatement;
 import kr.simula.formula.script.statement.LoopConditionStatement;
 import kr.simula.formula.script.statement.MethodCallStatement;
@@ -51,6 +58,15 @@ public class ScriptStatementHelper extends StatementHelper {
 		public MethodCallStatement create(BuildContext context, String token, Node[] args) {
 			MethodRef<?> methodRef = (MethodRef<?>)args[0];
 			MethodCallStatement stmt = new MethodCallStatement(methodRef);
+			return stmt;
+		}
+	};
+
+	static StatementFactory functionCallFactory = new StatementFactory() {
+		@Override
+		public FunctionCallStatement create(BuildContext context, String token, Node[] args) {
+			Gettable<?> gettable = (Gettable<?>)args[0];
+			FunctionCallStatement stmt = new FunctionCallStatement(gettable);
 			return stmt;
 		}
 	};
@@ -89,16 +105,33 @@ public class ScriptStatementHelper extends StatementHelper {
 		}
 	};
 
+	static StatementFactory assignFactory = new StatementFactory() {
+		@SuppressWarnings("rawtypes")
+		@Override
+		public AssignStatement create(BuildContext context, String token, Node[] args) {
+			Ref ref = (Ref)args[0];
+			Gettable<?> gettable = (Gettable<?>)args[1];
+			AssignStatement stmt = new AssignStatement(new SettableRefWrapper(ref), gettable);
+			return stmt;
+		}
+	};
+
 	static StatementFactory returnFactory = new StatementFactory() {
 		@Override
 		public ReturnStatement create(BuildContext context, String token, Node[] args) {
 			Gettable<?> gettable = null;
+			FunctionDeclStatement functionDeclStatement = null;
 			
-			if(args != null && args.length > 0){
-				gettable = GettableUtils.checkGettable(args[0]);
+			if(args != null && args.length > 1){
+				functionDeclStatement = (FunctionDeclStatement)args[0];
+				gettable = GettableUtils.checkGettable(args[1]);
+			} else {
+				throw new BuildException("return statement needs functionDeclStatement and gettable.");
 			}
 
-			ReturnStatement stmt = new ReturnStatement(gettable);
+			QName returnValueKey = functionDeclStatement.getReturnValueKey();
+			ReturnStatement stmt = new ReturnStatement(returnValueKey, gettable);
+
 			return stmt;
 		}
 	};
@@ -109,11 +142,16 @@ public class ScriptStatementHelper extends StatementHelper {
 	protected void initDefaults() {
 		super.initDefaults();
 		setFactory(ScriptTokens.IF, ifFactory);
-		setFactory(ScriptTokens.MTHODE_CALL, methodCallFactory);
+		setFactory(ScriptTokens.MTHODE_CALL_STMT, methodCallFactory);
+		setFactory(ScriptTokens.FUNCTION_CALL_STMT, functionCallFactory);
+		
 		setFactory(ScriptTokens.VAR_DECL, varDeclFactory);
 		setFactory(ScriptTokens.LOOP_COND_DECL, loopCondFactory);
 		setFactory(ScriptTokens.FOREACH, foreachFactory);
 		setFactory(ScriptTokens.RETURN, returnFactory);
+		setFactory(ScriptTokens.ASSIGN_STMT, assignFactory);
+		
+		
 	}
 	
 	

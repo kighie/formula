@@ -81,7 +81,7 @@ public class IfStatement extends AbstractBlock implements BlockStatement{
 	@Override
 	public String getExpression() {
 		StringBuilder buf = new StringBuilder();
-		buf.append("if(").append(condition.getExpression()).append(") {\n");
+		buf.append("if(").append(condition.getExpression()).append(") { ");
 		getBodyExpression(buf);
 		buf.append("}");
 		if( elseIfList != null ){

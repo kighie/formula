@@ -58,6 +58,7 @@ public class BlockContext implements Context {
 				return;
 			}
 		}
+
 		refMap.put(name, value);
 	}
 

@@ -69,10 +69,10 @@ importStatement	returns [Statement stmt]
 variableDecl	returns [VariableDeclStatement stmt]
 	: type IDENT 	
 	{ 
-		Ref varRef = handler.declare(ScriptTokens.VAR, $type.typeClz ,$IDENT.text); 
+		Ref varRef = handler.declare(ScriptTokens.VAR_DECL, $type.typeClz ,$IDENT.text); 
 		$stmt = (VariableDeclStatement)handler.statement(ScriptTokens.VAR_DECL, varRef);
 	}
-	( ':=' formulaExpressionBase {	$stmt.setValueNode($formulaExpressionBase.result); })?
+	( '<-' formulaExpressionBase {	$stmt.setValueNode($formulaExpressionBase.result); })?
 	END_OF_STMT
 	;
 
@@ -86,28 +86,33 @@ type returns [Class<?> typeClz]
  * declare function
  *************************************** */
 functionDecl	returns [BlockStatement fnBlock]
-	: type IDENT '(' argsDecl ')' '{'
+	: { List<Ref> args = new LinkedList<Ref>(); }
+	type IDENT '(' (argsDecl[args] )?  ')' '{'
 	{ 
-		$fnBlock = handler.declareFn($type.typeClz ,$IDENT.text, $argsDecl.args); 
+		$fnBlock = handler.declareFn($type.typeClz ,$IDENT.text, args); 
 	}
-	blockContents[$fnBlock]
-	retrunStmt[$fnBlock]
+	(blockContents[$fnBlock])?
+	(retrunStmt[$fnBlock])?
 	'}'
 		{	handler.endBlock(); }
 	;
 
-argsDecl returns [List<Ref> args]
-	: type IDENT 
+argsDecl [List<Ref> args]
+	: 
 	(
-		',' type IDENT 
-	)*
+		type IDENT { $args.add( handler.declare(ScriptTokens.ARG_DECL, $type.typeClz ,$IDENT.text)); }
+		(
+			',' type IDENT { $args.add( handler.declare(ScriptTokens.ARG_DECL, $type.typeClz ,$IDENT.text)); }
+		)*
+		
+	)
 	;
 
 retrunStmt	[BlockStatement fnBlock] 
 	: { Node arg = null; }
 		'return' ( formulaExpressionBase { arg = $formulaExpressionBase.result; } )?
 	{ 
-		$fnBlock.append( handler.statement( ScriptTokens.RETURN, arg ) ); 
+		$fnBlock.append( handler.statement( ScriptTokens.RETURN, fnBlock, arg ) ); 
 	}
 	';'
 	;
@@ -124,6 +129,7 @@ blockContents [Block stmtHolder]
 		| foreachStatement		{ $stmtHolder.append($foreachStatement.foreachStmt); }
 		| assignStatement		{ $stmtHolder.append($assignStatement.stmt); }
 		| methodCallStatement	{ $stmtHolder.append($methodCallStatement.stmt); }
+		| functionCallStatement	{ $stmtHolder.append($functionCallStatement.stmt); }
 		| variableDecl 			{ $stmtHolder.append($variableDecl.stmt); }
 	)*
 	;
@@ -188,7 +194,11 @@ loopCondition 	returns [LoopConditionStatement condition]
 
 
 methodCallStatement  returns [Statement stmt]
-	: methodCallExp END_OF_STMT { $stmt = handler.statement(ScriptTokens.MTHODE_CALL, $methodCallExp.result); }
+	: methodCallExp END_OF_STMT { $stmt = handler.statement(ScriptTokens.MTHODE_CALL_STMT, $methodCallExp.result); }
+	;
+	
+functionCallStatement  returns [Statement stmt]
+	: funcCallExp END_OF_STMT { $stmt = handler.statement(ScriptTokens.FUNCTION_CALL_STMT, $funcCallExp.result); }
 	;
 	
 	
@@ -196,14 +206,35 @@ methodCallStatement  returns [Statement stmt]
  * assign
  *************************************** */
 assignStatement  returns [Statement stmt]
-	: (IDENT|qualifiedName) ':=' formulaExpressionBase
+	: 
+	(
+		leftAssign 	{ $stmt = $leftAssign.stmt ; }
+		| rightAssign { $stmt = $rightAssign.stmt ; }
+	)
 	END_OF_STMT
 	; 
  
-//assignBodyExpr
-//	: ':=' ( formulaExpressionBase | decodeStatement )
-//	; 
-	
+leftAssign  returns [Statement stmt]
+	: { Ref settable = null; }
+	(
+		IDENT 			{ settable = handler.refer( $IDENT.text);}
+		| qualifiedName	{ settable = $qualifiedName.result;}
+	) 
+	'<-' formulaExpressionBase
+	{ $stmt = handler.statement(ScriptTokens.ASSIGN_STMT, settable, $formulaExpressionBase.result); }
+	; 
+ 
+rightAssign  returns [Statement stmt]
+	: { Ref settable = null; }
+	formulaExpressionBase 
+	'<-'
+	(
+		IDENT			{ settable = handler.refer( $IDENT.text);}
+		| qualifiedName	{ settable = $qualifiedName.result;}
+	)
+	{ $stmt = handler.statement(ScriptTokens.ASSIGN_STMT, settable, $formulaExpressionBase.result); }
+	; 
+ 
 
 /* *********************************************
 	Lexer rules

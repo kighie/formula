@@ -12,15 +12,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.core.factory.func;
+package kr.simula.formula.script.statement;
 
-import java.util.List;
-
-import kr.simula.formula.core.BlockStatement;
-import kr.simula.formula.core.Ref;
-import kr.simula.formula.core.builder.BuildContext;
-import kr.simula.formula.core.factory.FunctionDeclFactory;
-import kr.simula.formula.core.wrapper.LocalFunction;
+import kr.simula.formula.core.Context;
+import kr.simula.formula.core.Gettable;
 
 /**
  * <pre>
@@ -28,17 +23,30 @@ import kr.simula.formula.core.wrapper.LocalFunction;
  * @author Ikchan Kwon
  *
  */
-public class DefaultFunctionDeclFactory implements FunctionDeclFactory {
+public class FunctionCallStatement extends AbstractStatement {
+	
+	private Gettable<?> funcGettable;
+	
+	/**
+	 * @param methodRef
+	 */
+	public FunctionCallStatement(Gettable<?> funcGettable) {
+		this.funcGettable = funcGettable;
+	}
 
 	@Override
-	public BlockStatement create(BuildContext current, Class<?> retType, String name,
-			List<Ref> args) {
-		FunctionDeclStatement stmt = new FunctionDeclStatement(retType, name, args);
-		
-		LocalFunction localFunction = stmt.getLocalFunction();
-		current.registerLocalFn(name, localFunction);
-		
-		return stmt;
+	public void eval(Context context) {
+		funcGettable.get(context);
+	}
+	
+	@Override
+	public String getExpression() {
+		return funcGettable.getExpression();
+	}
+	
+	@Override
+	public String toString() {
+		return funcGettable.toString();
 	}
 
 }

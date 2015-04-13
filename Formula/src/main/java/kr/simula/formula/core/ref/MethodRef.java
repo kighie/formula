@@ -15,11 +15,11 @@
 package kr.simula.formula.core.ref;
 
 import kr.simula.formula.core.Context;
-import kr.simula.formula.core.Statement;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.RtException;
+import kr.simula.formula.core.Statement;
 import kr.simula.formula.core.util.MethodDelegator;
 import kr.simula.formula.core.util.RefUtils;
 
@@ -72,8 +72,8 @@ public class MethodRef<T> extends ExternalRef<T> implements Ref, Gettable<T>, St
 			if(methodDelegator == null){
 				Class<?>[] argTypes = new Class[args.length];
 				i = 0;
-				for(Object a : argArr){
-					argTypes[i++] = a.getClass();
+				for(Gettable g : args){
+					argTypes[i++] = g.type();
 				}
 				
 				methodDelegator = RefUtils.getMethodDelegator(bean, qname.getName(), argTypes);

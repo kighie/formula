@@ -40,7 +40,7 @@ options {
   	
 
 	public String strip( String text ) {
-    	if( text != null && text.length() >= 4 ) {
+    	if( text != null && text.length() >= 3 ) {
     		text = text.substring( 1, text.length() - 1 );
     		text = text.replaceAll( "\'", "'" );
     		text = text.replaceAll( "\"", "\\\"" );

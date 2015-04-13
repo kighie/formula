@@ -261,6 +261,18 @@ public class FormulaScriptBaseListener implements FormulaScriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterRightAssign(@NotNull FormulaScriptParser.RightAssignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRightAssign(@NotNull FormulaScriptParser.RightAssignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterIfStatement(@NotNull FormulaScriptParser.IfStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -292,6 +304,18 @@ public class FormulaScriptBaseListener implements FormulaScriptListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRetrunStmt(@NotNull FormulaScriptParser.RetrunStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLeftAssign(@NotNull FormulaScriptParser.LeftAssignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLeftAssign(@NotNull FormulaScriptParser.LeftAssignContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -364,6 +388,18 @@ public class FormulaScriptBaseListener implements FormulaScriptListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitVariableDecl(@NotNull FormulaScriptParser.VariableDeclContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunctionCallStatement(@NotNull FormulaScriptParser.FunctionCallStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctionCallStatement(@NotNull FormulaScriptParser.FunctionCallStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

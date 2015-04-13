@@ -22,7 +22,6 @@ import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.factory.DeclarationFactory;
 import kr.simula.formula.core.factory.FunctionDeclFactory;
-import kr.simula.formula.core.factory.func.DefaultFunctionDeclFactory;
 
 /**
  * <pre>
@@ -33,11 +32,6 @@ import kr.simula.formula.core.factory.func.DefaultFunctionDeclFactory;
 public abstract class DeclarationHelper extends AbstractHelper<DeclarationFactory> {
 	
 	private FunctionDeclFactory fnDeclFactory;
-	
-
-	public DeclarationHelper() {
-		this(new DefaultFunctionDeclFactory());
-	}
 	
 	/**
 	 * @param fnDeclFactory

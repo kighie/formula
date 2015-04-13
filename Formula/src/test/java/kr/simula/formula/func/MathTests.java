@@ -101,13 +101,9 @@ public class MathTests extends AbstractExpressionTests {
 		testExpression("=FACT(10)", new BigDecimal("3628800"));
 		testExpression("=FACT(12)", new BigDecimal("479001600"));
 		testExpression("=FACT(13)", new BigDecimal("6227020800"));
-		
-		try {
-			testExpression("=FACT(15)", new BigDecimal("1.30767E+12"));
-			testExpression("=FACT(20)", new BigDecimal("2.4329E+18"));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
+		testExpression("=FACT(15)", new BigDecimal("1.307674368E+12"));
+		testExpression("=FACT(20)", new BigDecimal("2.432902008E+18"));
 	}
 
 	@Test

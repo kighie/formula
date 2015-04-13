@@ -30,8 +30,12 @@ public interface ScriptTokens extends ExprTokens {
 	String ELSE 		= "else";
 	String FOREACH		= "foreach";
 	String LOOP_COND_DECL		= "LOOP_COND_DECL";
-	String MTHODE_CALL	= "MTHODE_CALL_STMT";
+	String MTHODE_CALL_STMT	= "MTHODE_CALL_STMT";
+	String FUNCTION_CALL_STMT	= "FUNC_CALL_STMT";
+	String ASSIGN_STMT	= "ASSIGN_STMT";
+	
 	String VAR			= "VAR";
 	String VAR_DECL		= "VAR_DECL";
+	String ARG_DECL		= "ARG_DECL";
 	String RETURN		= "RETURN";
 }

@@ -12,12 +12,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.core.factory.func;
+package kr.simula.formula.script.statement;
 
 import java.util.List;
 
 import kr.simula.formula.core.BlockStatement;
 import kr.simula.formula.core.Context;
+import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.Statement;
 import kr.simula.formula.core.wrapper.LocalFunction;
@@ -30,6 +31,7 @@ import kr.simula.formula.core.wrapper.LocalFunction;
  */
 public class FunctionDeclStatement implements BlockStatement {
 	private final LocalFunction<?> localFunction;
+	private final QName returnValueKey;
 	
 	/**
 	 * @param retType
@@ -38,7 +40,8 @@ public class FunctionDeclStatement implements BlockStatement {
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public FunctionDeclStatement(Class<?> retType, String name, List<Ref> args) {
-		localFunction = new LocalFunction(retType, name, args);
+		returnValueKey = new QName("RTN:" + hashCode());
+		localFunction = new LocalFunction(retType, name, args, returnValueKey);
 	}
 
 	/**
@@ -61,6 +64,13 @@ public class FunctionDeclStatement implements BlockStatement {
 	}
 
 	/**
+	 * @return the returnValueKey
+	 */
+	public QName getReturnValueKey() {
+		return returnValueKey;
+	}
+	
+	/**
 	 * <pre>
 	 * DO NOTHING
 	 * </pre>
@@ -74,8 +84,10 @@ public class FunctionDeclStatement implements BlockStatement {
 	@Override
 	public String getExpression() {
 		StringBuilder buf = new StringBuilder();
+		buf.append("[fn-def ");
+		buf.append(localFunction.getExpression());
+		buf.append("]");
 		
-		// TODO 
 		return buf.toString();
 	}
 

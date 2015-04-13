@@ -12,42 +12,49 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.script.statement;
+package kr.simula.formula.core.wrapper;
 
 import kr.simula.formula.core.Context;
-import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.Settable;
+import kr.simula.formula.core.util.ValueTypeUtils;
 
 /**
  * <pre></pre>
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class AssignStatement<T> extends AbstractStatement {
-
-	private Settable<T> settable;
-	private Gettable<? extends T> gettable;
+public class SettableRefWrapper<T> implements Settable<T> {
+	private Ref ref;
 	
 	/**
-	 * @param settable
-	 * @param gettable
+	 * @param type
+	 * @param ref
 	 */
-	public AssignStatement(Settable<T> settable, Gettable<? extends T> gettable) {
+	public SettableRefWrapper(Ref ref) {
 		super();
-		this.settable = settable;
-		this.gettable = gettable;
+		this.ref = ref;
 	}
 
 	@Override
-	public void eval(Context context) {
-		T value = gettable.get(context);
-		settable.set(context, value);
+	public ValueType valueType() {
+		return ValueTypeUtils.getValueType(ref.type());
 	}
 	
 	@Override
 	public String getExpression() {
-		// TODO Auto-generated method stub
-		return null;
+		return ref.getExpression();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Class<? extends T> type() {
+		return (Class<? extends T>)ref.type();
+	}
+
+	@Override
+	public void set(Context context, T value) {
+		context.setReference(ref.qualifiedName(), value);
 	}
 
 }

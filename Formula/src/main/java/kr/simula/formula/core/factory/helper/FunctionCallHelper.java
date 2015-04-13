@@ -36,6 +36,7 @@ import kr.simula.formula.core.factory.FunctionCallFactory;
 import kr.simula.formula.core.factory.func.ArgumentValidator;
 import kr.simula.formula.core.factory.func.BooleanFunctionCallFactory;
 import kr.simula.formula.core.factory.func.DateFunctionCallFactory;
+import kr.simula.formula.core.factory.func.LocalFunctionCallFactory;
 import kr.simula.formula.core.factory.func.NumericFunctionCallFactory;
 import kr.simula.formula.core.factory.func.ObjectFunctionCallFactory;
 import kr.simula.formula.core.factory.func.StringFunctionCallFactory;
@@ -58,6 +59,7 @@ public class FunctionCallHelper extends AbstractHelper<FunctionCallFactory> {
 	protected final static Class[] FACTORY_ARG_TYPES = new Class[]{Function.class, 
 		ArgumentValidator[].class, boolean.class};
 	
+	protected FunctionCallFactory localFunctionCallFactory = new LocalFunctionCallFactory();
 	
 	protected Map<Class<?>, ArgumentValidator<?>> validatorMap;
 	
@@ -89,6 +91,15 @@ public class FunctionCallHelper extends AbstractHelper<FunctionCallFactory> {
 	protected ArgumentValidator<?> getValidator(Class<?> argType) {
 		ArgumentValidator<?> validator = validatorMap.get(argType);
 		return validator == null ? ArgumentValidator.OBJECT_VALIDATOR : validator;
+	}
+
+	protected FunctionCallFactory getLocalFunctionCallFactory() {
+		return localFunctionCallFactory;
+	}
+
+	protected void setLocalFunctionCallFactory(
+			FunctionCallFactory localFunctionCallFactory) {
+		this.localFunctionCallFactory = localFunctionCallFactory;
 	}
 
 	/**<pre>
@@ -235,7 +246,17 @@ public class FunctionCallHelper extends AbstractHelper<FunctionCallFactory> {
 	}
 
 	public Gettable<?> create(BuildContext context,  String name , List<Node> args){
-		FunctionCallFactory factory = factories.get(name);
+		FunctionCallFactory factory = null;
+		
+		Function<?> function = context.getLocalFn(name);
+		if(function != null){
+			factory = localFunctionCallFactory;
+		}
+		
+		if(factory == null){
+			factory = factories.get(name);
+		}
+		
 		if(factory == null){
 			throw new BuildException("FunctionCallFactory for " + name + " is not registered.");
 		}

@@ -1,4 +1,4 @@
-/* ******************************************************************************
+/* 
  * Copyright (c) 2012 IkChan Kwon kighie@gmail.com
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,43 +12,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.script.statement;
+package kr.simula.formula.core.ref;
 
-import kr.simula.formula.core.Context;
-import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.QName;
+import kr.simula.formula.core.util.ValueTypeUtils;
 
 /**
- * <pre>
- * </pre>
- * @author Ikchan Kwon
- *
+ * <pre></pre>
+ * @author kighie@gmail.com
+ * @since 1.0
  */
-public class ReturnStatement extends AbstractStatement {
-
-	private final Gettable<?> gettable;
-	private final QName returnValueKey;
+public class ArgDeclRef  extends GenericRef {
+	protected Class<?> type;
 	
 	/**
-	 * @param gettable
+	 * @param qname
 	 */
-	public ReturnStatement(QName returnValueKey, Gettable<?> gettable) {
-		this.gettable = gettable;
-		this.returnValueKey = returnValueKey;
+	public ArgDeclRef(Class<?> type, QName qname) {
+		super(qname);
+		this.type = type;
 	}
-
+	
+	/**
+	 * @return the type
+	 */
+	public Class<?> type() {
+		return type;
+	}
+	
 	@Override
-	public void eval(Context context) {
-		Object value = gettable.get(context);
-		context.setLocalVar(returnValueKey, value);
+	public ValueType valueType() {
+		return ValueTypeUtils.getValueType(type);
 	}
 	
 	@Override
 	public String getExpression() {
 		StringBuilder buf = new StringBuilder();
-		buf.append("[return ").append(gettable.getExpression());
-		buf.append("]");
+		buf.append(type.getName()).append(" ").append(qname);
 		return buf.toString();
 	}
-
 }

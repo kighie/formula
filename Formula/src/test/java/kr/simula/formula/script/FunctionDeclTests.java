@@ -31,11 +31,26 @@ import org.junit.Test;
 public class FunctionDeclTests extends AbstractScriptTests {
 
 	static final String BASIC 
-			= "number testFn(number argA, number argB) {"
-			+ "	System.out.println(argA & 'X' & argB);"
-			+ "	return (argA * argB);"
-			+ "}"
-			+ "System.out.println( testFn(3, 4) );";
+			= "void println(object value) {\n"
+			+ "	System.out.println(value);"
+			+ "\n} "
+			+ "number testFn(number argA, number argB) {"
+			+ "	number retVal;"
+			+ "	if(argA > argB) {"
+			+ "		println(argA & 'X' & argB);"
+			+ "		retVal <- argA * argB;"
+			+ "	} else {"
+			+ "		println(argA & '/' & argB); "
+			+ "		retVal <- argA / argB;"
+			+ "	}"
+			+ "	return retVal;"
+			+ "} \n"
+			+ "void testSimple() {"
+			+ "	println('void return, empty args.'); "
+			+ "}\n"
+			+ "println( testFn(PA, 5) ); "
+			+ "println( testFn(5, PA) ); "
+			+ "testSimple();";
 	
 	@Test
 	public void basic(){
@@ -52,11 +67,37 @@ public class FunctionDeclTests extends AbstractScriptTests {
 		RootContext context = new RootContext();
 		
 		context.setReference(new QName(new QName("System"), "out"), System.out);
-		context.setParameter("PA", new BigDecimal(131));
 		
+		context.setParameter("PA", new BigDecimal(131));
 		script.eval(context);
 		
 		System.out.println("Running Time : " + stopWatch.ellapsedTime());
+		
+	}
+
+	@Test
+	public void performance(){
+		StopWatch stopWatch = new StopWatch();
+		stopWatch.start();
+		
+		Module script = buildScript(BASIC);
+		
+		System.out.println(script.getExpression());
+		System.out.println("BUILD Time : " + stopWatch.ellapsedTime());
+		
+		stopWatch.reset();
+		
+		RootContext context = new RootContext();
+		
+		context.setReference(new QName(new QName("System"), "out"), System.out);
+		
+		for( int i =0;i<1000;i++){
+			context.setParameter("PA", new BigDecimal(131));
+			script.eval(context);
+		}
+		
+		
+		System.out.println("Running 1,000 Times : " + stopWatch.ellapsedTime());
 		
 	}
 	
