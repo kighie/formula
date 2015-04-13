@@ -1,4 +1,4 @@
-/* ******************************************************************************
+/* 
  * Copyright (c) 2012 IkChan Kwon kighie@gmail.com
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,42 +12,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.util;
+package kr.simula.formula.script;
+
+import kr.simula.formula.core.Context;
+import kr.simula.formula.core.wrapper.AbstractBlock;
 
 /**
- * <pre>
- * </pre>
- * @author Ikchan Kwon
- *
+ * <pre></pre>
+ * @author kighie@gmail.com
+ * @since 1.0
  */
-public class StopWatch {
-	
-	
-	private long start;
+public class Module extends AbstractBlock{
 
-	public long start(){
-		return start = System.currentTimeMillis();
+	@Override
+	public void eval(Context context) {
+		evalBody(context);
 	}
 
-	public long ellapsed(){
-		return System.currentTimeMillis() - start;
-	}
-	
-	public StopWatch reset(){
-		start();
-		return this;
-	}
-	
-	public String ellapsedTime(){
-		long ellapsed = ellapsed();
-		long second = ellapsed / 1000;
-		long millisecond = ellapsed - second;
+	@Override
+	public String getExpression() {
 		StringBuilder buf = new StringBuilder();
-		if(second>0){
-			buf.append(second).append("sec. ");
-		} 
-		
-		buf.append(millisecond).append("ms.");
+		getBodyExpression(buf);
+		return buf.toString();
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder buf = new StringBuilder();
+		toBodyString(buf);
 		return buf.toString();
 	}
 }

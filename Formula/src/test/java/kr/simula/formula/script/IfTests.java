@@ -39,7 +39,7 @@ public class IfTests extends AbstractScriptTests {
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
 		
-		Script script = buildScript(IF_BASIC);
+		Module script = buildScript(IF_BASIC);
 		
 		System.out.println(script.getExpression());
 		System.out.println(stopWatch.ellapsedTime());

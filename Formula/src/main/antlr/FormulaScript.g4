@@ -47,10 +47,11 @@ import Formula;
  * Formula Script
  *************************************** */
 
-formulaScript returns [Script script]
-	: { $script = (Script)handler.block(ScriptTokens.SCRIPT); }
-		(importStatement 	{ $script.append($importStatement.stmt); })*
-		blockContents[$script]
+formulaScript returns [Module module]
+	: { $module = (Module)handler.block(ScriptTokens.MODULE); }
+		(importStatement 	{ $module.append($importStatement.stmt); })*
+		(functionDecl 		{ $module.append($functionDecl.fnBlock); })*
+		blockContents[$module]
 		EOF
 	  { handler.endBlock();}
 	;
@@ -84,13 +85,15 @@ type returns [Class<?> typeClz]
 /* *************************************
  * declare function
  *************************************** */
-functionDecl	returns [VariableDeclStatement stmt]
+functionDecl	returns [BlockStatement fnBlock]
 	: type IDENT '(' argsDecl ')' '{'
 	{ 
-		Ref varRef = handler.declare(ScriptTokens.VAR, $type.typeClz ,$IDENT.text); 
-		$stmt = (VariableDeclStatement)handler.statement(ScriptTokens.VAR_DECL, varRef);
+		$fnBlock = handler.declareFn($type.typeClz ,$IDENT.text, $argsDecl.args); 
 	}
+	blockContents[$fnBlock]
+	retrunStmt[$fnBlock]
 	'}'
+		{	handler.endBlock(); }
 	;
 
 argsDecl returns [List<Ref> args]
@@ -100,10 +103,16 @@ argsDecl returns [List<Ref> args]
 	)*
 	;
 
+retrunStmt	[BlockStatement fnBlock] 
+	: 'return' formulaExpressionBase	
+	{ 
+		$fnBlock.append( handler.statement( ScriptTokens.RETURN, $formulaExpressionBase.result ) ); 
+	}
+	;
 /* *************************************
  * load function
  *************************************** */
- 
+
  
  
 blockContents [Block stmtHolder]
@@ -124,7 +133,7 @@ blockContents [Block stmtHolder]
 ifStatement returns [IfStatement ifstmt]
 	: 'if' '(' logicalExpression ')' 
 		{
-			$ifstmt = (IfStatement)handler.statement(ScriptTokens.IF, $logicalExpression.result); 
+			$ifstmt = (IfStatement)handler.statementBlock(ScriptTokens.IF, $logicalExpression.result); 
 		}
 		'{'  blockContents[$ifstmt]? '}'
 	( 'elseif' '(' logicalExpression ')'
@@ -140,15 +149,17 @@ ifStatement returns [IfStatement ifstmt]
 		'{' blockContents[elseStmt]? '}'
 		
 	)?
+		{	handler.endBlock(); }
 	;
 
 
 foreachStatement returns [ForeachStatement foreachStmt]
 	: 'foreach' '(' loopCondition ')' 
 		{
-			$foreachStmt = (ForeachStatement)handler.statement(ScriptTokens.FOREACH, $loopCondition.condition); 
+			$foreachStmt = (ForeachStatement)handler.statementBlock(ScriptTokens.FOREACH, $loopCondition.condition); 
 		}
 		'{' blockContents[$foreachStmt]? '}'
+		{	handler.endBlock(); }
 	;
 	
 loopCondition 	returns [LoopConditionStatement condition]

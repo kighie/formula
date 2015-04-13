@@ -1,4 +1,4 @@
-/* 
+/* ******************************************************************************
  * Copyright (c) 2012 IkChan Kwon kighie@gmail.com
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,34 +12,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.script;
+package kr.simula.formula.core.factory.func;
 
-import kr.simula.formula.core.Context;
-import kr.simula.formula.core.wrapper.AbstractBlock;
+import java.util.List;
+
+import kr.simula.formula.core.BlockStatement;
+import kr.simula.formula.core.Ref;
+import kr.simula.formula.core.builder.BuildContext;
+import kr.simula.formula.core.factory.FunctionDeclFactory;
 
 /**
- * <pre></pre>
- * @author kighie@gmail.com
- * @since 1.0
+ * <pre>
+ * </pre>
+ * @author Ikchan Kwon
+ *
  */
-public class Script extends AbstractBlock{
+public class DefaultFunctionDeclFactory implements FunctionDeclFactory {
 
 	@Override
-	public void eval(Context context) {
-		evalBody(context);
+	public BlockStatement create(BuildContext current, Class<?> retType, String name,
+			List<Ref> args) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	@Override
-	public String getExpression() {
-		StringBuilder buf = new StringBuilder();
-		getBodyExpression(buf);
-		return buf.toString();
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder buf = new StringBuilder();
-		toBodyString(buf);
-		return buf.toString();
-	}
 }

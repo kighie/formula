@@ -18,6 +18,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import kr.simula.formula.core.BlockContext;
+import kr.simula.formula.core.BlockStatement;
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Node;
@@ -31,7 +32,7 @@ import kr.simula.formula.core.wrapper.AbstractBlock;
  * @author Ikchan Kwon
  *
  */
-public class IfStatement extends AbstractBlock implements Statement{
+public class IfStatement extends AbstractBlock implements BlockStatement{
 
 	private Gettable<Boolean> condition;
 	private List<ElseIf> elseIfList ;

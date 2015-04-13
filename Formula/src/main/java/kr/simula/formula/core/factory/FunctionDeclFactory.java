@@ -12,34 +12,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.script.build;
+package kr.simula.formula.core.factory;
 
-import kr.simula.formula.core.Block;
+import java.util.List;
+
+import kr.simula.formula.core.BlockStatement;
+import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.builder.BuildContext;
-import kr.simula.formula.core.factory.BlockFactory;
-import kr.simula.formula.core.factory.helper.BlockHelper;
-import kr.simula.formula.script.Module;
-import kr.simula.formula.script.ScriptTokens;
 
 /**
  * <pre></pre>
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class ScriptBlockHelper extends BlockHelper {
-	
-	static BlockFactory scriptFactory = new BlockFactory() {
-		@Override
-		public Block create(BuildContext context, String expToken) {
-			return new Module();
-		}
-	};
-	
-	@Override
-	protected void initDefaults() {
-		super.initDefaults();
-		setFactory(ScriptTokens.MODULE, scriptFactory);
-	}
-	
-	
+public interface FunctionDeclFactory {
+
+	BlockStatement create(BuildContext current, Class<?> retType, String name, List<Ref> args);
 }

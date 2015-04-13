@@ -35,8 +35,8 @@ public abstract class AbstractScriptTests {
 	}
 	
 
-	protected Script buildScript(String expr){
-		Script exprNode = (Script)builder.build(expr);
+	protected Module buildScript(String expr){
+		Module exprNode = (Module)builder.build(expr);
 		return exprNode;
 	}
 
@@ -55,7 +55,7 @@ public abstract class AbstractScriptTests {
 		System.out.println(exprNode.getExpression());
 		System.out.println(exprNode);
 		
-		Script script = (Script)exprNode;
+		Module script = (Module)exprNode;
 		
 		script.eval(context);
 	}

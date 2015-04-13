@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import kr.simula.formula.core.Function;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Ref;
 
@@ -44,6 +45,24 @@ public class ScopeBuildContext implements BuildContext {
 		return parent;
 	}
 	
+	/**
+	 * @param name
+	 * @param fn
+	 * @see kr.simula.formula.core.builder.BuildContext#registerLocalFn(java.lang.String, kr.simula.formula.core.Function)
+	 */
+	public void registerLocalFn(String name, Function<?> fn) {
+		parent.registerLocalFn(name, fn);
+	}
+
+	/**
+	 * @param name
+	 * @return
+	 * @see kr.simula.formula.core.builder.BuildContext#getLocalFn(java.lang.String)
+	 */
+	public Function<?> getLocalFn(String name) {
+		return parent.getLocalFn(name);
+	}
+
 	public Ref getRef(QName qname){
 		Ref ref = referenceMap.get(qname);
 		if(ref == null){

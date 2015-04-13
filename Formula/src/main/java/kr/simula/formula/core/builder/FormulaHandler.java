@@ -17,6 +17,7 @@ package kr.simula.formula.core.builder;
 import java.util.List;
 
 import kr.simula.formula.core.Block;
+import kr.simula.formula.core.BlockStatement;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Literal;
 import kr.simula.formula.core.Node;
@@ -117,6 +118,19 @@ public interface FormulaHandler {
 	 */
 	Ref declare(String token, Class<?> type, String name);
 	
+
+	/**
+	 * <pre>
+	 * Declares Function
+	 * [Caution] You must call {@link #endBlock()} after completing block parsing.
+	 * </pre>
+	 * @param token
+	 * @param type
+	 * @param name
+	 * @return
+	 */
+	BlockStatement declareFn(Class<?> retType, String name, List<Ref> args);
+	
 	/**
 	 * <pre>
 	 * </pre>
@@ -156,4 +170,16 @@ public interface FormulaHandler {
 	 * @return
 	 */
 	Statement statement(String token, Node ... args);
+	
+
+	/**
+	 * <pre>
+	 * Builds block statement.
+	 * [Caution] You must call {@link #endBlock()} after completing block parsing.
+	 * </pre>
+	 * @param token
+	 * @param args
+	 * @return
+	 */
+	BlockStatement statementBlock(String token, Node ... args);
 }

@@ -17,6 +17,7 @@ package kr.simula.formula.core.builder;
 
 import java.util.Map.Entry;
 
+import kr.simula.formula.core.Function;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Ref;
 
@@ -30,6 +31,12 @@ public interface BuildContext {
 	
 	BuildContext getParent() ;
 
+
+	void registerLocalFn(String name, Function<?> fn);
+	
+	Function<?> getLocalFn(String name);
+
+	
 	void registerRef(QName qname, Ref ref);
 	
 	Ref getRef(QName qname);

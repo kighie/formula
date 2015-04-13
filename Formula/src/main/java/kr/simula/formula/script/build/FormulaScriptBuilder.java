@@ -32,7 +32,7 @@ import kr.simula.formula.expr.builder.ExprBinaryOperatorHelper;
 import kr.simula.formula.expr.builder.ExprFunctionCallHelper;
 import kr.simula.formula.expr.builder.ExprLiteralHelper;
 import kr.simula.formula.expr.builder.ExprUnaryOperatorHelper;
-import kr.simula.formula.script.Script;
+import kr.simula.formula.script.Module;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CharStream;
@@ -44,7 +44,7 @@ import org.antlr.v4.runtime.TokenStream;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class FormulaScriptBuilder extends AbstractFormulaBuilder<Script, FormulaScriptHandler> {
+public class FormulaScriptBuilder extends AbstractFormulaBuilder<Module, FormulaScriptHandler> {
 
 	protected BlockHelper blockHelper = new ScriptBlockHelper();
 	protected StatementHelper statementHelper = new ScriptStatementHelper();
@@ -68,7 +68,7 @@ public class FormulaScriptBuilder extends AbstractFormulaBuilder<Script, Formula
 	}
 
 	@Override
-	protected Script build(FormulaScriptHandler handler, String expression) {
+	protected Module build(FormulaScriptHandler handler, String expression) {
 		CharStream input = new ANTLRInputStream(expression);
 		FormulaScriptLexer lexer = new FormulaScriptLexer(input);
 		TokenStream tokenStream = new CommonTokenStream(lexer);
@@ -76,7 +76,7 @@ public class FormulaScriptBuilder extends AbstractFormulaBuilder<Script, Formula
 		parser.setHandler(handler);
 		parser.addErrorListener(errorAdapter);
 		FormulaScriptContext ctx = parser.formulaScript();
-		return ctx.script;
+		return ctx.module;
 	}
 	
 }

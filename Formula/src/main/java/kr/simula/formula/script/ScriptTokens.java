@@ -24,7 +24,7 @@ import kr.simula.formula.expr.ExprTokens;
  */
 public interface ScriptTokens extends ExprTokens {
 
-	String SCRIPT 		= "SCRIPT";
+	String MODULE 		= "MODULE";
 	String IF 			= "if";
 	String ELSEIF 		= "elseif";
 	String ELSE 		= "else";
@@ -33,4 +33,5 @@ public interface ScriptTokens extends ExprTokens {
 	String MTHODE_CALL	= "MTHODE_CALL_STMT";
 	String VAR			= "VAR";
 	String VAR_DECL		= "VAR_DECL";
+	String RETURN		= "RETURN";
 }

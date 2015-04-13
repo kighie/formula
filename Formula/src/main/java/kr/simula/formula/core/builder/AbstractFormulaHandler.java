@@ -17,6 +17,7 @@ package kr.simula.formula.core.builder;
 import java.util.List;
 
 import kr.simula.formula.core.Block;
+import kr.simula.formula.core.BlockStatement;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Literal;
 import kr.simula.formula.core.Node;
@@ -159,6 +160,12 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	}
 	
 	@Override
+	public BlockStatement declareFn(Class<?> retType, String name, List<Ref> args) {
+		beginScope();
+		return declarationHelper.createFn(current, retType, name, args);
+	}
+	
+	@Override
 	public Class<?> type(String typeQname) {
 		return typeHelper.getType(current, typeQname);
 	}
@@ -177,5 +184,11 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	@Override
 	public Statement statement(String token, Node... args) {
 		return statementHelper.create(current, token, args);
+	}
+	
+	@Override
+	public BlockStatement statementBlock(String token, Node... args) {
+		beginScope();
+		return (BlockStatement)statementHelper.create(current, token, args);
 	}
 }

@@ -285,6 +285,18 @@ public class FormulaScriptBaseListener implements FormulaScriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterRetrunStmt(@NotNull FormulaScriptParser.RetrunStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRetrunStmt(@NotNull FormulaScriptParser.RetrunStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterLogicalExpression(@NotNull FormulaScriptParser.LogicalExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}

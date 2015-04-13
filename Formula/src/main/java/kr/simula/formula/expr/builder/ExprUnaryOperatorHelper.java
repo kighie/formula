@@ -19,8 +19,8 @@ import java.math.RoundingMode;
 
 import kr.simula.formula.core.Operator.Unary;
 import kr.simula.formula.core.factory.helper.UnaryOperatorHelper;
-import kr.simula.formula.core.factory.impl.DecimalUnaryOperatorFactory;
-import kr.simula.formula.core.factory.impl.LogicalUnaryOperatorFactory;
+import kr.simula.formula.core.factory.op.DecimalUnaryOperatorFactory;
+import kr.simula.formula.core.factory.op.LogicalUnaryOperatorFactory;
 import kr.simula.formula.expr.ExprTokens;
 
 /**

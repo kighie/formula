@@ -14,10 +14,15 @@
  */
 package kr.simula.formula.core.factory.helper;
 
+import java.util.List;
+
+import kr.simula.formula.core.BlockStatement;
 import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.factory.DeclarationFactory;
+import kr.simula.formula.core.factory.FunctionDeclFactory;
+import kr.simula.formula.core.factory.func.DefaultFunctionDeclFactory;
 
 /**
  * <pre>
@@ -26,6 +31,20 @@ import kr.simula.formula.core.factory.DeclarationFactory;
  *
  */
 public abstract class DeclarationHelper extends AbstractHelper<DeclarationFactory> {
+	
+	private FunctionDeclFactory fnDeclFactory;
+	
+
+	public DeclarationHelper() {
+		this(new DefaultFunctionDeclFactory());
+	}
+	
+	/**
+	 * @param fnDeclFactory
+	 */
+	public DeclarationHelper(FunctionDeclFactory fnDeclFactory) {
+		this.fnDeclFactory = fnDeclFactory;
+	}
 
 	/**<pre>
 	 * </pre>
@@ -41,6 +60,19 @@ public abstract class DeclarationHelper extends AbstractHelper<DeclarationFactor
 			throw new BuildException("DeclarationFactory for " + token + " is not registered.");
 		}
 		return factory.create(context, type, name);
+	}
+
+	/**<pre>
+	 * </pre>
+	 * @param current
+	 * @param retType
+	 * @param name
+	 * @param args
+	 * @return
+	 */
+	public BlockStatement createFn(BuildContext current, Class<?> retType, String name,
+			List<Ref> args) {
+		return fnDeclFactory.create(current, retType, name, args);
 	}
 
 	

@@ -43,7 +43,7 @@ public class ForeachTests extends AbstractScriptTests {
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
 		
-		Script script = buildScript(BASIC);
+		Module script = buildScript(BASIC);
 		
 		System.out.println(script.getExpression());
 		System.out.println("BUILD Time : " + stopWatch.ellapsedTime());
@@ -67,7 +67,7 @@ public class ForeachTests extends AbstractScriptTests {
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
 		
-		Script script = buildScript(BASIC);
+		Module script = buildScript(BASIC);
 		
 		System.out.println(script.getExpression());
 		System.out.println("BUILD Time : " + stopWatch.ellapsedTime());

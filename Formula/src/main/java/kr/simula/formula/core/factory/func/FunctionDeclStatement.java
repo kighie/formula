@@ -12,7 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.util;
+package kr.simula.formula.core.factory.func;
+
+import java.util.List;
+
+import kr.simula.formula.core.BlockStatement;
+import kr.simula.formula.core.Context;
+import kr.simula.formula.core.Ref;
+import kr.simula.formula.core.wrapper.AbstractBlock;
 
 /**
  * <pre>
@@ -20,34 +27,23 @@ package kr.simula.formula.util;
  * @author Ikchan Kwon
  *
  */
-public class StopWatch {
+public class FunctionDeclStatement extends AbstractBlock implements BlockStatement {
+	private Class<?> retType;
+	private String name;
+	private List<Ref> args;
 	
-	
-	private long start;
-
-	public long start(){
-		return start = System.currentTimeMillis();
-	}
-
-	public long ellapsed(){
-		return System.currentTimeMillis() - start;
-	}
-	
-	public StopWatch reset(){
-		start();
-		return this;
-	}
-	
-	public String ellapsedTime(){
-		long ellapsed = ellapsed();
-		long second = ellapsed / 1000;
-		long millisecond = ellapsed - second;
-		StringBuilder buf = new StringBuilder();
-		if(second>0){
-			buf.append(second).append("sec. ");
-		} 
+	@Override
+	public void eval(Context context) {
+		// TODO Auto-generated method stub
 		
-		buf.append(millisecond).append("ms.");
+	}
+
+	@Override
+	public String getExpression() {
+		StringBuilder buf = new StringBuilder();
+		
+		// TODO 
 		return buf.toString();
 	}
+
 }

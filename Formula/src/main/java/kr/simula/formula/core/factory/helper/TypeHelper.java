@@ -36,6 +36,7 @@ public class TypeHelper {
 	public static final String BOOLEAN = "boolean";
 	public static final String DATE = "date";
 	public static final String OBJECT = "object";
+	public static final String VOID = "void";
 	public static final String System = "System";
 	
 	/**
@@ -51,6 +52,7 @@ public class TypeHelper {
 		registerType(BOOLEAN, Boolean.class);
 		registerType(DATE, Date.class);
 		registerType(OBJECT, Object.class);
+		registerType(VOID, Void.class);
 		registerType(System, System.class);
 
 		registerType("BigDecimal", BigDecimal.class);

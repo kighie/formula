@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.core.factory.impl;
+package kr.simula.formula.core.factory.op;
 
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Node;
@@ -20,31 +20,31 @@ import kr.simula.formula.core.Operator.Binary;
 import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.factory.BinaryOperatorFactory;
 import kr.simula.formula.core.util.GettableUtils;
-import kr.simula.formula.core.wrapper.CompareBinaryOperatorGettable;
+import kr.simula.formula.core.wrapper.LogicalBinaryOperatorGettable;
 
 /**
  * <pre></pre>
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class CompareBinaryOperatorFactory implements BinaryOperatorFactory {
-	private Binary<Boolean, Comparable<?>, Comparable<?>>operator;
+public class LogicalBinaryOperatorFactory implements BinaryOperatorFactory {
+	private Binary<Boolean,Boolean,Boolean>operator;
 	
 
 	/**
 	 * @param operator
 	 */
-	public CompareBinaryOperatorFactory(
-			Binary<Boolean, Comparable<?>, Comparable<?>> operator) {
+	public LogicalBinaryOperatorFactory(
+			Binary<Boolean, Boolean,Boolean> operator) {
 		this.operator = operator;
 	}
 	
 	@Override
 	public Gettable<Boolean> create(BuildContext context, String exprToken, Node operand1, Node operand2) {
-		Gettable<Comparable<?>> gettable1 = GettableUtils.checkComparableGettable(operand1);
-		Gettable<Comparable<?>> gettable2 = GettableUtils.checkComparableGettable(operand2);
+		Gettable<Boolean> gettable1 = GettableUtils.checkGettable(operand1, Boolean.class);
+		Gettable<Boolean> gettable2 = GettableUtils.checkGettable(operand2, Boolean.class);
 		
-		return new CompareBinaryOperatorGettable(operator, gettable1, gettable2);
+		return new LogicalBinaryOperatorGettable(operator, gettable1, gettable2);
 	}
 
 }

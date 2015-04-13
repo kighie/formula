@@ -28,6 +28,7 @@ import org.junit.BeforeClass;
  * @since 1.0
  */
 public abstract class AbstractExpressionTests {
+	
 	protected static ExpressionBuilder builder;
 	
 	@BeforeClass

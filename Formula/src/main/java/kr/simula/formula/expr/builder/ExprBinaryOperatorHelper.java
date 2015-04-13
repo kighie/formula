@@ -20,10 +20,10 @@ import java.math.RoundingMode;
 
 import kr.simula.formula.core.Operator.Binary;
 import kr.simula.formula.core.factory.helper.BinaryOperatorHelper;
-import kr.simula.formula.core.factory.impl.CompareBinaryOperatorFactory;
-import kr.simula.formula.core.factory.impl.DecimalBinaryOperatorFactory;
-import kr.simula.formula.core.factory.impl.LogicalBinaryOperatorFactory;
-import kr.simula.formula.core.factory.impl.StringBinaryOperatorFactory;
+import kr.simula.formula.core.factory.op.CompareBinaryOperatorFactory;
+import kr.simula.formula.core.factory.op.DecimalBinaryOperatorFactory;
+import kr.simula.formula.core.factory.op.LogicalBinaryOperatorFactory;
+import kr.simula.formula.core.factory.op.StringBinaryOperatorFactory;
 import kr.simula.formula.expr.ExprTokens;
 
 /**

@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import kr.simula.formula.core.Function;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Ref;
 
@@ -29,6 +30,7 @@ import kr.simula.formula.core.Ref;
  */
 public class RootBuildContext implements BuildContext {
 	private Map<QName, Ref> referenceMap = new HashMap<QName, Ref>();
+	private Map<String, Function<?>> functionMap = new HashMap<String, Function<?>>();
 	
 
 	@Override
@@ -48,4 +50,25 @@ public class RootBuildContext implements BuildContext {
 	public Iterable<Entry<QName, Ref>> references() {
 		return referenceMap.entrySet();
 	}
+
+	/**
+	 * @param key
+	 * @return
+	 * @see java.util.Map#get(java.lang.Object)
+	 */
+	public Function<?> getLocalFn(String key) {
+		return functionMap.get(key);
+	}
+
+	/**
+	 * @param key
+	 * @param value
+	 * @return
+	 * @see java.util.Map#put(java.lang.Object, java.lang.Object)
+	 */
+	public void registerLocalFn(String key, Function<?> value) {
+		functionMap.put(key, value);
+	}
+	
+	
 }

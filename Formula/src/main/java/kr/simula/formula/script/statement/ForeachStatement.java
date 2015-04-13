@@ -15,10 +15,10 @@
 package kr.simula.formula.script.statement;
 
 import kr.simula.formula.core.BlockContext;
+import kr.simula.formula.core.BlockStatement;
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Ref;
-import kr.simula.formula.core.Statement;
 import kr.simula.formula.core.ref.VariableRef;
 import kr.simula.formula.core.wrapper.AbstractBlock;
 import kr.simula.formula.util.Range;
@@ -29,7 +29,7 @@ import kr.simula.formula.util.Range;
  * @author Ikchan Kwon
  *
  */
-public class ForeachStatement extends AbstractBlock implements Statement{
+public class ForeachStatement extends AbstractBlock implements BlockStatement{
 
 	private LoopConditionStatement loopCondition;
 	
