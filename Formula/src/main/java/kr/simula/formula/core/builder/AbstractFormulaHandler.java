@@ -19,6 +19,7 @@ import java.util.List;
 import kr.simula.formula.core.Block;
 import kr.simula.formula.core.BlockStatement;
 import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.Lambda;
 import kr.simula.formula.core.Literal;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.Ref;
@@ -27,6 +28,7 @@ import kr.simula.formula.core.factory.helper.BinaryOperatorHelper;
 import kr.simula.formula.core.factory.helper.BlockHelper;
 import kr.simula.formula.core.factory.helper.DeclarationHelper;
 import kr.simula.formula.core.factory.helper.FunctionCallHelper;
+import kr.simula.formula.core.factory.helper.LambdaHelper;
 import kr.simula.formula.core.factory.helper.LiteralHelper;
 import kr.simula.formula.core.factory.helper.MethodCallHelper;
 import kr.simula.formula.core.factory.helper.RefHelper;
@@ -52,6 +54,7 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	protected final MethodCallHelper methodCallHelper ;
 	protected final StatementHelper statementHelper;
 	protected final DeclarationHelper declarationHelper;
+	protected final LambdaHelper lambdaHelper;
 	
 	protected BuildContext current;
 	
@@ -79,7 +82,8 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 			UnaryOperatorHelper unaryOperatorHelper,
 			FunctionCallHelper functionCallHelper,
 			MethodCallHelper methodCallHelper, StatementHelper statementHelper,
-			DeclarationHelper declarationHelper) {
+			DeclarationHelper declarationHelper,
+			LambdaHelper lambdaHelper) {
 		this.current = this.rootContext = rootContext;
 		this.blockHelper = blockHelper;
 		this.literalHelper = literalHelper;
@@ -91,6 +95,7 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 		this.methodCallHelper = methodCallHelper;
 		this.statementHelper = statementHelper;
 		this.declarationHelper = declarationHelper;
+		this.lambdaHelper = lambdaHelper;
 	}
 
 
@@ -190,5 +195,10 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	public BlockStatement statementBlock(String token, Node... args) {
 		beginScope();
 		return (BlockStatement)statementHelper.create(current, token, args);
+	}
+	
+	@Override
+	public Lambda lambda(String token, List<Ref> args, Node... infos) {
+		return lambdaHelper.create(current, token, args, infos);
 	}
 }

@@ -22,6 +22,7 @@ import kr.simula.formula.core.factory.helper.BinaryOperatorHelper;
 import kr.simula.formula.core.factory.helper.BlockHelper;
 import kr.simula.formula.core.factory.helper.DeclarationHelper;
 import kr.simula.formula.core.factory.helper.FunctionCallHelper;
+import kr.simula.formula.core.factory.helper.LambdaHelper;
 import kr.simula.formula.core.factory.helper.LiteralHelper;
 import kr.simula.formula.core.factory.helper.MethodCallHelper;
 import kr.simula.formula.core.factory.helper.RefHelper;
@@ -57,10 +58,11 @@ public class ExpressionHandler extends AbstractFormulaHandler implements ExprTok
 			UnaryOperatorHelper unaryOperatorHelper,
 			FunctionCallHelper functionCallHelper,
 			MethodCallHelper methodCallHelper, StatementHelper statementHelper,
-			DeclarationHelper declarationHelper) {
+			DeclarationHelper declarationHelper,
+			LambdaHelper lambdaHelper) {
 		super(rootContext, blockHelper, literalHelper, refHelper, typeHelper,
 				binaryOperatorHelper, unaryOperatorHelper, functionCallHelper,
-				methodCallHelper, statementHelper, declarationHelper);
+				methodCallHelper, statementHelper, declarationHelper, lambdaHelper);
 	}
 
 

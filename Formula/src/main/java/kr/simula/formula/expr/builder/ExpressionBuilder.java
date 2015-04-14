@@ -23,6 +23,7 @@ import kr.simula.formula.core.builder.FormulaSource;
 import kr.simula.formula.core.builder.RootBuildContext;
 import kr.simula.formula.core.factory.helper.BinaryOperatorHelper;
 import kr.simula.formula.core.factory.helper.FunctionCallHelper;
+import kr.simula.formula.core.factory.helper.LambdaHelper;
 import kr.simula.formula.core.factory.helper.LiteralHelper;
 import kr.simula.formula.core.factory.helper.MethodCallHelper;
 import kr.simula.formula.core.factory.helper.RefHelper;
@@ -48,6 +49,7 @@ public class ExpressionBuilder extends AbstractFormulaBuilder<Expr, ExpressionHa
 	protected UnaryOperatorHelper unaryOperatorHelper = new ExprUnaryOperatorHelper();
 	protected FunctionCallHelper functionCallHelper = new ExprFunctionCallHelper();
 	protected MethodCallHelper methodCallHelper = new MethodCallHelper();
+	protected LambdaHelper lambdaHelper = new LambdaHelper();
 	
 	
 	
@@ -55,7 +57,7 @@ public class ExpressionBuilder extends AbstractFormulaBuilder<Expr, ExpressionHa
 	public ExpressionHandler newHandler(RootBuildContext rootContext) {
 		return new ExpressionHandler(rootContext, 
 				null, literalHelper, refHelper, null, binaryOperatorHelper, unaryOperatorHelper, 
-				functionCallHelper, methodCallHelper, null, null);
+				functionCallHelper, methodCallHelper, null, null, lambdaHelper);
 	}
 	
 	/**

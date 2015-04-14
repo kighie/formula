@@ -74,5 +74,12 @@ public class ExprLiteralHelper extends LiteralHelper{
 				}
 			}
 		} );
+		
+		factories.put(ExprTokens.LIT_NULL, new LiteralFactory<Object>() {
+			@Override
+			public Literal<Object> create(BuildContext context, String exprToken, String value) {
+				return AbstractLiteral.NULL;
+			}
+		} );
 	}
 }

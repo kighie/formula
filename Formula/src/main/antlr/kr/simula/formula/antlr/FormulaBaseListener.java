@@ -51,6 +51,18 @@ public class FormulaBaseListener implements FormulaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterLiteralTerm(@NotNull FormulaParser.LiteralTermContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLiteralTerm(@NotNull FormulaParser.LiteralTermContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterComparison(@NotNull FormulaParser.ComparisonContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -106,6 +118,18 @@ public class FormulaBaseListener implements FormulaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitNotExpression(@NotNull FormulaParser.NotExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterConditionArg(@NotNull FormulaParser.ConditionArgContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitConditionArg(@NotNull FormulaParser.ConditionArgContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

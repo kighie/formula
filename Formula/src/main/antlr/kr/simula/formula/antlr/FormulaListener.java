@@ -39,6 +39,16 @@ public interface FormulaListener extends ParseTreeListener {
 	 */
 	void exitFormulaTerm(@NotNull FormulaParser.FormulaTermContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link FormulaParser#literalTerm}.
+	 * @param ctx the parse tree
+	 */
+	void enterLiteralTerm(@NotNull FormulaParser.LiteralTermContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaParser#literalTerm}.
+	 * @param ctx the parse tree
+	 */
+	void exitLiteralTerm(@NotNull FormulaParser.LiteralTermContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link FormulaParser#comparison}.
 	 * @param ctx the parse tree
 	 */
@@ -88,6 +98,16 @@ public interface FormulaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitNotExpression(@NotNull FormulaParser.NotExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaParser#conditionArg}.
+	 * @param ctx the parse tree
+	 */
+	void enterConditionArg(@NotNull FormulaParser.ConditionArgContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaParser#conditionArg}.
+	 * @param ctx the parse tree
+	 */
+	void exitConditionArg(@NotNull FormulaParser.ConditionArgContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FormulaParser#unary}.
 	 * @param ctx the parse tree

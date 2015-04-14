@@ -105,14 +105,45 @@ methodCallExp returns [Node result]
 arguments  returns [List<Node> nodeList]
 	: { $nodeList = new LinkedList<Node>(); }
 	( operatorExpression { $nodeList.add($operatorExpression.result); } 
-		(',' arg2 = operatorExpression { $nodeList.add($arg2.result); })*
+		(',' 
+			(arg2 = operatorExpression { $nodeList.add($arg2.result); })
+			| (arg3 = conditionArg { $nodeList.add($arg3.result); })
+		)*
 	)?
 	;
+
+
+/*
+	Condition Argument
+*/
+conditionArg returns [Node result]
+	: 
+	( 
+		'='  op2 = literalTerm {$result = handler.operator(ExprTokens.OP_EQ, $result, $op2.result); }
+		|'is'  op2 = literalTerm {$result = handler.operator(ExprTokens.OP_EQ, $result, $op2.result); }
+		|'!=' op2 = literalTerm {$result = handler.operator(ExprTokens.OP_NOT_EQ, $result, $op2.result); }
+		|'<>' op2 = literalTerm {$result = handler.operator(ExprTokens.OP_NOT_EQ, $result, $op2.result); }
+		|'is' 'not' op2 = literalTerm {$result = handler.operator(ExprTokens.OP_NOT_EQ, $result, $op2.result); }
+		|'>'  op2 = literalTerm {$result = handler.operator(ExprTokens.OP_GT, $result, $op2.result); }
+		|'>=' op2 = literalTerm {$result = handler.operator(ExprTokens.OP_EQ_GT, $result, $op2.result); }
+		|'<'  op2 = literalTerm {$result = handler.operator(ExprTokens.OP_LT, $result, $op2.result); }
+		|'<=' op2 = literalTerm {$result = handler.operator(ExprTokens.OP_EQ_LT, $result, $op2.result); }
+	)
+	;
+
+literalTerm  returns [Node result]
+	: BOOLEAN 			{ $result = handler.literal( ExprTokens.LIT_BOOLEAN, $BOOLEAN.text); }
+	| STRING_LITERAL	{ $result = handler.literal( ExprTokens.LIT_STRING,  strip($STRING_LITERAL.text)); }
+	| NUMBER			{ $result = handler.literal( ExprTokens.LIT_NUMBER, $NUMBER.text); }
+	| IDENT				{ $result = handler.refer( $IDENT.text); }
+	;
+
 
 formulaTerm returns [Node result]
 	: BOOLEAN 			{ $result = handler.literal( ExprTokens.LIT_BOOLEAN, $BOOLEAN.text); }
 	| STRING_LITERAL	{ $result = handler.literal( ExprTokens.LIT_STRING,  strip($STRING_LITERAL.text)); }
 	| NUMBER			{ $result = handler.literal( ExprTokens.LIT_NUMBER, $NUMBER.text); }
+	| NULL				{ $result = handler.literal( ExprTokens.LIT_NULL, null); }
 	| IDENT				{ $result = handler.refer( $IDENT.text); }
 	| qualifiedName		{ $result = $qualifiedName.result; }
 	| funcCallExp		{ $result = $funcCallExp.result; }
@@ -244,6 +275,8 @@ STRING_LITERAL
 	:	( '"' ( ~('"'|'\r'|'\n') )* '"' )
 		| ( '\'' ( ~('\''|'\r'|'\n') )* '\'' )
 	;
+
+NULL : ('null'|'nil'|'NULL') ;
 
 BOOLEAN :	('true' | 'false' | 'TRUE' | 'FALSE') ;
 IDENT :  LETTER (LETTER|DIGIT)* ;

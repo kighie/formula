@@ -20,6 +20,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.lang.model.type.NullType;
+
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Literal;
 
@@ -29,6 +31,18 @@ import kr.simula.formula.core.Literal;
  * @since 1.0
  */
 public abstract class AbstractLiteral<T> implements Literal<T>{
+	public static final Literal<Object> NULL = new AbstractLiteral<Object>(null){
+		@Override
+		public ValueType valueType() {
+			return ValueType.VOID;
+		}
+
+		@Override
+		public Class<? extends Object> type() {
+			return NullType.class;
+		}
+	};
+	
 	protected T value;
 	
 	

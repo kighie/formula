@@ -185,6 +185,16 @@ public interface FormulaScriptListener extends ParseTreeListener {
 	 */
 	void exitFormulaTerm(@NotNull FormulaScriptParser.FormulaTermContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link FormulaScriptParser#literalTerm}.
+	 * @param ctx the parse tree
+	 */
+	void enterLiteralTerm(@NotNull FormulaScriptParser.LiteralTermContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaScriptParser#literalTerm}.
+	 * @param ctx the parse tree
+	 */
+	void exitLiteralTerm(@NotNull FormulaScriptParser.LiteralTermContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link FormulaScriptParser#comparison}.
 	 * @param ctx the parse tree
 	 */
@@ -234,6 +244,16 @@ public interface FormulaScriptListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIfStatement(@NotNull FormulaScriptParser.IfStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaScriptParser#conditionArg}.
+	 * @param ctx the parse tree
+	 */
+	void enterConditionArg(@NotNull FormulaScriptParser.ConditionArgContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaScriptParser#conditionArg}.
+	 * @param ctx the parse tree
+	 */
+	void exitConditionArg(@NotNull FormulaScriptParser.ConditionArgContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FormulaScriptParser#funcCallExp}.
 	 * @param ctx the parse tree

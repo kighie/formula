@@ -225,6 +225,18 @@ public class FormulaScriptBaseListener implements FormulaScriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterLiteralTerm(@NotNull FormulaScriptParser.LiteralTermContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLiteralTerm(@NotNull FormulaScriptParser.LiteralTermContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterComparison(@NotNull FormulaScriptParser.ComparisonContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -280,6 +292,18 @@ public class FormulaScriptBaseListener implements FormulaScriptListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitIfStatement(@NotNull FormulaScriptParser.IfStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterConditionArg(@NotNull FormulaScriptParser.ConditionArgContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitConditionArg(@NotNull FormulaScriptParser.ConditionArgContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

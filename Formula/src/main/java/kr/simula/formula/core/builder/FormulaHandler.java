@@ -19,6 +19,7 @@ import java.util.List;
 import kr.simula.formula.core.Block;
 import kr.simula.formula.core.BlockStatement;
 import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.Lambda;
 import kr.simula.formula.core.Literal;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.Ref;
@@ -182,4 +183,15 @@ public interface FormulaHandler {
 	 * @return
 	 */
 	BlockStatement statementBlock(String token, Node ... args);
+	
+	/**
+	 * <pre>
+	 * Make an anonymous function or operator.
+	 * </pre>
+	 * @param token
+	 * @param args
+	 * @param infos
+	 * @return
+	 */
+	Lambda lambda(String token, List<Ref> args, Node ... infos);
 }
