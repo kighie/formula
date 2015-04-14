@@ -20,7 +20,6 @@ options {
 
 import Formula;
 
-
 /* */
 
 // use command line option : -package kr.simula.formula.antlr
@@ -39,7 +38,6 @@ import Formula;
 
 @lexer::header {
 }
-
 
 
 /* *************************************

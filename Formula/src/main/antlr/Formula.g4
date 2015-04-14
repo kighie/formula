@@ -116,18 +116,18 @@ arguments  returns [List<Node> nodeList]
 /*
 	Condition Argument
 */
-conditionArg returns [Node result]
+conditionArg returns [Lambda result]
 	: 
 	( 
-		'='  op2 = literalTerm {$result = handler.operator(ExprTokens.OP_EQ, $result, $op2.result); }
-		|'is'  op2 = literalTerm {$result = handler.operator(ExprTokens.OP_EQ, $result, $op2.result); }
-		|'!=' op2 = literalTerm {$result = handler.operator(ExprTokens.OP_NOT_EQ, $result, $op2.result); }
-		|'<>' op2 = literalTerm {$result = handler.operator(ExprTokens.OP_NOT_EQ, $result, $op2.result); }
-		|'is' 'not' op2 = literalTerm {$result = handler.operator(ExprTokens.OP_NOT_EQ, $result, $op2.result); }
-		|'>'  op2 = literalTerm {$result = handler.operator(ExprTokens.OP_GT, $result, $op2.result); }
-		|'>=' op2 = literalTerm {$result = handler.operator(ExprTokens.OP_EQ_GT, $result, $op2.result); }
-		|'<'  op2 = literalTerm {$result = handler.operator(ExprTokens.OP_LT, $result, $op2.result); }
-		|'<=' op2 = literalTerm {$result = handler.operator(ExprTokens.OP_EQ_LT, $result, $op2.result); }
+		'='  op2 = literalTerm {$result = handler.lambda(ExprTokens.OP_EQ, null, $op2.result); }
+		|'is'  op2 = literalTerm {$result = handler.lambda(ExprTokens.OP_EQ, null, $op2.result); }
+		|'!=' op2 = literalTerm {$result = handler.lambda(ExprTokens.OP_NOT_EQ, null, $op2.result); }
+		|'<>' op2 = literalTerm {$result = handler.lambda(ExprTokens.OP_NOT_EQ, null, $op2.result); }
+		|'is' 'not' op2 = literalTerm {$result = handler.lambda(ExprTokens.OP_NOT_EQ, null, $op2.result); }
+		|'>'  op2 = literalTerm {$result = handler.lambda(ExprTokens.OP_GT, null, $op2.result); }
+		|'>=' op2 = literalTerm {$result = handler.lambda(ExprTokens.OP_EQ_GT, null, $op2.result); }
+		|'<'  op2 = literalTerm {$result = handler.lambda(ExprTokens.OP_LT, null, $op2.result); }
+		|'<=' op2 = literalTerm {$result = handler.lambda(ExprTokens.OP_EQ_LT, null, $op2.result); }
 	)
 	;
 
@@ -135,16 +135,13 @@ literalTerm  returns [Node result]
 	: BOOLEAN 			{ $result = handler.literal( ExprTokens.LIT_BOOLEAN, $BOOLEAN.text); }
 	| STRING_LITERAL	{ $result = handler.literal( ExprTokens.LIT_STRING,  strip($STRING_LITERAL.text)); }
 	| NUMBER			{ $result = handler.literal( ExprTokens.LIT_NUMBER, $NUMBER.text); }
+	| NULL				{ $result = handler.literal( ExprTokens.LIT_NULL, null); }
 	| IDENT				{ $result = handler.refer( $IDENT.text); }
 	;
 
 
 formulaTerm returns [Node result]
-	: BOOLEAN 			{ $result = handler.literal( ExprTokens.LIT_BOOLEAN, $BOOLEAN.text); }
-	| STRING_LITERAL	{ $result = handler.literal( ExprTokens.LIT_STRING,  strip($STRING_LITERAL.text)); }
-	| NUMBER			{ $result = handler.literal( ExprTokens.LIT_NUMBER, $NUMBER.text); }
-	| NULL				{ $result = handler.literal( ExprTokens.LIT_NULL, null); }
-	| IDENT				{ $result = handler.refer( $IDENT.text); }
+	: literalTerm 			{ $result = $literalTerm.result; }
 	| qualifiedName		{ $result = $qualifiedName.result; }
 	| funcCallExp		{ $result = $funcCallExp.result; }
 	| methodCallExp		{ $result = $methodCallExp.result; }
