@@ -12,9 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.core.builder;
+package kr.simula.formula.func.math;
 
-import kr.simula.formula.core.Node;
+import java.math.BigDecimal;
+import java.util.Arrays;
+
+import kr.simula.formula.core.annotation.Arguments;
+import kr.simula.formula.func.NumericFunction;
+import kr.simula.formula.func.base.MathFunctions;
 
 /**
  * <pre>
@@ -22,13 +27,16 @@ import kr.simula.formula.core.Node;
  * @author Ikchan Kwon
  *
  */
-public interface FormulaBuilder<T extends Node> {
 
-	T build(String expression);
+public class SUM extends NumericFunction{
+	private static final long serialVersionUID = 1L;
 
-	T build(FormulaSource source);
+	@Override
+	@Arguments({BigDecimal.class, BigDecimal.class})
+	public BigDecimal eval(Object... args) {
+		checkArgCountMoreThan(args, 2);
+		BigDecimal[] numArr = Arrays.copyOf(args, args.length, BigDecimal[].class);
+		return MathFunctions.sum(REAL_MATH_CONTEXT, numArr);
+	}
 
-	T build(FormulaSource source, RootBuildContext rootContext);
-	
-	
 }

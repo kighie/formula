@@ -248,11 +248,17 @@ STRING_LITERAL
 BOOLEAN :	('true' | 'false' | 'TRUE' | 'FALSE') ;
 IDENT :  LETTER (LETTER|DIGIT)* ;
 
-WS : (' ' | '\t'| '\n'| '\r'| '\f') + -> channel(HIDDEN);
+WS  :  [ \t\r\n\u000C]+ -> skip
+    ;
 
-COMMENT : '//' ()* EOL -> channel(HIDDEN);
-MULTILINE_COMMENT : '/*' ()* '*/' -> channel(HIDDEN);
+MULTILINE_COMMENT
+    :   '/*' .*? '*/' -> skip
+    ;
 
+LINE_COMMENT
+    :   '//' ~[\r\n]* -> skip
+    ;
+    
 fragment EOL 	
 	:	(	( '\r\n' ) // DOS
 		|	'\r'    // OSX

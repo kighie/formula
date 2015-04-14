@@ -44,14 +44,14 @@
   	<sourceDirectory>.</sourceDirectory>
   	<plugins>
         <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-        <includes>
-            <include>src/main/java/**/*.java</include>
-            <include>src/main/antlr/**/*.java</include>
-        </includes>
-        </configuration>
+	        <groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-compiler-plugin</artifactId>
+	        <configuration>
+	        <includes>
+	            <include>src/main/java/**/*.java</include>
+	            <include>src/main/antlr/**/*.java</include>
+	        </includes>
+	        </configuration>
         </plugin>
     </plugins>
   </build>

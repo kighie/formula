@@ -1082,20 +1082,82 @@ public final class MathFunctions extends FunctionBase {
 		return bottom + (int)(Math.random() * top); 
 	}
 	
+
+	/**
+	 * <pre>
+	 * The ROUND function rounds a number to a specified number of digits.
+	 * </pre> 
+	 * @param number    Required. The number that you want to round.
+	 * @param num_digits    Required. The number of digits to which you want to round the number argument.
+	 * @return
+	 */
+	public static BigDecimal round(BigDecimal number, int num_digits) {
+		return  number.setScale( num_digits , RoundingMode.HALF_UP ); 
+	}
+
+	/**
+	 * <pre>
+	 * The ROUND function rounds a number to a specified number of digits.
+	 * </pre> 
+	 * @param number    Required. The number that you want to round.
+	 * @param num_digits    Required. The number of digits to which you want to round the number argument.
+	 * @return
+	 */
+	public static BigDecimal round(BigDecimal number, BigDecimal num_digits) {
+		return round( number, num_digits.intValue() ); 
+	}
+	
+
+	/**
+	 * <pre>
+	 * Rounds a number down, toward zero.
+	 * </pre> 
+	 * @param number    Any real number that you want rounded down.
+	 * @param num_digits    The number of digits to which you want to round number.
+	 * @return
+	 */
+	public static BigDecimal roundDown(BigDecimal number, int num_digits) {
+		return  number.setScale( num_digits , RoundingMode.DOWN ); 
+	}
+
+	/**
+	 * <pre>
+	 * Rounds a number down, toward zero.
+	 * </pre> 
+	 * @param number    Any real number that you want rounded down.
+	 * @param num_digits    The number of digits to which you want to round number.
+	 * @return
+	 */
+	public static BigDecimal roundDown(BigDecimal number, BigDecimal num_digits) {
+		return roundDown( number, num_digits.intValue() ); 
+	}
+	
+
+	/**
+	 * <pre>
+	 * Rounds a number up, away from zero
+	 * </pre> 
+	 * @param number    Any real number that you want rounded up.
+	 * @param num_digits    The number of digits to which you want to round number.
+	 * @return
+	 */
+	public static BigDecimal roundUp(BigDecimal number, int num_digits) {
+		return  number.setScale( num_digits , RoundingMode.UP ); 
+	}
+
+	/**
+	 * <pre>
+	 * Rounds a number up, away from zero
+	 * </pre> 
+	 * @param number    Any real number that you want rounded up.
+	 * @param num_digits    The number of digits to which you want to round number.
+	 * @return
+	 */
+	public static BigDecimal roundUp(BigDecimal number, BigDecimal num_digits) {
+		return roundDown( number, num_digits.intValue() ); 
+	}
+	
 	/*
-
-ROUND
-
-Rounds a number to a specified number of digits
-
-ROUNDDOWN
-
-Rounds a number down, toward zero
-
-ROUNDUP
-
-Rounds a number up, away from zero
-
 SERIESSUM
 
 Returns the sum of a power series based on the formula
@@ -1111,7 +1173,21 @@ Returns the sine of the given angle
 SINH
 
 Returns the hyperbolic sine of a number
+*/
 
+	/**
+	 * <pre>
+	 * Returns a positive square root.
+	 * </pre>
+	 * @param number  The number for which you want the square root.
+	 * @param mc 
+	 * @return
+	 */
+	public static BigDecimal sqrt(BigDecimal number, MathContext mc) {
+		return new BigDecimal(Math.sqrt(number.doubleValue()), mc); 
+	}
+	
+/*
 SQRT
 
 Returns a positive square root
@@ -1123,14 +1199,60 @@ Returns the square root of (number * pi)
 SUBTOTAL
 
 Returns a subtotal in a list or database
+*/
 
-SUM
-
-Adds its arguments
-
+	/**
+	 * <pre>
+	 * The SUM function adds all the numbers that you specify as arguments. 
+	 * </pre>
+	 * @param numbers more than one numbers you want to add, up to a maximum of 255 arguments.
+	 * @return
+	 */
+	public static BigDecimal sum(MathContext mc , BigDecimal ... numbers) {
+		if(numbers == null){
+			throw new FormulaException("SUM function needs more than one args.");
+		}
+		if(numbers.length == 1){
+			return numbers[0];
+		}
+		
+		BigDecimal ret = BigDecimal.ZERO;
+		for( int i = 0; i<numbers.length;i++){
+			ret = ret.add(numbers[i], mc);
+		}
+		
+		return ret;
+	}
+	
+	
+/*
 SUMIF
 
 Adds the cells specified by a given criteria
+
+You use the SUMIF function to sum the values in a range that meet criteria that you specify. For example, suppose that in a column that contains numbers, you want to sum only the values that are larger than 5. You can use the following formula:
+
+=SUMIF(B2:B25,">5")
+
+In this example, the criteria is applied the same values that are being summed. If you want, you can apply the criteria to one range and sum the corresponding values in a different range. For example, the formula =SUMIF(B2:B5, "John", C2:C5) sums only the values in the range C2:C5, where the corresponding cells in the range B2:B5 equal "John."
+
+NOTE   To sum cells based on multiple criteria, see SUMIFS function.
+
+Syntax
+
+SUMIF(range, criteria, [sum_range])
+
+The SUMIF function syntax has the following arguments:
+
+range    Required. The range of cells that you want evaluated by criteria. Cells in each range must be numbers or names, arrays, or references that contain numbers. Blank and text values are ignored.
+
+criteria    Required. The criteria in the form of a number, expression, a cell reference, text, or a function that defines which cells will be added. For example, criteria can be expressed as 32, ">32", B5, 32, "32", "apples", or TODAY().
+
+IMPORTANT   Any text criteria or any criteria that includes logical or mathematical symbols must be enclosed in double quotation marks ("). If the criteria is numeric, double quotation marks are not required.
+
+sum_range    Optional. The actual cells to add, if you want to add cells other than those specified in the range argument. If the sum_range argument is omitted, Excel adds the cells that are specified in the range argument (the same cells to which the criteria is applied).
+
+
 
 SUMIFS
 

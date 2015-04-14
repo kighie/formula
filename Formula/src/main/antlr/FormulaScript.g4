@@ -42,7 +42,6 @@ import Formula;
 
 
 
-
 /* *************************************
  * Formula Script
  *************************************** */
@@ -173,7 +172,7 @@ foreachStatement returns [BlockStatement foreachStmt]
 loopCondition 	returns [LoopConditionStatement condition]
 	: type IDENT 
 	{ 
-		Ref varRef = handler.declare(ScriptTokens.VAR, $type.typeClz ,$IDENT.text); 
+		Ref varRef = handler.declare(ScriptTokens.VAR_DECL, $type.typeClz ,$IDENT.text); 
 		$condition = (LoopConditionStatement)handler.statement(ScriptTokens.LOOP_COND_DECL, varRef);
 	}
 	(
@@ -227,7 +226,7 @@ leftAssign  returns [Statement stmt]
 rightAssign  returns [Statement stmt]
 	: { Ref settable = null; }
 	formulaExpressionBase 
-	'<-'
+	'->'
 	(
 		IDENT			{ settable = handler.refer( $IDENT.text);}
 		| qualifiedName	{ settable = $qualifiedName.result;}

@@ -79,4 +79,12 @@ public class MathFunctionsTests {
 		System.out.println(new BigDecimal("1"));
 		System.out.println(new BigDecimal("1.0"));
 	}
+	
+
+	@Test
+	public void sqrt(){
+		System.out.println( MathFunctions.sqrt(new BigDecimal(3.2), NumericFunction.REAL_MATH_CONTEXT) ); // 1.788854382
+
+		System.out.println( MathFunctions.sqrt(new BigDecimal(16), NumericFunction.REAL_MATH_CONTEXT) ); //4
+	}
 }

@@ -14,8 +14,11 @@
  */
 package kr.simula.formula.script;
 
+import java.io.File;
+
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Node;
+import kr.simula.formula.core.builder.FormulaSource;
 import kr.simula.formula.script.build.FormulaScriptBuilder;
 
 import org.junit.BeforeClass;
@@ -37,6 +40,19 @@ public abstract class AbstractScriptTests {
 
 	protected Module buildScript(String expr){
 		Module exprNode = (Module)builder.build(expr);
+		return exprNode;
+	}
+
+	protected Module buildFromFile(File file){
+		FormulaSource source = FormulaSource.newSource(file.getPath(), file);
+		Module exprNode = (Module)builder.build(source);
+		return exprNode;
+	}
+
+	protected Module buildFromFile(String filePath){
+		FormulaSource source = FormulaSource.newSource(filePath, 
+				getClass().getResourceAsStream(filePath), "UTF-8");
+		Module exprNode = (Module)builder.build(source);
 		return exprNode;
 	}
 

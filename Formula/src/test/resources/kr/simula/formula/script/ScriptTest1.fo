@@ -1,0 +1,30 @@
+
+/* System out wrapping */
+void println(object value) { 
+	if( not skipPrint ){
+		System.out.println(value);
+	}
+} 
+
+number testFn(number argA, number argB) {
+	number retVal;
+	if(argA > argB) {
+		println(argA & 'X' & argB);
+		retVal <- CEILING(argA * argB, 3);
+	} else {
+		println(argA & '+' & argB); 
+		LOG(argA + argB) -> retVal; // left to right assignment
+	}
+	return retVal;
+} 
+
+void testSimple() {
+	println('void return, empty args.'); 
+}
+
+/*
+	PA is external argument.
+*/
+println( testFn(PA, 5) ); 
+println( testFn(5, PA) ); 
+testSimple();

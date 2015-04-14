@@ -18,6 +18,7 @@ import kr.simula.formula.antlr.FormulaScriptLexer;
 import kr.simula.formula.antlr.FormulaScriptParser;
 import kr.simula.formula.antlr.FormulaScriptParser.FormulaScriptContext;
 import kr.simula.formula.core.builder.AbstractFormulaBuilder;
+import kr.simula.formula.core.builder.FormulaSource;
 import kr.simula.formula.core.builder.RootBuildContext;
 import kr.simula.formula.core.factory.helper.BinaryOperatorHelper;
 import kr.simula.formula.core.factory.helper.BlockHelper;
@@ -28,10 +29,12 @@ import kr.simula.formula.core.factory.helper.MethodCallHelper;
 import kr.simula.formula.core.factory.helper.RefHelper;
 import kr.simula.formula.core.factory.helper.StatementHelper;
 import kr.simula.formula.core.factory.helper.UnaryOperatorHelper;
+import kr.simula.formula.expr.Expr;
 import kr.simula.formula.expr.builder.ExprBinaryOperatorHelper;
 import kr.simula.formula.expr.builder.ExprFunctionCallHelper;
 import kr.simula.formula.expr.builder.ExprLiteralHelper;
 import kr.simula.formula.expr.builder.ExprUnaryOperatorHelper;
+import kr.simula.formula.expr.builder.ExpressionHandler;
 import kr.simula.formula.script.Module;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
@@ -78,5 +81,9 @@ public class FormulaScriptBuilder extends AbstractFormulaBuilder<Module, Formula
 		FormulaScriptContext ctx = parser.formulaScript();
 		return ctx.module;
 	}
-	
+
+	@Override
+	protected Module build(FormulaScriptHandler handler, FormulaSource source) {
+		return build(handler, source.getSourceString());
+	}
 }

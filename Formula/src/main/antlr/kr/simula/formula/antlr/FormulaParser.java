@@ -30,12 +30,12 @@ public class FormulaParser extends Parser {
 		T__21=1, T__20=2, T__19=3, T__18=4, T__17=5, T__16=6, T__15=7, T__14=8, 
 		T__13=9, T__12=10, T__11=11, T__10=12, T__9=13, T__8=14, T__7=15, T__6=16, 
 		T__5=17, T__4=18, T__3=19, T__2=20, T__1=21, T__0=22, NUMBER=23, STRING_LITERAL=24, 
-		BOOLEAN=25, IDENT=26, WS=27, COMMENT=28, MULTILINE_COMMENT=29, NEGATION=30;
+		BOOLEAN=25, IDENT=26, WS=27, MULTILINE_COMMENT=28, LINE_COMMENT=29, NEGATION=30;
 	public static final String[] tokenNames = {
 		"<INVALID>", "'/'", "'!='", "'>='", "'<'", "'='", "'>'", "'^'", "'or'", 
 		"'<='", "'<>'", "'%'", "'&'", "'('", "'is'", "')'", "'and'", "'*'", "'+'", 
 		"'not'", "','", "'-'", "'.'", "NUMBER", "STRING_LITERAL", "BOOLEAN", "IDENT", 
-		"WS", "COMMENT", "MULTILINE_COMMENT", "NEGATION"
+		"WS", "MULTILINE_COMMENT", "LINE_COMMENT", "NEGATION"
 	};
 	public static final int
 		RULE_formulaExpression = 0, RULE_formulaExpressionBase = 1, RULE_funcCallExp = 2, 

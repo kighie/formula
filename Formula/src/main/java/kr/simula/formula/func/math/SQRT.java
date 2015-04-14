@@ -1,4 +1,4 @@
-/* ******************************************************************************
+/* 
  * Copyright (c) 2012 IkChan Kwon kighie@gmail.com
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,23 +12,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.core.builder;
+package kr.simula.formula.func.math;
 
-import kr.simula.formula.core.Node;
+import java.math.BigDecimal;
+
+import kr.simula.formula.core.annotation.Arguments;
+import kr.simula.formula.func.NumericFunction;
+import kr.simula.formula.func.base.MathFunctions;
 
 /**
- * <pre>
- * </pre>
- * @author Ikchan Kwon
- *
+ * <pre></pre>
+ * @author kighie@gmail.com
+ * @since 1.0
  */
-public interface FormulaBuilder<T extends Node> {
+public class SQRT extends NumericFunction{
+	private static final long serialVersionUID = 1L;
 
-	T build(String expression);
+	@Override
+	@Arguments({BigDecimal.class})
+	public BigDecimal eval(Object... args) {
+		checkArgCount(args, 1);
+		return MathFunctions.sqrt(toDecimal(args[0]), REAL_MATH_CONTEXT);
+	}
 
-	T build(FormulaSource source);
-
-	T build(FormulaSource source, RootBuildContext rootContext);
-	
-	
 }

@@ -52,12 +52,20 @@ public abstract class AbstractFormulaBuilder<N extends Node, H extends FormulaHa
 	}
 	
 	@Override
-	public N build(String expression, RootBuildContext rootContext) {
-		H handler = newHandler(rootContext);
-		return build(handler, expression);
+	public N build(FormulaSource source) {
+		H handler = newHandler();
+		return build(handler, source);
 	}
-	
+
+	@Override
+	public N build(FormulaSource source, RootBuildContext rootContext) {
+		H handler = newHandler(rootContext);
+		return build(handler, source);
+	}
+
 	protected abstract N build(H handler, String expression);
+	
+	protected abstract N build(H handler, FormulaSource source);
 	
 	
 }

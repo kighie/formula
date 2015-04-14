@@ -19,6 +19,7 @@ import kr.simula.formula.antlr.FormulaParser;
 import kr.simula.formula.antlr.FormulaParser.FormulaExpressionContext;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.builder.AbstractFormulaBuilder;
+import kr.simula.formula.core.builder.FormulaSource;
 import kr.simula.formula.core.builder.RootBuildContext;
 import kr.simula.formula.core.factory.helper.BinaryOperatorHelper;
 import kr.simula.formula.core.factory.helper.FunctionCallHelper;
@@ -75,5 +76,10 @@ public class ExpressionBuilder extends AbstractFormulaBuilder<Expr, ExpressionHa
 		FormulaExpressionContext ctx = parser.formulaExpression();
 		Expr expr = new Expr((Gettable<?>)ctx.result);
 		return expr;
+	}
+	
+	@Override
+	protected Expr build(ExpressionHandler handler, FormulaSource source) {
+		return build(handler, source.getSourceString());
 	}
 }

@@ -14,8 +14,6 @@
  */
 package kr.simula.formula.script;
 
-import java.math.BigDecimal;
-
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.RootContext;
 import kr.simula.formula.util.StopWatch;
@@ -27,53 +25,31 @@ import org.junit.Test;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class VariableTests extends AbstractScriptTests {
+public class FunctionTests  extends AbstractScriptTests {
 
-
-	static final String BASIC = "number number1 <- 10;"
-			+ "BigDecimal number2 <- 30 * PA;"
-			+ "Double number3 <- number1/number2;"
-			+ "if( not skipPrint) { System.out.println( 'SUM:' & number3); }";
-	
 	
 	@Test
-	public void basic(){
+	public void mathFunctions(){
+		testImpl("/kr/simula/formula/script/MathFuncTest.fo");
+	}
+	
+	private void testImpl(String filePath) {
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
 		
-		Module script = buildScript(BASIC);
+		Module script = buildFromFile(filePath);
 		
-		System.out.println(stopWatch.ellapsedTime());
-
-		System.out.println(script);
 		System.out.println(script.getExpression());
+		System.out.println("BUILD Time : " + stopWatch.ellapsedTime());
 		
 		stopWatch.reset();
 		
 		RootContext context = new RootContext();
 		
 		context.setReference(new QName(new QName("System"), "out"), System.out);
-		context.setParameter("PA", new BigDecimal(6));
-
-		script.eval(context);
-		System.out.println(stopWatch.ellapsedTime());
 		
 		script.eval(context);
-		System.out.println(stopWatch.ellapsedTime());
 		
-		context.setParameter("PA", new BigDecimal(3));
-		
-		script.eval(context);
-		System.out.println(stopWatch.ellapsedTime());
-		
-		stopWatch.reset();
-		
-		context.setParameter("skipPrint", true);
-		for(int i=0;i<1000;i++){
-			script.eval(context);
-		}
-		
-		System.out.println("1,000 times : " + stopWatch.ellapsedTime());
-
+		System.out.println("Running Time : " + stopWatch.ellapsedTime());
 	}
 }

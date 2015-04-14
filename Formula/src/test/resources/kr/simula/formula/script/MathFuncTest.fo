@@ -1,0 +1,17 @@
+
+/* System out wrapping */
+void println(object value) { 
+	if( not skipPrint ){
+		System.out.println(value);
+	}
+} 
+
+void assert(text desc , object value, object expected) { 
+	boolean ok <- value = expected;
+	println( desc & '= ' & value & ' , expected=' & expected & ' assert=' & ok);
+	return ok;
+} 
+
+
+assert( 'POWER(3,4)', POWER(3,4), 81 );
+assert( 'PRODUCT(1,2,3,4)', PRODUCT(1,2,3,4), 24 );
