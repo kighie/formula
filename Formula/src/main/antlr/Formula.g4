@@ -147,6 +147,16 @@ formulaTerm returns [Node result]
 	| methodCallExp		{ $result = $methodCallExp.result; }
 	;
 
+arrayRef 
+	: IDENT '[' (NUMBER | IDENT) ']'
+	;
+	
+arrayDecl 
+	: '['
+		literalTerm (',' literalTerm)* 	
+	  ']'
+	;
+	
 qualifiedName returns [Ref result]
 	: IDENT 	{ $result = handler.refer( $IDENT.text); }
 	('.' IDENT	{ $result = handler.refer( $result, $IDENT.text); } )* 

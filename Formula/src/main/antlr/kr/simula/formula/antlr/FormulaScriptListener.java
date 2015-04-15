@@ -95,6 +95,16 @@ public interface FormulaScriptListener extends ParseTreeListener {
 	 */
 	void exitBlockContents(@NotNull FormulaScriptParser.BlockContentsContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link FormulaScriptParser#arrayRef}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayRef(@NotNull FormulaScriptParser.ArrayRefContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaScriptParser#arrayRef}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayRef(@NotNull FormulaScriptParser.ArrayRefContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link FormulaScriptParser#notExpression}.
 	 * @param ctx the parse tree
 	 */
@@ -234,6 +244,16 @@ public interface FormulaScriptListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRightAssign(@NotNull FormulaScriptParser.RightAssignContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaScriptParser#arrayDecl}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayDecl(@NotNull FormulaScriptParser.ArrayDeclContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaScriptParser#arrayDecl}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayDecl(@NotNull FormulaScriptParser.ArrayDeclContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FormulaScriptParser#ifStatement}.
 	 * @param ctx the parse tree

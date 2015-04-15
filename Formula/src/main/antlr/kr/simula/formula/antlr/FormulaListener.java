@@ -89,6 +89,26 @@ public interface FormulaListener extends ParseTreeListener {
 	 */
 	void exitQualifiedName(@NotNull FormulaParser.QualifiedNameContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link FormulaParser#arrayDecl}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayDecl(@NotNull FormulaParser.ArrayDeclContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaParser#arrayDecl}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayDecl(@NotNull FormulaParser.ArrayDeclContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaParser#arrayRef}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayRef(@NotNull FormulaParser.ArrayRefContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaParser#arrayRef}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayRef(@NotNull FormulaParser.ArrayRefContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link FormulaParser#notExpression}.
 	 * @param ctx the parse tree
 	 */

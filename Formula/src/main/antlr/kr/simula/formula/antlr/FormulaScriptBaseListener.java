@@ -117,6 +117,18 @@ public class FormulaScriptBaseListener implements FormulaScriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterArrayRef(@NotNull FormulaScriptParser.ArrayRefContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArrayRef(@NotNull FormulaScriptParser.ArrayRefContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterNotExpression(@NotNull FormulaScriptParser.NotExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -280,6 +292,18 @@ public class FormulaScriptBaseListener implements FormulaScriptListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRightAssign(@NotNull FormulaScriptParser.RightAssignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterArrayDecl(@NotNull FormulaScriptParser.ArrayDeclContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArrayDecl(@NotNull FormulaScriptParser.ArrayDeclContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

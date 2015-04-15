@@ -17,6 +17,7 @@ package kr.simula.formula.core.factory.helper;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.builder.BuildException;
@@ -38,6 +39,7 @@ public class TypeHelper {
 	public static final String OBJECT = "object";
 	public static final String VOID = "void";
 	public static final String System = "System";
+	public static final String MAP = "map";
 	
 	/**
 	 * 
@@ -54,12 +56,14 @@ public class TypeHelper {
 		registerType(OBJECT, Object.class);
 		registerType(VOID, Void.class);
 		registerType(System, System.class);
+		registerType(MAP, Map.class);
 
 		registerType("BigDecimal", BigDecimal.class);
 		registerType("String", String.class);
 		registerType("Boolean", Boolean.class);
 		registerType("Date", Date.class);
 		registerType("Object", Object.class);
+		registerType("Map", Map.class);
 
 		registerType("int", BigDecimal.class);
 		registerType("Integer", BigDecimal.class);

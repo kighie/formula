@@ -111,6 +111,30 @@ public class FormulaBaseListener implements FormulaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterArrayDecl(@NotNull FormulaParser.ArrayDeclContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArrayDecl(@NotNull FormulaParser.ArrayDeclContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterArrayRef(@NotNull FormulaParser.ArrayRefContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArrayRef(@NotNull FormulaParser.ArrayRefContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterNotExpression(@NotNull FormulaParser.NotExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
