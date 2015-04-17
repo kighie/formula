@@ -14,24 +14,28 @@
  */
 package kr.simula.formula.core.factory.helper;
 
+import java.util.List;
+
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.builder.BuildContext;
-import kr.simula.formula.core.builder.BuildException;
-import kr.simula.formula.core.factory.UnaryOperatorFactory;
 
 /**
  * <pre></pre>
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class UnaryOperatorHelper extends AbstractHelper<UnaryOperatorFactory> {
+public class ArrayHelper {
 
-	public Gettable<?> create(BuildContext context, String exprToken, Node operand){
-		UnaryOperatorFactory factory = factories.get(exprToken);
-		if(factory == null){
-			throw new BuildException("UnaryOperatorFactory for " + exprToken + " is not registered.");
-		}
-		return factory.create(context, exprToken, operand);
+	/**<pre>
+	 * </pre>
+	 * @param current
+	 * @param elements
+	 * @return
+	 */
+	public Gettable<?> create(BuildContext current, List<Node> elements) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
 }

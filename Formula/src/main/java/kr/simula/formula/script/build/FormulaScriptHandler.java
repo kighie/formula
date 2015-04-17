@@ -16,12 +16,14 @@ package kr.simula.formula.script.build;
 
 import kr.simula.formula.core.builder.AbstractFormulaHandler;
 import kr.simula.formula.core.builder.RootBuildContext;
+import kr.simula.formula.core.factory.helper.ArrayHelper;
 import kr.simula.formula.core.factory.helper.BinaryOperatorHelper;
 import kr.simula.formula.core.factory.helper.BlockHelper;
 import kr.simula.formula.core.factory.helper.DeclarationHelper;
 import kr.simula.formula.core.factory.helper.FunctionCallHelper;
 import kr.simula.formula.core.factory.helper.LambdaHelper;
 import kr.simula.formula.core.factory.helper.LiteralHelper;
+import kr.simula.formula.core.factory.helper.MapHelper;
 import kr.simula.formula.core.factory.helper.MethodCallHelper;
 import kr.simula.formula.core.factory.helper.RefHelper;
 import kr.simula.formula.core.factory.helper.StatementHelper;
@@ -48,6 +50,9 @@ public class FormulaScriptHandler extends AbstractFormulaHandler {
 	 * @param methodCallHelper
 	 * @param statementHelper
 	 * @param declarationHelper
+	 * @param arrayHelper
+	 * @param mapHelper
+	 * @param lambdaHelper
 	 */
 	public FormulaScriptHandler(RootBuildContext rootContext,
 			BlockHelper blockHelper, LiteralHelper literalHelper,
@@ -56,11 +61,12 @@ public class FormulaScriptHandler extends AbstractFormulaHandler {
 			UnaryOperatorHelper unaryOperatorHelper,
 			FunctionCallHelper functionCallHelper,
 			MethodCallHelper methodCallHelper, StatementHelper statementHelper,
-			DeclarationHelper declarationHelper,
-			LambdaHelper lambdaHelper) {
+			DeclarationHelper declarationHelper, ArrayHelper arrayHelper,
+			MapHelper mapHelper, LambdaHelper lambdaHelper) {
 		super(rootContext, blockHelper, literalHelper, refHelper, typeHelper,
 				binaryOperatorHelper, unaryOperatorHelper, functionCallHelper,
-				methodCallHelper, statementHelper, declarationHelper, lambdaHelper);
+				methodCallHelper, statementHelper, declarationHelper, arrayHelper,
+				mapHelper, lambdaHelper);
 	}
 
 }

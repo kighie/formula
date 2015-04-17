@@ -145,16 +145,36 @@ formulaTerm returns [Node result]
 	| qualifiedName		{ $result = $qualifiedName.result; }
 	| funcCallExp		{ $result = $funcCallExp.result; }
 	| methodCallExp		{ $result = $methodCallExp.result; }
+	| arrayRef			{ $result = $arrayRef.result; }
+	| array 			{ $result = $array.result; }
+	| map				{ $result = $map.result; }
 	;
 
-arrayRef 
-	: IDENT '[' (NUMBER | IDENT) ']'
+arrayRef   returns [Ref result]
+	: IDENT '[' 
+		(NUMBER 	{ $result = handler.refer( $IDENT.text, handler.literal( ExprTokens.LIT_NUMBER, $NUMBER.text) ); } 
+		| IDENT		{ $result = handler.refer( $IDENT.text, $result = handler.refer( $IDENT.text) ); } 
+		)
+	 ']'
 	;
 	
-arrayDecl 
-	: '['
-		literalTerm (',' literalTerm)* 	
+array   returns [Gettable result]
+	: '['	{ List<Node> elements = new LinkedList<Node>(); }
+		formulaTerm 		{ elements.add($formulaTerm.result); }
+		(',' formulaTerm	{ elements.add($formulaTerm.result); } )* 	
+			{	$result = handler.array(elements); }
 	  ']'
+	;
+	
+map   returns [Gettable result]
+	: '{' 	{ List<MapEntry> entryList = new LinkedList<MapEntry>(); }
+		IDENT ':' formulaTerm	
+			{ entryList.add( handler.mapEntry(ExprTokens.MAP_ENTRY, null, $IDENT.text, $formulaTerm.result ) ); }
+		(',' IDENT ':' formulaTerm 
+			{ entryList.add( handler.mapEntry(ExprTokens.MAP_ENTRY, null, $IDENT.text, $formulaTerm.result ) ); }
+		)* 	
+			{ $result = handler.map(ExprTokens.MAP, entryList);}
+	  '}'
 	;
 	
 qualifiedName returns [Ref result]

@@ -12,17 +12,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.core.factory;
-
-import kr.simula.formula.core.Gettable;
-import kr.simula.formula.core.Node;
-import kr.simula.formula.core.builder.BuildContext;
+package kr.simula.formula.core;
 
 /**
  * <pre></pre>
  * @author kighie@gmail.com
  * @since 1.0
  */
-public interface BinaryOperatorFactory {
-	Gettable<?> create(BuildContext context, String exprToken, Node operand1, Node operand2);
+public interface MapEntry extends Node {
+	
+	String getKey();
+	
+	Node getValue();
+	
 }

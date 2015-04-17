@@ -89,16 +89,6 @@ public interface FormulaListener extends ParseTreeListener {
 	 */
 	void exitQualifiedName(@NotNull FormulaParser.QualifiedNameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link FormulaParser#arrayDecl}.
-	 * @param ctx the parse tree
-	 */
-	void enterArrayDecl(@NotNull FormulaParser.ArrayDeclContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FormulaParser#arrayDecl}.
-	 * @param ctx the parse tree
-	 */
-	void exitArrayDecl(@NotNull FormulaParser.ArrayDeclContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link FormulaParser#arrayRef}.
 	 * @param ctx the parse tree
 	 */
@@ -199,6 +189,16 @@ public interface FormulaListener extends ParseTreeListener {
 	 */
 	void exitOperatorExpression(@NotNull FormulaParser.OperatorExpressionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link FormulaParser#array}.
+	 * @param ctx the parse tree
+	 */
+	void enterArray(@NotNull FormulaParser.ArrayContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaParser#array}.
+	 * @param ctx the parse tree
+	 */
+	void exitArray(@NotNull FormulaParser.ArrayContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link FormulaParser#methodCallExp}.
 	 * @param ctx the parse tree
 	 */
@@ -218,6 +218,16 @@ public interface FormulaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitArguments(@NotNull FormulaParser.ArgumentsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaParser#map}.
+	 * @param ctx the parse tree
+	 */
+	void enterMap(@NotNull FormulaParser.MapContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaParser#map}.
+	 * @param ctx the parse tree
+	 */
+	void exitMap(@NotNull FormulaParser.MapContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FormulaParser#formulaExpressionBase}.
 	 * @param ctx the parse tree

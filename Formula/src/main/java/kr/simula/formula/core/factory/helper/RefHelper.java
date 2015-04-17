@@ -15,6 +15,7 @@
 package kr.simula.formula.core.factory.helper;
 
 import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.Node;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.builder.BuildContext;
@@ -108,5 +109,32 @@ public class RefHelper {
 	 */
 	protected QName makeQName(BuildContext context, String name) {
 		return new QName(name);
+	}
+
+
+	/**<pre>
+	 * </pre>
+	 * @param current
+	 * @param name
+	 * @param index
+	 * @return
+	 */
+	public Ref get(BuildContext current, String name, Node index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	/**<pre>
+	 * </pre>
+	 * @param current
+	 * @param parent
+	 * @param name
+	 * @param index
+	 * @return
+	 */
+	public Ref get(BuildContext current, Ref parent, String name, Node index) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

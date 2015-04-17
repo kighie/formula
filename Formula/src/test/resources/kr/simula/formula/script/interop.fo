@@ -1,0 +1,20 @@
+
+import java.lang.System;
+import java.math.BigDecimal;
+import java.util.Map;
+
+import xxx.yyy.TestService;
+import xxx.yyy.ADto;
+import xxx.yyy.BDto;
+
+
+interop TestServiceImpl implements TestService {
+	BDto doSomething(ADto dtoArg, BigDecimal argNum) {
+		return f_doSomething;
+	}
+}
+
+Record f_doSomething (Record adto, number argNum) {
+	number a = mapArg.aa * argNum;
+	return a ^ 10;
+}

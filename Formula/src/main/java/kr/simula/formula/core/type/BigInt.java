@@ -12,26 +12,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.core.factory.helper;
+package kr.simula.formula.core.type;
 
-import kr.simula.formula.core.Gettable;
-import kr.simula.formula.core.Node;
-import kr.simula.formula.core.builder.BuildContext;
-import kr.simula.formula.core.builder.BuildException;
-import kr.simula.formula.core.factory.UnaryOperatorFactory;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 
 /**
  * <pre></pre>
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class UnaryOperatorHelper extends AbstractHelper<UnaryOperatorFactory> {
+public class BigInt extends BigDecimal {
+	private static final long serialVersionUID = 1L;
 
-	public Gettable<?> create(BuildContext context, String exprToken, Node operand){
-		UnaryOperatorFactory factory = factories.get(exprToken);
-		if(factory == null){
-			throw new BuildException("UnaryOperatorFactory for " + exprToken + " is not registered.");
-		}
-		return factory.create(context, exprToken, operand);
+	/**
+	 * @param val
+	 */
+	public BigInt(BigInteger val) {
+		super(val);
 	}
+
+	/**
+	 * @param val
+	 */
+	public BigInt(long val) {
+		super(val);
+	}
+
+	/**
+	 * @param val
+	 */
+	public BigInt(String val) {
+		super(Long.parseLong(val));
+	}
+
+	
 }

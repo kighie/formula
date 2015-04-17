@@ -1,0 +1,111 @@
+
+
+/*
+	ARRAY
+*/
+
+number[] numArray <- [1,2,3,4];
+numArray <- [5,6,7,8];
+
+print (numArray[1] * 10);
+
+foreach ( a = 0:4) {
+	print (numArray[a] * 10);
+}
+
+sumif(numArray[0:2], <2); // ?
+
+sum([1,2,3,4,5,6,7]); 
+
+number[] numArray2 <- select(numArray, <2);
+
+
+
+/*
+	MAP
+*/
+Map map <- {
+	a:12,
+	b:3,
+	c:'text'
+}
+
+print (map.a * 10 / map.b);
+
+
+foreach ( a in map) {
+	print (a);
+}
+
+
+func( { a:12, b:3, c:'text' } ); // inline decl
+
+/*
+	Class
+*/
+
+Class Str1 {
+	number(3) a:12,
+	number(4,2) b:3,
+	text c:'text' ,
+	text d ,
+	number e,
+	number fnc (number pa) {
+		return a * pa;
+	} ,
+	Struct g : {
+		number aa,
+		number bb
+	},
+	number[] h : [1,2,3,4]
+}
+
+
+Str1 record <- {
+	a : 12,
+	d : 'textttt',
+	e : 3
+	g : {
+		aa : 1, bb:2
+	}
+}
+
+Class Str2 <- loadJavaClass(path.to.JavaClass);
+
+Str2 obj <- bindTo(javaObject, Str2);
+
+
+print (record.a * 10 / record.b);
+
+
+foreach ( a in record) {
+	print (a);
+}
+
+obj.method ( bindTo(record, pkg.path.JavaType) );
+
+
+/*
+	Table
+*/
+
+Table Tbl1 {
+	number(3) a:12,
+	number(4,2) b:3,
+	text c:'text' ,
+	text d ,
+	number e,
+	number fnc (number pa) {
+		return a * pa;
+	} 
+}
+
+
+Tbl1 record <- {
+	a : 12,
+	d : 'textttt',
+	e : 3
+	g : {
+		aa : 1, bb:2
+	}
+}

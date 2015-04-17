@@ -14,6 +14,7 @@
  */
 package kr.simula.formula.core.factory.helper;
 
+import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.builder.BuildException;
@@ -26,7 +27,7 @@ import kr.simula.formula.core.factory.BinaryOperatorFactory;
  */
 public class BinaryOperatorHelper extends AbstractHelper<BinaryOperatorFactory> {
 	
-	public Node create(BuildContext context, String expToken , Node operand1, Node operand2){
+	public Gettable<?> create(BuildContext context, String expToken , Node operand1, Node operand2){
 		BinaryOperatorFactory factory = factories.get(expToken);
 		if(factory == null){
 			throw new BuildException("BinaryOperatorFactory for " + expToken + " is not registered.");

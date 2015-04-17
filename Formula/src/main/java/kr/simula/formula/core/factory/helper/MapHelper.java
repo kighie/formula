@@ -14,24 +14,45 @@
  */
 package kr.simula.formula.core.factory.helper;
 
+import java.util.List;
+
 import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.MapEntry;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.builder.BuildContext;
-import kr.simula.formula.core.builder.BuildException;
-import kr.simula.formula.core.factory.UnaryOperatorFactory;
 
 /**
  * <pre></pre>
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class UnaryOperatorHelper extends AbstractHelper<UnaryOperatorFactory> {
+public class MapHelper {
 
-	public Gettable<?> create(BuildContext context, String exprToken, Node operand){
-		UnaryOperatorFactory factory = factories.get(exprToken);
-		if(factory == null){
-			throw new BuildException("UnaryOperatorFactory for " + exprToken + " is not registered.");
-		}
-		return factory.create(context, exprToken, operand);
+	/**<pre>
+	 * </pre>
+	 * @param current
+	 * @param token
+	 * @param entrySet
+	 * @return
+	 */
+	public Gettable<?> create(BuildContext current, String token, List<MapEntry> entrySet) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	/**<pre>
+	 * </pre>
+	 * @param current
+	 * @param token
+	 * @param retType
+	 * @param name
+	 * @param value
+	 * @return
+	 */
+	public MapEntry create(BuildContext current, String token,
+			Class<?> retType, String name, Node value) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

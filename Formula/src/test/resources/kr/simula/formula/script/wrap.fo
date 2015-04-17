@@ -1,0 +1,13 @@
+
+import java.lang.System;
+import java.math.BigDecimal;
+import java.util.Map;
+import kr.simula.formula.func.base.MathFunctions;
+import xxx.yyy.TestService;
+
+number sum(number[] args){
+	return MathFunctions.sum(args);
+}
+
+alias sum : 합계, 합산 ;
+

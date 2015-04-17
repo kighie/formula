@@ -21,15 +21,18 @@ import kr.simula.formula.core.BlockStatement;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Lambda;
 import kr.simula.formula.core.Literal;
+import kr.simula.formula.core.MapEntry;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.Statement;
+import kr.simula.formula.core.factory.helper.ArrayHelper;
 import kr.simula.formula.core.factory.helper.BinaryOperatorHelper;
 import kr.simula.formula.core.factory.helper.BlockHelper;
 import kr.simula.formula.core.factory.helper.DeclarationHelper;
 import kr.simula.formula.core.factory.helper.FunctionCallHelper;
 import kr.simula.formula.core.factory.helper.LambdaHelper;
 import kr.simula.formula.core.factory.helper.LiteralHelper;
+import kr.simula.formula.core.factory.helper.MapHelper;
 import kr.simula.formula.core.factory.helper.MethodCallHelper;
 import kr.simula.formula.core.factory.helper.RefHelper;
 import kr.simula.formula.core.factory.helper.StatementHelper;
@@ -55,6 +58,9 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	protected final StatementHelper statementHelper;
 	protected final DeclarationHelper declarationHelper;
 	protected final LambdaHelper lambdaHelper;
+
+	protected final ArrayHelper arrayHelper;
+	protected final MapHelper mapHelper;
 	
 	protected BuildContext current;
 	
@@ -83,6 +89,8 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 			FunctionCallHelper functionCallHelper,
 			MethodCallHelper methodCallHelper, StatementHelper statementHelper,
 			DeclarationHelper declarationHelper,
+			ArrayHelper arrayHelper,
+			MapHelper mapHelper,
 			LambdaHelper lambdaHelper) {
 		this.current = this.rootContext = rootContext;
 		this.blockHelper = blockHelper;
@@ -95,6 +103,8 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 		this.methodCallHelper = methodCallHelper;
 		this.statementHelper = statementHelper;
 		this.declarationHelper = declarationHelper;
+		this.arrayHelper = arrayHelper;
+		this.mapHelper = mapHelper;
 		this.lambdaHelper = lambdaHelper;
 	}
 
@@ -133,13 +143,13 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	}
 	
 	@Override
-	public Node operator(String token, Node node) {
+	public Gettable<?> operator(String token, Node node) {
 		return unaryOperatorHelper.create(current, token, node);
 	}
 
 
 	@Override
-	public Node operator(String token, Node left, Node right) {
+	public Gettable<?> operator(String token, Node left, Node right) {
 		return binaryOperatorHelper.create(current, token, left, right);
 	}
 
@@ -159,6 +169,18 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 		return refHelper.get(current, parent, name);
 	}
 	
+	@Override
+	public Ref refer(String name, Node index) {
+		return refHelper.get(current,name, index);
+	}
+
+
+	@Override
+	public Ref refer(Ref parent, String name, Node index) {
+		return refHelper.get(current, parent, name, index);
+	}
+
+
 	@Override
 	public Ref declare(String token, Class<?> type, String name) {
 		return declarationHelper.create(current, token, type, name);
@@ -201,4 +223,25 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	public Lambda lambda(String token, List<Ref> args, Node... infos) {
 		return lambdaHelper.create(current, token, args, infos);
 	}
+
+
+	@Override
+	public Gettable<?> array(List<Node> elements) {
+		return arrayHelper.create(current, elements);
+	}
+
+
+	@Override
+	public Gettable<?> map(String token, List<MapEntry> entrySet) {
+		return mapHelper.create(current, token, entrySet);
+	}
+
+
+	@Override
+	public MapEntry mapEntry(String token, Class<?> retType, String name, Node value) {
+		return mapHelper.create(current, token, retType, name, value);
+	}
+	
+	
+	
 }

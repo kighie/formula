@@ -18,12 +18,14 @@ import kr.simula.formula.core.Block;
 import kr.simula.formula.core.builder.AbstractFormulaHandler;
 import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.builder.RootBuildContext;
+import kr.simula.formula.core.factory.helper.ArrayHelper;
 import kr.simula.formula.core.factory.helper.BinaryOperatorHelper;
 import kr.simula.formula.core.factory.helper.BlockHelper;
 import kr.simula.formula.core.factory.helper.DeclarationHelper;
 import kr.simula.formula.core.factory.helper.FunctionCallHelper;
 import kr.simula.formula.core.factory.helper.LambdaHelper;
 import kr.simula.formula.core.factory.helper.LiteralHelper;
+import kr.simula.formula.core.factory.helper.MapHelper;
 import kr.simula.formula.core.factory.helper.MethodCallHelper;
 import kr.simula.formula.core.factory.helper.RefHelper;
 import kr.simula.formula.core.factory.helper.StatementHelper;
@@ -38,6 +40,7 @@ import kr.simula.formula.expr.ExprTokens;
 public class ExpressionHandler extends AbstractFormulaHandler implements ExprTokens {
 	
 
+
 	/**
 	 * @param rootContext
 	 * @param blockHelper
@@ -50,6 +53,9 @@ public class ExpressionHandler extends AbstractFormulaHandler implements ExprTok
 	 * @param methodCallHelper
 	 * @param statementHelper
 	 * @param declarationHelper
+	 * @param arrayHelper
+	 * @param mapHelper
+	 * @param lambdaHelper
 	 */
 	public ExpressionHandler(RootBuildContext rootContext,
 			BlockHelper blockHelper, LiteralHelper literalHelper,
@@ -58,13 +64,13 @@ public class ExpressionHandler extends AbstractFormulaHandler implements ExprTok
 			UnaryOperatorHelper unaryOperatorHelper,
 			FunctionCallHelper functionCallHelper,
 			MethodCallHelper methodCallHelper, StatementHelper statementHelper,
-			DeclarationHelper declarationHelper,
-			LambdaHelper lambdaHelper) {
+			DeclarationHelper declarationHelper, ArrayHelper arrayHelper,
+			MapHelper mapHelper, LambdaHelper lambdaHelper) {
 		super(rootContext, blockHelper, literalHelper, refHelper, typeHelper,
 				binaryOperatorHelper, unaryOperatorHelper, functionCallHelper,
-				methodCallHelper, statementHelper, declarationHelper, lambdaHelper);
+				methodCallHelper, statementHelper, declarationHelper, arrayHelper,
+				mapHelper, lambdaHelper);
 	}
-
 
 	@Override
 	public Block block(String token){

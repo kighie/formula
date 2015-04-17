@@ -21,6 +21,7 @@ import kr.simula.formula.core.BlockStatement;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Lambda;
 import kr.simula.formula.core.Literal;
+import kr.simula.formula.core.MapEntry;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.Statement;
@@ -63,7 +64,7 @@ public interface FormulaHandler {
 	 * @param node
 	 * @return
 	 */
-	Node operator (String token, Node node);
+	Gettable<?> operator (String token, Node node);
 	
 	/**
 	 * <pre>
@@ -74,7 +75,7 @@ public interface FormulaHandler {
 	 * @param right
 	 * @return
 	 */
-	Node operator (String token, Node left, Node right);
+	Gettable<?> operator (String token, Node left, Node right);
 	
 	/**
 	 * <pre>
@@ -97,6 +98,17 @@ public interface FormulaHandler {
 	 */
 	Ref refer(String name);
 	
+
+	/**
+	 * <pre>
+	 * Builds Reference with array index
+	 * </pre>
+	 * @param name
+	 * @param index
+	 * @return
+	 */
+	Ref refer(String name, Node index);
+	
 	/**
 	 * <pre>
 	 * Builds Reference
@@ -108,6 +120,18 @@ public interface FormulaHandler {
 	 */
 	Ref refer(Ref parent, String name);
 
+	/**
+	 * <pre>
+	 * Builds Reference with array index
+	 * </pre>
+	 * @param parent
+	 * @param name
+	 * @param index
+	 * @return
+	 */
+	Ref refer(Ref parent, String name, Node index);
+	
+	
 	/**
 	 * <pre>
 	 * Declares Ref(variable, type, ...)
@@ -194,4 +218,33 @@ public interface FormulaHandler {
 	 * @return
 	 */
 	Lambda lambda(String token, List<Ref> args, Node ... infos);
+	
+	/**
+	 * <pre>
+	 * </pre>
+	 * @param token
+	 * @param element
+	 * @return
+	 */
+	Gettable<?> array(List<Node> elements);
+	
+
+	/**
+	 * <pre>
+	 * </pre>
+	 * @param token
+	 * @param entrySet
+	 * @return
+	 */
+	Gettable<?> map(String token, List<MapEntry> entrySet);
+	
+	/**
+	 * <pre>
+	 * </pre>
+	 * @param retType
+	 * @param name
+	 * @param value
+	 * @return
+	 */
+	MapEntry mapEntry(String token, Class<?> retType, String name, Node value);
 }

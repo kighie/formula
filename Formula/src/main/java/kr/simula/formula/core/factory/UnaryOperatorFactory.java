@@ -14,6 +14,7 @@
  */
 package kr.simula.formula.core.factory;
 
+import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.builder.BuildContext;
 
@@ -25,5 +26,5 @@ import kr.simula.formula.core.builder.BuildContext;
  */
 public interface UnaryOperatorFactory {
 	
-	Node create(BuildContext context, String exprToken, Node operand);
+	Gettable<?> create(BuildContext context, String exprToken, Node operand);
 }

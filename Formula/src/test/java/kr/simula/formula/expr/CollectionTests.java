@@ -12,26 +12,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.core.factory.helper;
+package kr.simula.formula.expr;
 
-import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Node;
-import kr.simula.formula.core.builder.BuildContext;
-import kr.simula.formula.core.builder.BuildException;
-import kr.simula.formula.core.factory.UnaryOperatorFactory;
+
+import org.junit.Test;
 
 /**
  * <pre></pre>
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class UnaryOperatorHelper extends AbstractHelper<UnaryOperatorFactory> {
+public class CollectionTests extends AbstractExpressionTests {
 
-	public Gettable<?> create(BuildContext context, String exprToken, Node operand){
-		UnaryOperatorFactory factory = factories.get(exprToken);
-		if(factory == null){
-			throw new BuildException("UnaryOperatorFactory for " + exprToken + " is not registered.");
-		}
-		return factory.create(context, exprToken, operand);
+	@Test
+	public void testArray(){
+		Node node = buildExpression("=[1,2,3,4]");
+		System.out.println(node);
+	}
+	
+
+	@Test
+	public void testMap(){
+		Node node = buildExpression("={ a:1, b:2, c:3 }");
+		System.out.println(node);
 	}
 }

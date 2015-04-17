@@ -1,0 +1,87 @@
+/* 
+ * Copyright (c) 2012 IkChan Kwon kighie@gmail.com
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package kr.simula.formula.util;
+
+import java.math.BigDecimal;
+
+import kr.simula.formula.core.type.Int;
+
+import org.jscience.mathematics.number.Real;
+import org.junit.Test;
+
+/**
+ * <pre></pre>
+ * @author kighie@gmail.com
+ * @since 1.0
+ */
+public class Tests {
+
+	@Test
+	public void test(){
+		try {
+			Class<?> type = Class.forName("[Ljava.lang.String;");
+			
+			System.out.println(type.getName());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void val(){
+		
+		Real real = Real.valueOf((double)13/11);
+		
+		System.out.println(real);
+
+		BigDecimal dec = new BigDecimal((double)13/11);
+		System.out.println(dec);
+		
+		kr.simula.formula.core.type.Real freal = new kr.simula.formula.core.type.Real((double)13/11);
+		System.out.println(freal);
+	}
+
+	@Test
+	public void real(){
+		for(int i=0;i<100000;i++){
+
+			Real real = Real.valueOf((double)13/11);
+//			System.out.println(real);
+		}
+		
+	}
+
+	@Test
+	public void bigdecimal(){
+		for(int i=0;i<100000;i++){
+
+			BigDecimal real = new BigDecimal((double)13/11);
+//			System.out.println(real);
+		}
+		
+	}
+	
+
+	@Test
+	public void freal(){
+		for(int i=0;i<100000;i++){
+
+			kr.simula.formula.core.type.Real real = new kr.simula.formula.core.type.Real((double)13/11);
+//			System.out.println(real);
+		}
+		
+	}
+}

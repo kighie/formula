@@ -46,6 +46,8 @@ public interface ExprTokens {
 	String REF				= "REF";
 	String METHOD_CALL		= "METHOD_CALL";
 	String FUNC_CALL		= "FUNC_CALL";
-	
 
+	String MAP		= "MAP";
+	String MAP_ENTRY		= "MAP_ENTRY";
+	
 }

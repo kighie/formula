@@ -20,22 +20,22 @@ import kr.simula.formula.antlr.FormulaScriptParser.FormulaScriptContext;
 import kr.simula.formula.core.builder.AbstractFormulaBuilder;
 import kr.simula.formula.core.builder.FormulaSource;
 import kr.simula.formula.core.builder.RootBuildContext;
+import kr.simula.formula.core.factory.helper.ArrayHelper;
 import kr.simula.formula.core.factory.helper.BinaryOperatorHelper;
 import kr.simula.formula.core.factory.helper.BlockHelper;
 import kr.simula.formula.core.factory.helper.DeclarationHelper;
 import kr.simula.formula.core.factory.helper.FunctionCallHelper;
 import kr.simula.formula.core.factory.helper.LambdaHelper;
 import kr.simula.formula.core.factory.helper.LiteralHelper;
+import kr.simula.formula.core.factory.helper.MapHelper;
 import kr.simula.formula.core.factory.helper.MethodCallHelper;
 import kr.simula.formula.core.factory.helper.RefHelper;
 import kr.simula.formula.core.factory.helper.StatementHelper;
 import kr.simula.formula.core.factory.helper.UnaryOperatorHelper;
-import kr.simula.formula.expr.Expr;
 import kr.simula.formula.expr.builder.ExprBinaryOperatorHelper;
 import kr.simula.formula.expr.builder.ExprFunctionCallHelper;
 import kr.simula.formula.expr.builder.ExprLiteralHelper;
 import kr.simula.formula.expr.builder.ExprUnaryOperatorHelper;
-import kr.simula.formula.expr.builder.ExpressionHandler;
 import kr.simula.formula.script.Module;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
@@ -61,13 +61,17 @@ public class FormulaScriptBuilder extends AbstractFormulaBuilder<Module, Formula
 	protected FunctionCallHelper functionCallHelper = new ExprFunctionCallHelper();
 	protected MethodCallHelper methodCallHelper = new MethodCallHelper();
 	protected LambdaHelper lambdaHelper = new LambdaHelper();
+
+	protected ArrayHelper arrayHelper = new ArrayHelper();
+	protected MapHelper mapHelper = new MapHelper();
 	
 	
 	@Override
 	public FormulaScriptHandler newHandler(RootBuildContext rootContext) {
 		FormulaScriptHandler handler = new FormulaScriptHandler(rootContext, 
 				blockHelper, literalHelper, refHelper, typeHelper, binaryOperatorHelper, unaryOperatorHelper, 
-				functionCallHelper, methodCallHelper, statementHelper, declarationHelper, lambdaHelper);
+				functionCallHelper, methodCallHelper, statementHelper, declarationHelper, 
+				arrayHelper, mapHelper, lambdaHelper);
 		
 		return handler;
 	}
