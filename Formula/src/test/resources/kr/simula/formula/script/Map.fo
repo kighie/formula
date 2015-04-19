@@ -1,0 +1,16 @@
+
+/* System out wrapping */
+void println(object value) { 
+	if( not skipPrint ){
+		System.out.println(value);
+	}
+} 
+
+
+map simpleMap <- {
+	a:1,
+	b:2,
+	c:3
+};
+
+println( simpleMap );
