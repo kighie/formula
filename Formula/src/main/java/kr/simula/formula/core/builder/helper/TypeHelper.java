@@ -21,6 +21,7 @@ import java.util.Map;
 
 import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.builder.BuildException;
+import kr.simula.formula.core.util.ArrayUtils;
 import kr.simula.formula.core.util.RefUtils;
 
 /**
@@ -89,5 +90,10 @@ public class TypeHelper {
 			throw new BuildException("TypeFactory for " + typeQname + " is not registered.");
 		}
 		return type;
+	}
+	
+
+	public <T> Class<T[]> getArrayType(BuildContext context, Class<T> type) {
+		return ArrayUtils.getArrayClass(type);
 	}
 }

@@ -163,6 +163,14 @@ public interface FormulaHandler {
 	 * @return
 	 */
 	Class<?> type(String typeQname);
+
+	/**
+	 * <pre>
+	 * </pre>
+	 * @param type
+	 * @return
+	 */
+	<T> Class<T[]> arrayType(Class<T> type);
 	
 	/**
 	 * <pre>

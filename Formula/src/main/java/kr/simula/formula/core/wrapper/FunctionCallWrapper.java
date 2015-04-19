@@ -51,17 +51,21 @@ public abstract class FunctionCallWrapper<T> implements Gettable<T>{
 	public void setArgsLateEval(boolean bArgsLateEval) {
 		this.bArgsLateEval = bArgsLateEval;
 	}
-
+	
 	@Override
 	public String getExpression() {
 		StringBuilder buf = new StringBuilder();
-		buf.append("(").append(function.getClass().getSimpleName());
+		buf.append("(").append(getFunctionName());
 		for(Gettable<?> n : args){
 			buf.append(" ").append(n.getExpression());
 		}
 		buf.append(")");
 		
 		return buf.toString();
+	}
+	
+	protected String getFunctionName(){
+		return function.getClass().getSimpleName();
 	}
 	
 	@Override

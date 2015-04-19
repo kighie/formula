@@ -46,8 +46,17 @@ public class AssignStatement<T> extends AbstractStatement {
 	
 	@Override
 	public String getExpression() {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder buf = new StringBuilder();
+		buf.append("ASSIGN ").append(settable.getExpression()).append(" <- ");
+		buf.append(gettable.getExpression());
+		return buf.toString();
 	}
-
+	
+	@Override
+	public String toString() {
+		StringBuilder buf = new StringBuilder();
+		buf.append("ASSIGN ").append(settable.toString()).append(" <- ");
+		buf.append(gettable.toString());
+		return buf.toString();
+	}
 }

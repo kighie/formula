@@ -49,8 +49,7 @@ public class MapHelper {
 	 * @param value
 	 * @return
 	 */
-	public MapEntry create(BuildContext current, String token,
-			Class<?> retType, String name, Node value) {
+	public MapEntry create(BuildContext current, String token, Class<?> retType, String name, Node value) {
 		// TODO Auto-generated method stub
 		return null;
 	}

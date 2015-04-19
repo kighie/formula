@@ -16,6 +16,7 @@ package kr.simula.formula.func;
 
 import java.math.BigDecimal;
 
+import kr.simula.formula.core.RootContext;
 import kr.simula.formula.expr.AbstractExpressionTests;
 
 import org.junit.Test;
@@ -116,6 +117,15 @@ public class MathTests extends AbstractExpressionTests {
 	public void SUM(){
 		testExpression("=SUM(11,9,4,3)", new BigDecimal("27"));
 		testExpression("=SUM([11,9,4,3],3)", new BigDecimal("30"));
+		
+
+		RootContext context = new RootContext();
+		context.setParameter("param", new BigDecimal[]{new BigDecimal(1), new BigDecimal(2), new BigDecimal(3),
+				new BigDecimal(4), new BigDecimal(5)});
+		
+		testExpression("=SUM(param,3)", context, new BigDecimal("18"));
+
+		testExpression("=SUM(param,3)/3", context, new BigDecimal("6"));
 	}
 
 }

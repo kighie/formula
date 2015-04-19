@@ -34,7 +34,7 @@ public class SUM extends NumericFunction{
 	@Override
 	@Arguments({BigDecimal[].class})
 	public BigDecimal eval(Object... args) {
-		checkArgCountMoreThan(args, 1);
+		checkArgCountMoreThan(args, 0);
 		
 		BigDecimal[] numArr = ArrayUtils.copyOf(args, BigDecimal[].class);
 		return MathFunctions.sum(REAL_MATH_CONTEXT, numArr);

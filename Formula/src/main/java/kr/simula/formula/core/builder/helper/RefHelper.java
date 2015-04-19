@@ -19,8 +19,10 @@ import kr.simula.formula.core.Node;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.builder.BuildContext;
+import kr.simula.formula.core.ref.ArrayElementRef;
 import kr.simula.formula.core.ref.FieldRef;
 import kr.simula.formula.core.ref.ParameterRef;
+import kr.simula.formula.core.util.GettableUtils;
 
 /**
  * <pre>
@@ -119,9 +121,12 @@ public class RefHelper {
 	 * @param index
 	 * @return
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Ref get(BuildContext current, String name, Node index) {
-		// TODO Auto-generated method stub
-		return null;
+		Ref parentArray = get(current, name);
+		ArrayElementRef elementRef = new ArrayElementRef (parentArray.qualifiedName(), 
+				GettableUtils.checkGettable(parentArray), GettableUtils.checkGettable(index,Number.class));
+		return elementRef;
 	}
 
 
@@ -133,8 +138,11 @@ public class RefHelper {
 	 * @param index
 	 * @return
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Ref get(BuildContext current, Ref parent, String name, Node index) {
-		// TODO Auto-generated method stub
-		return null;
+		Ref parentArray = get(current, parent, name);
+		ArrayElementRef elementRef = new ArrayElementRef (parentArray.qualifiedName(), 
+				GettableUtils.checkGettable(parentArray), GettableUtils.checkGettable(index,Number.class));
+		return elementRef;
 	}
 }

@@ -14,7 +14,12 @@
  */
 package kr.simula.formula.expr;
 
+import java.math.BigDecimal;
+import java.util.Arrays;
+
+import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Node;
+import kr.simula.formula.core.RootContext;
 
 import org.junit.Test;
 
@@ -27,8 +32,25 @@ public class CollectionTests extends AbstractExpressionTests {
 
 	@Test
 	public void testArray(){
-		Node node = buildExpression("=[1,2,3,4]");
+		Gettable<?> node = (Gettable<?>)buildExpression("=[1,2,3,4]");
 		System.out.println(node);
+		
+		RootContext context = new RootContext();
+		
+//		for(int i=0;i<1000;i++){
+//			System.out.println(Arrays.toString( (Object[])node.get(context) ));
+//		}
+		System.out.println(Arrays.toString( (Object[])node.get(context) ));
+	}
+
+	@Test
+	public void testArrayRef(){
+		Gettable<?> node = (Gettable<?>)buildExpression("=param[2] * 5");
+		System.out.println(node.getExpression());
+		RootContext context = new RootContext();
+		context.setParameter("param", new BigDecimal[]{new BigDecimal(1), new BigDecimal(2), new BigDecimal(3),
+				new BigDecimal(4), new BigDecimal(5)});
+		System.out.println(node.get(context));
 	}
 	
 

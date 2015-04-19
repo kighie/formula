@@ -17,6 +17,8 @@ package kr.simula.formula.core.util;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
+import kr.simula.formula.core.builder.BuildException;
+
 /**
  * <pre></pre>
  * @author kighie@gmail.com
@@ -24,6 +26,15 @@ import java.util.Arrays;
  */
 public class ArrayUtils {
 
+	@SuppressWarnings("unchecked")
+	public static <T> Class<T[]> getArrayClass(Class<T> elementType){
+		try {
+			return (Class<T[]>)Class.forName("[L" + elementType.getName() + ";");
+		} catch (ClassNotFoundException e) {
+			throw new BuildException(e);
+		}
+	}
+	
 	@SuppressWarnings("unchecked")
 	public static <T> T[] copyOf(Object[] args, Class<T[]> type){
 		int length = 0;

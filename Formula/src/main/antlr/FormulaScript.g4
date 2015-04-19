@@ -76,6 +76,7 @@ variableDecl	returns [VariableDeclStatement stmt]
 type returns [Class<?> typeClz]
 	: (IDENT 	{ $typeClz = handler.type($IDENT.text); })  
 	| (qualifiedName { $typeClz = handler.type($qualifiedName.text); }) 
+	('[' ']' 	{ $typeClz = handler.arrayType($typeClz); })?
 	;
 
 

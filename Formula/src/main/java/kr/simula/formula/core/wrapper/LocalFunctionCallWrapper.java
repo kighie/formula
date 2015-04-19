@@ -66,4 +66,10 @@ public class LocalFunctionCallWrapper<T> extends FunctionCallWrapper<T> {
 			return super.get(context);
 		}
 	}
+	
+
+	protected String getFunctionName(){
+		return ((LocalFunction<T>)function).getName();
+	}
+	
 }

@@ -197,6 +197,11 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 		return typeHelper.getType(current, typeQname);
 	}
 	
+	@Override
+	public <T> Class<T[]> arrayType(Class<T> type) {
+		return typeHelper.getArrayType(current, type);
+	}
+	
 	@SuppressWarnings("rawtypes")
 	@Override
 	public Gettable functionCall(String name, List<Node> args) {

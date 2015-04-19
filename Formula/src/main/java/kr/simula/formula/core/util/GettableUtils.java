@@ -21,6 +21,7 @@ import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Literal;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.builder.BuildException;
+import kr.simula.formula.core.ref.ArrayElementRef;
 import kr.simula.formula.core.ref.ExternalRef;
 import kr.simula.formula.core.wrapper.DecimalGettableWrapper;
 import kr.simula.formula.core.wrapper.StringGettableWrapper;
@@ -108,8 +109,12 @@ public class GettableUtils {
 	public static Gettable<BigDecimal> getDecimalGettable(Gettable<?> node){
 		Class<?> type = node.type();
 		
-		if(type == null && (node instanceof ExternalRef)){
-			((ExternalRef)node).setRequiredType(type);
+		if(type == null) {
+			if(node instanceof ExternalRef){
+				((ExternalRef)node).setRequiredType(BigDecimal.class);
+			} else if(node instanceof ArrayElementRef){
+				((ArrayElementRef)node).setRequiredType(BigDecimal.class);
+			}
 			return new DecimalGettableWrapper(NUMBER_TO_DECIMAL,node);
 		}
 		
