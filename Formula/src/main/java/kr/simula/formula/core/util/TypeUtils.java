@@ -12,27 +12,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.core.factory.helper;
-
-import kr.simula.formula.core.Block;
-import kr.simula.formula.core.builder.BuildContext;
-import kr.simula.formula.core.builder.BuildException;
-import kr.simula.formula.core.factory.BlockFactory;
+package kr.simula.formula.core.util;
 
 /**
- * <pre>
- * LiteralHelper creates Literal Nodes (string, number, boolean, date, etc.)
- * </pre>
+ * <pre></pre>
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class BlockHelper extends AbstractHelper<BlockFactory> {
-	
-	public Block create(BuildContext context,  String expToken){
-		BlockFactory factory = factories.get(expToken);
-		if(factory == null){
-			throw new BuildException("BlockFactory for " + expToken + " is not registered.");
+public class TypeUtils {
+
+	public static Class<?> forName(String className){
+		try {
+			return Class.forName(className);
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException(e);
 		}
-		return factory.create(context, expToken);
+	}
+	
+
+	public static Class<?> forName(ClassLoader loader , String className){
+		try {
+			return loader.loadClass(className);
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

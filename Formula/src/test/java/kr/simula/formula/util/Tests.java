@@ -16,10 +16,12 @@ package kr.simula.formula.util;
 
 import java.math.BigDecimal;
 
-import kr.simula.formula.core.type.Int;
+import kr.simula.formula.core.util.ArrayUtils;
 
 import org.jscience.mathematics.number.Real;
 import org.junit.Test;
+
+import cern.colt.Arrays;
 
 /**
  * <pre></pre>
@@ -28,6 +30,19 @@ import org.junit.Test;
  */
 public class Tests {
 
+	@Test
+	public void testArrayUtils(){
+		Object[] array = new Object[]{ new BigDecimal(1), new BigDecimal(2), 
+				new BigDecimal[]{new BigDecimal(11), new BigDecimal(12), new BigDecimal(13)} ,
+				new BigDecimal(3)
+		};
+		
+		BigDecimal[] newArr = ArrayUtils.copyOf(array, BigDecimal[].class);
+		
+		System.out.println(Arrays.toString(newArr));
+	}
+	
+	
 	@Test
 	public void test(){
 		try {

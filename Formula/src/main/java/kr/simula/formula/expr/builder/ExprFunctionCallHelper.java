@@ -14,7 +14,7 @@
  */
 package kr.simula.formula.expr.builder;
 
-import kr.simula.formula.core.factory.helper.FunctionCallHelper;
+import kr.simula.formula.core.builder.helper.FunctionCallHelper;
 
 /**
  * <pre>

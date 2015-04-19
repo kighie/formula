@@ -19,7 +19,7 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 
 import kr.simula.formula.core.Operator.Binary;
-import kr.simula.formula.core.factory.helper.BinaryOperatorHelper;
+import kr.simula.formula.core.builder.helper.BinaryOperatorHelper;
 import kr.simula.formula.core.factory.op.CompareBinaryOperatorFactory;
 import kr.simula.formula.core.factory.op.DecimalBinaryOperatorFactory;
 import kr.simula.formula.core.factory.op.LogicalBinaryOperatorFactory;

@@ -12,30 +12,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.core.factory.helper;
+package kr.simula.formula.core.builder.helper;
 
-import java.util.List;
-
-import kr.simula.formula.core.Gettable;
-import kr.simula.formula.core.Node;
+import kr.simula.formula.core.Block;
 import kr.simula.formula.core.builder.BuildContext;
+import kr.simula.formula.core.builder.BuildException;
+import kr.simula.formula.core.factory.BlockFactory;
 
 /**
- * <pre></pre>
+ * <pre>
+ * LiteralHelper creates Literal Nodes (string, number, boolean, date, etc.)
+ * </pre>
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class ArrayHelper {
-
-	/**<pre>
-	 * </pre>
-	 * @param current
-	 * @param elements
-	 * @return
-	 */
-	public Gettable<?> create(BuildContext current, List<Node> elements) {
-		// TODO Auto-generated method stub
-		return null;
+public class BlockHelper extends AbstractHelper<BlockFactory> {
+	
+	public Block create(BuildContext context,  String expToken){
+		BlockFactory factory = factories.get(expToken);
+		if(factory == null){
+			throw new BuildException("BlockFactory for " + expToken + " is not registered.");
+		}
+		return factory.create(context, expToken);
 	}
-
 }

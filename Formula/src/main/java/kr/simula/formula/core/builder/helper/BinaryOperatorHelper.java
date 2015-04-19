@@ -12,28 +12,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.core.factory.helper;
+package kr.simula.formula.core.builder.helper;
 
-import kr.simula.formula.core.Literal;
+import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.Node;
 import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.builder.BuildException;
-import kr.simula.formula.core.factory.LiteralFactory;
+import kr.simula.formula.core.factory.BinaryOperatorFactory;
 
 /**
- * <pre>
- * LiteralHelper creates Literal Nodes (string, number, boolean, date, etc.)
- * </pre>
+ * <pre></pre>
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class LiteralHelper extends AbstractHelper<LiteralFactory<?>> {
+public class BinaryOperatorHelper extends AbstractHelper<BinaryOperatorFactory> {
 	
-	@SuppressWarnings("rawtypes")
-	public Literal create(BuildContext context, String exprToken , String value){
-		LiteralFactory factory = factories.get(exprToken);
+	public Gettable<?> create(BuildContext context, String expToken , Node operand1, Node operand2){
+		BinaryOperatorFactory factory = factories.get(expToken);
 		if(factory == null){
-			throw new BuildException("LiteralFacotry for " + exprToken + " is not registered.");
+			throw new BuildException("BinaryOperatorFactory for " + expToken + " is not registered.");
 		}
-		return factory.create(context, exprToken, value);
+		return factory.create(context, expToken, operand1, operand2);
 	}
 }

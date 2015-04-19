@@ -14,7 +14,7 @@
  */
 package kr.simula.formula.script.build;
 
-import kr.simula.formula.core.factory.helper.TypeHelper;
+import kr.simula.formula.core.builder.helper.TypeHelper;
 
 /**
  * <pre></pre>

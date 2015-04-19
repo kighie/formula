@@ -1,4 +1,4 @@
-/* 
+/* ******************************************************************************
  * Copyright (c) 2012 IkChan Kwon kighie@gmail.com
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,26 +12,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.core.factory.helper;
+package kr.simula.formula.core.builder.helper;
 
-import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Node;
+import kr.simula.formula.core.Statement;
 import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.builder.BuildException;
-import kr.simula.formula.core.factory.BinaryOperatorFactory;
+import kr.simula.formula.core.factory.StatementFactory;
 
 /**
- * <pre></pre>
- * @author kighie@gmail.com
- * @since 1.0
+ * <pre>
+ * </pre>
+ * @author Ikchan Kwon
+ *
  */
-public class BinaryOperatorHelper extends AbstractHelper<BinaryOperatorFactory> {
-	
-	public Gettable<?> create(BuildContext context, String expToken , Node operand1, Node operand2){
-		BinaryOperatorFactory factory = factories.get(expToken);
+public class StatementHelper extends AbstractHelper<StatementFactory> {
+
+
+
+	/**<pre>
+	 * </pre>
+	 * @param current
+	 * @param token
+	 * @param args
+	 * @return
+	 */
+	public Statement create(BuildContext context, String token, Node[] args) {
+		StatementFactory factory = factories.get(token);
 		if(factory == null){
-			throw new BuildException("BinaryOperatorFactory for " + expToken + " is not registered.");
+			throw new BuildException("StatementFactory for " + token + " is not registered.");
 		}
-		return factory.create(context, expToken, operand1, operand2);
+		return factory.create(context, token, args);
 	}
+
 }

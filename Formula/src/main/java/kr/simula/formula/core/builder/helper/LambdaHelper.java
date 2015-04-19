@@ -1,4 +1,4 @@
-/* ******************************************************************************
+/* 
  * Copyright (c) 2012 IkChan Kwon kighie@gmail.com
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,37 +12,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.core.factory.helper;
+package kr.simula.formula.core.builder.helper;
 
+import java.util.List;
+
+import kr.simula.formula.core.Lambda;
 import kr.simula.formula.core.Node;
-import kr.simula.formula.core.Statement;
+import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.builder.BuildException;
-import kr.simula.formula.core.factory.StatementFactory;
+import kr.simula.formula.core.factory.LambdaFactory;
 
 /**
- * <pre>
- * </pre>
- * @author Ikchan Kwon
- *
+ * <pre></pre>
+ * @author kighie@gmail.com
+ * @since 1.0
  */
-public class StatementHelper extends AbstractHelper<StatementFactory> {
-
-
+public class LambdaHelper extends AbstractHelper<LambdaFactory> {
 
 	/**<pre>
 	 * </pre>
 	 * @param current
 	 * @param token
 	 * @param args
+	 * @param infos
 	 * @return
 	 */
-	public Statement create(BuildContext context, String token, Node[] args) {
-		StatementFactory factory = factories.get(token);
+	public Lambda create(BuildContext current, String token, List<Ref> args, Node[] infos) {
+		LambdaFactory factory = factories.get(token);
 		if(factory == null){
-			throw new BuildException("StatementFactory for " + token + " is not registered.");
+			throw new BuildException("LambdaFactory for " + token + " is not registered.");
 		}
-		return factory.create(context, token, args);
+		return factory.create(current, token, args, infos);
 	}
 
 }

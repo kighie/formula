@@ -112,4 +112,10 @@ public class MathTests extends AbstractExpressionTests {
 		testExpression("=MOD(29, 4)", new BigDecimal("1"));
 	}
 
+	@Test
+	public void SUM(){
+		testExpression("=SUM(11,9,4,3)", new BigDecimal("27"));
+		testExpression("=SUM([11,9,4,3],3)", new BigDecimal("30"));
+	}
+
 }

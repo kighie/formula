@@ -12,41 +12,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.core.factory.helper;
+package kr.simula.formula.core.builder.helper;
 
-import java.util.HashMap;
-import java.util.Map;
+import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.Node;
+import kr.simula.formula.core.builder.BuildContext;
+import kr.simula.formula.core.builder.BuildException;
+import kr.simula.formula.core.factory.UnaryOperatorFactory;
 
 /**
  * <pre></pre>
  * @author kighie@gmail.com
  * @since 1.0
  */
-public abstract class AbstractHelper<FACTORY_TYPE> {
+public class UnaryOperatorHelper extends AbstractHelper<UnaryOperatorFactory> {
 
-	protected final HashMap<String, FACTORY_TYPE> factories = new HashMap<String, FACTORY_TYPE>();
-	
-	
-	/**
-	 * 
-	 */
-	public AbstractHelper() {
-		initDefaults();
+	public Gettable<?> create(BuildContext context, String exprToken, Node operand){
+		UnaryOperatorFactory factory = factories.get(exprToken);
+		if(factory == null){
+			throw new BuildException("UnaryOperatorFactory for " + exprToken + " is not registered.");
+		}
+		return factory.create(context, exprToken, operand);
 	}
-	
-	protected void initDefaults(){
-	}
-	
-	public FACTORY_TYPE getFactory(String expToken) {
-		return factories.get(expToken);
-	}
-	
-	public FACTORY_TYPE setFactory(String expToken, FACTORY_TYPE factory) {
-		return factories.put(expToken, factory);
-	}
-	
-	public void setFactories(Map<String, ? extends FACTORY_TYPE> m) {
-		factories.putAll(m);
-	}
-
 }

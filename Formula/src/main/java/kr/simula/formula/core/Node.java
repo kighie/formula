@@ -32,6 +32,7 @@ public interface Node {
 		NUMERIC,
 		LOGICAL,
 		OBJECT,
+		ARRAY,
 		UNKNOWN
 	}
 	

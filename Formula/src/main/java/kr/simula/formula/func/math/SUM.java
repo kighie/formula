@@ -15,9 +15,9 @@
 package kr.simula.formula.func.math;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 
 import kr.simula.formula.core.annotation.Arguments;
+import kr.simula.formula.core.util.ArrayUtils;
 import kr.simula.formula.func.NumericFunction;
 import kr.simula.formula.func.base.MathFunctions;
 
@@ -32,10 +32,11 @@ public class SUM extends NumericFunction{
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	@Arguments({BigDecimal.class, BigDecimal.class})
+	@Arguments({BigDecimal[].class})
 	public BigDecimal eval(Object... args) {
-		checkArgCountMoreThan(args, 2);
-		BigDecimal[] numArr = Arrays.copyOf(args, args.length, BigDecimal[].class);
+		checkArgCountMoreThan(args, 1);
+		
+		BigDecimal[] numArr = ArrayUtils.copyOf(args, BigDecimal[].class);
 		return MathFunctions.sum(REAL_MATH_CONTEXT, numArr);
 	}
 
