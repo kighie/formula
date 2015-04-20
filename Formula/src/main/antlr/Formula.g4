@@ -153,7 +153,7 @@ formulaTerm returns [Node result]
 arrayRef   returns [Ref result]
 	: IDENT '[' 
 		(NUMBER 	{ $result = handler.refer( $IDENT.text, handler.literal( ExprTokens.LIT_NUMBER, $NUMBER.text) ); } 
-		| IDENT		{ $result = handler.refer( $IDENT.text, $result = handler.refer( $IDENT.text) ); } 
+		| id2 = IDENT		{ $result = handler.refer( $IDENT.text, handler.refer( $id2.text) ); } 
 		)
 	 ']'
 	;
@@ -167,13 +167,12 @@ array   returns [Gettable result]
 	;
 	
 map   returns [Gettable result]
-	: '{' 	{ List<MapEntry> entryList = new LinkedList<MapEntry>(); }
+	: '{' 	{ $result = handler.map(ExprTokens.SIMPLE_MAP);}
 		IDENT ':' formulaTerm	
-			{ entryList.add( handler.mapEntry(ExprTokens.MAP_ENTRY, null, $IDENT.text, $formulaTerm.result ) ); }
+			{ handler.mapEntry( $result, null, $IDENT.text, $formulaTerm.result ); }
 		(',' IDENT ':' formulaTerm 
-			{ entryList.add( handler.mapEntry(ExprTokens.MAP_ENTRY, null, $IDENT.text, $formulaTerm.result ) ); }
-		)* 	
-			{ $result = handler.map(ExprTokens.MAP, entryList);}
+			{ handler.mapEntry( $result, null, $IDENT.text, $formulaTerm.result ); }
+		)* 
 	  '}'
 	;
 	

@@ -1,4 +1,4 @@
-/* 
+/* ******************************************************************************
  * Copyright (c) 2012 IkChan Kwon kighie@gmail.com
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,40 +12,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.core;
+package kr.simula.formula.core.type;
+
+import java.util.Map;
 
 /**
  * <pre>
- * Common interface of all Node classes.
  * </pre>
- * @author kighie@gmail.com
+ * @author Ikchan Kwon
  *
  */
-public interface Node {
-	/**
-	 * Node's content value type
-	 */
-	public enum ValueType {
-		VOID, 
-		TEXT,
-		DATE,
-		NUMERIC,
-		LOGICAL,
-		OBJECT,
-		ARRAY, 
-		MAP,
-		UNKNOWN
-	}
+public interface FormulaMap extends Map<String, Object>{
 	
-	/**
-	 * Returns the value type of this node.
-	 * @return
-	 */
-	ValueType valueType();
-	
-	/**
-	 * Returns full expression string of this node 
-	 * @return
-	 */
-	String getExpression();
 }

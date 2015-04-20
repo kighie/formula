@@ -1154,7 +1154,7 @@ public final class MathFunctions extends FunctionBase {
 	 * @return
 	 */
 	public static BigDecimal roundUp(BigDecimal number, BigDecimal num_digits) {
-		return roundDown( number, num_digits.intValue() ); 
+		return roundUp( number, num_digits.intValue() ); 
 	}
 	
 	/*

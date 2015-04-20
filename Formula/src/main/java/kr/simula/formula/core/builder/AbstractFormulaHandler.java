@@ -15,13 +15,13 @@
 package kr.simula.formula.core.builder;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.simula.formula.core.Block;
 import kr.simula.formula.core.BlockStatement;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Lambda;
 import kr.simula.formula.core.Literal;
-import kr.simula.formula.core.MapEntry;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.Statement;
@@ -236,17 +236,16 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	}
 
 
+	@SuppressWarnings("rawtypes")
 	@Override
-	public Gettable<?> map(String token, List<MapEntry> entrySet) {
-		return mapHelper.create(current, token, entrySet);
+	public Gettable<Map> map(String token) {
+		return mapHelper.create(current, token);
 	}
 
-
 	@Override
-	public MapEntry mapEntry(String token, Class<?> retType, String name, Node value) {
-		return mapHelper.create(current, token, retType, name, value);
+	public void mapEntry(Gettable<?> mapGettable, Class<?> entryType,
+			String name, Node value) {
+		mapHelper.mapEntry(current, mapGettable, entryType, name, value);
 	}
-	
-	
-	
+
 }

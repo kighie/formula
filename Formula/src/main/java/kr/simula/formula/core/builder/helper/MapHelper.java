@@ -14,19 +14,21 @@
  */
 package kr.simula.formula.core.builder.helper;
 
-import java.util.List;
+import java.util.Map;
 
 import kr.simula.formula.core.Gettable;
-import kr.simula.formula.core.MapEntry;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.builder.BuildContext;
+import kr.simula.formula.core.builder.BuildException;
+import kr.simula.formula.core.factory.MapGettableFactory;
+import kr.simula.formula.core.wrapper.MapGettable;
 
 /**
  * <pre></pre>
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class MapHelper {
+public class MapHelper extends AbstractHelper<MapGettableFactory>{
 
 	/**<pre>
 	 * </pre>
@@ -35,23 +37,29 @@ public class MapHelper {
 	 * @param entrySet
 	 * @return
 	 */
-	public Gettable<?> create(BuildContext current, String token, List<MapEntry> entrySet) {
-		// TODO Auto-generated method stub
-		return null;
+	@SuppressWarnings("rawtypes")
+	public Gettable<Map> create(BuildContext current, String token) {
+		MapGettableFactory factory = factories.get(token);
+		if(factory == null){
+			throw new BuildException("MapGettableFactory for " + token + " is not registered.");
+		}
+		return factory.create(current, token);
 	}
 
 	/**<pre>
 	 * </pre>
 	 * @param current
-	 * @param token
-	 * @param retType
+	 * @param mapGettable
+	 * @param entryType
 	 * @param name
 	 * @param value
-	 * @return
 	 */
-	public MapEntry create(BuildContext current, String token, Class<?> retType, String name, Node value) {
-		// TODO Auto-generated method stub
-		return null;
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void mapEntry(BuildContext current, Gettable<?> mapGettable,
+			Class<?> entryType, String name, Node value) {
+		if(mapGettable instanceof MapGettable){
+			((MapGettable)mapGettable).addEntry(entryType, name, (Gettable)value);
+		}
 	}
 
 }

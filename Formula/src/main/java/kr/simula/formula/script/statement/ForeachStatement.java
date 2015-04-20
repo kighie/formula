@@ -14,6 +14,8 @@
  */
 package kr.simula.formula.script.statement;
 
+import java.util.Arrays;
+
 import kr.simula.formula.core.BlockContext;
 import kr.simula.formula.core.BlockStatement;
 import kr.simula.formula.core.Context;
@@ -58,8 +60,16 @@ public class ForeachStatement extends AbstractBlock implements BlockStatement{
 		
 		Ref iteratorRef = loopCondition.getIteratorRef();
 		if(iteratorRef != null){
-			Iterable<?> iterable = ((Gettable<Iterable>)iteratorRef).get(blockCtx);
-			doEval(blockCtx, varRef, iterable);
+			Class<?> type = iteratorRef.type();
+			if(Iterable.class.isAssignableFrom(type) ){
+				Iterable<?> iterable = ((Gettable<Iterable>)iteratorRef).get(blockCtx);
+				doEval(blockCtx, varRef, iterable);
+			} else if(type.isArray()){
+				Object[] array = ((Gettable<Object[]>)iteratorRef).get(blockCtx);
+				
+				doEval(blockCtx, varRef, Arrays.asList(array));
+			}
+			
 		} else {
 			Range range = loopCondition.getRange();
 			doEval(blockCtx, varRef, range);

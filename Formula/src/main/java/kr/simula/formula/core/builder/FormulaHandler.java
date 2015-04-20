@@ -15,13 +15,13 @@
 package kr.simula.formula.core.builder;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.simula.formula.core.Block;
 import kr.simula.formula.core.BlockStatement;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Lambda;
 import kr.simula.formula.core.Literal;
-import kr.simula.formula.core.MapEntry;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.Statement;
@@ -244,7 +244,8 @@ public interface FormulaHandler {
 	 * @param entrySet
 	 * @return
 	 */
-	Gettable<?> map(String token, List<MapEntry> entrySet);
+	@SuppressWarnings("rawtypes")
+	Gettable<Map> map(String token);
 	
 	/**
 	 * <pre>
@@ -254,5 +255,5 @@ public interface FormulaHandler {
 	 * @param value
 	 * @return
 	 */
-	MapEntry mapEntry(String token, Class<?> retType, String name, Node value);
+	void mapEntry(Gettable<?> mapGettable, Class<?> entryType, String name, Node value);
 }
