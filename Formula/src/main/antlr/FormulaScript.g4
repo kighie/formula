@@ -106,7 +106,6 @@ argsDecl [List<Ref> args]
 	)
 	;
 
-
 retrunStmt	[BlockStatement fnBlock] 
 	: { Node arg = null; }
 		'return' ( formulaExpressionBase { arg = $formulaExpressionBase.result; } )?
@@ -169,6 +168,7 @@ foreachStatement returns [BlockStatement foreachStmt]
 		{	handler.endBlock(); }
 	;
 	
+	
 loopCondition 	returns [LoopConditionStatement condition]
 	: type IDENT 
 	{ 
@@ -181,13 +181,15 @@ loopCondition 	returns [LoopConditionStatement condition]
 				$condition.setIteratorRef($iterableTerm.result);
 			}
 		)
-		| ( from=NUMBER ':' to=NUMBER
+		/*
+		| ( '=' from=NUMBER ':' to=NUMBER
 			{
 				Range range = Range.create($from.text, $to.text);
 				$condition.setRange(range);
 			}
-		)
+		) */
 	;
+
 
 
 methodCallStatement  returns [Statement stmt]

@@ -29,6 +29,7 @@ options {
 	import kr.simula.formula.core.*;
 	import kr.simula.formula.core.builder.*;
 	import kr.simula.formula.expr.*;
+	import kr.simula.formula.util.*;
 }
 
 @parser::members {
@@ -148,6 +149,7 @@ iterableTerm returns [Node result]
 	| array 			{ $result = $array.result; }
 	;
 
+
 formulaTerm returns [Node result]
 	: literalTerm 			{ $result = $literalTerm.result; }
 	| qualifiedName		{ $result = $qualifiedName.result; }
@@ -168,9 +170,15 @@ arrayRef   returns [Ref result]
 	
 array   returns [Gettable result]
 	: '['	{ List<Node> elements = new LinkedList<Node>(); }
-		formulaTerm 		{ elements.add($formulaTerm.result); }
-		(',' formulaTerm	{ elements.add($formulaTerm.result); } )* 	
-			{	$result = handler.array(elements); }
+		( 
+			( formulaTerm 		{ elements.add($formulaTerm.result); } )
+			| ( from=NUMBER ':' to=NUMBER  { Range.setRange(elements, $from.text, $to.text) ; } )
+		)
+		(','
+			( formulaTerm 		{ elements.add($formulaTerm.result); } )
+			| ( from=NUMBER ':' to=NUMBER  { Range.setRange(elements, $from.text, $to.text) ; } ) 
+		)* 	
+		{	$result = handler.array(elements); }
 	  ']'
 	;
 	

@@ -17,6 +17,10 @@ package kr.simula.formula.util;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Iterator;
+import java.util.List;
+
+import kr.simula.formula.core.Node;
+import kr.simula.formula.core.wrapper.AbstractLiteral;
 
 /**
  * <pre></pre>
@@ -58,6 +62,28 @@ public class Range implements Serializable , Iterable<BigDecimal> {
 			return new Range(fromInt, toInt);
 		} catch (NumberFormatException e) {
 			throw new NumberFormatException("Range must be integer to integer. " + e.getMessage());
+		}
+	}
+
+	public static void setRange(List<Node> list, String from, String to){
+		
+		try {
+			int fromInt = Integer.parseInt(from);
+			int toInt = Integer.parseInt(to);
+			
+			setRange(list, fromInt, toInt);
+		} catch (NumberFormatException e) {
+			throw new NumberFormatException("Range must be integer to integer. " + e.getMessage());
+		}
+	}
+	
+	public static void setRange(List<Node> list, int from, int to){
+		if(from>to){
+			throw new RuntimeException("Range to("+to+") must be greater than from("+from+").");
+		}
+		
+		for(int i=from ; i < to ; i++){
+			list.add(AbstractLiteral.NumberLiteral.parseLiteral(i));
 		}
 	}
 	

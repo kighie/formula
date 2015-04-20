@@ -30,7 +30,7 @@ import org.junit.Test;
 public class ForeachTests extends AbstractScriptTests {
 
 	static final String BASIC 
-			= "foreach(int a = 1:10) {"
+			= "foreach(int a in [1:10]) {"
 			+ "	number num <- a * 10; "
 			+ "	number total <- num * PA / 11; "
 			+ "	if( not skipPrint and MOD(a,3) is not 1) { "

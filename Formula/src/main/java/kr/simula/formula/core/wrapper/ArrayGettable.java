@@ -16,9 +16,11 @@ package kr.simula.formula.core.wrapper;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Iterator;
 
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.RtException;
 
 /**
  * <pre></pre>
@@ -34,7 +36,7 @@ public class ArrayGettable<T, E> implements Gettable<T>{
 	 * @param type
 	 * @param array
 	 */
-	public ArrayGettable(Class<T> type,Class<E> elementType, Gettable<?>[] array) {
+	public ArrayGettable(Class<T> type, Class<E> elementType, Gettable<?>[] array) {
 		this.type = type;
 		this.elementType = elementType;
 		this.array = array;
@@ -46,7 +48,7 @@ public class ArrayGettable<T, E> implements Gettable<T>{
 	}
 
 	@Override
-	public Class<T> type() {
+	public Class<? extends T> type() {
 		return type;
 	}
 
@@ -73,10 +75,52 @@ public class ArrayGettable<T, E> implements Gettable<T>{
 		}
 
 		return (T)valArray;
+//		return new ArrayIterable<E>(valArray);
 	}
 	
 	@Override
 	public String toString() {
 		return Arrays.toString(array);
+	}
+	
+	
+
+	static class ArrayIterable<T> implements Iterable<T> {
+		T[] valArray;
+		
+		public ArrayIterable(T[] valArray) {
+			super();
+			this.valArray = valArray;
+		}
+
+		@Override
+		public Iterator<T> iterator() {
+			return new ArrayIterator<T>(valArray);
+		}		
+	}
+
+	static class ArrayIterator<T> implements Iterator<T> {
+		T[] valArray;
+		int index;
+		
+		public ArrayIterator(T[] valArray) {
+			this.valArray = valArray;
+		}
+
+		@Override
+		public boolean hasNext() {
+			return index < valArray.length;
+		}
+
+		@Override
+		public T next() {
+			return valArray[index++];
+		}
+		
+		@Override
+		public void remove() {
+			throw new RtException("ArrayIterator does not support removing element.");
+		}
+			
 	}
 }

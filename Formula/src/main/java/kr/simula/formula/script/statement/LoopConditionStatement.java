@@ -17,6 +17,7 @@ package kr.simula.formula.script.statement;
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Node;
+import kr.simula.formula.core.RtException;
 import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.ref.VariableRef;
 import kr.simula.formula.core.util.GettableUtils;
@@ -32,7 +33,7 @@ public class LoopConditionStatement extends AbstractStatement {
 	private VariableRef varRef;
 	@SuppressWarnings("rawtypes")
 	private Gettable<Iterable> iteratorRef;
-	private Range range;
+	private Gettable<?> arrayGettable;
 	
 	
 	/**
@@ -51,6 +52,8 @@ public class LoopConditionStatement extends AbstractStatement {
 	public void setIteratorRef(Node iteratorRef) {
 		if(GettableUtils.isGettable(iteratorRef, Iterable.class) ) {
 			this.iteratorRef = GettableUtils.checkGettable(iteratorRef, Iterable.class);
+		} else if(GettableUtils.isArrayGettable(iteratorRef) ) {
+			this.arrayGettable = GettableUtils.checkGettable(iteratorRef);
 		} else {
 			throw new BuildException(iteratorRef + " is not iterable.");
 		}
@@ -64,9 +67,13 @@ public class LoopConditionStatement extends AbstractStatement {
 		return varRef;
 	}
 	
+	public Gettable<?> getArrayGettable() {
+		return arrayGettable;
+	}
+
 	/**
 	 * @return the range
-	 */
+	 *
 	public Range getRange() {
 		return range;
 	}
@@ -74,10 +81,12 @@ public class LoopConditionStatement extends AbstractStatement {
 	public void setRange(Range range) {
 		this.range = range;
 	}
+	*/
 	
 	@Override
 	public void eval(Context context) {
-		//
+		// DO NOTHING
+		throw new RtException("LoopCondition#eval not supported.");
 	}
 	
 	@Override
@@ -86,8 +95,8 @@ public class LoopConditionStatement extends AbstractStatement {
 		buf.append("(").append(varRef.getExpression());
 		if(iteratorRef != null) {
 			buf.append(iteratorRef.getExpression());
-		} else if(range != null) {
-			buf.append(range.toString());
+		} else if(arrayGettable != null) {
+			buf.append(arrayGettable.getExpression());
 		} 
 		
 		return buf.toString();

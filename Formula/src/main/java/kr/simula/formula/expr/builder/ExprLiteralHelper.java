@@ -47,7 +47,7 @@ public class ExprLiteralHelper extends LiteralHelper{
 		factories.put(ExprTokens.LIT_NUMBER, new LiteralFactory<BigDecimal>() {
 			@Override
 			public Literal<BigDecimal> create(BuildContext context, String exprToken, String value) {
-				return new AbstractLiteral.NumberLiteral(new BigDecimal(value));
+				return AbstractLiteral.NumberLiteral.parseLiteral(value);
 			}
 		} );
 		

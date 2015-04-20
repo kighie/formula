@@ -23,7 +23,6 @@ import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.RtException;
 import kr.simula.formula.core.ref.VariableRef;
 import kr.simula.formula.core.wrapper.AbstractBlock;
-import kr.simula.formula.util.Range;
 
 /**
  * <pre>
@@ -72,13 +71,13 @@ public class ForeachStatement extends AbstractBlock implements BlockStatement{
 				throw new RtException(iteratorRef + " is not iterable.");
 			}
 		} else {
-			Range range = loopCondition.getRange();
-			if(range != null){
-				doEval(blockCtx, varRef, range);
+			Gettable<?> arrayGettable = loopCondition.getArrayGettable();
+			if(arrayGettable != null){
+				Object[] array = ((Gettable<Object[]>)arrayGettable).get(blockCtx);
+				doEval(blockCtx, varRef, Arrays.asList(array));
 			} else {
 				throw new RtException(iteratorRef + " is not iterable nor int range.");
 			}
-			
 		}
 		
 	}

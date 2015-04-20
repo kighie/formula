@@ -88,6 +88,29 @@ public class GettableUtils {
 		return false;
 	}
 	
+
+	/**<pre>
+	 * </pre>
+	 * @param iteratorRef
+	 * @return
+	 */
+	public static boolean isArrayGettable(Node node) {
+		if(node instanceof Gettable){
+			Gettable gettable = (Gettable)node;
+			Class<?> nodeType = gettable.type();
+			if(nodeType == null && gettable instanceof ExternalRef){
+				return true;
+			}
+			if(nodeType.isArray()){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
+
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static Gettable<Comparable<?>> checkComparableGettable(Node node){
 		if(node instanceof Gettable){
