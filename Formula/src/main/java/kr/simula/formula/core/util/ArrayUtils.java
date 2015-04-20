@@ -16,6 +16,7 @@ package kr.simula.formula.core.util;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Collection;
 
 import kr.simula.formula.core.builder.BuildException;
 
@@ -38,9 +39,12 @@ public class ArrayUtils {
 	@SuppressWarnings("unchecked")
 	public static <T> T[] copyOf(Object[] args, Class<T[]> type){
 		int length = 0;
+		
 		for(Object o : args){
 			if(o.getClass().isArray()){
 				length += ((Object[])o).length;
+			} else if(o instanceof Collection){
+				length += ((Collection<?>)o).size();
 			} else {
 				length++;
 			}
@@ -59,6 +63,12 @@ public class ArrayUtils {
 				Object[] arr = (Object[])o;
 				System.arraycopy(arr, 0, array, index,arr.length);
 				index += arr.length;
+			} else if(o instanceof Collection){
+				int size = ((Collection<?>)o).size();
+				T[] part = (T[])Array.newInstance(type.getComponentType(), size);
+				part = ((Collection<?>)o).toArray(part);
+				System.arraycopy(part, 0, array, index, size);
+				index += size;
 			} else {
 				array[index++] = (T)o;
 			}

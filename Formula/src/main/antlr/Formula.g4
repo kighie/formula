@@ -140,6 +140,14 @@ literalTerm  returns [Node result]
 	;
 
 
+iterableTerm returns [Node result]
+	: IDENT 			{ $result = handler.refer( $IDENT.text); }
+	| qualifiedName		{ $result = $qualifiedName.result; }
+	| funcCallExp		{ $result = $funcCallExp.result; }
+	| methodCallExp		{ $result = $methodCallExp.result; }
+	| array 			{ $result = $array.result; }
+	;
+
 formulaTerm returns [Node result]
 	: literalTerm 			{ $result = $literalTerm.result; }
 	| qualifiedName		{ $result = $qualifiedName.result; }

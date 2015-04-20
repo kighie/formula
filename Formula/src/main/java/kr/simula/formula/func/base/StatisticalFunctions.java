@@ -15,6 +15,7 @@
 package kr.simula.formula.func.base;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 
 /**
@@ -39,7 +40,7 @@ public final class StatisticalFunctions extends FunctionBase {
 	 * @param numbers
 	 * @return
 	 */
-	public static final Number AVERAGE(Number ... numbers){
+	public static final BigDecimal average(MathContext mc, Number ... numbers){
 		int len = numbers!= null ? numbers.length : 0;
 		if(len == 1){
 			return new BigDecimal(numbers[0].toString());
@@ -48,7 +49,7 @@ public final class StatisticalFunctions extends FunctionBase {
 			for(Number n : numbers){
 				sum = sum.add(new BigDecimal(n.toString()));
 			}
-			return sum.divide(BigDecimal.valueOf(len));
+			return sum.divide(BigDecimal.valueOf(len), mc);
 		} else {
 			return BigDecimal.ZERO;
 		}

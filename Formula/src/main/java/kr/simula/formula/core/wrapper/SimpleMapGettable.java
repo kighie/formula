@@ -15,7 +15,6 @@
 package kr.simula.formula.core.wrapper;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import kr.simula.formula.core.Context;
@@ -29,8 +28,7 @@ import kr.simula.formula.core.Context;
  */
 @SuppressWarnings("rawtypes")
 public class SimpleMapGettable  extends MapGettable<Map>{
-	protected Map<String, KeyValue<?>> entries = new LinkedHashMap<String, SimpleMapGettable.KeyValue<?>>();
-	
+
 	@Override
 	public ValueType valueType() {
 		return ValueType.MAP;
@@ -46,7 +44,7 @@ public class SimpleMapGettable  extends MapGettable<Map>{
 	public Map get(Context context) {
 		Map map = new HashMap();
 		for( KeyValue kv : entries.values()){
-			map.put(kv.key, kv.value);
+			map.put(kv.key, kv.value.get(context));
 		}
 		return map;
 	}

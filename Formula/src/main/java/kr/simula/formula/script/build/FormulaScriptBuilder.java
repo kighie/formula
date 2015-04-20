@@ -35,6 +35,7 @@ import kr.simula.formula.core.builder.helper.UnaryOperatorHelper;
 import kr.simula.formula.expr.builder.ExprBinaryOperatorHelper;
 import kr.simula.formula.expr.builder.ExprFunctionCallHelper;
 import kr.simula.formula.expr.builder.ExprLiteralHelper;
+import kr.simula.formula.expr.builder.ExprMapHelper;
 import kr.simula.formula.expr.builder.ExprUnaryOperatorHelper;
 import kr.simula.formula.script.Module;
 
@@ -63,7 +64,7 @@ public class FormulaScriptBuilder extends AbstractFormulaBuilder<Module, Formula
 	protected LambdaHelper lambdaHelper = new LambdaHelper();
 
 	protected ArrayHelper arrayHelper = new ArrayHelper();
-	protected MapHelper mapHelper = new MapHelper();
+	protected MapHelper mapHelper = new ExprMapHelper();
 	
 	
 	@Override

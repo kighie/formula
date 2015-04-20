@@ -14,11 +14,9 @@
  */
 package kr.simula.formula.core.wrapper;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.builder.BuildException;
 
@@ -44,7 +42,7 @@ public abstract class MapGettable<T extends Map>  implements Gettable<T>{
 			} else {
 				first = false;
 			}
-			buf.append(kv.key).append(" : ").append(kv.value);
+			buf.append(kv.key).append(":").append(kv.value);
 		}
 		buf.append("}");
 		
@@ -58,16 +56,6 @@ public abstract class MapGettable<T extends Map>  implements Gettable<T>{
 		}
 		KeyValue<?> keyValue = new KeyValue(type, key, value);
 		entries.put(key, keyValue);
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	public T get(Context context) {
-		Map map = new HashMap();
-		for( KeyValue kv : entries.values()){
-			map.put(kv.key, kv.value);
-		}
-		return (T)map;
 	}
 	
 	protected static class KeyValue<E> {

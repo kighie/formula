@@ -175,20 +175,18 @@ loopCondition 	returns [LoopConditionStatement condition]
 		Ref varRef = handler.declare(ScriptTokens.VAR_DECL, $type.typeClz ,$IDENT.text); 
 		$condition = (LoopConditionStatement)handler.statement(ScriptTokens.LOOP_COND_DECL, varRef);
 	}
-	(
-		( 'in' var=IDENT 
+	'in'
+		(  iterableTerm 
 			{
-				Ref iteratorRef = handler.refer( $var.text);
-				$condition.setIteratorRef(iteratorRef);
+				$condition.setIteratorRef($iterableTerm.result);
 			}
 		)
-		| ('=' from=NUMBER ':' to=NUMBER
+		| ( from=NUMBER ':' to=NUMBER
 			{
 				Range range = Range.create($from.text, $to.text);
 				$condition.setRange(range);
 			}
 		)
-	)	
 	;
 
 

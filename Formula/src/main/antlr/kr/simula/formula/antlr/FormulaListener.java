@@ -1,4 +1,4 @@
-// Generated from Formula.g4 by ANTLR 4.5
+// Generated from Formula.g4 by ANTLR 4.4
 package kr.simula.formula.antlr;
 
 //	package kr.simula.formula.antlr;
@@ -19,223 +19,233 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface FormulaListener extends ParseTreeListener {
 	/**
-	 * Enter a parse tree produced by {@link FormulaParser#formulaExpression}.
-	 * @param ctx the parse tree
-	 */
-	void enterFormulaExpression(FormulaParser.FormulaExpressionContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FormulaParser#formulaExpression}.
-	 * @param ctx the parse tree
-	 */
-	void exitFormulaExpression(FormulaParser.FormulaExpressionContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link FormulaParser#formulaExpressionBase}.
-	 * @param ctx the parse tree
-	 */
-	void enterFormulaExpressionBase(FormulaParser.FormulaExpressionBaseContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FormulaParser#formulaExpressionBase}.
-	 * @param ctx the parse tree
-	 */
-	void exitFormulaExpressionBase(FormulaParser.FormulaExpressionBaseContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link FormulaParser#funcCallExp}.
-	 * @param ctx the parse tree
-	 */
-	void enterFuncCallExp(FormulaParser.FuncCallExpContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FormulaParser#funcCallExp}.
-	 * @param ctx the parse tree
-	 */
-	void exitFuncCallExp(FormulaParser.FuncCallExpContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link FormulaParser#methodCallExp}.
-	 * @param ctx the parse tree
-	 */
-	void enterMethodCallExp(FormulaParser.MethodCallExpContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FormulaParser#methodCallExp}.
-	 * @param ctx the parse tree
-	 */
-	void exitMethodCallExp(FormulaParser.MethodCallExpContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link FormulaParser#arguments}.
-	 * @param ctx the parse tree
-	 */
-	void enterArguments(FormulaParser.ArgumentsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FormulaParser#arguments}.
-	 * @param ctx the parse tree
-	 */
-	void exitArguments(FormulaParser.ArgumentsContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link FormulaParser#conditionArg}.
-	 * @param ctx the parse tree
-	 */
-	void enterConditionArg(FormulaParser.ConditionArgContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FormulaParser#conditionArg}.
-	 * @param ctx the parse tree
-	 */
-	void exitConditionArg(FormulaParser.ConditionArgContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link FormulaParser#literalTerm}.
-	 * @param ctx the parse tree
-	 */
-	void enterLiteralTerm(FormulaParser.LiteralTermContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FormulaParser#literalTerm}.
-	 * @param ctx the parse tree
-	 */
-	void exitLiteralTerm(FormulaParser.LiteralTermContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link FormulaParser#formulaTerm}.
-	 * @param ctx the parse tree
-	 */
-	void enterFormulaTerm(FormulaParser.FormulaTermContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FormulaParser#formulaTerm}.
-	 * @param ctx the parse tree
-	 */
-	void exitFormulaTerm(FormulaParser.FormulaTermContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link FormulaParser#arrayRef}.
-	 * @param ctx the parse tree
-	 */
-	void enterArrayRef(FormulaParser.ArrayRefContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FormulaParser#arrayRef}.
-	 * @param ctx the parse tree
-	 */
-	void exitArrayRef(FormulaParser.ArrayRefContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link FormulaParser#array}.
-	 * @param ctx the parse tree
-	 */
-	void enterArray(FormulaParser.ArrayContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FormulaParser#array}.
-	 * @param ctx the parse tree
-	 */
-	void exitArray(FormulaParser.ArrayContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link FormulaParser#map}.
-	 * @param ctx the parse tree
-	 */
-	void enterMap(FormulaParser.MapContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FormulaParser#map}.
-	 * @param ctx the parse tree
-	 */
-	void exitMap(FormulaParser.MapContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link FormulaParser#qualifiedName}.
-	 * @param ctx the parse tree
-	 */
-	void enterQualifiedName(FormulaParser.QualifiedNameContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FormulaParser#qualifiedName}.
-	 * @param ctx the parse tree
-	 */
-	void exitQualifiedName(FormulaParser.QualifiedNameContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link FormulaParser#unary}.
-	 * @param ctx the parse tree
-	 */
-	void enterUnary(FormulaParser.UnaryContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FormulaParser#unary}.
-	 * @param ctx the parse tree
-	 */
-	void exitUnary(FormulaParser.UnaryContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link FormulaParser#percent}.
-	 * @param ctx the parse tree
-	 */
-	void enterPercent(FormulaParser.PercentContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FormulaParser#percent}.
-	 * @param ctx the parse tree
-	 */
-	void exitPercent(FormulaParser.PercentContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link FormulaParser#exponential}.
 	 * @param ctx the parse tree
 	 */
-	void enterExponential(FormulaParser.ExponentialContext ctx);
+	void enterExponential(@NotNull FormulaParser.ExponentialContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link FormulaParser#exponential}.
 	 * @param ctx the parse tree
 	 */
-	void exitExponential(FormulaParser.ExponentialContext ctx);
+	void exitExponential(@NotNull FormulaParser.ExponentialContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link FormulaParser#multiplicative}.
+	 * Enter a parse tree produced by {@link FormulaParser#formulaTerm}.
 	 * @param ctx the parse tree
 	 */
-	void enterMultiplicative(FormulaParser.MultiplicativeContext ctx);
+	void enterFormulaTerm(@NotNull FormulaParser.FormulaTermContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link FormulaParser#multiplicative}.
+	 * Exit a parse tree produced by {@link FormulaParser#formulaTerm}.
 	 * @param ctx the parse tree
 	 */
-	void exitMultiplicative(FormulaParser.MultiplicativeContext ctx);
+	void exitFormulaTerm(@NotNull FormulaParser.FormulaTermContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link FormulaParser#additiveExpression}.
+	 * Enter a parse tree produced by {@link FormulaParser#literalTerm}.
 	 * @param ctx the parse tree
 	 */
-	void enterAdditiveExpression(FormulaParser.AdditiveExpressionContext ctx);
+	void enterLiteralTerm(@NotNull FormulaParser.LiteralTermContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link FormulaParser#additiveExpression}.
+	 * Exit a parse tree produced by {@link FormulaParser#literalTerm}.
 	 * @param ctx the parse tree
 	 */
-	void exitAdditiveExpression(FormulaParser.AdditiveExpressionContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link FormulaParser#stringExpression}.
-	 * @param ctx the parse tree
-	 */
-	void enterStringExpression(FormulaParser.StringExpressionContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FormulaParser#stringExpression}.
-	 * @param ctx the parse tree
-	 */
-	void exitStringExpression(FormulaParser.StringExpressionContext ctx);
+	void exitLiteralTerm(@NotNull FormulaParser.LiteralTermContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FormulaParser#comparison}.
 	 * @param ctx the parse tree
 	 */
-	void enterComparison(FormulaParser.ComparisonContext ctx);
+	void enterComparison(@NotNull FormulaParser.ComparisonContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link FormulaParser#comparison}.
 	 * @param ctx the parse tree
 	 */
-	void exitComparison(FormulaParser.ComparisonContext ctx);
+	void exitComparison(@NotNull FormulaParser.ComparisonContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaParser#formulaExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterFormulaExpression(@NotNull FormulaParser.FormulaExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaParser#formulaExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitFormulaExpression(@NotNull FormulaParser.FormulaExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaParser#additiveExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterAdditiveExpression(@NotNull FormulaParser.AdditiveExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaParser#additiveExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitAdditiveExpression(@NotNull FormulaParser.AdditiveExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaParser#qualifiedName}.
+	 * @param ctx the parse tree
+	 */
+	void enterQualifiedName(@NotNull FormulaParser.QualifiedNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaParser#qualifiedName}.
+	 * @param ctx the parse tree
+	 */
+	void exitQualifiedName(@NotNull FormulaParser.QualifiedNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaParser#arrayRef}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayRef(@NotNull FormulaParser.ArrayRefContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaParser#arrayRef}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayRef(@NotNull FormulaParser.ArrayRefContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FormulaParser#notExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterNotExpression(FormulaParser.NotExpressionContext ctx);
+	void enterNotExpression(@NotNull FormulaParser.NotExpressionContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link FormulaParser#notExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitNotExpression(FormulaParser.NotExpressionContext ctx);
+	void exitNotExpression(@NotNull FormulaParser.NotExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaParser#conditionArg}.
+	 * @param ctx the parse tree
+	 */
+	void enterConditionArg(@NotNull FormulaParser.ConditionArgContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaParser#conditionArg}.
+	 * @param ctx the parse tree
+	 */
+	void exitConditionArg(@NotNull FormulaParser.ConditionArgContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaParser#unary}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnary(@NotNull FormulaParser.UnaryContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaParser#unary}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnary(@NotNull FormulaParser.UnaryContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaParser#multiplicative}.
+	 * @param ctx the parse tree
+	 */
+	void enterMultiplicative(@NotNull FormulaParser.MultiplicativeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaParser#multiplicative}.
+	 * @param ctx the parse tree
+	 */
+	void exitMultiplicative(@NotNull FormulaParser.MultiplicativeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaParser#funcCallExp}.
+	 * @param ctx the parse tree
+	 */
+	void enterFuncCallExp(@NotNull FormulaParser.FuncCallExpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaParser#funcCallExp}.
+	 * @param ctx the parse tree
+	 */
+	void exitFuncCallExp(@NotNull FormulaParser.FuncCallExpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaParser#percent}.
+	 * @param ctx the parse tree
+	 */
+	void enterPercent(@NotNull FormulaParser.PercentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaParser#percent}.
+	 * @param ctx the parse tree
+	 */
+	void exitPercent(@NotNull FormulaParser.PercentContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FormulaParser#logicalExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterLogicalExpression(FormulaParser.LogicalExpressionContext ctx);
+	void enterLogicalExpression(@NotNull FormulaParser.LogicalExpressionContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link FormulaParser#logicalExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitLogicalExpression(FormulaParser.LogicalExpressionContext ctx);
+	void exitLogicalExpression(@NotNull FormulaParser.LogicalExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaParser#stringExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterStringExpression(@NotNull FormulaParser.StringExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaParser#stringExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitStringExpression(@NotNull FormulaParser.StringExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FormulaParser#operatorExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterOperatorExpression(FormulaParser.OperatorExpressionContext ctx);
+	void enterOperatorExpression(@NotNull FormulaParser.OperatorExpressionContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link FormulaParser#operatorExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitOperatorExpression(FormulaParser.OperatorExpressionContext ctx);
+	void exitOperatorExpression(@NotNull FormulaParser.OperatorExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaParser#array}.
+	 * @param ctx the parse tree
+	 */
+	void enterArray(@NotNull FormulaParser.ArrayContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaParser#array}.
+	 * @param ctx the parse tree
+	 */
+	void exitArray(@NotNull FormulaParser.ArrayContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaParser#iterableTerm}.
+	 * @param ctx the parse tree
+	 */
+	void enterIterableTerm(@NotNull FormulaParser.IterableTermContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaParser#iterableTerm}.
+	 * @param ctx the parse tree
+	 */
+	void exitIterableTerm(@NotNull FormulaParser.IterableTermContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaParser#methodCallExp}.
+	 * @param ctx the parse tree
+	 */
+	void enterMethodCallExp(@NotNull FormulaParser.MethodCallExpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaParser#methodCallExp}.
+	 * @param ctx the parse tree
+	 */
+	void exitMethodCallExp(@NotNull FormulaParser.MethodCallExpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaParser#arguments}.
+	 * @param ctx the parse tree
+	 */
+	void enterArguments(@NotNull FormulaParser.ArgumentsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaParser#arguments}.
+	 * @param ctx the parse tree
+	 */
+	void exitArguments(@NotNull FormulaParser.ArgumentsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaParser#map}.
+	 * @param ctx the parse tree
+	 */
+	void enterMap(@NotNull FormulaParser.MapContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaParser#map}.
+	 * @param ctx the parse tree
+	 */
+	void exitMap(@NotNull FormulaParser.MapContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaParser#formulaExpressionBase}.
+	 * @param ctx the parse tree
+	 */
+	void enterFormulaExpressionBase(@NotNull FormulaParser.FormulaExpressionBaseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaParser#formulaExpressionBase}.
+	 * @param ctx the parse tree
+	 */
+	void exitFormulaExpressionBase(@NotNull FormulaParser.FormulaExpressionBaseContext ctx);
 }

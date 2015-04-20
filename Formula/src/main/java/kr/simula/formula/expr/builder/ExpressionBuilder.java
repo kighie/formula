@@ -54,7 +54,7 @@ public class ExpressionBuilder extends AbstractFormulaBuilder<Expr, ExpressionHa
 	protected LambdaHelper lambdaHelper = new LambdaHelper();
 
 	protected ArrayHelper arrayHelper = new ArrayHelper();
-	protected MapHelper mapHelper = new MapHelper();
+	protected MapHelper mapHelper = new ExprMapHelper();
 	
 	
 	

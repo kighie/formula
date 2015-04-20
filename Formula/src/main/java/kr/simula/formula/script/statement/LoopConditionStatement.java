@@ -15,8 +15,11 @@
 package kr.simula.formula.script.statement;
 
 import kr.simula.formula.core.Context;
-import kr.simula.formula.core.Ref;
+import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.Node;
+import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.ref.VariableRef;
+import kr.simula.formula.core.util.GettableUtils;
 import kr.simula.formula.util.Range;
 
 /**
@@ -27,7 +30,8 @@ import kr.simula.formula.util.Range;
 public class LoopConditionStatement extends AbstractStatement {
 	@SuppressWarnings("rawtypes")
 	private VariableRef varRef;
-	private Ref iteratorRef;
+	@SuppressWarnings("rawtypes")
+	private Gettable<Iterable> iteratorRef;
 	private Range range;
 	
 	
@@ -39,12 +43,18 @@ public class LoopConditionStatement extends AbstractStatement {
 		this.varRef = varRef;
 	}
 
-	public Ref getIteratorRef() {
+	@SuppressWarnings("rawtypes")
+	public Gettable<Iterable> getIteratorRef() {
 		return iteratorRef;
 	}
 
-	public void setIteratorRef(Ref iteratorRef) {
-		this.iteratorRef = iteratorRef;
+	public void setIteratorRef(Node iteratorRef) {
+		if(GettableUtils.isGettable(iteratorRef, Iterable.class) ) {
+			this.iteratorRef = GettableUtils.checkGettable(iteratorRef, Iterable.class);
+		} else {
+			throw new BuildException(iteratorRef + " is not iterable.");
+		}
+		
 	}
 	
 	/**

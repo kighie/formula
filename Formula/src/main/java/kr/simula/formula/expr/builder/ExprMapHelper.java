@@ -14,7 +14,14 @@
  */
 package kr.simula.formula.expr.builder;
 
+import java.util.Map;
+
+import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.builder.helper.MapHelper;
+import kr.simula.formula.core.factory.MapGettableFactory;
+import kr.simula.formula.core.wrapper.SimpleMapGettable;
+import kr.simula.formula.expr.ExprTokens;
 
 /**
  * <pre>
@@ -24,11 +31,18 @@ import kr.simula.formula.core.builder.helper.MapHelper;
  */
 public class ExprMapHelper extends MapHelper {
 
+	protected static MapGettableFactory simpleMapFactory = new MapGettableFactory() {
+		@SuppressWarnings("rawtypes")
+		@Override
+		public Gettable<Map> create(BuildContext current, String token) {
+			SimpleMapGettable mapGettable = new SimpleMapGettable();
+			return mapGettable;
+		}
+	};
+	
 	@Override
 	protected void initDefaults() {
-		super.initDefaults();
-		
-		
+		setFactory(ExprTokens.SIMPLE_MAP, simpleMapFactory);
 	}
 
 }

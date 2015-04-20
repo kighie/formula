@@ -30,7 +30,7 @@ import org.junit.Test;
 public class MapTests  extends AbstractScriptTests {
 
 	@Test
-	public void script1(){
+	public void simpleMap(){
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
 		

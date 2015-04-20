@@ -60,6 +60,7 @@ public class GettableUtils {
 			Gettable gettable = (Gettable)node;
 			Class<?> nodeType = gettable.type();
 			if(nodeType == null && gettable instanceof ExternalRef){
+				((ExternalRef)gettable).setRequiredType(type);
 				return (Gettable<T>)node;
 			}
 			if(type.isAssignableFrom( nodeType )){
@@ -71,6 +72,22 @@ public class GettableUtils {
 		throw new BuildException(node + " is not Gettable<" + type.getName() + ">");
 	}
 
+	public static <T> boolean isGettable(Node node, Class<T>type){
+		if(node instanceof Gettable){
+			Gettable gettable = (Gettable)node;
+			Class<?> nodeType = gettable.type();
+			if(nodeType == null && gettable instanceof ExternalRef){
+				return true;
+			}
+			if(type.isAssignableFrom( nodeType )){
+				return true;
+			}
+		}
+		
+		
+		return false;
+	}
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static Gettable<Comparable<?>> checkComparableGettable(Node node){
 		if(node instanceof Gettable){

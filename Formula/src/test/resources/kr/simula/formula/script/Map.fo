@@ -13,4 +13,15 @@ map simpleMap <- {
 	c:3
 };
 
-println( simpleMap );
+println( simpleMap.keySet() );
+
+foreach(object a in simpleMap.keySet() ) {
+	println("key:" & a);
+}
+
+foreach(object a in simpleMap.values() ) {
+	println("value:" & a);
+}
+
+println( 'SUM values : ' & SUM(simpleMap.values()) );
+println( 'AVERAGE values : ' & AVERAGE(simpleMap.values()) );
