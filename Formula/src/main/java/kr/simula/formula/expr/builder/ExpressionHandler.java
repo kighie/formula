@@ -31,13 +31,12 @@ import kr.simula.formula.core.builder.helper.RefHelper;
 import kr.simula.formula.core.builder.helper.StatementHelper;
 import kr.simula.formula.core.builder.helper.TypeHelper;
 import kr.simula.formula.core.builder.helper.UnaryOperatorHelper;
-import kr.simula.formula.expr.ExprTokens;
 
 /**
  * @author kighie@gmail.com
  *
  */
-public class ExpressionHandler extends AbstractFormulaHandler implements ExprTokens {
+public class ExpressionHandler extends AbstractFormulaHandler {
 	
 
 

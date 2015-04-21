@@ -1605,28 +1605,28 @@ public class FormulaScriptParser extends Parser {
 				{
 				setState(349); match(T__29);
 				setState(350); ((ConditionArgContext)_localctx).op2 = literalTerm();
-				((ConditionArgContext)_localctx).result =  handler.lambda(ExprTokens.OP_EQ, null, ((ConditionArgContext)_localctx).op2.result); 
+				((ConditionArgContext)_localctx).result =  handler.lambda(GrammarTokens.OP_EQ, null, ((ConditionArgContext)_localctx).op2.result); 
 				}
 				break;
 			case 2:
 				{
 				setState(353); match(T__22);
 				setState(354); ((ConditionArgContext)_localctx).op2 = literalTerm();
-				((ConditionArgContext)_localctx).result =  handler.lambda(ExprTokens.OP_EQ, null, ((ConditionArgContext)_localctx).op2.result); 
+				((ConditionArgContext)_localctx).result =  handler.lambda(GrammarTokens.OP_EQ, null, ((ConditionArgContext)_localctx).op2.result); 
 				}
 				break;
 			case 3:
 				{
 				setState(357); match(T__31);
 				setState(358); ((ConditionArgContext)_localctx).op2 = literalTerm();
-				((ConditionArgContext)_localctx).result =  handler.lambda(ExprTokens.OP_NOT_EQ, null, ((ConditionArgContext)_localctx).op2.result); 
+				((ConditionArgContext)_localctx).result =  handler.lambda(GrammarTokens.OP_NOT_EQ, null, ((ConditionArgContext)_localctx).op2.result); 
 				}
 				break;
 			case 4:
 				{
 				setState(361); match(T__9);
 				setState(362); ((ConditionArgContext)_localctx).op2 = literalTerm();
-				((ConditionArgContext)_localctx).result =  handler.lambda(ExprTokens.OP_NOT_EQ, null, ((ConditionArgContext)_localctx).op2.result); 
+				((ConditionArgContext)_localctx).result =  handler.lambda(GrammarTokens.OP_NOT_EQ, null, ((ConditionArgContext)_localctx).op2.result); 
 				}
 				break;
 			case 5:
@@ -1634,35 +1634,35 @@ public class FormulaScriptParser extends Parser {
 				setState(365); match(T__22);
 				setState(366); match(T__2);
 				setState(367); ((ConditionArgContext)_localctx).op2 = literalTerm();
-				((ConditionArgContext)_localctx).result =  handler.lambda(ExprTokens.OP_NOT_EQ, null, ((ConditionArgContext)_localctx).op2.result); 
+				((ConditionArgContext)_localctx).result =  handler.lambda(GrammarTokens.OP_NOT_EQ, null, ((ConditionArgContext)_localctx).op2.result); 
 				}
 				break;
 			case 6:
 				{
 				setState(370); match(T__11);
 				setState(371); ((ConditionArgContext)_localctx).op2 = literalTerm();
-				((ConditionArgContext)_localctx).result =  handler.lambda(ExprTokens.OP_GT, null, ((ConditionArgContext)_localctx).op2.result); 
+				((ConditionArgContext)_localctx).result =  handler.lambda(GrammarTokens.OP_GT, null, ((ConditionArgContext)_localctx).op2.result); 
 				}
 				break;
 			case 7:
 				{
 				setState(374); match(T__15);
 				setState(375); ((ConditionArgContext)_localctx).op2 = literalTerm();
-				((ConditionArgContext)_localctx).result =  handler.lambda(ExprTokens.OP_EQ_GT, null, ((ConditionArgContext)_localctx).op2.result); 
+				((ConditionArgContext)_localctx).result =  handler.lambda(GrammarTokens.OP_EQ_GT, null, ((ConditionArgContext)_localctx).op2.result); 
 				}
 				break;
 			case 8:
 				{
 				setState(378); match(T__13);
 				setState(379); ((ConditionArgContext)_localctx).op2 = literalTerm();
-				((ConditionArgContext)_localctx).result =  handler.lambda(ExprTokens.OP_LT, null, ((ConditionArgContext)_localctx).op2.result); 
+				((ConditionArgContext)_localctx).result =  handler.lambda(GrammarTokens.OP_LT, null, ((ConditionArgContext)_localctx).op2.result); 
 				}
 				break;
 			case 9:
 				{
 				setState(382); match(T__25);
 				setState(383); ((ConditionArgContext)_localctx).op2 = literalTerm();
-				((ConditionArgContext)_localctx).result =  handler.lambda(ExprTokens.OP_EQ_LT, null, ((ConditionArgContext)_localctx).op2.result); 
+				((ConditionArgContext)_localctx).result =  handler.lambda(GrammarTokens.OP_EQ_LT, null, ((ConditionArgContext)_localctx).op2.result); 
 				}
 				break;
 			}
@@ -1714,28 +1714,28 @@ public class FormulaScriptParser extends Parser {
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(388); ((LiteralTermContext)_localctx).BOOLEAN = match(BOOLEAN);
-				 ((LiteralTermContext)_localctx).result =  handler.literal( ExprTokens.LIT_BOOLEAN, (((LiteralTermContext)_localctx).BOOLEAN!=null?((LiteralTermContext)_localctx).BOOLEAN.getText():null)); 
+				 ((LiteralTermContext)_localctx).result =  handler.literal( GrammarTokens.LIT_BOOLEAN, (((LiteralTermContext)_localctx).BOOLEAN!=null?((LiteralTermContext)_localctx).BOOLEAN.getText():null)); 
 				}
 				break;
 			case STRING_LITERAL:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(390); ((LiteralTermContext)_localctx).STRING_LITERAL = match(STRING_LITERAL);
-				 ((LiteralTermContext)_localctx).result =  handler.literal( ExprTokens.LIT_STRING,  strip((((LiteralTermContext)_localctx).STRING_LITERAL!=null?((LiteralTermContext)_localctx).STRING_LITERAL.getText():null))); 
+				 ((LiteralTermContext)_localctx).result =  handler.literal( GrammarTokens.LIT_STRING,  strip((((LiteralTermContext)_localctx).STRING_LITERAL!=null?((LiteralTermContext)_localctx).STRING_LITERAL.getText():null))); 
 				}
 				break;
 			case NUMBER:
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(392); ((LiteralTermContext)_localctx).NUMBER = match(NUMBER);
-				 ((LiteralTermContext)_localctx).result =  handler.literal( ExprTokens.LIT_NUMBER, (((LiteralTermContext)_localctx).NUMBER!=null?((LiteralTermContext)_localctx).NUMBER.getText():null)); 
+				 ((LiteralTermContext)_localctx).result =  handler.literal( GrammarTokens.LIT_NUMBER, (((LiteralTermContext)_localctx).NUMBER!=null?((LiteralTermContext)_localctx).NUMBER.getText():null)); 
 				}
 				break;
 			case NULL:
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(394); match(NULL);
-				 ((LiteralTermContext)_localctx).result =  handler.literal( ExprTokens.LIT_NULL, null); 
+				 ((LiteralTermContext)_localctx).result =  handler.literal( GrammarTokens.LIT_NULL, null); 
 				}
 				break;
 			case IDENT:
@@ -1997,7 +1997,7 @@ public class FormulaScriptParser extends Parser {
 			case NUMBER:
 				{
 				setState(441); ((ArrayRefContext)_localctx).NUMBER = match(NUMBER);
-				 ((ArrayRefContext)_localctx).result =  handler.refer( (((ArrayRefContext)_localctx).IDENT!=null?((ArrayRefContext)_localctx).IDENT.getText():null), handler.literal( ExprTokens.LIT_NUMBER, (((ArrayRefContext)_localctx).NUMBER!=null?((ArrayRefContext)_localctx).NUMBER.getText():null)) ); 
+				 ((ArrayRefContext)_localctx).result =  handler.refer( (((ArrayRefContext)_localctx).IDENT!=null?((ArrayRefContext)_localctx).IDENT.getText():null), handler.literal( GrammarTokens.LIT_NUMBER, (((ArrayRefContext)_localctx).NUMBER!=null?((ArrayRefContext)_localctx).NUMBER.getText():null)) ); 
 				}
 				break;
 			case IDENT:
@@ -2167,7 +2167,7 @@ public class FormulaScriptParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(476); match(T__30);
-			 ((MapContext)_localctx).result =  handler.map(ExprTokens.SIMPLE_MAP);
+			 ((MapContext)_localctx).result =  handler.map(GrammarTokens.SIMPLE_MAP);
 			setState(478); ((MapContext)_localctx).IDENT = match(IDENT);
 			setState(479); match(T__16);
 			setState(480); ((MapContext)_localctx).formulaTerm = formulaTerm();
@@ -2331,7 +2331,7 @@ public class FormulaScriptParser extends Parser {
 			}
 			 
 						if(negative){
-							((UnaryContext)_localctx).result =  handler.operator(ExprTokens.OP_NUM_NEGATION, _localctx.result );
+							((UnaryContext)_localctx).result =  handler.operator(GrammarTokens.OP_NUM_NEGATION, _localctx.result );
 						} 
 					
 			}
@@ -2381,7 +2381,7 @@ public class FormulaScriptParser extends Parser {
 			if (_la==T__8) {
 				{
 				setState(524); match(T__8);
-				((PercentContext)_localctx).result =  handler.operator(ExprTokens.OP_PERCENT, _localctx.result); 
+				((PercentContext)_localctx).result =  handler.operator(GrammarTokens.OP_PERCENT, _localctx.result); 
 				}
 			}
 
@@ -2439,7 +2439,7 @@ public class FormulaScriptParser extends Parser {
 				{
 				setState(530); match(T__27);
 				setState(531); ((ExponentialContext)_localctx).op2 = ((ExponentialContext)_localctx).percent = percent();
-				((ExponentialContext)_localctx).result =  handler.operator(ExprTokens.OP_POW, _localctx.result, ((ExponentialContext)_localctx).op2.result); 
+				((ExponentialContext)_localctx).result =  handler.operator(GrammarTokens.OP_POW, _localctx.result, ((ExponentialContext)_localctx).op2.result); 
 				}
 				}
 				setState(538);
@@ -2503,14 +2503,14 @@ public class FormulaScriptParser extends Parser {
 					{
 					setState(541); match(T__21);
 					setState(542); ((MultiplicativeContext)_localctx).op2 = ((MultiplicativeContext)_localctx).exponential = exponential();
-					((MultiplicativeContext)_localctx).result =  handler.operator(ExprTokens.OP_MULTI, _localctx.result, ((MultiplicativeContext)_localctx).op2.result); 
+					((MultiplicativeContext)_localctx).result =  handler.operator(GrammarTokens.OP_MULTI, _localctx.result, ((MultiplicativeContext)_localctx).op2.result); 
 					}
 					break;
 				case T__35:
 					{
 					setState(545); match(T__35);
 					setState(546); ((MultiplicativeContext)_localctx).op2 = ((MultiplicativeContext)_localctx).exponential = exponential();
-					((MultiplicativeContext)_localctx).result =  handler.operator(ExprTokens.OP_DIVIDE, _localctx.result, ((MultiplicativeContext)_localctx).op2.result); 
+					((MultiplicativeContext)_localctx).result =  handler.operator(GrammarTokens.OP_DIVIDE, _localctx.result, ((MultiplicativeContext)_localctx).op2.result); 
 					}
 					break;
 				default:
@@ -2578,14 +2578,14 @@ public class FormulaScriptParser extends Parser {
 					{
 					setState(556); match(T__3);
 					setState(557); ((AdditiveExpressionContext)_localctx).op2 = ((AdditiveExpressionContext)_localctx).multiplicative = multiplicative();
-					((AdditiveExpressionContext)_localctx).result =  handler.operator(ExprTokens.OP_PLUS, _localctx.result, ((AdditiveExpressionContext)_localctx).op2.result); 
+					((AdditiveExpressionContext)_localctx).result =  handler.operator(GrammarTokens.OP_PLUS, _localctx.result, ((AdditiveExpressionContext)_localctx).op2.result); 
 					}
 					break;
 				case T__1:
 					{
 					setState(560); match(T__1);
 					setState(561); ((AdditiveExpressionContext)_localctx).op2 = ((AdditiveExpressionContext)_localctx).multiplicative = multiplicative();
-					((AdditiveExpressionContext)_localctx).result =  handler.operator(ExprTokens.OP_MINUS, _localctx.result, ((AdditiveExpressionContext)_localctx).op2.result); 
+					((AdditiveExpressionContext)_localctx).result =  handler.operator(GrammarTokens.OP_MINUS, _localctx.result, ((AdditiveExpressionContext)_localctx).op2.result); 
 					}
 					break;
 				default:
@@ -2650,7 +2650,7 @@ public class FormulaScriptParser extends Parser {
 				{
 				setState(571); match(T__24);
 				setState(572); ((StringExpressionContext)_localctx).op2 = ((StringExpressionContext)_localctx).additiveExpression = additiveExpression();
-				((StringExpressionContext)_localctx).result =  handler.operator(ExprTokens.OP_CONCAT, _localctx.result, ((StringExpressionContext)_localctx).op2.result); 
+				((StringExpressionContext)_localctx).result =  handler.operator(GrammarTokens.OP_CONCAT, _localctx.result, ((StringExpressionContext)_localctx).op2.result); 
 				}
 				}
 				setState(579);
@@ -2715,28 +2715,28 @@ public class FormulaScriptParser extends Parser {
 						{
 						setState(582); match(T__29);
 						setState(583); ((ComparisonContext)_localctx).op2 = ((ComparisonContext)_localctx).stringExpression = stringExpression();
-						((ComparisonContext)_localctx).result =  handler.operator(ExprTokens.OP_EQ, _localctx.result, ((ComparisonContext)_localctx).op2.result); 
+						((ComparisonContext)_localctx).result =  handler.operator(GrammarTokens.OP_EQ, _localctx.result, ((ComparisonContext)_localctx).op2.result); 
 						}
 						break;
 					case 2:
 						{
 						setState(586); match(T__22);
 						setState(587); ((ComparisonContext)_localctx).op2 = ((ComparisonContext)_localctx).stringExpression = stringExpression();
-						((ComparisonContext)_localctx).result =  handler.operator(ExprTokens.OP_EQ, _localctx.result, ((ComparisonContext)_localctx).op2.result); 
+						((ComparisonContext)_localctx).result =  handler.operator(GrammarTokens.OP_EQ, _localctx.result, ((ComparisonContext)_localctx).op2.result); 
 						}
 						break;
 					case 3:
 						{
 						setState(590); match(T__31);
 						setState(591); ((ComparisonContext)_localctx).op2 = ((ComparisonContext)_localctx).stringExpression = stringExpression();
-						((ComparisonContext)_localctx).result =  handler.operator(ExprTokens.OP_NOT_EQ, _localctx.result, ((ComparisonContext)_localctx).op2.result); 
+						((ComparisonContext)_localctx).result =  handler.operator(GrammarTokens.OP_NOT_EQ, _localctx.result, ((ComparisonContext)_localctx).op2.result); 
 						}
 						break;
 					case 4:
 						{
 						setState(594); match(T__9);
 						setState(595); ((ComparisonContext)_localctx).op2 = ((ComparisonContext)_localctx).stringExpression = stringExpression();
-						((ComparisonContext)_localctx).result =  handler.operator(ExprTokens.OP_NOT_EQ, _localctx.result, ((ComparisonContext)_localctx).op2.result); 
+						((ComparisonContext)_localctx).result =  handler.operator(GrammarTokens.OP_NOT_EQ, _localctx.result, ((ComparisonContext)_localctx).op2.result); 
 						}
 						break;
 					case 5:
@@ -2744,35 +2744,35 @@ public class FormulaScriptParser extends Parser {
 						setState(598); match(T__22);
 						setState(599); match(T__2);
 						setState(600); ((ComparisonContext)_localctx).op2 = ((ComparisonContext)_localctx).stringExpression = stringExpression();
-						((ComparisonContext)_localctx).result =  handler.operator(ExprTokens.OP_NOT_EQ, _localctx.result, ((ComparisonContext)_localctx).op2.result); 
+						((ComparisonContext)_localctx).result =  handler.operator(GrammarTokens.OP_NOT_EQ, _localctx.result, ((ComparisonContext)_localctx).op2.result); 
 						}
 						break;
 					case 6:
 						{
 						setState(603); match(T__11);
 						setState(604); ((ComparisonContext)_localctx).op2 = ((ComparisonContext)_localctx).stringExpression = stringExpression();
-						((ComparisonContext)_localctx).result =  handler.operator(ExprTokens.OP_GT, _localctx.result, ((ComparisonContext)_localctx).op2.result); 
+						((ComparisonContext)_localctx).result =  handler.operator(GrammarTokens.OP_GT, _localctx.result, ((ComparisonContext)_localctx).op2.result); 
 						}
 						break;
 					case 7:
 						{
 						setState(607); match(T__15);
 						setState(608); ((ComparisonContext)_localctx).op2 = ((ComparisonContext)_localctx).stringExpression = stringExpression();
-						((ComparisonContext)_localctx).result =  handler.operator(ExprTokens.OP_EQ_GT, _localctx.result, ((ComparisonContext)_localctx).op2.result); 
+						((ComparisonContext)_localctx).result =  handler.operator(GrammarTokens.OP_EQ_GT, _localctx.result, ((ComparisonContext)_localctx).op2.result); 
 						}
 						break;
 					case 8:
 						{
 						setState(611); match(T__13);
 						setState(612); ((ComparisonContext)_localctx).op2 = ((ComparisonContext)_localctx).stringExpression = stringExpression();
-						((ComparisonContext)_localctx).result =  handler.operator(ExprTokens.OP_LT, _localctx.result, ((ComparisonContext)_localctx).op2.result); 
+						((ComparisonContext)_localctx).result =  handler.operator(GrammarTokens.OP_LT, _localctx.result, ((ComparisonContext)_localctx).op2.result); 
 						}
 						break;
 					case 9:
 						{
 						setState(615); match(T__25);
 						setState(616); ((ComparisonContext)_localctx).op2 = ((ComparisonContext)_localctx).stringExpression = stringExpression();
-						((ComparisonContext)_localctx).result =  handler.operator(ExprTokens.OP_EQ_LT, _localctx.result, ((ComparisonContext)_localctx).op2.result); 
+						((ComparisonContext)_localctx).result =  handler.operator(GrammarTokens.OP_EQ_LT, _localctx.result, ((ComparisonContext)_localctx).op2.result); 
 						}
 						break;
 					}
@@ -2841,7 +2841,7 @@ public class FormulaScriptParser extends Parser {
 				{
 				setState(627); match(T__2);
 				setState(628); ((NotExpressionContext)_localctx).comparison = comparison();
-				((NotExpressionContext)_localctx).result =  handler.operator(ExprTokens.OP_NOT, ((NotExpressionContext)_localctx).comparison.result); 
+				((NotExpressionContext)_localctx).result =  handler.operator(GrammarTokens.OP_NOT, ((NotExpressionContext)_localctx).comparison.result); 
 				}
 				break;
 			default:
@@ -2908,14 +2908,14 @@ public class FormulaScriptParser extends Parser {
 						{
 						setState(635); match(T__4);
 						setState(636); ((LogicalExpressionContext)_localctx).op2 = operatorExpression();
-						((LogicalExpressionContext)_localctx).result =  handler.operator(ExprTokens.OP_AND, _localctx.result, ((LogicalExpressionContext)_localctx).op2.result); 
+						((LogicalExpressionContext)_localctx).result =  handler.operator(GrammarTokens.OP_AND, _localctx.result, ((LogicalExpressionContext)_localctx).op2.result); 
 						}
 						break;
 					case T__10:
 						{
 						setState(639); match(T__10);
 						setState(640); ((LogicalExpressionContext)_localctx).op2 = operatorExpression();
-						((LogicalExpressionContext)_localctx).result =  handler.operator(ExprTokens.OP_OR, _localctx.result, ((LogicalExpressionContext)_localctx).op2.result); 
+						((LogicalExpressionContext)_localctx).result =  handler.operator(GrammarTokens.OP_OR, _localctx.result, ((LogicalExpressionContext)_localctx).op2.result); 
 						}
 						break;
 					default:

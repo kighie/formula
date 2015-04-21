@@ -35,6 +35,7 @@ public abstract class AbstractScriptTests {
 	@BeforeClass
 	public static void setUp(){
 		builder = new FormulaScriptBuilder();
+		builder.initialize();
 	}
 	
 

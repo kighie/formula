@@ -43,7 +43,6 @@ import Formula;
 /* *************************************
  * Formula Script
  *************************************** */
-
 formulaScript returns [Module module]
 	: { $module = (Module)handler.block(ScriptTokens.MODULE); }
 		(importStatement 	{ $module.append($importStatement.stmt); })*

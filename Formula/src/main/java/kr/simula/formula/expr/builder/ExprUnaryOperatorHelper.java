@@ -17,11 +17,11 @@ package kr.simula.formula.expr.builder;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+import kr.simula.formula.core.GrammarTokens;
 import kr.simula.formula.core.Operator.Unary;
 import kr.simula.formula.core.builder.helper.UnaryOperatorHelper;
 import kr.simula.formula.core.factory.op.DecimalUnaryOperatorFactory;
 import kr.simula.formula.core.factory.op.LogicalUnaryOperatorFactory;
-import kr.simula.formula.expr.ExprTokens;
 
 /**
  * <pre></pre>
@@ -36,9 +36,9 @@ public class ExprUnaryOperatorHelper extends UnaryOperatorHelper {
 	protected void initDefaults() {
 		super.initDefaults();
 
-		setFactory(ExprTokens.OP_NUM_NEGATION, new DecimalUnaryOperatorFactory(NEGATE));
-		setFactory(ExprTokens.OP_PERCENT, new DecimalUnaryOperatorFactory(PERCENT));
-		setFactory(ExprTokens.OP_NOT, new LogicalUnaryOperatorFactory(NOT));
+		setFactory(GrammarTokens.OP_NUM_NEGATION, new DecimalUnaryOperatorFactory(NEGATE));
+		setFactory(GrammarTokens.OP_PERCENT, new DecimalUnaryOperatorFactory(PERCENT));
+		setFactory(GrammarTokens.OP_NOT, new LogicalUnaryOperatorFactory(NOT));
 	}
 	
 

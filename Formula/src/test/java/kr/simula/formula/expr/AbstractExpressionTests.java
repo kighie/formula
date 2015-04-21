@@ -34,6 +34,7 @@ public abstract class AbstractExpressionTests {
 	@BeforeClass
 	public static void setUp(){
 		builder = new ExpressionBuilder();
+		builder.initialize();
 	}
 
 	protected Node buildExpression(String expr){

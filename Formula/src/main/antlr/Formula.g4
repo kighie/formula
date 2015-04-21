@@ -120,23 +120,23 @@ arguments  returns [List<Node> nodeList]
 conditionArg returns [Lambda result]
 	: 
 	( 
-		'='  op2 = literalTerm {$result = handler.lambda(ExprTokens.OP_EQ, null, $op2.result); }
-		|'is'  op2 = literalTerm {$result = handler.lambda(ExprTokens.OP_EQ, null, $op2.result); }
-		|'!=' op2 = literalTerm {$result = handler.lambda(ExprTokens.OP_NOT_EQ, null, $op2.result); }
-		|'<>' op2 = literalTerm {$result = handler.lambda(ExprTokens.OP_NOT_EQ, null, $op2.result); }
-		|'is' 'not' op2 = literalTerm {$result = handler.lambda(ExprTokens.OP_NOT_EQ, null, $op2.result); }
-		|'>'  op2 = literalTerm {$result = handler.lambda(ExprTokens.OP_GT, null, $op2.result); }
-		|'>=' op2 = literalTerm {$result = handler.lambda(ExprTokens.OP_EQ_GT, null, $op2.result); }
-		|'<'  op2 = literalTerm {$result = handler.lambda(ExprTokens.OP_LT, null, $op2.result); }
-		|'<=' op2 = literalTerm {$result = handler.lambda(ExprTokens.OP_EQ_LT, null, $op2.result); }
+		'='  op2 = literalTerm {$result = handler.lambda(GrammarTokens.OP_EQ, null, $op2.result); }
+		|'is'  op2 = literalTerm {$result = handler.lambda(GrammarTokens.OP_EQ, null, $op2.result); }
+		|'!=' op2 = literalTerm {$result = handler.lambda(GrammarTokens.OP_NOT_EQ, null, $op2.result); }
+		|'<>' op2 = literalTerm {$result = handler.lambda(GrammarTokens.OP_NOT_EQ, null, $op2.result); }
+		|'is' 'not' op2 = literalTerm {$result = handler.lambda(GrammarTokens.OP_NOT_EQ, null, $op2.result); }
+		|'>'  op2 = literalTerm {$result = handler.lambda(GrammarTokens.OP_GT, null, $op2.result); }
+		|'>=' op2 = literalTerm {$result = handler.lambda(GrammarTokens.OP_EQ_GT, null, $op2.result); }
+		|'<'  op2 = literalTerm {$result = handler.lambda(GrammarTokens.OP_LT, null, $op2.result); }
+		|'<=' op2 = literalTerm {$result = handler.lambda(GrammarTokens.OP_EQ_LT, null, $op2.result); }
 	)
 	;
 
 literalTerm  returns [Node result]
-	: BOOLEAN 			{ $result = handler.literal( ExprTokens.LIT_BOOLEAN, $BOOLEAN.text); }
-	| STRING_LITERAL	{ $result = handler.literal( ExprTokens.LIT_STRING,  strip($STRING_LITERAL.text)); }
-	| NUMBER			{ $result = handler.literal( ExprTokens.LIT_NUMBER, $NUMBER.text); }
-	| NULL				{ $result = handler.literal( ExprTokens.LIT_NULL, null); }
+	: BOOLEAN 			{ $result = handler.literal( GrammarTokens.LIT_BOOLEAN, $BOOLEAN.text); }
+	| STRING_LITERAL	{ $result = handler.literal( GrammarTokens.LIT_STRING,  strip($STRING_LITERAL.text)); }
+	| NUMBER			{ $result = handler.literal( GrammarTokens.LIT_NUMBER, $NUMBER.text); }
+	| NULL				{ $result = handler.literal( GrammarTokens.LIT_NULL, null); }
 	| IDENT				{ $result = handler.refer( $IDENT.text); }
 	;
 
@@ -162,7 +162,7 @@ formulaTerm returns [Node result]
 
 arrayRef   returns [Ref result]
 	: IDENT '[' 
-		(NUMBER 	{ $result = handler.refer( $IDENT.text, handler.literal( ExprTokens.LIT_NUMBER, $NUMBER.text) ); } 
+		(NUMBER 	{ $result = handler.refer( $IDENT.text, handler.literal( GrammarTokens.LIT_NUMBER, $NUMBER.text) ); } 
 		| id2 = IDENT		{ $result = handler.refer( $IDENT.text, handler.refer( $id2.text) ); } 
 		)
 	 ']'
@@ -183,7 +183,7 @@ array   returns [Gettable result]
 	;
 	
 map   returns [Gettable result]
-	: '{' 	{ $result = handler.map(ExprTokens.SIMPLE_MAP);}
+	: '{' 	{ $result = handler.map(GrammarTokens.SIMPLE_MAP);}
 		IDENT ':' formulaTerm	
 			{ handler.mapEntry( $result, null, $IDENT.text, $formulaTerm.result ); }
 		(',' IDENT ':' formulaTerm 
@@ -209,38 +209,38 @@ unary  returns [Node result]
 		) 
 		{ 
 			if(negative){
-				$result = handler.operator(ExprTokens.OP_NUM_NEGATION, $result );
+				$result = handler.operator(GrammarTokens.OP_NUM_NEGATION, $result );
 			} 
 		}
 	;
 
 percent  returns [Node result]
 	:	unary 	{ $result = $unary.result;  }
-    	('%' {$result = handler.operator(ExprTokens.OP_PERCENT, $result); } )?
+    	('%' {$result = handler.operator(GrammarTokens.OP_PERCENT, $result); } )?
     ;
 
     
 exponential returns [Node result]
     :	percent 	{ $result = $percent.result;  }
     	(
-    		'^'		op2 = percent  	{$result = handler.operator(ExprTokens.OP_POW, $result, $op2.result); }
+    		'^'		op2 = percent  	{$result = handler.operator(GrammarTokens.OP_POW, $result, $op2.result); }
     	)*
     ;
     
 multiplicative returns [Node result]
     :	exponential 	{ $result = $exponential.result;  }
     	(
-    		'*' 		op2 = exponential 	{$result = handler.operator(ExprTokens.OP_MULTI, $result, $op2.result); }
-    		| '/' 		op2 = exponential  	{$result = handler.operator(ExprTokens.OP_DIVIDE, $result, $op2.result); }
-//    		| '%'		op2 = exponential  	{$result = handler.operator(ExprTokens.OP_MOD, $result, $op2.result); }
+    		'*' 		op2 = exponential 	{$result = handler.operator(GrammarTokens.OP_MULTI, $result, $op2.result); }
+    		| '/' 		op2 = exponential  	{$result = handler.operator(GrammarTokens.OP_DIVIDE, $result, $op2.result); }
+//    		| '%'		op2 = exponential  	{$result = handler.operator(GrammarTokens.OP_MOD, $result, $op2.result); }
     	)*
     ;
     
 additiveExpression returns [Node result]
     :   multiplicative { $result = $multiplicative.result;  }
     ( 
-    	'+' 	op2 = multiplicative	{$result = handler.operator(ExprTokens.OP_PLUS, $result, $op2.result); }
-    	| '-' 	op2 = multiplicative	{$result = handler.operator(ExprTokens.OP_MINUS, $result, $op2.result); }
+    	'+' 	op2 = multiplicative	{$result = handler.operator(GrammarTokens.OP_PLUS, $result, $op2.result); }
+    	| '-' 	op2 = multiplicative	{$result = handler.operator(GrammarTokens.OP_MINUS, $result, $op2.result); }
     )*
     ;
     
@@ -251,7 +251,7 @@ additiveExpression returns [Node result]
 stringExpression returns [Node result]
     :   additiveExpression { $result = $additiveExpression.result;  }
     ( 
-    	'&' op2 = additiveExpression {$result = handler.operator(ExprTokens.OP_CONCAT, $result, $op2.result); }
+    	'&' op2 = additiveExpression {$result = handler.operator(GrammarTokens.OP_CONCAT, $result, $op2.result); }
     )* 
     ;
   
@@ -261,15 +261,15 @@ stringExpression returns [Node result]
 comparison returns [Node result]
 	: stringExpression  { $result = $stringExpression.result;  }
 	( 
-		'='  op2 = stringExpression {$result = handler.operator(ExprTokens.OP_EQ, $result, $op2.result); }
-		|'is'  op2 = stringExpression {$result = handler.operator(ExprTokens.OP_EQ, $result, $op2.result); }
-		|'!=' op2 = stringExpression {$result = handler.operator(ExprTokens.OP_NOT_EQ, $result, $op2.result); }
-		|'<>' op2 = stringExpression {$result = handler.operator(ExprTokens.OP_NOT_EQ, $result, $op2.result); }
-		|'is' 'not' op2 = stringExpression {$result = handler.operator(ExprTokens.OP_NOT_EQ, $result, $op2.result); }
-		|'>'  op2 = stringExpression {$result = handler.operator(ExprTokens.OP_GT, $result, $op2.result); }
-		|'>=' op2 = stringExpression {$result = handler.operator(ExprTokens.OP_EQ_GT, $result, $op2.result); }
-		|'<'  op2 = stringExpression {$result = handler.operator(ExprTokens.OP_LT, $result, $op2.result); }
-		|'<=' op2 = stringExpression {$result = handler.operator(ExprTokens.OP_EQ_LT, $result, $op2.result); }
+		'='  op2 = stringExpression {$result = handler.operator(GrammarTokens.OP_EQ, $result, $op2.result); }
+		|'is'  op2 = stringExpression {$result = handler.operator(GrammarTokens.OP_EQ, $result, $op2.result); }
+		|'!=' op2 = stringExpression {$result = handler.operator(GrammarTokens.OP_NOT_EQ, $result, $op2.result); }
+		|'<>' op2 = stringExpression {$result = handler.operator(GrammarTokens.OP_NOT_EQ, $result, $op2.result); }
+		|'is' 'not' op2 = stringExpression {$result = handler.operator(GrammarTokens.OP_NOT_EQ, $result, $op2.result); }
+		|'>'  op2 = stringExpression {$result = handler.operator(GrammarTokens.OP_GT, $result, $op2.result); }
+		|'>=' op2 = stringExpression {$result = handler.operator(GrammarTokens.OP_EQ_GT, $result, $op2.result); }
+		|'<'  op2 = stringExpression {$result = handler.operator(GrammarTokens.OP_LT, $result, $op2.result); }
+		|'<=' op2 = stringExpression {$result = handler.operator(GrammarTokens.OP_EQ_LT, $result, $op2.result); }
 	)*
 	;
 	
@@ -277,7 +277,7 @@ notExpression returns [Node result]
 	: 
 	(
 		comparison { $result = $comparison.result;  }
-		| 'not' comparison {$result = handler.operator(ExprTokens.OP_NOT, $comparison.result); }
+		| 'not' comparison {$result = handler.operator(GrammarTokens.OP_NOT, $comparison.result); }
 		
 	)
 	;
@@ -285,8 +285,8 @@ notExpression returns [Node result]
 logicalExpression returns [Node result]
 	: notExpression { $result = $notExpression.result;  }
 	( 
-		'and' 	op2 = operatorExpression {$result = handler.operator(ExprTokens.OP_AND, $result, $op2.result); }
-		|'or' 	op2 = operatorExpression {$result = handler.operator(ExprTokens.OP_OR, $result, $op2.result); }
+		'and' 	op2 = operatorExpression {$result = handler.operator(GrammarTokens.OP_AND, $result, $op2.result); }
+		|'or' 	op2 = operatorExpression {$result = handler.operator(GrammarTokens.OP_OR, $result, $op2.result); }
 		
 	)*
 	;

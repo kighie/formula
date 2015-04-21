@@ -13,7 +13,7 @@ numbers2 <- [6,7,8,9,10,1,2,3,4,5,11,3];
 
 int minusNum <- -4;
 
-numbers4 <- [6,minusNum, 3*4];
+numbers4 <- [6,minusNum, 3];
 
 println( "numbers::" & numbers);
 println( "number4::" & numbers4);

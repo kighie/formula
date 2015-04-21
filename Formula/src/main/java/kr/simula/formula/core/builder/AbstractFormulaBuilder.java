@@ -16,6 +16,19 @@ package kr.simula.formula.core.builder;
 
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.antlr.ParsingErrorAdapter;
+import kr.simula.formula.core.builder.helper.ArrayHelper;
+import kr.simula.formula.core.builder.helper.BinaryOperatorHelper;
+import kr.simula.formula.core.builder.helper.BlockHelper;
+import kr.simula.formula.core.builder.helper.DeclarationHelper;
+import kr.simula.formula.core.builder.helper.FunctionCallHelper;
+import kr.simula.formula.core.builder.helper.LambdaHelper;
+import kr.simula.formula.core.builder.helper.LiteralHelper;
+import kr.simula.formula.core.builder.helper.MapHelper;
+import kr.simula.formula.core.builder.helper.MethodCallHelper;
+import kr.simula.formula.core.builder.helper.RefHelper;
+import kr.simula.formula.core.builder.helper.StatementHelper;
+import kr.simula.formula.core.builder.helper.TypeHelper;
+import kr.simula.formula.core.builder.helper.UnaryOperatorHelper;
 
 /**
  * <pre>
@@ -23,10 +36,24 @@ import kr.simula.formula.core.antlr.ParsingErrorAdapter;
  * @author Ikchan Kwon
  *
  */
-public abstract class AbstractFormulaBuilder<N extends Node, H extends FormulaHandler> 
-	implements FormulaBuilder<N>, FormulaHandlerFactory<H> {
+public abstract class AbstractFormulaBuilder<N extends Node> 
+	implements FormulaBuilder<N>, FormulaHandlerFactory {
 	
-
+	private BlockHelper blockHelper;
+	private LiteralHelper literalHelper;
+	private RefHelper refHelper;
+	private BinaryOperatorHelper binaryOperatorHelper;
+	private UnaryOperatorHelper unaryOperatorHelper;
+	private FunctionCallHelper functionCallHelper;
+	private MethodCallHelper methodCallHelper;
+	private LambdaHelper lambdaHelper;
+	private ArrayHelper arrayHelper;
+	private MapHelper mapHelper;
+	private StatementHelper statementHelper;
+	private DeclarationHelper declarationHelper;
+	private TypeHelper typeHelper;
+	
+	
 	protected final ParsingErrorAdapter errorAdapter = new ParsingErrorAdapter();
 	
 
@@ -38,34 +65,123 @@ public abstract class AbstractFormulaBuilder<N extends Node, H extends FormulaHa
 		return errorAdapter.removeListener(o);
 	}
 
-	
-	
-	@Override
-	public H newHandler() {
-		return newHandler(new RootBuildContext());
+	public void initialize(){
+		this.literalHelper = initLiteralHelper();
+		this.refHelper = initRefHelper();
+		this.binaryOperatorHelper = initBinaryOperatorHelper();
+		this.unaryOperatorHelper = initUnaryOperatorHelper();
+		this.functionCallHelper = initFunctionCallHelper();
+		this.methodCallHelper = initMethodCallHelper();
+		this.lambdaHelper = initLambdaHelper();
+		this.arrayHelper = initArrayHelper();
+		this.mapHelper = initMapHelper();
+
+		this.blockHelper = initBlockHelper();
+		this.statementHelper = initStatementHelper();
+		this.declarationHelper = initDeclarationHelper();
+		this.typeHelper = initTypeHelper();
 	}
 
+	protected LiteralHelper initLiteralHelper() {
+		return new LiteralHelper();
+	}
+
+	protected RefHelper initRefHelper() {
+		return new RefHelper();
+	}
+
+	protected BinaryOperatorHelper initBinaryOperatorHelper() {
+		return new BinaryOperatorHelper();
+	}
+
+	protected UnaryOperatorHelper initUnaryOperatorHelper() {
+		return  new UnaryOperatorHelper();
+	}
+
+	protected FunctionCallHelper initFunctionCallHelper() {
+		return new FunctionCallHelper();
+	}
+
+	protected MethodCallHelper initMethodCallHelper() {
+		return new MethodCallHelper();
+	}
+
+	protected LambdaHelper initLambdaHelper() {
+		return new LambdaHelper();
+	}
+
+	protected ArrayHelper initArrayHelper() {
+		return new ArrayHelper();
+	}
+
+	protected MapHelper initMapHelper() {
+		return new MapHelper();
+	}
+
+
+	public BlockHelper initBlockHelper() {
+		return null;
+	}
+
+	public StatementHelper initStatementHelper() {
+		return null;
+	}
+
+	public DeclarationHelper initDeclarationHelper() {
+		return null;
+	}
+
+	public TypeHelper initTypeHelper() {
+		return null;
+	}
+
+	
+	@Override
+	public FormulaHandler newHandler() {
+		return newHandler(new RootBuildContext());
+	}
+	
+	@Override
+	public FormulaHandler newHandler(RootBuildContext rootContext) {
+		return newHandler(rootContext, 
+				blockHelper, literalHelper, refHelper, typeHelper, 
+				binaryOperatorHelper, unaryOperatorHelper, functionCallHelper, methodCallHelper, 
+				statementHelper, declarationHelper, arrayHelper, mapHelper, lambdaHelper);
+	}
+
+	protected abstract FormulaHandler newHandler(RootBuildContext rootContext,
+			BlockHelper blockHelper, LiteralHelper literalHelper,
+			RefHelper refHelper, TypeHelper typeHelper,
+			BinaryOperatorHelper binaryOperatorHelper,
+			UnaryOperatorHelper unaryOperatorHelper,
+			FunctionCallHelper functionCallHelper,
+			MethodCallHelper methodCallHelper, StatementHelper statementHelper,
+			DeclarationHelper declarationHelper, ArrayHelper arrayHelper,
+			MapHelper mapHelper, LambdaHelper lambdaHelper);
+	
+	
+	
 	@Override
 	public N build(String expression) {
-		H handler = newHandler();
+		FormulaHandler handler = newHandler();
 		return build(handler, expression);
 	}
 	
 	@Override
 	public N build(FormulaSource source) {
-		H handler = newHandler();
+		FormulaHandler handler = newHandler();
 		return build(handler, source);
 	}
 
 	@Override
 	public N build(FormulaSource source, RootBuildContext rootContext) {
-		H handler = newHandler(rootContext);
+		FormulaHandler handler = newHandler(rootContext);
 		return build(handler, source);
 	}
 
-	protected abstract N build(H handler, String expression);
+	protected abstract N build(FormulaHandler handler, String expression);
 	
-	protected abstract N build(H handler, FormulaSource source);
+	protected abstract N build(FormulaHandler handler, FormulaSource source);
 	
 	
 }

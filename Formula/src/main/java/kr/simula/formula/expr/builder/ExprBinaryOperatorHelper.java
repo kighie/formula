@@ -18,13 +18,13 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
+import kr.simula.formula.core.GrammarTokens;
 import kr.simula.formula.core.Operator.Binary;
 import kr.simula.formula.core.builder.helper.BinaryOperatorHelper;
 import kr.simula.formula.core.factory.op.CompareBinaryOperatorFactory;
 import kr.simula.formula.core.factory.op.DecimalBinaryOperatorFactory;
 import kr.simula.formula.core.factory.op.LogicalBinaryOperatorFactory;
 import kr.simula.formula.core.factory.op.StringBinaryOperatorFactory;
-import kr.simula.formula.expr.ExprTokens;
 
 /**
  * <pre></pre>
@@ -39,21 +39,21 @@ public class ExprBinaryOperatorHelper extends BinaryOperatorHelper {
 	protected void initDefaults() {
 		super.initDefaults();
 
-		setFactory(ExprTokens.OP_POW, new DecimalBinaryOperatorFactory(POW));
-		setFactory(ExprTokens.OP_MULTI, new DecimalBinaryOperatorFactory(MULTIFLY));
-		setFactory(ExprTokens.OP_DIVIDE, new DecimalBinaryOperatorFactory(DIVIDE));
-//		setFactory(ExprTokens.OP_MOD, new DecimalBinaryOperatorFactory(MOD));
-		setFactory(ExprTokens.OP_PLUS, new DecimalBinaryOperatorFactory(ADD));
-		setFactory(ExprTokens.OP_MINUS, new DecimalBinaryOperatorFactory(SUBTRACT));
-		setFactory(ExprTokens.OP_EQ, new CompareBinaryOperatorFactory(EQUALS));
-		setFactory(ExprTokens.OP_NOT_EQ, new CompareBinaryOperatorFactory(NOT_EQUALS));
-		setFactory(ExprTokens.OP_EQ_GT, new CompareBinaryOperatorFactory(EQUALS_GT));
-		setFactory(ExprTokens.OP_GT, new CompareBinaryOperatorFactory(GT));
-		setFactory(ExprTokens.OP_EQ_LT, new CompareBinaryOperatorFactory(EQUALS_LT));
-		setFactory(ExprTokens.OP_LT, new CompareBinaryOperatorFactory(LT));
-		setFactory(ExprTokens.OP_AND, new LogicalBinaryOperatorFactory(AND));
-		setFactory(ExprTokens.OP_OR, new LogicalBinaryOperatorFactory(OR));
-		setFactory(ExprTokens.OP_CONCAT, new StringBinaryOperatorFactory(CONCAT));
+		setFactory(GrammarTokens.OP_POW, new DecimalBinaryOperatorFactory(POW));
+		setFactory(GrammarTokens.OP_MULTI, new DecimalBinaryOperatorFactory(MULTIFLY));
+		setFactory(GrammarTokens.OP_DIVIDE, new DecimalBinaryOperatorFactory(DIVIDE));
+//		setFactory(GrammarTokens.OP_MOD, new DecimalBinaryOperatorFactory(MOD));
+		setFactory(GrammarTokens.OP_PLUS, new DecimalBinaryOperatorFactory(ADD));
+		setFactory(GrammarTokens.OP_MINUS, new DecimalBinaryOperatorFactory(SUBTRACT));
+		setFactory(GrammarTokens.OP_EQ, new CompareBinaryOperatorFactory(EQUALS));
+		setFactory(GrammarTokens.OP_NOT_EQ, new CompareBinaryOperatorFactory(NOT_EQUALS));
+		setFactory(GrammarTokens.OP_EQ_GT, new CompareBinaryOperatorFactory(EQUALS_GT));
+		setFactory(GrammarTokens.OP_GT, new CompareBinaryOperatorFactory(GT));
+		setFactory(GrammarTokens.OP_EQ_LT, new CompareBinaryOperatorFactory(EQUALS_LT));
+		setFactory(GrammarTokens.OP_LT, new CompareBinaryOperatorFactory(LT));
+		setFactory(GrammarTokens.OP_AND, new LogicalBinaryOperatorFactory(AND));
+		setFactory(GrammarTokens.OP_OR, new LogicalBinaryOperatorFactory(OR));
+		setFactory(GrammarTokens.OP_CONCAT, new StringBinaryOperatorFactory(CONCAT));
 	}
 
 

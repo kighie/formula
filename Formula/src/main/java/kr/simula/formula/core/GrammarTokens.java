@@ -12,14 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.expr;
+package kr.simula.formula.core;
 
 /**
+ * <pre></pre>
  * @author kighie@gmail.com
- *
+ * @since 1.0
  */
-public interface ExprTokens {
-
+public interface GrammarTokens {
 	String LIT_NUMBER 		= "LIT_NUMBER";
 	String LIT_BOOLEAN 		= "LIT_BOOLEAN";
 	String LIT_DATE 		= "LIT_DATE";
@@ -49,4 +49,18 @@ public interface ExprTokens {
 
 	String SIMPLE_MAP		= "SIMPLE_MAP";
 	
+	
+	String IF 			= "IF";
+	String ELSEIF 		= "ELSEIF";
+	String ELSE 		= "ELSE";
+	String FOREACH		= "FOREACH";
+	String LOOP_COND_DECL		= "LOOP_COND_DECL";
+	String MTHODE_CALL_STMT	= "MTHODE_CALL_STMT";
+	String FUNCTION_CALL_STMT	= "FUNC_CALL_STMT";
+	String ASSIGN_STMT	= "ASSIGN_STMT";
+	
+	String VAR			= "VAR";
+	String VAR_DECL		= "VAR_DECL";
+	String ARG_DECL		= "ARG_DECL";
+	String RETURN		= "RETURN";
 }

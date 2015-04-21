@@ -18,13 +18,13 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.Date;
 
+import kr.simula.formula.core.GrammarTokens;
 import kr.simula.formula.core.Literal;
 import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.builder.helper.LiteralHelper;
 import kr.simula.formula.core.factory.LiteralFactory;
 import kr.simula.formula.core.wrapper.AbstractLiteral;
-import kr.simula.formula.expr.ExprTokens;
 
 /**
  * <pre>
@@ -37,14 +37,14 @@ public class ExprLiteralHelper extends LiteralHelper{
 
 	@Override
 	protected final void initDefaults(){
-		factories.put(ExprTokens.LIT_STRING, new LiteralFactory<String>() {
+		factories.put(GrammarTokens.LIT_STRING, new LiteralFactory<String>() {
 			@Override
 			public Literal<String> create(BuildContext context, String exprToken, String value) {
 				return new AbstractLiteral.StringLiteral(value);
 			}
 		} );
 		
-		factories.put(ExprTokens.LIT_NUMBER, new LiteralFactory<BigDecimal>() {
+		factories.put(GrammarTokens.LIT_NUMBER, new LiteralFactory<BigDecimal>() {
 			@Override
 			public Literal<BigDecimal> create(BuildContext context, String exprToken, String value) {
 				return AbstractLiteral.NumberLiteral.parseLiteral(value);
@@ -52,7 +52,7 @@ public class ExprLiteralHelper extends LiteralHelper{
 		} );
 		
 
-		factories.put(ExprTokens.LIT_BOOLEAN, new LiteralFactory<Boolean>() {
+		factories.put(GrammarTokens.LIT_BOOLEAN, new LiteralFactory<Boolean>() {
 			@Override
 			public Literal<Boolean> create(BuildContext context, String exprToken, String value) {
 				if("true".equals(value) ||"TRUE".equals(value) ){
@@ -64,7 +64,7 @@ public class ExprLiteralHelper extends LiteralHelper{
 			}
 		} );
 		
-		factories.put(ExprTokens.LIT_DATE, new LiteralFactory<Date>() {
+		factories.put(GrammarTokens.LIT_DATE, new LiteralFactory<Date>() {
 			@Override
 			public Literal<Date> create(BuildContext context, String exprToken, String value) {
 				try {
@@ -75,7 +75,7 @@ public class ExprLiteralHelper extends LiteralHelper{
 			}
 		} );
 		
-		factories.put(ExprTokens.LIT_NULL, new LiteralFactory<Object>() {
+		factories.put(GrammarTokens.LIT_NULL, new LiteralFactory<Object>() {
 			@Override
 			public Literal<Object> create(BuildContext context, String exprToken, String value) {
 				return AbstractLiteral.NULL;

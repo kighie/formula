@@ -18,6 +18,7 @@ import kr.simula.formula.antlr.FormulaScriptLexer;
 import kr.simula.formula.antlr.FormulaScriptParser;
 import kr.simula.formula.antlr.FormulaScriptParser.FormulaScriptContext;
 import kr.simula.formula.core.builder.AbstractFormulaBuilder;
+import kr.simula.formula.core.builder.FormulaHandler;
 import kr.simula.formula.core.builder.FormulaSource;
 import kr.simula.formula.core.builder.RootBuildContext;
 import kr.simula.formula.core.builder.helper.ArrayHelper;
@@ -31,6 +32,7 @@ import kr.simula.formula.core.builder.helper.MapHelper;
 import kr.simula.formula.core.builder.helper.MethodCallHelper;
 import kr.simula.formula.core.builder.helper.RefHelper;
 import kr.simula.formula.core.builder.helper.StatementHelper;
+import kr.simula.formula.core.builder.helper.TypeHelper;
 import kr.simula.formula.core.builder.helper.UnaryOperatorHelper;
 import kr.simula.formula.expr.builder.ExprBinaryOperatorHelper;
 import kr.simula.formula.expr.builder.ExprFunctionCallHelper;
@@ -49,36 +51,62 @@ import org.antlr.v4.runtime.TokenStream;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class FormulaScriptBuilder extends AbstractFormulaBuilder<Module, FormulaScriptHandler> {
-
-	protected BlockHelper blockHelper = new ScriptBlockHelper();
-	protected StatementHelper statementHelper = new ScriptStatementHelper();
-	protected DeclarationHelper declarationHelper = new ScriptDeclarationHelper();
-	protected ScriptTypeHelper typeHelper = new ScriptTypeHelper();
-	protected LiteralHelper literalHelper = new ExprLiteralHelper();
-	protected RefHelper refHelper = new RefHelper();
-	protected BinaryOperatorHelper binaryOperatorHelper = new ExprBinaryOperatorHelper();
-	protected UnaryOperatorHelper unaryOperatorHelper = new ExprUnaryOperatorHelper();
-	protected FunctionCallHelper functionCallHelper = new ExprFunctionCallHelper();
-	protected MethodCallHelper methodCallHelper = new MethodCallHelper();
-	protected LambdaHelper lambdaHelper = new LambdaHelper();
-
-	protected ArrayHelper arrayHelper = new ArrayHelper();
-	protected MapHelper mapHelper = new ExprMapHelper();
+public class FormulaScriptBuilder extends AbstractFormulaBuilder<Module> {
 	
-	
-	@Override
-	public FormulaScriptHandler newHandler(RootBuildContext rootContext) {
-		FormulaScriptHandler handler = new FormulaScriptHandler(rootContext, 
-				blockHelper, literalHelper, refHelper, typeHelper, binaryOperatorHelper, unaryOperatorHelper, 
-				functionCallHelper, methodCallHelper, statementHelper, declarationHelper, 
-				arrayHelper, mapHelper, lambdaHelper);
-		
-		return handler;
+	public BlockHelper initBlockHelper() {
+		return new ScriptBlockHelper();
+	}
+
+	public StatementHelper initStatementHelper() {
+		return new ScriptStatementHelper();
+	}
+
+	public DeclarationHelper initDeclarationHelper() {
+		return new ScriptDeclarationHelper();
+	}
+
+	public TypeHelper initTypeHelper() {
+		return new ScriptTypeHelper();
+	}
+
+	protected LiteralHelper initLiteralHelper() {
+		return new ExprLiteralHelper();
+	}
+
+	protected BinaryOperatorHelper initBinaryOperatorHelper() {
+		return new ExprBinaryOperatorHelper();
+	}
+
+	protected UnaryOperatorHelper initUnaryOperatorHelper() {
+		return  new ExprUnaryOperatorHelper();
+	}
+
+	protected FunctionCallHelper initFunctionCallHelper() {
+		return new ExprFunctionCallHelper();
+	}
+
+	protected MapHelper initMapHelper() {
+		return new ExprMapHelper();
 	}
 
 	@Override
-	protected Module build(FormulaScriptHandler handler, String expression) {
+	protected FormulaHandler newHandler(RootBuildContext rootContext,
+			BlockHelper blockHelper, LiteralHelper literalHelper,
+			RefHelper refHelper, TypeHelper typeHelper,
+			BinaryOperatorHelper binaryOperatorHelper,
+			UnaryOperatorHelper unaryOperatorHelper,
+			FunctionCallHelper functionCallHelper,
+			MethodCallHelper methodCallHelper, StatementHelper statementHelper,
+			DeclarationHelper declarationHelper, ArrayHelper arrayHelper,
+			MapHelper mapHelper, LambdaHelper lambdaHelper) {
+		return new FormulaScriptHandler(rootContext, 
+				blockHelper, literalHelper, refHelper, typeHelper, binaryOperatorHelper, unaryOperatorHelper, 
+				functionCallHelper, methodCallHelper, statementHelper, declarationHelper, 
+				arrayHelper, mapHelper, lambdaHelper);
+	}
+
+	@Override
+	protected Module build(FormulaHandler handler, String expression) {
 		CharStream input = new ANTLRInputStream(expression);
 		FormulaScriptLexer lexer = new FormulaScriptLexer(input);
 		TokenStream tokenStream = new CommonTokenStream(lexer);
@@ -90,7 +118,7 @@ public class FormulaScriptBuilder extends AbstractFormulaBuilder<Module, Formula
 	}
 
 	@Override
-	protected Module build(FormulaScriptHandler handler, FormulaSource source) {
+	protected Module build(FormulaHandler handler, FormulaSource source) {
 		return build(handler, source.getSourceString());
 	}
 }

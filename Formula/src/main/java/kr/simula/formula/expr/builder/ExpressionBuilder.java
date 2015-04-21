@@ -19,16 +19,21 @@ import kr.simula.formula.antlr.FormulaParser;
 import kr.simula.formula.antlr.FormulaParser.FormulaExpressionContext;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.builder.AbstractFormulaBuilder;
+import kr.simula.formula.core.builder.FormulaHandler;
 import kr.simula.formula.core.builder.FormulaSource;
 import kr.simula.formula.core.builder.RootBuildContext;
 import kr.simula.formula.core.builder.helper.ArrayHelper;
 import kr.simula.formula.core.builder.helper.BinaryOperatorHelper;
+import kr.simula.formula.core.builder.helper.BlockHelper;
+import kr.simula.formula.core.builder.helper.DeclarationHelper;
 import kr.simula.formula.core.builder.helper.FunctionCallHelper;
 import kr.simula.formula.core.builder.helper.LambdaHelper;
 import kr.simula.formula.core.builder.helper.LiteralHelper;
 import kr.simula.formula.core.builder.helper.MapHelper;
 import kr.simula.formula.core.builder.helper.MethodCallHelper;
 import kr.simula.formula.core.builder.helper.RefHelper;
+import kr.simula.formula.core.builder.helper.StatementHelper;
+import kr.simula.formula.core.builder.helper.TypeHelper;
 import kr.simula.formula.core.builder.helper.UnaryOperatorHelper;
 import kr.simula.formula.expr.Expr;
 
@@ -43,26 +48,41 @@ import org.antlr.v4.runtime.TokenStream;
  * @author Ikchan Kwon
  *
  */
-public class ExpressionBuilder extends AbstractFormulaBuilder<Expr, ExpressionHandler> {
+public class ExpressionBuilder extends AbstractFormulaBuilder<Expr> {
 
-	protected LiteralHelper literalHelper = new ExprLiteralHelper();
-	protected RefHelper refHelper = new RefHelper();
-	protected BinaryOperatorHelper binaryOperatorHelper = new ExprBinaryOperatorHelper();
-	protected UnaryOperatorHelper unaryOperatorHelper = new ExprUnaryOperatorHelper();
-	protected FunctionCallHelper functionCallHelper = new ExprFunctionCallHelper();
-	protected MethodCallHelper methodCallHelper = new MethodCallHelper();
-	protected LambdaHelper lambdaHelper = new LambdaHelper();
+	protected LiteralHelper initLiteralHelper() {
+		return new ExprLiteralHelper();
+	}
 
-	protected ArrayHelper arrayHelper = new ArrayHelper();
-	protected MapHelper mapHelper = new ExprMapHelper();
-	
-	
-	
+	protected BinaryOperatorHelper initBinaryOperatorHelper() {
+		return new ExprBinaryOperatorHelper();
+	}
+
+	protected UnaryOperatorHelper initUnaryOperatorHelper() {
+		return  new ExprUnaryOperatorHelper();
+	}
+
+	protected FunctionCallHelper initFunctionCallHelper() {
+		return new ExprFunctionCallHelper();
+	}
+
+	protected MapHelper initMapHelper() {
+		return new ExprMapHelper();
+	}
+
 	@Override
-	public ExpressionHandler newHandler(RootBuildContext rootContext) {
+	protected FormulaHandler newHandler(RootBuildContext rootContext,
+			BlockHelper blockHelper, LiteralHelper literalHelper,
+			RefHelper refHelper, TypeHelper typeHelper,
+			BinaryOperatorHelper binaryOperatorHelper,
+			UnaryOperatorHelper unaryOperatorHelper,
+			FunctionCallHelper functionCallHelper,
+			MethodCallHelper methodCallHelper, StatementHelper statementHelper,
+			DeclarationHelper declarationHelper, ArrayHelper arrayHelper,
+			MapHelper mapHelper, LambdaHelper lambdaHelper) {
 		return new ExpressionHandler(rootContext, 
-				null, literalHelper, refHelper, null, binaryOperatorHelper, unaryOperatorHelper, 
-				functionCallHelper, methodCallHelper, null, null,  
+				blockHelper, literalHelper, refHelper, typeHelper , binaryOperatorHelper, unaryOperatorHelper, 
+				functionCallHelper, methodCallHelper, statementHelper, declarationHelper,  
 				arrayHelper, mapHelper, lambdaHelper);
 	}
 	
@@ -74,7 +94,7 @@ public class ExpressionBuilder extends AbstractFormulaBuilder<Expr, ExpressionHa
 	 * @param expression
 	 * @return
 	 */
-	protected Expr build(ExpressionHandler handler, String expression){
+	protected Expr build(FormulaHandler handler, String expression){
 		CharStream input = new ANTLRInputStream(expression);
 		FormulaLexer lexer = new FormulaLexer(input);
 		TokenStream tokenStream = new CommonTokenStream(lexer);
@@ -88,7 +108,7 @@ public class ExpressionBuilder extends AbstractFormulaBuilder<Expr, ExpressionHa
 	}
 	
 	@Override
-	protected Expr build(ExpressionHandler handler, FormulaSource source) {
+	protected Expr build(FormulaHandler handler, FormulaSource source) {
 		return build(handler, source.getSourceString());
 	}
 }

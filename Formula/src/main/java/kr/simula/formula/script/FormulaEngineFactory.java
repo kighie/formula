@@ -14,7 +14,11 @@
  */
 package kr.simula.formula.script;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineFactory;
@@ -24,113 +28,133 @@ import javax.script.ScriptEngineFactory;
  *
  */
 public class FormulaEngineFactory implements ScriptEngineFactory{
+	private static List<String> ENGINE_EXTS;
+	private static List<String> MIME_TYPES;
+	private static List<String> NAMES;
 
-	/* (non-Javadoc)
-	 * @see javax.script.ScriptEngineFactory#getEngineName()
-	 */
-	@Override
-	public String getEngineName() {
-		// TODO Auto-generated method stub
-		return null;
+	static {
+		ENGINE_EXTS = new ArrayList<String>();
+		ENGINE_EXTS.add("fo");
+		ENGINE_EXTS = Collections.unmodifiableList(ENGINE_EXTS);
+		
+		MIME_TYPES = new ArrayList<String>();
+		MIME_TYPES.add("text");
+		MIME_TYPES.add("text/formula");
+		MIME_TYPES.add("application/formula");
+		MIME_TYPES = Collections.unmodifiableList(MIME_TYPES);
+		
+		NAMES = new ArrayList<String>();
+		NAMES.add("formula");
+		NAMES = Collections.unmodifiableList(NAMES);
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.script.ScriptEngineFactory#getEngineVersion()
-	 */
-	@Override
-	public String getEngineVersion() {
-		// TODO Auto-generated method stub
-		return null;
+	private final Map<String,String> props = new HashMap<String, String>();
+	private boolean initialized;
+
+	public void initialize() {
+		if(!initialized){
+			initProps();
+		}
+		
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.script.ScriptEngineFactory#getExtensions()
-	 */
-	@Override
-	public List<String> getExtensions() {
-		// TODO Auto-generated method stub
-		return null;
+	public void destroy() {
+		if(initialized){
+			
+		}
+		
+	}
+	
+	protected void initProps(){
+		props.put(ScriptEngine.ENGINE, "Formula");
+		props.put(ScriptEngine.ENGINE_VERSION, "0.0.1");
+		props.put(ScriptEngine.NAME, "Formula Script");
+		props.put(ScriptEngine.LANGUAGE, "Formula Script");
+		props.put(ScriptEngine.LANGUAGE_VERSION, "0.0.1");
 	}
 
-	/* (non-Javadoc)
-	 * @see javax.script.ScriptEngineFactory#getMimeTypes()
-	 */
-	@Override
-	public List<String> getMimeTypes() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see javax.script.ScriptEngineFactory#getNames()
-	 */
-	@Override
-	public List<String> getNames() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see javax.script.ScriptEngineFactory#getLanguageName()
-	 */
-	@Override
-	public String getLanguageName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see javax.script.ScriptEngineFactory#getLanguageVersion()
-	 */
-	@Override
-	public String getLanguageVersion() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see javax.script.ScriptEngineFactory#getParameter(java.lang.String)
-	 */
-	@Override
-	public Object getParameter(String key) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see javax.script.ScriptEngineFactory#getMethodCallSyntax(java.lang.String, java.lang.String, java.lang.String[])
-	 */
-	@Override
-	public String getMethodCallSyntax(String obj, String m, String... args) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see javax.script.ScriptEngineFactory#getOutputStatement(java.lang.String)
-	 */
-	@Override
-	public String getOutputStatement(String toDisplay) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see javax.script.ScriptEngineFactory#getProgram(java.lang.String[])
-	 */
-	@Override
-	public String getProgram(String... statements) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see javax.script.ScriptEngineFactory#getScriptEngine()
-	 */
+    public String getName() {
+        return (String)getParameter(ScriptEngine.NAME);
+    }
+    
+    public String getEngineName() {
+        return (String)getParameter(ScriptEngine.ENGINE);
+    }
+    
+    public String getEngineVersion() {
+        return (String)getParameter(ScriptEngine.ENGINE_VERSION);
+    }
+    
+    public String getLanguageName() {
+        return (String)getParameter(ScriptEngine.LANGUAGE);
+    }
+    
+    public String getLanguageVersion() {
+        return (String)getParameter(ScriptEngine.LANGUAGE_VERSION);
+    }
+    
 	@Override
 	public ScriptEngine getScriptEngine() {
-		// TODO Auto-generated method stub
-		return null;
+		FormulaEngine engine = new FormulaEngine();
+		return engine;
+	}
+
+	@Override
+	public List<String> getNames() {
+		return NAMES;
+	}
+
+
+	@Override
+	public Object getParameter(String key) {
+		return props.get(key);
+	}
+
+	
+	@Override
+	public String getMethodCallSyntax(String obj, String method, String... args) {
+        String ret = obj + "." + method + "(";
+        int len = args.length;
+        if (len == 0) {
+            ret += ")";
+            return ret;
+        }
+        
+        for (int i = 0; i < len; i++) {
+            ret += args[i];
+            if (i != len - 1) {
+                ret += ",";
+            } else {
+                ret += ")";
+            }
+        }
+        return ret;
+	}
+
+	@Override
+	public String getOutputStatement(String toDisplay) {
+        return "print(" + toDisplay + ")";
+	}
+
+	@Override
+	public String getProgram(String... statements) {
+        int len = statements.length;
+        String ret = "";
+        for (int i = 0; i < len; i++) {
+            ret += statements[i] + ";";
+        }
+        
+        return ret;
+	}
+
+	@Override
+	public List<String> getExtensions() {
+		return ENGINE_EXTS;
+	}
+
+	@Override
+	public List<String> getMimeTypes() {
+		return MIME_TYPES;
 	}
 
 }

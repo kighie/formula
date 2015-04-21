@@ -19,10 +19,10 @@ package kr.simula.formula.core.builder;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public interface FormulaHandlerFactory<T extends FormulaHandler> {
+public interface FormulaHandlerFactory {
 
-	public abstract T newHandler(RootBuildContext rootContext) ;
+	public abstract FormulaHandler newHandler(RootBuildContext rootContext) ;
 
-	public abstract T newHandler() ;
+	public abstract FormulaHandler newHandler() ;
 	
 }

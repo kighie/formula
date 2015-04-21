@@ -14,14 +14,35 @@
  */
 package kr.simula.formula.script;
 
-import kr.simula.formula.core.GrammarTokens;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineFactory;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+
+import org.junit.Test;
 
 /**
  * <pre></pre>
  * @author kighie@gmail.com
  * @since 1.0
  */
-public interface ScriptTokens extends GrammarTokens {
+public class Jsr233 {
 
-	String MODULE = "MODULE";
+	@Test
+	public void test(){
+		ScriptEngineManager factory = new ScriptEngineManager();
+		
+		for( ScriptEngineFactory f : factory.getEngineFactories() ){
+			System.out.println(f);
+		}
+		
+        ScriptEngine engine = factory.getEngineByName("formula");
+        // evaluate JavaScript code from String
+        try {
+			engine.eval("print('Hello, World')");
+		} catch (ScriptException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

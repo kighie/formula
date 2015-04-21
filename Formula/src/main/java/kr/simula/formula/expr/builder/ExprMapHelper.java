@@ -17,11 +17,11 @@ package kr.simula.formula.expr.builder;
 import java.util.Map;
 
 import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.GrammarTokens;
 import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.builder.helper.MapHelper;
 import kr.simula.formula.core.factory.MapGettableFactory;
 import kr.simula.formula.core.wrapper.SimpleMapGettable;
-import kr.simula.formula.expr.ExprTokens;
 
 /**
  * <pre>
@@ -42,7 +42,7 @@ public class ExprMapHelper extends MapHelper {
 	
 	@Override
 	protected void initDefaults() {
-		setFactory(ExprTokens.SIMPLE_MAP, simpleMapFactory);
+		setFactory(GrammarTokens.SIMPLE_MAP, simpleMapFactory);
 	}
 
 }
