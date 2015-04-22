@@ -249,6 +249,7 @@ public class FunctionCallHelper extends AbstractHelper<FunctionCallFactory> {
 		FunctionCallFactory factory = null;
 		
 		Function<?> function = context.getLocalFn(name);
+		
 		if(function != null){
 			factory = localFunctionCallFactory;
 		}
@@ -258,7 +259,7 @@ public class FunctionCallHelper extends AbstractHelper<FunctionCallFactory> {
 		}
 		
 		if(factory == null){
-			throw new BuildException("FunctionCallFactory for " + name + " is not registered.");
+			throw new BuildException("Function '" + name + "' is not registered.");
 		}
 		return factory.create(context, name, args);
 	}

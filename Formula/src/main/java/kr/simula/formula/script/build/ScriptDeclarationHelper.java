@@ -17,6 +17,7 @@ package kr.simula.formula.script.build;
 import java.util.List;
 
 import kr.simula.formula.core.BlockStatement;
+import kr.simula.formula.core.Function;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.builder.BuildContext;
@@ -56,6 +57,10 @@ public class ScriptDeclarationHelper extends DeclarationHelper {
 		public ArgDeclRef create(BuildContext context, Class<?> type,
 				String name) {
 			ArgDeclRef arg = new ArgDeclRef(type,new QName(name));
+			if(Function.class.isAssignableFrom(type)){
+				
+			}
+			System.out.println("ArgDeclRef :: " + arg);
 			return arg;
 		}
 		
@@ -69,7 +74,7 @@ public class ScriptDeclarationHelper extends DeclarationHelper {
 			FunctionDeclStatement stmt = new FunctionDeclStatement(retType, name, args);
 			
 			LocalFunction<?> localFunction = stmt.getLocalFunction();
-			current.registerLocalFn(name, localFunction);
+			current.getParent().registerLocalFn(name, localFunction);
 			
 			return stmt;
 		}

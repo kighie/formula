@@ -14,6 +14,7 @@
  */
 package kr.simula.formula.core.builder.helper;
 
+import kr.simula.formula.core.Function;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.QName;
@@ -21,6 +22,7 @@ import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.ref.ArrayElementRef;
 import kr.simula.formula.core.ref.FieldRef;
+import kr.simula.formula.core.ref.FunctionRef;
 import kr.simula.formula.core.ref.ParameterRef;
 import kr.simula.formula.core.util.GettableUtils;
 
@@ -44,12 +46,12 @@ public class RefHelper {
 	public Ref get(BuildContext context, String name){
 		QName qname = makeQName(context, name);
 		Ref ref = context.getRef(qname);
-		System.out.println("REF A :: " + ref);
+
 		if(ref != null){
 			return ref;
 		}
 
-		System.out.println("REF B :: " + ref);
+
 		ref = newRef(context, null, qname);
 		return ref;
 	}
@@ -68,28 +70,40 @@ public class RefHelper {
 		QName qname = makeQName(context, parent, name);
 		Ref ref = context.getRef(qname);
 
-		System.out.println("REF1 :: " + ref);
 		if(ref != null){
 			return ref;
 		}
 		
 		ref = newRef(context, parent, qname);
-		System.out.println("REF2 :: " + ref);
+
 		return ref;
 	}
 	
 	protected Ref newRef(BuildContext context, Ref parent, QName qname) {
-		Ref ref = create(parent, qname);
+		Ref ref = create(context, parent, qname);
 		context.registerRef(qname, ref);
 		return ref;
 	}
 	
+	/**
+	 * TODO method closure
+	 * @param context
+	 * @param parent
+	 * @param qname
+	 * @return
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	protected Ref create(Ref parent, QName qname){
+	protected Ref create(BuildContext context, Ref parent, QName qname){
 		if(parent != null){
 			return new FieldRef(qname, (Gettable<?>)parent);
 		} else {
-			return new ParameterRef(qname);
+			Function<?> function = context.getLocalFn(qname.getName());
+			if(function != null){
+				FunctionRef closure = new FunctionRef(qname, function);
+				return closure;
+			} else {
+				return new ParameterRef(qname);
+			}
 		}
 	}
 	
@@ -118,6 +132,7 @@ public class RefHelper {
 
 
 	/**<pre>
+	 * Build array reference 
 	 * </pre>
 	 * @param current
 	 * @param name
@@ -134,6 +149,7 @@ public class RefHelper {
 
 
 	/**<pre>
+	 * Build array reference
 	 * </pre>
 	 * @param current
 	 * @param parent

@@ -33,6 +33,7 @@ public class ScopeBuildContext implements BuildContext {
 	private BuildContext parent;
 	
 	private Map<QName, Ref> referenceMap = new HashMap<QName, Ref>();
+	private Map<String, Function<?>> functionMap = new HashMap<String, Function<?>>();
 	
 	public ScopeBuildContext(BuildContext parent) {
 		this.parent = parent;
@@ -51,7 +52,10 @@ public class ScopeBuildContext implements BuildContext {
 	 * @see kr.simula.formula.core.builder.BuildContext#registerLocalFn(java.lang.String, kr.simula.formula.core.Function)
 	 */
 	public void registerLocalFn(String name, Function<?> fn) {
-		parent.registerLocalFn(name, fn);
+		if(functionMap.containsKey(name)){
+			throw new BuildException("Local function '" + name + " is already registered.");
+		}
+		functionMap.put(name, fn);
 	}
 
 	/**
@@ -60,7 +64,13 @@ public class ScopeBuildContext implements BuildContext {
 	 * @see kr.simula.formula.core.builder.BuildContext#getLocalFn(java.lang.String)
 	 */
 	public Function<?> getLocalFn(String name) {
-		return parent.getLocalFn(name);
+		Function<?> function = functionMap.get(name);
+		
+		if(function != null){
+			return function;
+		} else {
+			return parent.getLocalFn(name);
+		}
 	}
 
 	public Ref getRef(QName qname){

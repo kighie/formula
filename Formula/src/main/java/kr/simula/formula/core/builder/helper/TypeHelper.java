@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import kr.simula.formula.core.Function;
 import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.util.ArrayUtils;
@@ -59,7 +60,7 @@ public class TypeHelper {
 		registerType(VOID, Void.class);
 		registerType(System, System.class);
 		registerType(MAP, Map.class);
-		registerType(FUNCTION, Map.class);
+		registerType(FUNCTION, Function.class);
 
 		registerType("BigDecimal", BigDecimal.class);
 		registerType("String", String.class);

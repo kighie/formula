@@ -1,0 +1,51 @@
+package kr.simula.formula.core.ref;
+
+import kr.simula.formula.core.Context;
+import kr.simula.formula.core.Function;
+import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.QName;
+import kr.simula.formula.core.Ref;
+
+@SuppressWarnings("rawtypes")
+public class FunctionRef implements Ref, Gettable<Function> {
+
+	protected final QName qname;
+	protected final Function<?> function;
+	
+	public FunctionRef(QName qname, Function<?> function) {
+		super();
+		this.qname = qname;
+		this.function = function;
+	}
+	
+	@Override
+	public ValueType valueType() {
+		return ValueType.FUNCTION;
+	}
+
+	@Override
+	public Class<Function> type() {
+		return Function.class;
+	}
+	
+	@Override
+	public Function<?> get(Context context) {
+		return function;
+	}
+	
+	@Override
+	public String getExpression() {
+		return qname.toString();
+	}
+
+	@Override
+	public QName qualifiedName() {
+		return qname;
+	}
+	
+	@Override
+	public String toString() {
+		return "{fn-closure:" + getExpression() + "}";
+	}
+
+}
