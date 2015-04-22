@@ -18,8 +18,11 @@ import java.io.File;
 
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Node;
+import kr.simula.formula.core.QName;
+import kr.simula.formula.core.RootContext;
 import kr.simula.formula.core.builder.FormulaSource;
 import kr.simula.formula.script.build.FormulaScriptBuilder;
+import kr.simula.formula.util.StopWatch;
 
 import org.junit.BeforeClass;
 
@@ -38,7 +41,59 @@ public abstract class AbstractScriptTests {
 		builder.initialize();
 	}
 	
+	protected void testBasic(String scriptFilePath){
+		testBasic(scriptFilePath, new RootContext());
+	}
+	
+	protected void testBasic(String scriptFilePath, RootContext context){
+		StopWatch stopWatch = new StopWatch();
+		stopWatch.start();
+		
+		Module script = buildFromFile(scriptFilePath);
+		
+		System.out.println(scriptFilePath);
+		System.out.println(script.getExpression());
+		System.out.println("BUILD Time : " + stopWatch.ellapsedTime());
+		
+		stopWatch.reset();
+		
+		context.setReference(new QName(new QName("System"), "out"), System.out);
+		
+		script.eval(context);
+		
+		System.out.println("Running Time : " + stopWatch.ellapsedTime());
+	}
 
+
+	public void performanceTest(String scriptFilePath, int loopCount, RootContext context){
+		StopWatch stopWatch = new StopWatch();
+		stopWatch.start();
+		
+		Module script = buildFromFile(scriptFilePath);
+		
+		System.out.println(script.getExpression());
+		System.out.println("BUILD Time : " + stopWatch.ellapsedTime());
+		
+		stopWatch.reset();
+		
+		context.setReference(new QName(new QName("System"), "out"), System.out);
+		context.setParameter("skipPrint", true);
+		
+		for(int i=0;i<loopCount;i++){
+			script.eval(context);
+		}
+		
+		
+		System.out.println("Running " + loopCount + " Times : " + stopWatch.ellapsedTime());
+		
+	}
+	
+
+	public void performanceTest(String scriptFilePath, int loopCount){
+		performanceTest(scriptFilePath, loopCount, new RootContext());
+	}
+	
+	
 	protected Module buildScript(String expr){
 		Module exprNode = (Module)builder.build(expr);
 		return exprNode;

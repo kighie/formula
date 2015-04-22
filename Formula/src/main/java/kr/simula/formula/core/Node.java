@@ -34,6 +34,7 @@ public interface Node {
 		OBJECT,
 		ARRAY, 
 		MAP,
+		FUNCTION,
 		UNKNOWN
 	}
 	

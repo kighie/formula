@@ -14,6 +14,8 @@
  */
 package kr.simula.formula.script;
 
+import kr.simula.formula.core.RootContext;
+
 import org.junit.Test;
 
 /**
@@ -21,16 +23,23 @@ import org.junit.Test;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class ArrayScriptTests extends AbstractScriptTests {
+public class ClosureTest extends AbstractScriptTests {
 
 	@Test
-	public void script1(){
-		testBasic("/kr/simula/formula/script/ArrayScript.fo");
+	public void basic(){
+		RootContext context = new RootContext();
+		context.setParameter("sampleObject", new SampleObject());
+		
+		testBasic("/kr/simula/formula/script/Closure.fo",context);
 	}
 	
 
 	@Test
 	public void performance(){
-		performanceTest("/kr/simula/formula/script/ArrayScript.fo", 1000);
+		RootContext context = new RootContext();
+		context.setParameter("sampleObject", new SampleObject());
+		
+		performanceTest("/kr/simula/formula/script/Closure.fo", 1000, context);
 	}
+	
 }

@@ -1,0 +1,40 @@
+
+void println(object value) { 
+	if( not skipPrint ){
+		System.out.println(value);
+	}
+} 
+
+
+println( sampleObject.testMethod(3));
+println( sampleObject.testMethod(4));
+println( sampleObject.testMethod);
+
+/*
+number fnA(number a){
+	return a * 3;
+}
+
+
+number fnB(number a){
+	return a * 7;
+}
+
+number fnC(number a){
+	return a * 13;
+}
+
+number fnTest(function fn, number num) {
+	return fn(num / 3.1);
+}
+
+println( fnTest(fnA, 4) );
+println( fnTest(fnB, 4) );
+println( fnTest(fnC, 4) );
+
+function[] fnArray = [fnA, fnB, fnC];
+
+foreach (function f in fnArray){
+	println( fnTest(f, 5) );
+}
+*/

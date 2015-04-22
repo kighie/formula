@@ -14,23 +14,18 @@
  */
 package kr.simula.formula.script;
 
-import org.junit.Test;
+import java.math.BigDecimal;
 
 /**
  * <pre></pre>
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class ArrayScriptTests extends AbstractScriptTests {
+public class SampleObject {
 
-	@Test
-	public void script1(){
-		testBasic("/kr/simula/formula/script/ArrayScript.fo");
-	}
 	
-
-	@Test
-	public void performance(){
-		performanceTest("/kr/simula/formula/script/ArrayScript.fo", 1000);
+	public BigDecimal testMethod(BigDecimal number){
+//		new Exception().printStackTrace();
+		return number.add(new BigDecimal(33));
 	}
 }

@@ -36,8 +36,7 @@ public class MethodCallHelper {
 		QName qname = new QName(parent.qualifiedName(), name);
 		
 		MethodRef<?> methodRef = newMethodRef(context, parent, qname, args);
-		
-		context.registerRef(qname, methodRef);
+
 		return methodRef;
 	}
 	

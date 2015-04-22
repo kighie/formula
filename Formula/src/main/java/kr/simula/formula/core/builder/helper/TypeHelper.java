@@ -41,6 +41,7 @@ public class TypeHelper {
 	public static final String VOID = "void";
 	public static final String System = "System";
 	public static final String MAP = "map";
+	public static final String FUNCTION = "function";
 	
 	/**
 	 * 
@@ -58,6 +59,7 @@ public class TypeHelper {
 		registerType(VOID, Void.class);
 		registerType(System, System.class);
 		registerType(MAP, Map.class);
+		registerType(FUNCTION, Map.class);
 
 		registerType("BigDecimal", BigDecimal.class);
 		registerType("String", String.class);

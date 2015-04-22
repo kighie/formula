@@ -34,7 +34,7 @@ import kr.simula.formula.core.util.GettableUtils;
 public class RefHelper {
 
 	/**
-	 * TODO
+	 * 
 	 * <pre>
 	 * </pre>
 	 * @param context
@@ -44,11 +44,12 @@ public class RefHelper {
 	public Ref get(BuildContext context, String name){
 		QName qname = makeQName(context, name);
 		Ref ref = context.getRef(qname);
-		
+		System.out.println("REF A :: " + ref);
 		if(ref != null){
 			return ref;
 		}
-		
+
+		System.out.println("REF B :: " + ref);
 		ref = newRef(context, null, qname);
 		return ref;
 	}
@@ -66,12 +67,14 @@ public class RefHelper {
 	public Ref get(BuildContext context, Ref parent, String name){
 		QName qname = makeQName(context, parent, name);
 		Ref ref = context.getRef(qname);
-		
+
+		System.out.println("REF1 :: " + ref);
 		if(ref != null){
 			return ref;
 		}
 		
 		ref = newRef(context, parent, qname);
+		System.out.println("REF2 :: " + ref);
 		return ref;
 	}
 	

@@ -14,6 +14,7 @@
  */
 package kr.simula.formula.core.ref;
 
+import cern.colt.Arrays;
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.QName;
@@ -63,6 +64,7 @@ public class MethodRef<T> extends ExternalRef<T> implements Ref, Gettable<T>, St
 		int i = 0;
 		for(Gettable<?> n : args){
 			argArr[i++] = n.get(context);
+//			System.out.println("n : " + n.getExpression() + "  " + n.getClass());
 		}
 		
 		Object bean = getBean(context);
@@ -83,7 +85,7 @@ public class MethodRef<T> extends ExternalRef<T> implements Ref, Gettable<T>, St
 		} else {
 			throw new RtException("Ref[" + qname + "] has no parent.");
 		}
-		
+//		System.err.println(bean + " : " + methodDelegator + " : " + Arrays.toString(argArr) + " \n\t" + returnValue);
 		return (T) returnValue;
 	}
 
