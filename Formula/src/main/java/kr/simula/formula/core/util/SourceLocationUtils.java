@@ -17,6 +17,7 @@ package kr.simula.formula.core.util;
 import kr.simula.formula.core.SourceLocation;
 
 import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.misc.Interval;
 
 /**
  * <pre></pre>
@@ -28,6 +29,8 @@ public class SourceLocationUtils {
 	public static SourceLocation createSourceLocation(Token token){
 		BaseSourceLocation loc = new BaseSourceLocation(token.getLine(), token.getCharPositionInLine(), 
 				token.getStartIndex(), token.getStopIndex());
+		loc.setSource(token.getText());
+		loc.setSource(token.getInputStream().getText(new Interval(token.getStartIndex() - token.getCharPositionInLine(), token.getStopIndex())));
 		return loc;
 	}
 
@@ -41,5 +44,6 @@ public class SourceLocationUtils {
 		BaseSourceLocation loc = new BaseSourceLocation(line, charPositionInLine);
 		return loc;
 	}
+	
 	
 }

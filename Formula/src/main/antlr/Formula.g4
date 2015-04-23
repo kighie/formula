@@ -16,6 +16,7 @@ grammar Formula;
 
 options {
 	language = Java;
+	
 }
 
 // use command line option : -package kr.simula.formula.antlr
@@ -52,6 +53,7 @@ options {
 
 /*
 @rulecatch {
+	
 	catch (RecognitionException re) {
 	    throw re;
 	}  
@@ -61,8 +63,8 @@ options {
 	    throw dsle;
 	}
 }
- */
- 
+*/
+
 @lexer::header {
 //	package kr.simula.formula.antlr;
 }

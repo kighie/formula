@@ -78,7 +78,6 @@ type returns [Class<?> typeClz]
 	('[' ']' 	{ $typeClz = handler.arrayType($typeClz); })?
 	;
 
-
 /* *************************************
  * declare function
  *************************************** */

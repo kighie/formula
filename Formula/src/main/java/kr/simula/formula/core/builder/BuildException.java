@@ -95,16 +95,8 @@ public class BuildException extends RuntimeException {
 		if(sourceLocation != null){
 			StringBuilder buf = new StringBuilder();
 			buf.append(super.toString());
-			buf.append("\n");
 			buf.append( " at [").append(sourceLocation.getLine()).append(",").append(sourceLocation.getCharPositionInLine()).append("] ");
 			
-//			if(token instanceof CommonToken){
-//				int index = ((CommonToken)token).getStartIndex();
-//				buf.append("\n").append( token.getInputStream().getText(new Interval(0, index)) );
-//			} else {
-//				CharStream stream = token.getInputStream();
-//				buf.append("\n").append( stream.getText(new Interval(0, stream.index())) );
-//			}
 			String source = sourceLocation.getSource();
 			if(source != null){
 				buf.append(source);

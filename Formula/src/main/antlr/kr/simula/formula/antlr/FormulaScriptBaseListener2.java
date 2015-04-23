@@ -3,21 +3,18 @@ package kr.simula.formula.antlr;
 
 	
 	import kr.simula.formula.script.*;
-	import kr.simula.formula.script.statement.*;
-	import kr.simula.formula.util.*;
+import kr.simula.formula.script.statement.*;
+import kr.simula.formula.util.*;
 
-
-//	package kr.simula.formula.antlr;
-	
 	import java.util.List;
-	import java.util.LinkedList;
-	
+import java.util.LinkedList;
+
 	import kr.simula.formula.core.*;
-	import kr.simula.formula.core.builder.*;
-	import kr.simula.formula.expr.*;
-	import kr.simula.formula.util.*;
+import kr.simula.formula.core.builder.*;
+import kr.simula.formula.expr.*;
+import kr.simula.formula.util.*;
 
-
+import org.antlr.v4.runtime.Parser;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -28,19 +25,33 @@ import org.antlr.v4.runtime.tree.TerminalNode;
  * which can be extended to create a listener which only needs to handle a subset
  * of the available methods.
  */
-public class FormulaScriptBaseListener implements FormulaScriptListener {
+public class FormulaScriptBaseListener2 implements FormulaScriptListener {
+	
+	private Parser recognizer;
+	
+	
+	public FormulaScriptBaseListener2(Parser recognizer) {
+		super();
+		this.recognizer = recognizer;
+	}
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunctionDecl(@NotNull FormulaScriptParser.FunctionDeclContext ctx) { }
+	@Override public void enterFunctionDecl(@NotNull FormulaScriptParser.FunctionDeclContext ctx) {
+		System.out.println("enterFunctionDecl :: " + ctx.getStart() ) ;
+		System.out.println("\t :: " + ctx.toInfoString(recognizer)) ;
+	}
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFunctionDecl(@NotNull FormulaScriptParser.FunctionDeclContext ctx) { }
+	@Override public void exitFunctionDecl(@NotNull FormulaScriptParser.FunctionDeclContext ctx) { 
+		System.out.println("exitFunctionDecl :: " + ctx.getStop() ) ;
+		System.out.println("\t :: " + ctx.toInfoString(recognizer)) ;
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -262,13 +273,18 @@ public class FormulaScriptBaseListener implements FormulaScriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFormulaTerm(@NotNull FormulaScriptParser.FormulaTermContext ctx) { }
+	@Override public void enterFormulaTerm(@NotNull FormulaScriptParser.FormulaTermContext ctx) { 
+		System.out.println("enterFormulaTerm :: " + ctx.getStart() ) ;
+		System.out.println("\t :: " + ctx.toInfoString(recognizer)) ;}
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFormulaTerm(@NotNull FormulaScriptParser.FormulaTermContext ctx) { }
+	@Override public void exitFormulaTerm(@NotNull FormulaScriptParser.FormulaTermContext ctx) {
+		System.out.println("exitFormulaTerm :: " + ctx.getStop() ) ;
+		System.out.println("\t :: " + ctx.toInfoString(recognizer)) ;
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -358,13 +374,19 @@ public class FormulaScriptBaseListener implements FormulaScriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFuncCallExp(@NotNull FormulaScriptParser.FuncCallExpContext ctx) { }
+	@Override public void enterFuncCallExp(@NotNull FormulaScriptParser.FuncCallExpContext ctx) {
+		System.out.println("enterFuncCallExp :: " + ctx.getStart() ) ;
+		System.out.println("\t :: " + ctx.toInfoString(recognizer)) ;
+	}
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFuncCallExp(@NotNull FormulaScriptParser.FuncCallExpContext ctx) { }
+	@Override public void exitFuncCallExp(@NotNull FormulaScriptParser.FuncCallExpContext ctx) {
+		System.out.println("exitFuncCallExp :: " + ctx.getStop() ) ;
+		System.out.println("\t :: " + ctx.toInfoString(recognizer)) ;
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -466,13 +488,19 @@ public class FormulaScriptBaseListener implements FormulaScriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunctionCallStatement(@NotNull FormulaScriptParser.FunctionCallStatementContext ctx) { }
+	@Override public void enterFunctionCallStatement(@NotNull FormulaScriptParser.FunctionCallStatementContext ctx) { 
+		System.out.println("enterFunctionCallStatement :: " + ctx.getStart() ) ;
+		System.out.println("\t :: " + ctx.toInfoString(recognizer)) ;
+	}
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFunctionCallStatement(@NotNull FormulaScriptParser.FunctionCallStatementContext ctx) { }
+	@Override public void exitFunctionCallStatement(@NotNull FormulaScriptParser.FunctionCallStatementContext ctx) { 
+		System.out.println("exitFunctionCallStatement :: " + ctx.getStart() ) ;
+		System.out.println("\t :: " + ctx.toInfoString(recognizer)) ;
+	}
 	/**
 	 * {@inheritDoc}
 	 *

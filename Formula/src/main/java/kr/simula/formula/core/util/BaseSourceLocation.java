@@ -89,5 +89,10 @@ public class BaseSourceLocation implements SourceLocation {
 		this.source = source;
 	}
 
-	
+//	@Override
+//	public String toString() {
+//		StringBuilder buf = new StringBuilder();
+//		buf.append(str)
+//		return buf.toString();
+//	}
 }

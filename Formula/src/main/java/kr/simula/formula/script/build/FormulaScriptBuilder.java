@@ -14,10 +14,12 @@
  */
 package kr.simula.formula.script.build;
 
+import kr.simula.formula.antlr.FormulaScriptBaseListener2;
 import kr.simula.formula.antlr.FormulaScriptLexer;
 import kr.simula.formula.antlr.FormulaScriptParser;
 import kr.simula.formula.antlr.FormulaScriptParser.FormulaScriptContext;
 import kr.simula.formula.core.builder.AbstractFormulaBuilder;
+import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.builder.FormulaHandler;
 import kr.simula.formula.core.builder.FormulaSource;
 import kr.simula.formula.core.builder.RootBuildContext;
@@ -45,6 +47,7 @@ import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.TokenStream;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 /**
  * <pre></pre>
@@ -113,8 +116,29 @@ public class FormulaScriptBuilder extends AbstractFormulaBuilder<Module> {
 		FormulaScriptParser parser =new FormulaScriptParser(tokenStream);
 		parser.setHandler(handler);
 		parser.addErrorListener(errorAdapter);
-		FormulaScriptContext ctx = parser.formulaScript();
-		return ctx.module;
+		
+		FormulaScriptBaseListener2 extractor = new FormulaScriptBaseListener2(parser);
+		parser.addParseListener(extractor);
+		
+		FormulaScriptContext ctx = null;
+		
+		try {
+			ctx = parser.formulaScript();
+			
+			return ctx.module;
+		} catch (BuildException e) {
+			BuildException be = (BuildException)e;
+			be.setLocation(parser.getCurrentToken());
+			System.out.println(be);
+
+			if( ctx != null){
+				ParseTreeWalker walker = new ParseTreeWalker(); // create standard walker
+				
+				walker.walk(extractor, ctx); // initiate walk of tree with listener
+			}
+			
+			throw be;
+		}
 	}
 
 	@Override
