@@ -23,9 +23,9 @@ import kr.simula.formula.core.builder.BuildException;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public abstract class ExternalRef<T> extends GenericRef implements Gettable<T> {
+public abstract class ExternalRef<T> extends GenericRef implements Gettable<T>, TypeLateBinding<T> {
 
-	private Class<T> type;
+	private Class<? extends T> type;
 	
 	/**
 	 * @param qname
@@ -39,7 +39,7 @@ public abstract class ExternalRef<T> extends GenericRef implements Gettable<T> {
 		return type;
 	}
 
-	public void setRequiredType(Class<T> requiredType) {
+	public void setRequiredType(Class<? extends T> requiredType) {
 		if((this.type != null) && (requiredType.isAssignableFrom( this.type) )){
 			throw new BuildException("Ambiguous Ref type:" + this.type + "<>" + requiredType );
 		}

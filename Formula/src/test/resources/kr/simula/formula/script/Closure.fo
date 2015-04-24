@@ -7,7 +7,7 @@ void println(object value) {
 
 
 
-number testFn(number argA, number argB) {
+number localFunc(number argA, number argB) {
 	number retVal;
 	if(argA > argB) {
 		println(argA & 'X' & argB);
@@ -18,6 +18,10 @@ number testFn(number argA, number argB) {
 	}
 	return retVal;
 } 
+
+number fnA(number a){
+	return a * 3;
+}
 
 number fnB(number a){
 	return a * 7;
@@ -40,10 +44,17 @@ println( fnTest(fnA, 4) );
 println( fnTest(fnB, 4) );
 println( fnTest(fnC, 4) );
 
-/*
-function[] fnArray = [fnA, fnB, fnC];
+
+println("=================");
+
+function[] fnArray <- [fnA, fnB, fnC];
 
 foreach (function f in fnArray){
-	println( fnTest(f, 5) );
+	println( fnTest(EVEN, 5) );
 }
-*/
+
+
+println("=================");
+
+println( fnTest(ROUND, 4) );
+

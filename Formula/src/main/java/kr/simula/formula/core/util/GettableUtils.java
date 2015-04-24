@@ -23,6 +23,7 @@ import kr.simula.formula.core.Node;
 import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.ref.ArrayElementRef;
 import kr.simula.formula.core.ref.ExternalRef;
+import kr.simula.formula.core.ref.TypeLateBinding;
 import kr.simula.formula.core.wrapper.DecimalGettableWrapper;
 import kr.simula.formula.core.wrapper.StringGettableWrapper;
 
@@ -59,8 +60,8 @@ public class GettableUtils {
 		if(node instanceof Gettable){
 			Gettable gettable = (Gettable)node;
 			Class<?> nodeType = gettable.type();
-			if(nodeType == null && gettable instanceof ExternalRef){
-				((ExternalRef)gettable).setRequiredType(type);
+			if(nodeType == null && gettable instanceof TypeLateBinding){
+				((TypeLateBinding)gettable).setRequiredType(type);
 				return (Gettable<T>)node;
 			}
 			if(type.isAssignableFrom( nodeType )){
@@ -76,7 +77,7 @@ public class GettableUtils {
 		if(node instanceof Gettable){
 			Gettable gettable = (Gettable)node;
 			Class<?> nodeType = gettable.type();
-			if(nodeType == null && gettable instanceof ExternalRef){
+			if(nodeType == null && gettable instanceof TypeLateBinding){
 				return true;
 			}
 			if(type.isAssignableFrom( nodeType )){
@@ -98,7 +99,7 @@ public class GettableUtils {
 		if(node instanceof Gettable){
 			Gettable gettable = (Gettable)node;
 			Class<?> nodeType = gettable.type();
-			if(nodeType == null && gettable instanceof ExternalRef){
+			if(nodeType == null && gettable instanceof TypeLateBinding){
 				return true;
 			}
 			if(nodeType.isArray()){
@@ -115,7 +116,7 @@ public class GettableUtils {
 	public static Gettable<Comparable<?>> checkComparableGettable(Node node){
 		if(node instanceof Gettable){
 			Class<?> type = ((Gettable) node).type();
-			if(type == null && node instanceof ExternalRef){
+			if(type == null && node instanceof TypeLateBinding){
 				return (Gettable<Comparable<?>>)node;
 			}
 			if(Comparable.class.isAssignableFrom( type )){
@@ -150,8 +151,8 @@ public class GettableUtils {
 		Class<?> type = node.type();
 		
 		if(type == null) {
-			if(node instanceof ExternalRef){
-				((ExternalRef)node).setRequiredType(BigDecimal.class);
+			if(node instanceof TypeLateBinding){
+				((TypeLateBinding)node).setRequiredType(BigDecimal.class);
 			} else if(node instanceof ArrayElementRef){
 				((ArrayElementRef)node).setRequiredType(BigDecimal.class);
 			}
@@ -223,7 +224,7 @@ public class GettableUtils {
 	@SuppressWarnings("unchecked")
 	public static Gettable<Boolean> getBooleanGettable(Gettable<?> node) {
 		Class<?> type = node.type();
-		if(type == null && node instanceof ExternalRef){
+		if(type == null && node instanceof TypeLateBinding){
 			return (Gettable<Boolean>)node;
 		}
 		if(Boolean.class.isAssignableFrom( type )){

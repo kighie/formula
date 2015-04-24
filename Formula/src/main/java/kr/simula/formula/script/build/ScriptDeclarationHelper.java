@@ -56,11 +56,13 @@ public class ScriptDeclarationHelper extends DeclarationHelper {
 		@Override
 		public ArgDeclRef create(BuildContext context, Class<?> type,
 				String name) {
-			ArgDeclRef arg = new ArgDeclRef(type,new QName(name));
+			QName qname;
 			if(Function.class.isAssignableFrom(type)){
-				
+				qname = QName.getClosureQName(name);
+			} else {
+				qname = new QName(name);
 			}
-			System.out.println("ArgDeclRef :: " + arg);
+			ArgDeclRef arg = new ArgDeclRef(type,qname);
 			return arg;
 		}
 		

@@ -28,6 +28,8 @@ import java.util.logging.Logger;
 import kr.simula.formula.core.Function;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Node;
+import kr.simula.formula.core.QName;
+import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.annotation.Arguments;
 import kr.simula.formula.core.annotation.FunctionBuild;
 import kr.simula.formula.core.builder.BuildContext;
@@ -35,11 +37,13 @@ import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.factory.FunctionCallFactory;
 import kr.simula.formula.core.factory.func.ArgumentValidator;
 import kr.simula.formula.core.factory.func.BooleanFunctionCallFactory;
+import kr.simula.formula.core.factory.func.ClosureCallFactory;
 import kr.simula.formula.core.factory.func.DateFunctionCallFactory;
 import kr.simula.formula.core.factory.func.LocalFunctionCallFactory;
 import kr.simula.formula.core.factory.func.NumericFunctionCallFactory;
 import kr.simula.formula.core.factory.func.ObjectFunctionCallFactory;
 import kr.simula.formula.core.factory.func.StringFunctionCallFactory;
+import kr.simula.formula.core.ref.ClosureRef;
 
 /**
  * <pre></pre>
@@ -58,8 +62,10 @@ public class FunctionCallHelper extends AbstractHelper<FunctionCallFactory> {
 	@SuppressWarnings("rawtypes")
 	protected final static Class[] FACTORY_ARG_TYPES = new Class[]{Function.class, 
 		ArgumentValidator[].class, boolean.class};
-	
-	protected FunctionCallFactory localFunctionCallFactory = new LocalFunctionCallFactory();
+
+	protected FunctionCallFactory localFunctionCallFactory;
+
+	protected FunctionCallFactory closureCallFactory;
 	
 	protected Map<Class<?>, ArgumentValidator<?>> validatorMap;
 	
@@ -72,8 +78,24 @@ public class FunctionCallHelper extends AbstractHelper<FunctionCallFactory> {
 	
 	@Override
 	protected void initDefaults() {
+		localFunctionCallFactory = initLocalFunctionCallFactory();
+		closureCallFactory = initClosureCallFactory();
 		super.initDefaults();
 		initValidators();
+	}
+	
+	/**
+	 * @return the closureCallFactory
+	 */
+	protected FunctionCallFactory initClosureCallFactory() {
+		return new ClosureCallFactory();
+	}
+	
+	/**<pre>
+	 * </pre>
+	 */
+	protected FunctionCallFactory initLocalFunctionCallFactory() {
+		return new LocalFunctionCallFactory();
 	}
 	
 	protected void initValidators(){
@@ -253,11 +275,19 @@ public class FunctionCallHelper extends AbstractHelper<FunctionCallFactory> {
 		if(function != null){
 			factory = localFunctionCallFactory;
 		}
+
+		if(factory == null){
+			Ref ref = context.getRef(QName.getClosureQName(name));
+
+			if( ref != null && ref instanceof ClosureRef){
+				factory = closureCallFactory;
+			}
+		}
 		
 		if(factory == null){
 			factory = factories.get(name);
 		}
-		
+
 		if(factory == null){
 			throw new BuildException("Function '" + name + "' is not registered.");
 		}

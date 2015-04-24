@@ -17,11 +17,14 @@ package kr.simula.formula.core.builder.helper;
 import java.util.List;
 
 import kr.simula.formula.core.BlockStatement;
+import kr.simula.formula.core.Function;
+import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.factory.DeclarationFactory;
 import kr.simula.formula.core.factory.FunctionDeclFactory;
+import kr.simula.formula.core.ref.ClosureRef;
 
 /**
  * <pre>
@@ -58,16 +61,22 @@ public abstract class DeclarationHelper extends AbstractHelper<DeclarationFactor
 
 	/**<pre>
 	 * </pre>
-	 * @param current
+	 * @param context
 	 * @param retType
 	 * @param name
 	 * @param args
 	 * @return
 	 */
-	public BlockStatement createFn(BuildContext current, Class<?> retType, String name,
+	public BlockStatement createFn(BuildContext context, Class<?> retType, String name,
 			List<Ref> args) {
-		
-		return fnDeclFactory.create(current, retType, name, args);
+		for(Ref r : args){
+			if(Function.class.isAssignableFrom( r.type() )){
+				QName aname = r.qualifiedName();
+				// register closure function
+				context.registerRef(aname, new ClosureRef(aname));
+			}
+		}
+		return fnDeclFactory.create(context, retType, name, args);
 	}
 
 	

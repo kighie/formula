@@ -1,4 +1,4 @@
-/* 
+/* ******************************************************************************
  * Copyright (c) 2012 IkChan Kwon kighie@gmail.com
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,34 +14,14 @@
  */
 package kr.simula.formula.core.ref;
 
-import kr.simula.formula.core.Context;
-import kr.simula.formula.core.Function;
-import kr.simula.formula.core.QName;
-import kr.simula.formula.core.Settable;
-
 /**
  * <pre>
- * External parameter get/set delegator
  * </pre>
- * @author kighie@gmail.com
- * @since 1.0
+ * @author Ikchan Kwon
+ *
  */
-public class ParameterRef<T> extends ExternalRef<T> implements Settable<T>{
-	/**
-	 * @param qname
-	 */
-	public ParameterRef(QName qname) {
-		super(qname);
-	}
+public interface TypeLateBinding<T> {
 	
-	@Override
-	public void set(Context context, T value) {
-		context.setReference(qname, value);
-	}
+	void setRequiredType(Class<? extends T> requiredType);
 	
-	@SuppressWarnings("unchecked")
-	@Override
-	public T get(Context context) {
-		return (T)context.getReference(qname);
-	}
 }

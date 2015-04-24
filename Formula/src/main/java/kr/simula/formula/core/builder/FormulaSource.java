@@ -24,6 +24,8 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
 
+import kr.simula.formula.core.SourceLocation;
+
 
 /**
  * <pre></pre>
@@ -66,6 +68,9 @@ public class FormulaSource {
 		return sourceString;
 	}
 	
+	public String getText(SourceLocation location){
+		return sourceString.substring(location.getStartIndex(), location.getEndIndex());
+	}
 	/**
 	 * @return the sourcePath
 	 */

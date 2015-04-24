@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class QName implements Serializable {
+	public final static QName CLOSURE_PREFIX = new QName("closure");
+	
 	private QName parent;
 	private QName root;
 	private String qname;
@@ -12,8 +14,13 @@ public class QName implements Serializable {
 	public QName(QName parent, String name){
 		this.name = name;
 		this.parent = parent;
-		this.root = (parent != null) ? parent.root:this;
-		this.qname = toString(".").intern();
+		if(parent != null){
+			this.root = parent.root;
+			this.qname = toString(".").intern();
+		} else {
+			this.root = this;
+			this.qname = name;
+		}
 	}
 
 	public QName(String name){
@@ -89,4 +96,7 @@ public class QName implements Serializable {
 		return buf.toString();
 	}
 
+	public static QName getClosureQName(String name){
+		return new QName(CLOSURE_PREFIX, name);
+	}
 }

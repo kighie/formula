@@ -21,6 +21,8 @@ import kr.simula.formula.core.Function;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.RtException;
+import kr.simula.formula.core.ref.ClosureRef;
+import kr.simula.formula.core.ref.TypeLateBinding;
 import kr.simula.formula.core.util.ValueTypeUtils;
 
 /**
@@ -29,54 +31,80 @@ import kr.simula.formula.core.util.ValueTypeUtils;
  * @param <T>
  * @since 1.0
  */
-public class LocalFunctionCallWrapper<T> extends FunctionCallWrapper<T> {
-	private ValueType valueType;
+public class ClosureCallWrapper<T> implements Gettable<T>, TypeLateBinding<T> {
+	protected final ClosureRef closureRef;
+	protected final Gettable<?>[] args;
+	private Class<? extends T> type;
 	
 	/**
-	 * @param function
+	 * @param closureRef
 	 * @param args
 	 */
-	public LocalFunctionCallWrapper(Function<T> function, Gettable<?>[] args) {
-		super(function, args);
-		valueType = ValueTypeUtils.getValueType(function.getReturnType());
+	public ClosureCallWrapper(ClosureRef closureRef, Gettable<?>[] args) {
+		this.closureRef = closureRef;
+		this.args = args;
 	}
 	
 	@Override
 	public ValueType valueType() {
-		return valueType;
+		return ValueTypeUtils.getValueType(type);
+	}
+	
+	@Override
+	public Class<? extends T> type() {
+		return type;
+	}
+	
+	@Override
+	public void setRequiredType(Class<? extends T> requiredType) {
+		this.type = requiredType;
+	}
+	
+	@Override
+	public String getExpression() {
+		StringBuilder buf = new StringBuilder();
+		buf.append("(").append(closureRef);
+		for(Gettable<?> n : args){
+			buf.append(" ").append(n.getExpression());
+		}
+		buf.append(")");
+		
+		return buf.toString();
 	}
 	
 	@Override
 	public T get(Context context) {
-		if(function instanceof LocalFunction){
+		@SuppressWarnings("unchecked")
+		Function<T> function = (Function<T>)closureRef.get(context);
+		
+		if(function != null){
 			LocalFunction<T> localFn = (LocalFunction<T>)function;
 			List<Ref> argDecls = localFn.getArgs();
 			int length = argDecls.size();
+			
+			if(args.length != length){
+				throw new RtException(closureRef.qualifiedName().getName() + " has " + args.length + " args."
+						+ " But original function needs " + length + "args.");
+			}
 			Ref argD;
 			Object argV;
 			
 			for(int i=0;i<length;i++){
 				argD = argDecls.get(i);
 				argV = args[i].get(context);
-				
-				if( argD.type() == Function.class 
-						&& (argV == null || !(argV instanceof Function) ) ){
-					throw new RtException("Argument '" + args[i].getExpression() + "' is not function.");
-				} 
-				
 				context.setReference(argD.qualifiedName(), argV);
 			}
 
 			localFn.eval(context);
 			return localFn.getReturnValue(context);
 		} else {
-			return super.get(context);
+			throw new RtException(closureRef + " is not registered.");
 		}
 	}
 	
 
 	protected String getFunctionName(){
-		return ((LocalFunction<T>)function).getName();
+		return closureRef.qualifiedName().getName();
 	}
 	
 }
