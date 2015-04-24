@@ -31,10 +31,11 @@ public interface BuildContext {
 	
 	BuildContext getParent() ;
 
-
 	void registerLocalFn(String name, Function<?> fn);
 	
 	Function<?> getLocalFn(String name);
+
+	Function<?> getGlobalFunction(String name);
 
 	
 	void registerRef(QName qname, Ref ref);

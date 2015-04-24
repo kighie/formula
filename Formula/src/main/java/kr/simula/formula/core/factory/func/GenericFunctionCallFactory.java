@@ -47,6 +47,13 @@ public abstract class GenericFunctionCallFactory implements FunctionCallFactory 
 	}
 	
 	/**
+	 * @return the function
+	 */
+	public Function<?> getFunction() {
+		return function;
+	}
+	
+	/**
 	 * @return the bArgsLateEval
 	 */
 	public boolean isArgsLateEval() {

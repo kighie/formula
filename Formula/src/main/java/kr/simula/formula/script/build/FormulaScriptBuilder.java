@@ -27,6 +27,7 @@ import kr.simula.formula.core.builder.helper.BinaryOperatorHelper;
 import kr.simula.formula.core.builder.helper.BlockHelper;
 import kr.simula.formula.core.builder.helper.DeclarationHelper;
 import kr.simula.formula.core.builder.helper.FunctionCallHelper;
+import kr.simula.formula.core.builder.helper.GlobalFunctionRegistry;
 import kr.simula.formula.core.builder.helper.LambdaHelper;
 import kr.simula.formula.core.builder.helper.LiteralHelper;
 import kr.simula.formula.core.builder.helper.MapHelper;
@@ -36,7 +37,6 @@ import kr.simula.formula.core.builder.helper.StatementHelper;
 import kr.simula.formula.core.builder.helper.TypeHelper;
 import kr.simula.formula.core.builder.helper.UnaryOperatorHelper;
 import kr.simula.formula.expr.builder.ExprBinaryOperatorHelper;
-import kr.simula.formula.expr.builder.ExprFunctionCallHelper;
 import kr.simula.formula.expr.builder.ExprLiteralHelper;
 import kr.simula.formula.expr.builder.ExprMapHelper;
 import kr.simula.formula.expr.builder.ExprUnaryOperatorHelper;
@@ -53,6 +53,21 @@ import org.antlr.v4.runtime.TokenStream;
  * @since 1.0
  */
 public class FormulaScriptBuilder extends AbstractFormulaBuilder<Module> {
+
+	protected final static String FUNC_CLASSPATH = "kr.simula.formula.func";
+	
+	
+	@Override
+	protected GlobalFunctionRegistry initGlobalFunctionRegistry() {
+		GlobalFunctionRegistry registry = new GlobalFunctionRegistry(){
+			@Override
+			protected void initFunctions() {
+				loadAndRegisterFunctions(this.getClass().getClassLoader(), FUNC_CLASSPATH);
+			}
+		};
+		registry.initialize();
+		return registry;
+	}
 	
 	public BlockHelper initBlockHelper() {
 		return new ScriptBlockHelper();
@@ -80,10 +95,6 @@ public class FormulaScriptBuilder extends AbstractFormulaBuilder<Module> {
 
 	protected UnaryOperatorHelper initUnaryOperatorHelper() {
 		return  new ExprUnaryOperatorHelper();
-	}
-
-	protected FunctionCallHelper initFunctionCallHelper() {
-		return new ExprFunctionCallHelper();
 	}
 
 	protected MapHelper initMapHelper() {

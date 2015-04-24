@@ -21,6 +21,7 @@ import java.util.Map.Entry;
 import kr.simula.formula.core.Function;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Ref;
+import kr.simula.formula.core.builder.helper.GlobalFunctionRegistry;
 
 /**
  * 
@@ -31,7 +32,7 @@ import kr.simula.formula.core.Ref;
 public class RootBuildContext implements BuildContext {
 	private Map<QName, Ref> referenceMap = new HashMap<QName, Ref>();
 	private Map<String, Function<?>> functionMap = new HashMap<String, Function<?>>();
-	
+	private GlobalFunctionRegistry globalFunctionRegistry;
 
 	@Override
 	public BuildContext getParent() {
@@ -56,10 +57,10 @@ public class RootBuildContext implements BuildContext {
 	 * @return
 	 * @see java.util.Map#get(java.lang.Object)
 	 */
-	public Function<?> getLocalFn(String key) {
-		return functionMap.get(key);
+	public Function<?> getLocalFn(String fnName) {
+		return functionMap.get(fnName);
 	}
-
+	
 	/**
 	 * @param key
 	 * @param value
@@ -68,6 +69,20 @@ public class RootBuildContext implements BuildContext {
 	 */
 	public void registerLocalFn(String key, Function<?> value) {
 		functionMap.put(key, value);
+	}
+	
+	@Override
+	public Function<?> getGlobalFunction(String fnName) {
+		return globalFunctionRegistry.getFunction(fnName);
+	}
+	
+	/**<pre>
+	 * </pre>
+	 * @param globalFunctionRegistry
+	 */
+	public void setFunctionRegistry(
+			GlobalFunctionRegistry globalFunctionRegistry) {
+		this.globalFunctionRegistry = globalFunctionRegistry;
 	}
 	
 	

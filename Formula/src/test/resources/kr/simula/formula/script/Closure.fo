@@ -49,6 +49,7 @@ println("=================");
 
 function[] fnArray <- [fnA, fnB, fnC];
 
+println( ROUNDUP );
 foreach (function f in fnArray){
 	println( fnTest(EVEN, 5) );
 }

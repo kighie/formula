@@ -36,7 +36,7 @@ public class LocalFunctionCallWrapper<T> extends FunctionCallWrapper<T> {
 	 * @param function
 	 * @param args
 	 */
-	public LocalFunctionCallWrapper(Function<T> function, Gettable<?>[] args) {
+	public LocalFunctionCallWrapper(LocalFunction<T> function, Gettable<?>[] args) {
 		super(function, args);
 		valueType = ValueTypeUtils.getValueType(function.getReturnType());
 	}
@@ -48,30 +48,28 @@ public class LocalFunctionCallWrapper<T> extends FunctionCallWrapper<T> {
 	
 	@Override
 	public T get(Context context) {
-		if(function instanceof LocalFunction){
-			LocalFunction<T> localFn = (LocalFunction<T>)function;
-			List<Ref> argDecls = localFn.getArgs();
-			int length = argDecls.size();
-			Ref argD;
-			Object argV;
+		LocalFunction<T> localFn = (LocalFunction<T>)function;
+		List<Ref> argDecls = localFn.getArgs();
+		int length = argDecls.size();
+		Ref argD;
+		Object argV;
+		
+		for(int i=0;i<length;i++){
+			argD = argDecls.get(i);
+			argV = args[i].get(context);
 			
-			for(int i=0;i<length;i++){
-				argD = argDecls.get(i);
-				argV = args[i].get(context);
-				
-				if( argD.type() == Function.class 
-						&& (argV == null || !(argV instanceof Function) ) ){
-					throw new RtException("Argument '" + args[i].getExpression() + "' is not function.");
-				} 
-				
-				context.setReference(argD.qualifiedName(), argV);
+			if( argD.type() == Function.class ) {
+				if(argV == null) {
+					throw new RtException(localFn.getName() + " argument '" + args[i].getExpression() + "' is not defined.");
+				} else if(!(argV instanceof Function)) {
+					throw new RtException(localFn.getName() + " argument '" + args[i].getExpression() + "' is not function.");
+				}
 			}
-
-			localFn.eval(context);
-			return localFn.getReturnValue(context);
-		} else {
-			return super.get(context);
+			context.setReference(argD.qualifiedName(), argV);
 		}
+
+		localFn.eval(context);
+		return localFn.getReturnValue(context);
 	}
 	
 

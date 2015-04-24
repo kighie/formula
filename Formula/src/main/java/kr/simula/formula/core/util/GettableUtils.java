@@ -22,7 +22,6 @@ import kr.simula.formula.core.Literal;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.ref.ArrayElementRef;
-import kr.simula.formula.core.ref.ExternalRef;
 import kr.simula.formula.core.ref.TypeLateBinding;
 import kr.simula.formula.core.wrapper.DecimalGettableWrapper;
 import kr.simula.formula.core.wrapper.StringGettableWrapper;
@@ -75,7 +74,7 @@ public class GettableUtils {
 
 	public static <T> boolean isGettable(Node node, Class<T>type){
 		if(node instanceof Gettable){
-			Gettable gettable = (Gettable)node;
+			Gettable<?> gettable = (Gettable<?>)node;
 			Class<?> nodeType = gettable.type();
 			if(nodeType == null && gettable instanceof TypeLateBinding){
 				return true;
@@ -97,7 +96,7 @@ public class GettableUtils {
 	 */
 	public static boolean isArrayGettable(Node node) {
 		if(node instanceof Gettable){
-			Gettable gettable = (Gettable)node;
+			Gettable<?> gettable = (Gettable<?>)node;
 			Class<?> nodeType = gettable.type();
 			if(nodeType == null && gettable instanceof TypeLateBinding){
 				return true;

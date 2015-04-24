@@ -23,6 +23,7 @@ import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.factory.FunctionCallFactory;
+import kr.simula.formula.core.ref.FunctionRef;
 import kr.simula.formula.core.util.GettableUtils;
 import kr.simula.formula.core.wrapper.LocalFunction;
 import kr.simula.formula.core.wrapper.LocalFunctionCallWrapper;
@@ -62,9 +63,22 @@ public class LocalFunctionCallFactory implements FunctionCallFactory {
 		for(int i =0;i< refCount;i++){
 			Ref r = argRefs.get(i);
 			gettables[i] = GettableUtils.checkGettable(args.get(i), r.type());
+			
+			if((r.type() == Function.class) 
+					&& !FunctionRef.class.isAssignableFrom( gettables[i].getClass()) ){
+				Ref g = (Ref)gettables[i];
+				Function<?> gFunc = context.getGlobalFunction(g.qualifiedName().getFullName());
+				if(gFunc != null){
+					FunctionRef closure = new FunctionRef(g.qualifiedName(), gFunc);
+					gettables[i] = closure;
+				} else {
+					throw new BuildException("Function '" + g.qualifiedName() + "' is not found.");
+				}
+				
+			}
 		}
 		
-		LocalFunctionCallWrapper<?> wrapper = new LocalFunctionCallWrapper(function,gettables) ;
+		LocalFunctionCallWrapper<?> wrapper = new LocalFunctionCallWrapper((LocalFunction)function,gettables) ;
 		return wrapper;
 	}
 	

@@ -17,6 +17,7 @@ package kr.simula.formula.core.factory.func;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import kr.simula.formula.core.Function;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.util.GettableUtils;
@@ -72,6 +73,15 @@ public interface ArgumentValidator<T> {
 		@Override
 		public Gettable<Date> validate(Node node) {
 			return GettableUtils.getDateGettable(node);
+		}
+	};
+	
+
+	@SuppressWarnings("rawtypes")
+	public static ArgumentValidator<Function> FUNCTION_VALIDATOR = new ArgumentValidator<Function>() {
+		@Override
+		public Gettable<Function> validate(Node node) {
+			return GettableUtils.checkGettable(node,Function.class);
 		}
 	};
 }

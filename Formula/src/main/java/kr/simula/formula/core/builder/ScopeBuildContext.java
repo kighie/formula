@@ -73,6 +73,11 @@ public class ScopeBuildContext implements BuildContext {
 		}
 	}
 
+	@Override
+	public Function<?> getGlobalFunction(String fnName) {
+		return parent.getGlobalFunction(fnName);
+	}
+	
 	public Ref getRef(QName qname){
 		Ref ref = referenceMap.get(qname);
 		if(ref == null){

@@ -16,18 +16,15 @@ package kr.simula.formula.core.factory.func;
 
 import java.util.List;
 
-import kr.simula.formula.core.Function;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.QName;
-import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.factory.FunctionCallFactory;
 import kr.simula.formula.core.ref.ClosureRef;
 import kr.simula.formula.core.util.GettableUtils;
 import kr.simula.formula.core.wrapper.ClosureCallWrapper;
-import kr.simula.formula.core.wrapper.LocalFunction;
 
 /**
  * <pre></pre>

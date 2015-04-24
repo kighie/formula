@@ -21,6 +21,7 @@ import kr.simula.formula.core.builder.helper.BinaryOperatorHelper;
 import kr.simula.formula.core.builder.helper.BlockHelper;
 import kr.simula.formula.core.builder.helper.DeclarationHelper;
 import kr.simula.formula.core.builder.helper.FunctionCallHelper;
+import kr.simula.formula.core.builder.helper.GlobalFunctionRegistry;
 import kr.simula.formula.core.builder.helper.LambdaHelper;
 import kr.simula.formula.core.builder.helper.LiteralHelper;
 import kr.simula.formula.core.builder.helper.MapHelper;
@@ -39,6 +40,9 @@ import kr.simula.formula.core.builder.helper.UnaryOperatorHelper;
 public abstract class AbstractFormulaBuilder<N extends Node> 
 	implements FormulaBuilder<N>, FormulaHandlerFactory {
 	
+	
+	private GlobalFunctionRegistry globalFunctionRegistry;
+	
 	private BlockHelper blockHelper;
 	private LiteralHelper literalHelper;
 	private RefHelper refHelper;
@@ -52,6 +56,7 @@ public abstract class AbstractFormulaBuilder<N extends Node>
 	private StatementHelper statementHelper;
 	private DeclarationHelper declarationHelper;
 	private TypeHelper typeHelper;
+	private boolean initialized;
 	
 	
 	protected final ParsingErrorAdapter errorAdapter = new ParsingErrorAdapter();
@@ -65,12 +70,17 @@ public abstract class AbstractFormulaBuilder<N extends Node>
 		return errorAdapter.removeListener(o);
 	}
 
-	public void initialize(){
+	public synchronized void initialize(){
+		if(initialized){
+			return;
+		}
+		
+		this.globalFunctionRegistry = initGlobalFunctionRegistry();
 		this.literalHelper = initLiteralHelper();
 		this.refHelper = initRefHelper();
 		this.binaryOperatorHelper = initBinaryOperatorHelper();
 		this.unaryOperatorHelper = initUnaryOperatorHelper();
-		this.functionCallHelper = initFunctionCallHelper();
+		this.functionCallHelper = initFunctionCallHelper(globalFunctionRegistry);
 		this.methodCallHelper = initMethodCallHelper();
 		this.lambdaHelper = initLambdaHelper();
 		this.arrayHelper = initArrayHelper();
@@ -80,7 +90,15 @@ public abstract class AbstractFormulaBuilder<N extends Node>
 		this.statementHelper = initStatementHelper();
 		this.declarationHelper = initDeclarationHelper();
 		this.typeHelper = initTypeHelper();
+		
+		initialized = true;
 	}
+
+	/**<pre>
+	 * </pre>
+	 * @return
+	 */
+	protected abstract GlobalFunctionRegistry initGlobalFunctionRegistry();
 
 	protected LiteralHelper initLiteralHelper() {
 		return new LiteralHelper();
@@ -98,8 +116,10 @@ public abstract class AbstractFormulaBuilder<N extends Node>
 		return  new UnaryOperatorHelper();
 	}
 
-	protected FunctionCallHelper initFunctionCallHelper() {
-		return new FunctionCallHelper();
+	protected FunctionCallHelper initFunctionCallHelper(GlobalFunctionRegistry globalFunctionRegistry) {
+		FunctionCallHelper callHelper = new FunctionCallHelper();
+		callHelper.setFunctionRegistry(globalFunctionRegistry);
+		return callHelper;
 	}
 
 	protected MethodCallHelper initMethodCallHelper() {
@@ -134,11 +154,18 @@ public abstract class AbstractFormulaBuilder<N extends Node>
 	public TypeHelper initTypeHelper() {
 		return null;
 	}
-
+	
+	@Override
+	public RootBuildContext createContext() {
+		RootBuildContext context = new RootBuildContext();
+		context.setFunctionRegistry(globalFunctionRegistry);
+		
+		return context;
+	}
 	
 	@Override
 	public FormulaHandler newHandler() {
-		return newHandler(new RootBuildContext());
+		return newHandler(createContext());
 	}
 	
 	@Override
