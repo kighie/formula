@@ -12,11 +12,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-grammar Formula;
+grammar Ontolog;
 
 options {
 	language = Java;
-	
 }
 
 // use command line option : -package kr.simula.formula.antlr
@@ -42,7 +41,7 @@ options {
   	
 
 	public String strip( String text ) {
-    	if( text != null && text.length() >= 2 ) {
+    	if( text != null && text.length() >= 3 ) {
     		text = text.substring( 1, text.length() - 1 );
     		text = text.replaceAll( "\'", "'" );
     		text = text.replaceAll( "\"", "\\\"" );
@@ -50,7 +49,6 @@ options {
     	return text;
 	}
 }
-
 /*
 @rulecatch {
 	

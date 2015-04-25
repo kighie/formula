@@ -29,7 +29,7 @@ import kr.simula.formula.core.util.ValueTypeUtils;
  * @author Ikchan Kwon
  *
  */
-public class LocalFunction<O> extends AbstractBlock implements Function<O>{
+public class LocalFunction<O> extends AbstractBlock implements Function<O>, FunctionSpi<O>{
 	private static final long serialVersionUID = 1L;
 	private Class<O> retType;
 	private String name;
@@ -95,6 +95,12 @@ public class LocalFunction<O> extends AbstractBlock implements Function<O>{
 	}
 
 	@Override
+	public O evalFunc(Context context) {
+		eval(context);
+		return getReturnValue(context);
+	}
+	
+	@Override
 	public void eval(Context context) {
 		evalBody(context);
 	}
@@ -103,5 +109,17 @@ public class LocalFunction<O> extends AbstractBlock implements Function<O>{
 	public O getReturnValue(Context context){
 		O value = (O)context.getReference(returnValueKey);
 		return value;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder buf = new StringBuilder();
+		buf.append("[lf ");
+		buf.append(retType.getSimpleName()).append(" ").append(name).append("(");
+		for(Ref n : args){
+			buf.append(" ").append(n.getExpression());
+		}
+		buf.append(")]");
+		return buf.toString();
 	}
 }

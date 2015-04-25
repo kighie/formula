@@ -15,6 +15,7 @@
 package kr.simula.formula.script.statement;
 
 import kr.simula.formula.core.Context;
+import kr.simula.formula.core.Function;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.RtException;

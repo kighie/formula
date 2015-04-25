@@ -26,7 +26,9 @@ import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.factory.FunctionCallFactory;
 import kr.simula.formula.core.factory.func.ClosureCallFactory;
 import kr.simula.formula.core.factory.func.LocalFunctionCallFactory;
+import kr.simula.formula.core.factory.func.VariableClosureCallFactory;
 import kr.simula.formula.core.ref.ClosureRef;
+import kr.simula.formula.core.ref.VariableRef;
 
 /**
  * <pre></pre>
@@ -40,8 +42,9 @@ public class FunctionCallHelper  {
 	protected FunctionCallFactory localFunctionCallFactory;
 
 	protected FunctionCallFactory closureCallFactory;
+	protected FunctionCallFactory variableClosureCallFactory;
 	
-	protected GlobalFunctionRegistry globalFunctionRegistry;
+	protected BuiltInFunctionRegistry globalFunctionRegistry;
 	
 	/**
 	 * 
@@ -53,6 +56,7 @@ public class FunctionCallHelper  {
 	protected final void initDefaults() {
 		localFunctionCallFactory = initLocalFunctionCallFactory();
 		closureCallFactory = initClosureCallFactory();
+		variableClosureCallFactory = initVariableClosureCallFactory();
 	}
 	
 	/**
@@ -68,8 +72,12 @@ public class FunctionCallHelper  {
 	protected FunctionCallFactory initLocalFunctionCallFactory() {
 		return new LocalFunctionCallFactory();
 	}
-	
 
+	protected FunctionCallFactory initVariableClosureCallFactory() {
+		return new VariableClosureCallFactory();
+	}
+	
+	
 	protected FunctionCallFactory getLocalFunctionCallFactory() {
 		return localFunctionCallFactory;
 	}
@@ -79,7 +87,7 @@ public class FunctionCallHelper  {
 	 * @param globalFunctionRegistry
 	 */
 	public void setFunctionRegistry(
-			GlobalFunctionRegistry globalFunctionRegistry) {
+			BuiltInFunctionRegistry globalFunctionRegistry) {
 		this.globalFunctionRegistry = globalFunctionRegistry;
 	}
 	
@@ -97,6 +105,16 @@ public class FunctionCallHelper  {
 
 			if( ref != null && ref instanceof ClosureRef){
 				factory = closureCallFactory;
+			}
+		}
+
+		if(factory == null){
+			Ref ref = context.getRef(QName.getQName(name));
+
+			if( ref != null && ref instanceof VariableRef){
+				if( Function.class.isAssignableFrom(( (VariableRef<?>)ref).type()) ){
+					factory = closureCallFactory;
+				}
 			}
 		}
 		

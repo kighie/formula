@@ -115,12 +115,12 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	}
 	
 
-	protected void beginScope(){
+	public void beginScope(){
 		ScopeBuildContext scope = new ScopeBuildContext(current);
 		current = scope;
 	}
 	
-	protected void endScope(){
+	public void endScope(){
 		BuildContext parent = current.getParent();
 		if(parent == null){
 			throw new BuildException("Current step exceeds BuildScope.");
@@ -136,11 +136,12 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 		Block block = blockHelper.create(current, token);
 		return block;
 	}
-	
+	/*
 	@Override
 	public void endBlock() {
 		endScope();
 	}
+	*/
 	
 	@Override
 	public Gettable<?> operator(String token, Node node) {
@@ -188,7 +189,7 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	
 	@Override
 	public BlockStatement declareFn(Class<?> retType, String name, List<Ref> args) {
-		beginScope();
+//		beginScope();
 		return declarationHelper.createFn(current, retType, name, args);
 	}
 	
@@ -220,7 +221,6 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	
 	@Override
 	public BlockStatement statementBlock(String token, Node... args) {
-		beginScope();
 		return (BlockStatement)statementHelper.create(current, token, args);
 	}
 	

@@ -14,10 +14,8 @@
  */
 package kr.simula.formula.core.builder;
 
+import kr.simula.formula.FormulaException;
 import kr.simula.formula.core.SourceLocation;
-import kr.simula.formula.core.util.SourceLocationUtils;
-
-import org.antlr.v4.runtime.Token;
 
 
 /**
@@ -28,11 +26,9 @@ import org.antlr.v4.runtime.Token;
  * @date 2012. 10. 22.
  * @since	1.0
  */
-public class BuildException extends RuntimeException {
+public class BuildException extends FormulaException {
 
 	private static final long serialVersionUID = 1050340953390702771L;
-	
-	private SourceLocation sourceLocation;
 	
 	/**
 	 * 
@@ -62,48 +58,5 @@ public class BuildException extends RuntimeException {
 	 */
 	public BuildException(Throwable cause) {
 		super(cause);
-	}
-
-
-	public BuildException setLocation(SourceLocation token) {
-		this.sourceLocation = token;
-		return this;
-	}
-
-	public BuildException setLocation(int line, int charPositionInLine) {
-		this.sourceLocation = SourceLocationUtils.createSourceLocation(line, charPositionInLine);
-		return this;
-	}
-
-	public BuildException setLocation(int line, int charPositionInLine, 
-			int startIndex, int endIndex) {
-		this.sourceLocation = SourceLocationUtils.createSourceLocation(line, charPositionInLine, startIndex, endIndex);
-		return this;
-	}
-
-	public BuildException setLocation(Token token) {
-		this.sourceLocation = SourceLocationUtils.createSourceLocation(token);
-		return this;
-	}
-	
-	public SourceLocation getLocation() {
-		return sourceLocation;
-	}
-	
-	@Override
-	public String toString() {
-		if(sourceLocation != null){
-			StringBuilder buf = new StringBuilder();
-			buf.append(super.toString());
-			buf.append( " at [").append(sourceLocation.getLine()).append(",").append(sourceLocation.getCharPositionInLine()).append("] ");
-			
-			String source = sourceLocation.getSource();
-			if(source != null){
-				buf.append(source);
-			}
-			return buf.toString();
-		} else {
-			return super.toString();
-		}	
 	}
 }

@@ -1,4 +1,4 @@
-// Generated from Formula.g4 by ANTLR 4.4
+// Generated from Ontolog.g4 by ANTLR 4.4
 package kr.simula.formula.antlr;
 
 //	package kr.simula.formula.antlr;
@@ -13,7 +13,7 @@ import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class FormulaLexer extends Lexer {
+public class OntologLexer extends Lexer {
 	static { RuntimeMetaData.checkVersion("4.4", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -46,13 +46,13 @@ public class FormulaLexer extends Lexer {
 	};
 
 
-	public FormulaLexer(CharStream input) {
+	public OntologLexer(CharStream input) {
 		super(input);
 		_interp = new LexerATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
 	@Override
-	public String getGrammarFileName() { return "Formula.g4"; }
+	public String getGrammarFileName() { return "Ontolog.g4"; }
 
 	@Override
 	public String[] getTokenNames() { return tokenNames; }

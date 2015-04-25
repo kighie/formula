@@ -75,9 +75,13 @@ public class ExpressionHandler extends AbstractFormulaHandler {
 	public Block block(String token){
 		throw new BuildException("New block is not supported.");
 	}
+	@Override
+	public void beginScope() {
+		throw new BuildException("beginScope is not supported.");
+	}
 	
 	@Override
-	public void endBlock() {
+	public void endScope() {
 		throw new BuildException("End block is not supported.");
 	}
 	

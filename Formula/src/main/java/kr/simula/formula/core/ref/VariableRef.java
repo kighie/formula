@@ -18,7 +18,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import kr.simula.formula.core.Context;
-import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Settable;
 
@@ -27,7 +26,7 @@ import kr.simula.formula.core.Settable;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class VariableRef<T> extends GenericRef implements Gettable<T>, Settable<T>{
+public class VariableRef<T> extends GenericRef implements GettableRef<T>, Settable<T>{
 	protected Class<? extends T> valueType;
 	
 	/**

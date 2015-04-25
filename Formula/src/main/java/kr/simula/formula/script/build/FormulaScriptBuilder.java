@@ -14,6 +14,7 @@
  */
 package kr.simula.formula.script.build;
 
+import kr.simula.formula.FormulaException;
 import kr.simula.formula.antlr.FormulaScriptLexer;
 import kr.simula.formula.antlr.FormulaScriptParser;
 import kr.simula.formula.antlr.FormulaScriptParser.FormulaScriptContext;
@@ -25,9 +26,9 @@ import kr.simula.formula.core.builder.RootBuildContext;
 import kr.simula.formula.core.builder.helper.ArrayHelper;
 import kr.simula.formula.core.builder.helper.BinaryOperatorHelper;
 import kr.simula.formula.core.builder.helper.BlockHelper;
+import kr.simula.formula.core.builder.helper.BuiltInFunctionRegistry;
 import kr.simula.formula.core.builder.helper.DeclarationHelper;
 import kr.simula.formula.core.builder.helper.FunctionCallHelper;
-import kr.simula.formula.core.builder.helper.GlobalFunctionRegistry;
 import kr.simula.formula.core.builder.helper.LambdaHelper;
 import kr.simula.formula.core.builder.helper.LiteralHelper;
 import kr.simula.formula.core.builder.helper.MapHelper;
@@ -58,8 +59,8 @@ public class FormulaScriptBuilder extends AbstractFormulaBuilder<Module> {
 	
 	
 	@Override
-	protected GlobalFunctionRegistry initGlobalFunctionRegistry() {
-		GlobalFunctionRegistry registry = new GlobalFunctionRegistry(){
+	protected BuiltInFunctionRegistry initGlobalFunctionRegistry() {
+		BuiltInFunctionRegistry registry = new BuiltInFunctionRegistry(){
 			@Override
 			protected void initFunctions() {
 				loadAndRegisterFunctions(this.getClass().getClassLoader(), FUNC_CLASSPATH);
@@ -135,8 +136,8 @@ public class FormulaScriptBuilder extends AbstractFormulaBuilder<Module> {
 			ctx = parser.formulaScript();
 			
 			return ctx.module;
-		} catch (BuildException e) {
-			BuildException be = (BuildException)e;
+		} catch (FormulaException e) {
+			FormulaException be = (FormulaException)e;
 			be.setLocation(parser.getCurrentToken());
 			System.out.println(be);
 

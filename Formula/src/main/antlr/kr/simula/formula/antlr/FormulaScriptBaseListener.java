@@ -1,4 +1,4 @@
-// Generated from FormulaScript.g4 by ANTLR 4.5
+// Generated from FormulaScript.g4 by ANTLR 4.4
 package kr.simula.formula.antlr;
 
 	
@@ -34,492 +34,492 @@ public class FormulaScriptBaseListener implements FormulaScriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFormulaScript(FormulaScriptParser.FormulaScriptContext ctx) { }
+	@Override public void enterFunctionDecl(@NotNull FormulaScriptParser.FunctionDeclContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFormulaScript(FormulaScriptParser.FormulaScriptContext ctx) { }
+	@Override public void exitFunctionDecl(@NotNull FormulaScriptParser.FunctionDeclContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterImportStatement(FormulaScriptParser.ImportStatementContext ctx) { }
+	@Override public void enterExponential(@NotNull FormulaScriptParser.ExponentialContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitImportStatement(FormulaScriptParser.ImportStatementContext ctx) { }
+	@Override public void exitExponential(@NotNull FormulaScriptParser.ExponentialContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterVariableDecl(FormulaScriptParser.VariableDeclContext ctx) { }
+	@Override public void enterFormulaExpression(@NotNull FormulaScriptParser.FormulaExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitVariableDecl(FormulaScriptParser.VariableDeclContext ctx) { }
+	@Override public void exitFormulaExpression(@NotNull FormulaScriptParser.FormulaExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterType(FormulaScriptParser.TypeContext ctx) { }
+	@Override public void enterImportStatement(@NotNull FormulaScriptParser.ImportStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitType(FormulaScriptParser.TypeContext ctx) { }
+	@Override public void exitImportStatement(@NotNull FormulaScriptParser.ImportStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunctionDecl(FormulaScriptParser.FunctionDeclContext ctx) { }
+	@Override public void enterMethodCallStatement(@NotNull FormulaScriptParser.MethodCallStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFunctionDecl(FormulaScriptParser.FunctionDeclContext ctx) { }
+	@Override public void exitMethodCallStatement(@NotNull FormulaScriptParser.MethodCallStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArgsDecl(FormulaScriptParser.ArgsDeclContext ctx) { }
+	@Override public void enterAdditiveExpression(@NotNull FormulaScriptParser.AdditiveExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArgsDecl(FormulaScriptParser.ArgsDeclContext ctx) { }
+	@Override public void exitAdditiveExpression(@NotNull FormulaScriptParser.AdditiveExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRetrunStmt(FormulaScriptParser.RetrunStmtContext ctx) { }
+	@Override public void enterBlockContents(@NotNull FormulaScriptParser.BlockContentsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRetrunStmt(FormulaScriptParser.RetrunStmtContext ctx) { }
+	@Override public void exitBlockContents(@NotNull FormulaScriptParser.BlockContentsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBlockContents(FormulaScriptParser.BlockContentsContext ctx) { }
+	@Override public void enterArrayRef(@NotNull FormulaScriptParser.ArrayRefContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBlockContents(FormulaScriptParser.BlockContentsContext ctx) { }
+	@Override public void exitArrayRef(@NotNull FormulaScriptParser.ArrayRefContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIfStatement(FormulaScriptParser.IfStatementContext ctx) { }
+	@Override public void enterNotExpression(@NotNull FormulaScriptParser.NotExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIfStatement(FormulaScriptParser.IfStatementContext ctx) { }
+	@Override public void exitNotExpression(@NotNull FormulaScriptParser.NotExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterForeachStatement(FormulaScriptParser.ForeachStatementContext ctx) { }
+	@Override public void enterUnary(@NotNull FormulaScriptParser.UnaryContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitForeachStatement(FormulaScriptParser.ForeachStatementContext ctx) { }
+	@Override public void exitUnary(@NotNull FormulaScriptParser.UnaryContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLoopCondition(FormulaScriptParser.LoopConditionContext ctx) { }
+	@Override public void enterMultiplicative(@NotNull FormulaScriptParser.MultiplicativeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLoopCondition(FormulaScriptParser.LoopConditionContext ctx) { }
+	@Override public void exitMultiplicative(@NotNull FormulaScriptParser.MultiplicativeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMethodCallStatement(FormulaScriptParser.MethodCallStatementContext ctx) { }
+	@Override public void enterType(@NotNull FormulaScriptParser.TypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMethodCallStatement(FormulaScriptParser.MethodCallStatementContext ctx) { }
+	@Override public void exitType(@NotNull FormulaScriptParser.TypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunctionCallStatement(FormulaScriptParser.FunctionCallStatementContext ctx) { }
+	@Override public void enterPercent(@NotNull FormulaScriptParser.PercentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFunctionCallStatement(FormulaScriptParser.FunctionCallStatementContext ctx) { }
+	@Override public void exitPercent(@NotNull FormulaScriptParser.PercentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAssignStatement(FormulaScriptParser.AssignStatementContext ctx) { }
+	@Override public void enterStringExpression(@NotNull FormulaScriptParser.StringExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAssignStatement(FormulaScriptParser.AssignStatementContext ctx) { }
+	@Override public void exitStringExpression(@NotNull FormulaScriptParser.StringExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLeftAssign(FormulaScriptParser.LeftAssignContext ctx) { }
+	@Override public void enterArray(@NotNull FormulaScriptParser.ArrayContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLeftAssign(FormulaScriptParser.LeftAssignContext ctx) { }
+	@Override public void exitArray(@NotNull FormulaScriptParser.ArrayContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRightAssign(FormulaScriptParser.RightAssignContext ctx) { }
+	@Override public void enterIterableTerm(@NotNull FormulaScriptParser.IterableTermContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRightAssign(FormulaScriptParser.RightAssignContext ctx) { }
+	@Override public void exitIterableTerm(@NotNull FormulaScriptParser.IterableTermContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFormulaExpression(FormulaScriptParser.FormulaExpressionContext ctx) { }
+	@Override public void enterMethodCallExp(@NotNull FormulaScriptParser.MethodCallExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFormulaExpression(FormulaScriptParser.FormulaExpressionContext ctx) { }
+	@Override public void exitMethodCallExp(@NotNull FormulaScriptParser.MethodCallExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFormulaExpressionBase(FormulaScriptParser.FormulaExpressionBaseContext ctx) { }
+	@Override public void enterMap(@NotNull FormulaScriptParser.MapContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFormulaExpressionBase(FormulaScriptParser.FormulaExpressionBaseContext ctx) { }
+	@Override public void exitMap(@NotNull FormulaScriptParser.MapContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFuncCallExp(FormulaScriptParser.FuncCallExpContext ctx) { }
+	@Override public void enterFormulaExpressionBase(@NotNull FormulaScriptParser.FormulaExpressionBaseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFuncCallExp(FormulaScriptParser.FuncCallExpContext ctx) { }
+	@Override public void exitFormulaExpressionBase(@NotNull FormulaScriptParser.FormulaExpressionBaseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMethodCallExp(FormulaScriptParser.MethodCallExpContext ctx) { }
+	@Override public void enterFormulaTerm(@NotNull FormulaScriptParser.FormulaTermContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMethodCallExp(FormulaScriptParser.MethodCallExpContext ctx) { }
+	@Override public void exitFormulaTerm(@NotNull FormulaScriptParser.FormulaTermContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArguments(FormulaScriptParser.ArgumentsContext ctx) { }
+	@Override public void enterLiteralTerm(@NotNull FormulaScriptParser.LiteralTermContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArguments(FormulaScriptParser.ArgumentsContext ctx) { }
+	@Override public void exitLiteralTerm(@NotNull FormulaScriptParser.LiteralTermContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterConditionArg(FormulaScriptParser.ConditionArgContext ctx) { }
+	@Override public void enterComparison(@NotNull FormulaScriptParser.ComparisonContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitConditionArg(FormulaScriptParser.ConditionArgContext ctx) { }
+	@Override public void exitComparison(@NotNull FormulaScriptParser.ComparisonContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLiteralTerm(FormulaScriptParser.LiteralTermContext ctx) { }
+	@Override public void enterLoopCondition(@NotNull FormulaScriptParser.LoopConditionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLiteralTerm(FormulaScriptParser.LiteralTermContext ctx) { }
+	@Override public void exitLoopCondition(@NotNull FormulaScriptParser.LoopConditionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIterableTerm(FormulaScriptParser.IterableTermContext ctx) { }
+	@Override public void enterQualifiedName(@NotNull FormulaScriptParser.QualifiedNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIterableTerm(FormulaScriptParser.IterableTermContext ctx) { }
+	@Override public void exitQualifiedName(@NotNull FormulaScriptParser.QualifiedNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFormulaTerm(FormulaScriptParser.FormulaTermContext ctx) { }
+	@Override public void enterRightAssign(@NotNull FormulaScriptParser.RightAssignContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFormulaTerm(FormulaScriptParser.FormulaTermContext ctx) { }
+	@Override public void exitRightAssign(@NotNull FormulaScriptParser.RightAssignContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArrayRef(FormulaScriptParser.ArrayRefContext ctx) { }
+	@Override public void enterIfStatement(@NotNull FormulaScriptParser.IfStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArrayRef(FormulaScriptParser.ArrayRefContext ctx) { }
+	@Override public void exitIfStatement(@NotNull FormulaScriptParser.IfStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArray(FormulaScriptParser.ArrayContext ctx) { }
+	@Override public void enterConditionArg(@NotNull FormulaScriptParser.ConditionArgContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArray(FormulaScriptParser.ArrayContext ctx) { }
+	@Override public void exitConditionArg(@NotNull FormulaScriptParser.ConditionArgContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMap(FormulaScriptParser.MapContext ctx) { }
+	@Override public void enterFuncCallExp(@NotNull FormulaScriptParser.FuncCallExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMap(FormulaScriptParser.MapContext ctx) { }
+	@Override public void exitFuncCallExp(@NotNull FormulaScriptParser.FuncCallExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterQualifiedName(FormulaScriptParser.QualifiedNameContext ctx) { }
+	@Override public void enterRetrunStmt(@NotNull FormulaScriptParser.RetrunStmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitQualifiedName(FormulaScriptParser.QualifiedNameContext ctx) { }
+	@Override public void exitRetrunStmt(@NotNull FormulaScriptParser.RetrunStmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterUnary(FormulaScriptParser.UnaryContext ctx) { }
+	@Override public void enterLeftAssign(@NotNull FormulaScriptParser.LeftAssignContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitUnary(FormulaScriptParser.UnaryContext ctx) { }
+	@Override public void exitLeftAssign(@NotNull FormulaScriptParser.LeftAssignContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPercent(FormulaScriptParser.PercentContext ctx) { }
+	@Override public void enterLogicalExpression(@NotNull FormulaScriptParser.LogicalExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPercent(FormulaScriptParser.PercentContext ctx) { }
+	@Override public void exitLogicalExpression(@NotNull FormulaScriptParser.LogicalExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExponential(FormulaScriptParser.ExponentialContext ctx) { }
+	@Override public void enterForeachStatement(@NotNull FormulaScriptParser.ForeachStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExponential(FormulaScriptParser.ExponentialContext ctx) { }
+	@Override public void exitForeachStatement(@NotNull FormulaScriptParser.ForeachStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMultiplicative(FormulaScriptParser.MultiplicativeContext ctx) { }
+	@Override public void enterOperatorExpression(@NotNull FormulaScriptParser.OperatorExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMultiplicative(FormulaScriptParser.MultiplicativeContext ctx) { }
+	@Override public void exitOperatorExpression(@NotNull FormulaScriptParser.OperatorExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAdditiveExpression(FormulaScriptParser.AdditiveExpressionContext ctx) { }
+	@Override public void enterFormulaScript(@NotNull FormulaScriptParser.FormulaScriptContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAdditiveExpression(FormulaScriptParser.AdditiveExpressionContext ctx) { }
+	@Override public void exitFormulaScript(@NotNull FormulaScriptParser.FormulaScriptContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStringExpression(FormulaScriptParser.StringExpressionContext ctx) { }
+	@Override public void enterArgsDecl(@NotNull FormulaScriptParser.ArgsDeclContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStringExpression(FormulaScriptParser.StringExpressionContext ctx) { }
+	@Override public void exitArgsDecl(@NotNull FormulaScriptParser.ArgsDeclContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterComparison(FormulaScriptParser.ComparisonContext ctx) { }
+	@Override public void enterVariableDecl(@NotNull FormulaScriptParser.VariableDeclContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitComparison(FormulaScriptParser.ComparisonContext ctx) { }
+	@Override public void exitVariableDecl(@NotNull FormulaScriptParser.VariableDeclContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNotExpression(FormulaScriptParser.NotExpressionContext ctx) { }
+	@Override public void enterFunctionCallStatement(@NotNull FormulaScriptParser.FunctionCallStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNotExpression(FormulaScriptParser.NotExpressionContext ctx) { }
+	@Override public void exitFunctionCallStatement(@NotNull FormulaScriptParser.FunctionCallStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLogicalExpression(FormulaScriptParser.LogicalExpressionContext ctx) { }
+	@Override public void enterAssignStatement(@NotNull FormulaScriptParser.AssignStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLogicalExpression(FormulaScriptParser.LogicalExpressionContext ctx) { }
+	@Override public void exitAssignStatement(@NotNull FormulaScriptParser.AssignStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOperatorExpression(FormulaScriptParser.OperatorExpressionContext ctx) { }
+	@Override public void enterArguments(@NotNull FormulaScriptParser.ArgumentsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitOperatorExpression(FormulaScriptParser.OperatorExpressionContext ctx) { }
+	@Override public void exitArguments(@NotNull FormulaScriptParser.ArgumentsContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEveryRule(ParserRuleContext ctx) { }
+	@Override public void enterEveryRule(@NotNull ParserRuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitEveryRule(ParserRuleContext ctx) { }
+	@Override public void exitEveryRule(@NotNull ParserRuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void visitTerminal(TerminalNode node) { }
+	@Override public void visitTerminal(@NotNull TerminalNode node) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void visitErrorNode(ErrorNode node) { }
+	@Override public void visitErrorNode(@NotNull ErrorNode node) { }
 }

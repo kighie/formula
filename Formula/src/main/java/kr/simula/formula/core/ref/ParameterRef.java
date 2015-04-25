@@ -15,7 +15,6 @@
 package kr.simula.formula.core.ref;
 
 import kr.simula.formula.core.Context;
-import kr.simula.formula.core.Function;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Settable;
 

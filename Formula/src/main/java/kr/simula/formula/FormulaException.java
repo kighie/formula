@@ -14,6 +14,11 @@
  */
 package kr.simula.formula;
 
+import kr.simula.formula.core.SourceLocation;
+import kr.simula.formula.core.util.SourceLocationUtils;
+
+import org.antlr.v4.runtime.Token;
+
 /**
  * 
  * <pre>
@@ -25,12 +30,13 @@ public class FormulaException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
+	private SourceLocation sourceLocation;
+	
 	/**
 	 * 
 	 */
 	public FormulaException() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -39,7 +45,6 @@ public class FormulaException extends RuntimeException {
 	 */
 	public FormulaException(String message, Throwable cause) {
 		super(message, cause);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -54,7 +59,47 @@ public class FormulaException extends RuntimeException {
 	 */
 	public FormulaException(Throwable cause) {
 		super(cause);
-		// TODO Auto-generated constructor stub
+	}
+
+	public FormulaException setLocation(SourceLocation token) {
+		this.sourceLocation = token;
+		return this;
+	}
+
+	public FormulaException setLocation(int line, int charPositionInLine) {
+		this.sourceLocation = SourceLocationUtils.createSourceLocation(line, charPositionInLine);
+		return this;
+	}
+
+	public FormulaException setLocation(int line, int charPositionInLine, 
+			int startIndex, int endIndex) {
+		this.sourceLocation = SourceLocationUtils.createSourceLocation(line, charPositionInLine, startIndex, endIndex);
+		return this;
+	}
+
+	public FormulaException setLocation(Token token) {
+		this.sourceLocation = SourceLocationUtils.createSourceLocation(token);
+		return this;
 	}
 	
+	public SourceLocation getLocation() {
+		return sourceLocation;
+	}
+	
+	@Override
+	public String toString() {
+		if(sourceLocation != null){
+			StringBuilder buf = new StringBuilder();
+			buf.append(super.toString());
+			buf.append( " at [").append(sourceLocation.getLine()).append(",").append(sourceLocation.getCharPositionInLine()).append("] ");
+			
+			String source = sourceLocation.getSource();
+			if(source != null){
+				buf.append(source);
+			}
+			return buf.toString();
+		} else {
+			return super.toString();
+		}	
+	}
 }

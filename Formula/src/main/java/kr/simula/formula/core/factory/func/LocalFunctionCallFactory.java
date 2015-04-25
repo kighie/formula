@@ -24,6 +24,8 @@ import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.factory.FunctionCallFactory;
 import kr.simula.formula.core.ref.FunctionRef;
+import kr.simula.formula.core.ref.ParameterRef;
+import kr.simula.formula.core.ref.VariableRef;
 import kr.simula.formula.core.util.GettableUtils;
 import kr.simula.formula.core.wrapper.LocalFunction;
 import kr.simula.formula.core.wrapper.LocalFunctionCallWrapper;
@@ -35,6 +37,7 @@ import kr.simula.formula.core.wrapper.LocalFunctionCallWrapper;
  */
 public class LocalFunctionCallFactory implements FunctionCallFactory {
 	
+
 	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Gettable<?> create(BuildContext context, String fnName,
@@ -65,9 +68,9 @@ public class LocalFunctionCallFactory implements FunctionCallFactory {
 			gettables[i] = GettableUtils.checkGettable(args.get(i), r.type());
 			
 			if((r.type() == Function.class) 
-					&& !FunctionRef.class.isAssignableFrom( gettables[i].getClass()) ){
+					&& ParameterRef.class.isAssignableFrom( gettables[i].getClass()) ){
 				Ref g = (Ref)gettables[i];
-				Function<?> gFunc = context.getGlobalFunction(g.qualifiedName().getFullName());
+				Function<?> gFunc = context.getBuiltInFunction(g.qualifiedName().getFullName());
 				if(gFunc != null){
 					FunctionRef closure = new FunctionRef(g.qualifiedName(), gFunc);
 					gettables[i] = closure;

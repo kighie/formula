@@ -30,9 +30,16 @@ public class FormulaHandlerParser extends Parser {
 		return handler.block(token);
 	}
 
-	public void endBlock() {
-		handler.endBlock();
+
+	public void beginScope() {
+		handler.beginScope();
 	}
+
+
+	public void endScope() {
+		handler.endScope();
+	}
+
 
 	public Gettable<?> operator(String token, Node node) {
 		return handler.operator(token, node);

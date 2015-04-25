@@ -16,14 +16,14 @@ package kr.simula.formula.core.factory.func;
 
 import java.util.List;
 
-import kr.simula.formula.core.Function;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.factory.FunctionCallFactory;
-import kr.simula.formula.core.ref.GettableRef;
+import kr.simula.formula.core.ref.ClosureRef;
+import kr.simula.formula.core.ref.VariableRef;
 import kr.simula.formula.core.util.GettableUtils;
 import kr.simula.formula.core.wrapper.ClosureCallWrapper;
 
@@ -32,34 +32,30 @@ import kr.simula.formula.core.wrapper.ClosureCallWrapper;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class ClosureCallFactory implements FunctionCallFactory {
+public class VariableClosureCallFactory implements FunctionCallFactory {
 	
 	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Gettable<?> create(BuildContext context, String fnName,
 			List<Node> args) {
 		
-		GettableRef<Function> closureRef = (GettableRef<Function>)context.getRef(QName.getClosureQName(fnName));
-		
-		if(closureRef == null){
-			closureRef = (GettableRef<Function>)context.getRef(QName.getQName(fnName));
-			
-			if(closureRef == null){
-				throw new BuildException("Closure '" + fnName + "' is not found.");
-			}
-		}
-		
-		int argCount = (args != null) ? args.size() : 0;
-		
-		Gettable<?>[] gettables = new Gettable<?>[argCount];
-		
-		for(int i =0;i< argCount;i++){
-			Node a = args.get(i);
-			gettables[i] = GettableUtils.checkGettable(a);
-		}
-
-		ClosureCallWrapper<?> wrapper = new ClosureCallWrapper(closureRef,gettables) ;
-		return wrapper;
+//		VariableRef closureRef = (ClosureRef)context.getRef(QName.getClosureQName(fnName));
+//		
+//		if(closureRef == null){
+//			throw new BuildException("Closure '" + fnName + "' is not found.");
+//		}
+//		
+//		int argCount = (args != null) ? args.size() : 0;
+//		
+//		Gettable<?>[] gettables = new Gettable<?>[argCount];
+//		
+//		for(int i =0;i< argCount;i++){
+//			Node a = args.get(i);
+//			gettables[i] = GettableUtils.checkGettable(a);
+//		}
+//
+//		ClosureCallWrapper<?> wrapper = new ClosureCallWrapper(closureRef,gettables) ;
+		return null;
 	}
 	
 	

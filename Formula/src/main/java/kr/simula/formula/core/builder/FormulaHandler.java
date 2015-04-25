@@ -49,12 +49,15 @@ public interface FormulaHandler {
 	 */
 	Block block(String token);
 	
+	void beginScope();
+	
+	
 	/**
 	 * <pre>
 	 * End building block.
 	 * </pre>
 	 */
-	void endBlock();
+	void endScope();
 	
 	/**
 	 * <pre>

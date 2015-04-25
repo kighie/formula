@@ -27,7 +27,7 @@ import kr.simula.formula.core.builder.helper.BinaryOperatorHelper;
 import kr.simula.formula.core.builder.helper.BlockHelper;
 import kr.simula.formula.core.builder.helper.DeclarationHelper;
 import kr.simula.formula.core.builder.helper.FunctionCallHelper;
-import kr.simula.formula.core.builder.helper.GlobalFunctionRegistry;
+import kr.simula.formula.core.builder.helper.BuiltInFunctionRegistry;
 import kr.simula.formula.core.builder.helper.LambdaHelper;
 import kr.simula.formula.core.builder.helper.LiteralHelper;
 import kr.simula.formula.core.builder.helper.MapHelper;
@@ -55,8 +55,8 @@ public class ExpressionBuilder extends AbstractFormulaBuilder<Expr> {
 	
 	
 	@Override
-	protected GlobalFunctionRegistry initGlobalFunctionRegistry() {
-		GlobalFunctionRegistry registry = new GlobalFunctionRegistry(){
+	protected BuiltInFunctionRegistry initGlobalFunctionRegistry() {
+		BuiltInFunctionRegistry registry = new BuiltInFunctionRegistry(){
 			@Override
 			protected void initFunctions() {
 				loadAndRegisterFunctions(this.getClass().getClassLoader(), FUNC_CLASSPATH);

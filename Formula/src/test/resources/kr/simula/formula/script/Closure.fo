@@ -47,15 +47,37 @@ println( fnTest(fnC, 4) );
 
 println("=================");
 
+println( ROUNDUP );
+
+println( "EVEN(4) " & fnTest(EVEN, 4) );
+println( "EXP(4) " & fnTest(EXP, 4) );
+
+println("====== Function Closure Array ===========");
+
+
 function[] fnArray <- [fnA, fnB, fnC];
 
-println( ROUNDUP );
-foreach (function f in fnArray){
-	println( fnTest(EVEN, 5) );
+
+foreach (function ar in fnArray){
+	println( ar & " : "  & ar(5) );
+};
+
+
+println("====== Function Closure Array in function call ==========="); 
+
+
+foreach (function a in fnArray) {
+	println( " fnTest : EVEN : "  & fnTest(EVEN, 5) );
+	println( " fnTest : " & a & " :: " & fnTest(a, 5) );
 }
 
+println("====== Function variable ==========="); 
 
-println("=================");
+function delegateFn <- fnA;
 
-println( fnTest(ROUND, 4) );
+println(" delegateFn : "  & delegateFn(5));
+/*
+
+
+*/
 

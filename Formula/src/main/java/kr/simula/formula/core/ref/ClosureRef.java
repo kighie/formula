@@ -16,9 +16,7 @@ package kr.simula.formula.core.ref;
 
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Function;
-import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.QName;
-import kr.simula.formula.core.Ref;
 
 /**
  * <pre>
@@ -27,7 +25,7 @@ import kr.simula.formula.core.Ref;
  *
  */
 @SuppressWarnings("rawtypes")
-public class ClosureRef implements Ref, Gettable<Function> {
+public class ClosureRef implements GettableRef<Function> {
 
 	protected final QName qname;
 	

@@ -21,7 +21,7 @@ import kr.simula.formula.core.builder.helper.BinaryOperatorHelper;
 import kr.simula.formula.core.builder.helper.BlockHelper;
 import kr.simula.formula.core.builder.helper.DeclarationHelper;
 import kr.simula.formula.core.builder.helper.FunctionCallHelper;
-import kr.simula.formula.core.builder.helper.GlobalFunctionRegistry;
+import kr.simula.formula.core.builder.helper.BuiltInFunctionRegistry;
 import kr.simula.formula.core.builder.helper.LambdaHelper;
 import kr.simula.formula.core.builder.helper.LiteralHelper;
 import kr.simula.formula.core.builder.helper.MapHelper;
@@ -41,7 +41,7 @@ public abstract class AbstractFormulaBuilder<N extends Node>
 	implements FormulaBuilder<N>, FormulaHandlerFactory {
 	
 	
-	private GlobalFunctionRegistry globalFunctionRegistry;
+	private BuiltInFunctionRegistry globalFunctionRegistry;
 	
 	private BlockHelper blockHelper;
 	private LiteralHelper literalHelper;
@@ -98,7 +98,7 @@ public abstract class AbstractFormulaBuilder<N extends Node>
 	 * </pre>
 	 * @return
 	 */
-	protected abstract GlobalFunctionRegistry initGlobalFunctionRegistry();
+	protected abstract BuiltInFunctionRegistry initGlobalFunctionRegistry();
 
 	protected LiteralHelper initLiteralHelper() {
 		return new LiteralHelper();
@@ -116,7 +116,7 @@ public abstract class AbstractFormulaBuilder<N extends Node>
 		return  new UnaryOperatorHelper();
 	}
 
-	protected FunctionCallHelper initFunctionCallHelper(GlobalFunctionRegistry globalFunctionRegistry) {
+	protected FunctionCallHelper initFunctionCallHelper(BuiltInFunctionRegistry globalFunctionRegistry) {
 		FunctionCallHelper callHelper = new FunctionCallHelper();
 		callHelper.setFunctionRegistry(globalFunctionRegistry);
 		return callHelper;

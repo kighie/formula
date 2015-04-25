@@ -49,7 +49,7 @@ formulaScript returns [Module module]
 		(functionDecl 		{ $module.append($functionDecl.fnBlock); })*
 		blockContents[$module]
 		EOF
-	  { handler.endBlock();}
+	  { handler.endScope();}
 	;
 
 /* *************************************
@@ -82,7 +82,9 @@ type returns [Class<?> typeClz]
  * declare function
  *************************************** */
 functionDecl	returns [BlockStatement fnBlock]
-	: { List<Ref> args = new LinkedList<Ref>(); }
+	: { List<Ref> args = new LinkedList<Ref>(); 
+		handler.beginScope();
+	}
 	type IDENT '(' (argsDecl[args] )?  ')' '{'
 	{ 
 		$fnBlock = handler.declareFn($type.typeClz ,$IDENT.text, args); 
@@ -90,7 +92,7 @@ functionDecl	returns [BlockStatement fnBlock]
 	(blockContents[$fnBlock])?
 	(retrunStmt[$fnBlock])?
 	'}'
-		{	handler.endBlock(); }
+		{	handler.endScope(); }
 	;
 
 argsDecl [List<Ref> args]
@@ -135,7 +137,9 @@ blockContents [Block stmtHolder]
  *************************************** */
 
 ifStatement returns [IfStatement ifstmt]
-	: 'if' '(' logicalExpression ')' 
+	: 	
+	'if' { handler.beginScope(); } 
+		'(' logicalExpression ')' 
 		{
 			$ifstmt = (IfStatement)handler.statementBlock(ScriptTokens.IF, $logicalExpression.result); 
 		}
@@ -153,17 +157,20 @@ ifStatement returns [IfStatement ifstmt]
 		'{' blockContents[elseStmt]? '}'
 		
 	)?
-		{	handler.endBlock(); }
+		{	handler.endScope(); }
 	;
 
 
 foreachStatement returns [BlockStatement foreachStmt]
-	: 'foreach' '(' loopCondition ')' 
+	: 'foreach'  
+		{	handler.beginScope(); }
+		'(' loopCondition  ')' 
 		{
 			$foreachStmt = handler.statementBlock(ScriptTokens.FOREACH, $loopCondition.condition); 
 		}
 		'{' blockContents[$foreachStmt]? '}'
-		{	handler.endBlock(); }
+		';'?
+		{	handler.endScope(); }
 	;
 	
 	

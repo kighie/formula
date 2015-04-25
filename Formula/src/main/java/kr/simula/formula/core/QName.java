@@ -5,6 +5,16 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class QName implements Serializable {
 	public final static QName CLOSURE_PREFIX = new QName("closure");
+
+	public static QName getClosureQName(String name){
+		return new QName(CLOSURE_PREFIX, name);
+	}
+	
+
+	public static QName getQName(String name){
+		return new QName(name);
+	}
+	
 	
 	private QName parent;
 	private QName root;
@@ -96,7 +106,4 @@ public class QName implements Serializable {
 		return buf.toString();
 	}
 
-	public static QName getClosureQName(String name){
-		return new QName(CLOSURE_PREFIX, name);
-	}
 }

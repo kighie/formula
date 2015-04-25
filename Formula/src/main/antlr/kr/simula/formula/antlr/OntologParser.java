@@ -1,4 +1,4 @@
-// Generated from Formula.g4 by ANTLR 4.4
+// Generated from Ontolog.g4 by ANTLR 4.4
 package kr.simula.formula.antlr;
 
 //	package kr.simula.formula.antlr;
@@ -21,7 +21,7 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class FormulaParser extends Parser {
+public class OntologParser extends Parser {
 	static { RuntimeMetaData.checkVersion("4.4", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -57,7 +57,7 @@ public class FormulaParser extends Parser {
 	};
 
 	@Override
-	public String getGrammarFileName() { return "Formula.g4"; }
+	public String getGrammarFileName() { return "Ontolog.g4"; }
 
 	@Override
 	public String[] getTokenNames() { return tokenNames; }
@@ -80,7 +80,7 @@ public class FormulaParser extends Parser {
 	  	
 
 		public String strip( String text ) {
-	    	if( text != null && text.length() >= 2 ) {
+	    	if( text != null && text.length() >= 3 ) {
 	    		text = text.substring( 1, text.length() - 1 );
 	    		text = text.replaceAll( "\'", "'" );
 	    		text = text.replaceAll( "\"", "\\\"" );
@@ -88,7 +88,7 @@ public class FormulaParser extends Parser {
 	    	return text;
 		}
 
-	public FormulaParser(TokenStream input) {
+	public OntologParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
@@ -104,11 +104,11 @@ public class FormulaParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_formulaExpression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).enterFormulaExpression(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).enterFormulaExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).exitFormulaExpression(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).exitFormulaExpression(this);
 		}
 	}
 
@@ -173,11 +173,11 @@ public class FormulaParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_formulaExpressionBase; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).enterFormulaExpressionBase(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).enterFormulaExpressionBase(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).exitFormulaExpressionBase(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).exitFormulaExpressionBase(this);
 		}
 	}
 
@@ -228,18 +228,18 @@ public class FormulaParser extends Parser {
 		public ArgumentsContext arguments() {
 			return getRuleContext(ArgumentsContext.class,0);
 		}
-		public TerminalNode IDENT() { return getToken(FormulaParser.IDENT, 0); }
+		public TerminalNode IDENT() { return getToken(OntologParser.IDENT, 0); }
 		public FuncCallExpContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_funcCallExp; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).enterFuncCallExp(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).enterFuncCallExp(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).exitFuncCallExp(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).exitFuncCallExp(this);
 		}
 	}
 
@@ -285,18 +285,18 @@ public class FormulaParser extends Parser {
 		public ArgumentsContext arguments() {
 			return getRuleContext(ArgumentsContext.class,0);
 		}
-		public TerminalNode IDENT() { return getToken(FormulaParser.IDENT, 0); }
+		public TerminalNode IDENT() { return getToken(OntologParser.IDENT, 0); }
 		public MethodCallExpContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_methodCallExp; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).enterMethodCallExp(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).enterMethodCallExp(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).exitMethodCallExp(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).exitMethodCallExp(this);
 		}
 	}
 
@@ -358,11 +358,11 @@ public class FormulaParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_arguments; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).enterArguments(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).enterArguments(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).exitArguments(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).exitArguments(this);
 		}
 	}
 
@@ -447,11 +447,11 @@ public class FormulaParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_conditionArg; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).enterConditionArg(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).enterConditionArg(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).exitConditionArg(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).exitConditionArg(this);
 		}
 	}
 
@@ -547,22 +547,22 @@ public class FormulaParser extends Parser {
 		public Token STRING_LITERAL;
 		public Token NUMBER;
 		public Token IDENT;
-		public TerminalNode NULL() { return getToken(FormulaParser.NULL, 0); }
-		public TerminalNode STRING_LITERAL() { return getToken(FormulaParser.STRING_LITERAL, 0); }
-		public TerminalNode BOOLEAN() { return getToken(FormulaParser.BOOLEAN, 0); }
-		public TerminalNode NUMBER() { return getToken(FormulaParser.NUMBER, 0); }
-		public TerminalNode IDENT() { return getToken(FormulaParser.IDENT, 0); }
+		public TerminalNode NULL() { return getToken(OntologParser.NULL, 0); }
+		public TerminalNode STRING_LITERAL() { return getToken(OntologParser.STRING_LITERAL, 0); }
+		public TerminalNode BOOLEAN() { return getToken(OntologParser.BOOLEAN, 0); }
+		public TerminalNode NUMBER() { return getToken(OntologParser.NUMBER, 0); }
+		public TerminalNode IDENT() { return getToken(OntologParser.IDENT, 0); }
 		public LiteralTermContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_literalTerm; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).enterLiteralTerm(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).enterLiteralTerm(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).exitLiteralTerm(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).exitLiteralTerm(this);
 		}
 	}
 
@@ -638,7 +638,7 @@ public class FormulaParser extends Parser {
 		public FuncCallExpContext funcCallExp() {
 			return getRuleContext(FuncCallExpContext.class,0);
 		}
-		public TerminalNode IDENT() { return getToken(FormulaParser.IDENT, 0); }
+		public TerminalNode IDENT() { return getToken(OntologParser.IDENT, 0); }
 		public ArrayContext array() {
 			return getRuleContext(ArrayContext.class,0);
 		}
@@ -648,11 +648,11 @@ public class FormulaParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_iterableTerm; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).enterIterableTerm(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).enterIterableTerm(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).exitIterableTerm(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).exitIterableTerm(this);
 		}
 	}
 
@@ -746,11 +746,11 @@ public class FormulaParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_formulaTerm; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).enterFormulaTerm(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).enterFormulaTerm(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).exitFormulaTerm(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).exitFormulaTerm(this);
 		}
 	}
 
@@ -828,21 +828,21 @@ public class FormulaParser extends Parser {
 		public Token NUMBER;
 		public Token id2;
 		public TerminalNode IDENT(int i) {
-			return getToken(FormulaParser.IDENT, i);
+			return getToken(OntologParser.IDENT, i);
 		}
-		public TerminalNode NUMBER() { return getToken(FormulaParser.NUMBER, 0); }
-		public List<TerminalNode> IDENT() { return getTokens(FormulaParser.IDENT); }
+		public TerminalNode NUMBER() { return getToken(OntologParser.NUMBER, 0); }
+		public List<TerminalNode> IDENT() { return getTokens(OntologParser.IDENT); }
 		public ArrayRefContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_arrayRef; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).enterArrayRef(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).enterArrayRef(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).exitArrayRef(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).exitArrayRef(this);
 		}
 	}
 
@@ -894,23 +894,23 @@ public class FormulaParser extends Parser {
 			return getRuleContext(FormulaTermContext.class,i);
 		}
 		public TerminalNode NUMBER(int i) {
-			return getToken(FormulaParser.NUMBER, i);
+			return getToken(OntologParser.NUMBER, i);
 		}
 		public List<FormulaTermContext> formulaTerm() {
 			return getRuleContexts(FormulaTermContext.class);
 		}
-		public List<TerminalNode> NUMBER() { return getTokens(FormulaParser.NUMBER); }
+		public List<TerminalNode> NUMBER() { return getTokens(OntologParser.NUMBER); }
 		public ArrayContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_array; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).enterArray(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).enterArray(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).exitArray(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).exitArray(this);
 		}
 	}
 
@@ -1004,20 +1004,20 @@ public class FormulaParser extends Parser {
 			return getRuleContexts(FormulaTermContext.class);
 		}
 		public TerminalNode IDENT(int i) {
-			return getToken(FormulaParser.IDENT, i);
+			return getToken(OntologParser.IDENT, i);
 		}
-		public List<TerminalNode> IDENT() { return getTokens(FormulaParser.IDENT); }
+		public List<TerminalNode> IDENT() { return getTokens(OntologParser.IDENT); }
 		public MapContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_map; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).enterMap(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).enterMap(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).exitMap(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).exitMap(this);
 		}
 	}
 
@@ -1069,20 +1069,20 @@ public class FormulaParser extends Parser {
 		public Ref result;
 		public Token IDENT;
 		public TerminalNode IDENT(int i) {
-			return getToken(FormulaParser.IDENT, i);
+			return getToken(OntologParser.IDENT, i);
 		}
-		public List<TerminalNode> IDENT() { return getTokens(FormulaParser.IDENT); }
+		public List<TerminalNode> IDENT() { return getTokens(OntologParser.IDENT); }
 		public QualifiedNameContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_qualifiedName; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).enterQualifiedName(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).enterQualifiedName(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).exitQualifiedName(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).exitQualifiedName(this);
 		}
 	}
 
@@ -1141,11 +1141,11 @@ public class FormulaParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_unary; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).enterUnary(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).enterUnary(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).exitUnary(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).exitUnary(this);
 		}
 	}
 
@@ -1221,11 +1221,11 @@ public class FormulaParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_percent; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).enterPercent(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).enterPercent(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).exitPercent(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).exitPercent(this);
 		}
 	}
 
@@ -1276,11 +1276,11 @@ public class FormulaParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_exponential; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).enterExponential(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).enterExponential(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).exitExponential(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).exitExponential(this);
 		}
 	}
 
@@ -1337,11 +1337,11 @@ public class FormulaParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_multiplicative; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).enterMultiplicative(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).enterMultiplicative(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).exitMultiplicative(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).exitMultiplicative(this);
 		}
 	}
 
@@ -1412,11 +1412,11 @@ public class FormulaParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_additiveExpression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).enterAdditiveExpression(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).enterAdditiveExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).exitAdditiveExpression(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).exitAdditiveExpression(this);
 		}
 	}
 
@@ -1487,11 +1487,11 @@ public class FormulaParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_stringExpression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).enterStringExpression(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).enterStringExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).exitStringExpression(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).exitStringExpression(this);
 		}
 	}
 
@@ -1548,11 +1548,11 @@ public class FormulaParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_comparison; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).enterComparison(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).enterComparison(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).exitComparison(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).exitComparison(this);
 		}
 	}
 
@@ -1669,11 +1669,11 @@ public class FormulaParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_notExpression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).enterNotExpression(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).enterNotExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).exitNotExpression(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).exitNotExpression(this);
 		}
 	}
 
@@ -1741,11 +1741,11 @@ public class FormulaParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_logicalExpression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).enterLogicalExpression(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).enterLogicalExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).exitLogicalExpression(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).exitLogicalExpression(this);
 		}
 	}
 
@@ -1814,11 +1814,11 @@ public class FormulaParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_operatorExpression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).enterOperatorExpression(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).enterOperatorExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FormulaListener ) ((FormulaListener)listener).exitOperatorExpression(this);
+			if ( listener instanceof OntologListener ) ((OntologListener)listener).exitOperatorExpression(this);
 		}
 	}
 

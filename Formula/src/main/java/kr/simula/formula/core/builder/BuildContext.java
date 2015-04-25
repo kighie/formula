@@ -35,7 +35,7 @@ public interface BuildContext {
 	
 	Function<?> getLocalFn(String name);
 
-	Function<?> getGlobalFunction(String name);
+	Function<?> getBuiltInFunction(String name);
 
 	
 	void registerRef(QName qname, Ref ref);

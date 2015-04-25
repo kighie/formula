@@ -22,6 +22,7 @@ import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.RtException;
 import kr.simula.formula.core.ref.ClosureRef;
+import kr.simula.formula.core.ref.GettableRef;
 import kr.simula.formula.core.ref.TypeLateBinding;
 import kr.simula.formula.core.util.ValueTypeUtils;
 
@@ -32,7 +33,7 @@ import kr.simula.formula.core.util.ValueTypeUtils;
  * @since 1.0
  */
 public class ClosureCallWrapper<T> implements Gettable<T>, TypeLateBinding<T> {
-	protected final ClosureRef closureRef;
+	protected final GettableRef<Function<?>> closureRef;
 	protected final Gettable<?>[] args;
 	private Class<? extends T> type;
 	
@@ -40,7 +41,7 @@ public class ClosureCallWrapper<T> implements Gettable<T>, TypeLateBinding<T> {
 	 * @param closureRef
 	 * @param args
 	 */
-	public ClosureCallWrapper(ClosureRef closureRef, Gettable<?>[] args) {
+	public ClosureCallWrapper(GettableRef<Function<?>> closureRef, Gettable<?>[] args) {
 		this.closureRef = closureRef;
 		this.args = args;
 	}
@@ -58,6 +59,10 @@ public class ClosureCallWrapper<T> implements Gettable<T>, TypeLateBinding<T> {
 	@Override
 	public void setRequiredType(Class<? extends T> requiredType) {
 		this.type = requiredType;
+	}
+
+	protected String getFunctionName(){
+		return closureRef.qualifiedName().getName();
 	}
 	
 	@Override
@@ -78,33 +83,46 @@ public class ClosureCallWrapper<T> implements Gettable<T>, TypeLateBinding<T> {
 		Function<T> function = (Function<T>)closureRef.get(context);
 		
 		if(function != null){
-			LocalFunction<T> localFn = (LocalFunction<T>)function;
-			List<Ref> argDecls = localFn.getArgs();
-			int length = argDecls.size();
-			
-			if(args.length != length){
-				throw new RtException(closureRef.qualifiedName().getName() + " has " + args.length + " args."
-						+ " But original function needs " + length + "args.");
+			if( function instanceof FunctionSpi){
+				return evalLocalFunction((FunctionSpi<T>)function, context);
+			} else {
+				return evalBuiltInFunction(function, context);
 			}
-			Ref argD;
-			Object argV;
-			
-			for(int i=0;i<length;i++){
-				argD = argDecls.get(i);
-				argV = args[i].get(context);
-				context.setReference(argD.qualifiedName(), argV);
-			}
-
-			localFn.eval(context);
-			return localFn.getReturnValue(context);
 		} else {
 			throw new RtException(closureRef + " is not registered.");
 		}
 	}
 	
+	protected T evalLocalFunction(FunctionSpi<T> localFn, Context context){
+		List<Ref> argDecls = localFn.getArgs();
+		int length = argDecls.size();
+		
+		if(args.length != length){
+			throw new RtException(closureRef.qualifiedName().getName() + " has " + args.length + " args."
+					+ " But original function needs " + length + "args.");
+		}
+		Ref argD;
+		Object argV;
+		
+		for(int i=0;i<length;i++){
+			argD = argDecls.get(i);
+			argV = args[i].get(context);
+			context.setReference(argD.qualifiedName(), argV);
+		}
 
-	protected String getFunctionName(){
-		return closureRef.qualifiedName().getName();
+		return localFn.evalFunc(context);
 	}
 	
+
+	protected T evalBuiltInFunction(Function<T> function, Context context){
+		int length = args.length;
+		
+		Object[] arguments = new Object[length];
+		
+		for(int i=0;i<length;i++){
+			arguments[i] = args[i].get(context);
+		}
+
+		return function.eval(arguments);
+	}
 }

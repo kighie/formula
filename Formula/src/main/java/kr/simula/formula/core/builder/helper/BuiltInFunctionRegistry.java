@@ -45,9 +45,9 @@ import kr.simula.formula.core.factory.func.StringFunctionCallFactory;
  * @author Ikchan Kwon
  *
  */
-public class GlobalFunctionRegistry {
+public class BuiltInFunctionRegistry {
 
-	private static Logger logger = Logger.getLogger(GlobalFunctionRegistry.class.getName());
+	private static Logger logger = Logger.getLogger(BuiltInFunctionRegistry.class.getName());
 
 	protected static final Class<?>[] EMPTY_CLASS_ARRAY = new Class<?>[0];
 

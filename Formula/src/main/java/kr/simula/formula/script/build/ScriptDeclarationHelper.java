@@ -42,11 +42,22 @@ public class ScriptDeclarationHelper extends DeclarationHelper {
 
 		@SuppressWarnings({ "rawtypes", "unchecked" })
 		@Override
-		public VariableRef<?> create(BuildContext context, Class<?> type,
+		public Ref create(BuildContext context, Class<?> type,
 				String name) {
-			VariableRef<?> var = new VariableRef(type,new QName(name));
-			context.registerRef(var.qualifiedName(), var);
-			return var;
+			QName qname = new QName(name);
+			Ref ref = new VariableRef(type,qname);
+			context.registerRef(qname, ref);
+			
+//			QName qname;
+//			Ref ref;
+//			if(Function.class.isAssignableFrom(type)){
+//				qname = QName.getClosureQName(name);
+//				ref = new ClosureRef(qname);
+//			} else {
+//				qname = new QName(name);
+//				ref = new VariableRef(type,qname);
+//			}
+			return ref;
 		}
 		
 	};
