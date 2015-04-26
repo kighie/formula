@@ -12,11 +12,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.core.type;
+package so.ontolog.data.type;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.math.MathContext;
 
 
 /**
@@ -24,44 +23,28 @@ import java.math.MathContext;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class Real extends BigDecimal {
+public class Int extends BigDecimal {
 	private static final long serialVersionUID = 1L;
-	
 
-	public static final BigDecimal PI = BigDecimal.valueOf( Math.PI );
-	public static final BigDecimal ONE = BigDecimal.ONE;
-	public static final BigDecimal NEGAT_ONE = BigDecimal.ONE.negate();
-	public static final BigDecimal TWO = BigDecimal.valueOf( 2 );
-	public static final BigDecimal TEN = BigDecimal.TEN;
-	
-	
 	/**
 	 * @param val
 	 */
-	public Real(long val) {
+	public Int(BigInteger val) {
 		super(val);
 	}
 
 	/**
 	 * @param val
 	 */
-	public Real(double val) {
+	public Int(int val) {
 		super(val);
 	}
 
 	/**
 	 * @param val
 	 */
-	public Real(String val) {
-		super(val);
-	}
-
-	/**
-	 * @param val
-	 * @param mc
-	 */
-	public Real(double val, MathContext mc) {
-		super(val, mc);
+	public Int(String val) {
+		super(Integer.parseInt(val));
 	}
 
 	

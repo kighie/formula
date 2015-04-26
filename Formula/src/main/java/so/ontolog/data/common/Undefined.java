@@ -12,40 +12,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.core.type;
+package so.ontolog.data.common;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-
+import java.io.Serializable;
 
 /**
- * <pre></pre>
+ * <pre>Undefined Type markup class</pre>
  * @author kighie@gmail.com
- * @since 1.0
+ *
  */
-public class Int extends BigDecimal {
+public final class Undefined implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @param val
+	 * Undefined Value
 	 */
-	public Int(BigInteger val) {
-		super(val);
-	}
-
-	/**
-	 * @param val
-	 */
-	public Int(int val) {
-		super(val);
-	}
-
-	/**
-	 * @param val
-	 */
-	public Int(String val) {
-		super(Integer.parseInt(val));
-	}
-
+	public static Undefined VALUE = new Undefined();
 	
+	@Override
+	public String toString() {
+		return "Undefined";
+	}
 }

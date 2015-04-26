@@ -65,7 +65,7 @@ public class Tests {
 		BigDecimal dec = new BigDecimal((double)13/11);
 		System.out.println(dec);
 		
-		kr.simula.formula.core.type.Real freal = new kr.simula.formula.core.type.Real((double)13/11);
+		so.ontolog.data.type.Real freal = new so.ontolog.data.type.Real((double)13/11);
 		System.out.println(freal);
 	}
 
@@ -94,7 +94,7 @@ public class Tests {
 	public void freal(){
 		for(int i=0;i<100000;i++){
 
-			kr.simula.formula.core.type.Real real = new kr.simula.formula.core.type.Real((double)13/11);
+			so.ontolog.data.type.Real real = new so.ontolog.data.type.Real((double)13/11);
 //			System.out.println(real);
 		}
 		

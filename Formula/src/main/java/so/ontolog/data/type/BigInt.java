@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.core.type;
+package so.ontolog.data.type;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

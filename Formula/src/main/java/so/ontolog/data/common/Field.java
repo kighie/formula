@@ -12,14 +12,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.core.type;
+package so.ontolog.data.common;
 
+import java.io.Serializable;
 
 /**
+ * 
  * <pre></pre>
  * @author kighie@gmail.com
- * @since 1.0
+ *
+ * @param <T>
  */
-public interface FormulaArray<T> extends Iterable<T>{
-
+public interface Field extends Serializable {
+	
+	String name();
+	
 }
