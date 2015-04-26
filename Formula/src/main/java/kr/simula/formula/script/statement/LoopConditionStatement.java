@@ -15,14 +15,13 @@
 package kr.simula.formula.script.statement;
 
 import kr.simula.formula.core.Context;
-import kr.simula.formula.core.Function;
 import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.GrammarTokens;
 import kr.simula.formula.core.Node;
-import kr.simula.formula.core.RtException;
+import kr.simula.formula.core.EvalException;
 import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.ref.VariableRef;
 import kr.simula.formula.core.util.GettableUtils;
-import kr.simula.formula.util.Range;
 
 /**
  * <pre></pre>
@@ -45,6 +44,11 @@ public class LoopConditionStatement extends AbstractStatement {
 		this.varRef = varRef;
 	}
 
+	@Override
+	public String getToken() {
+		return GrammarTokens.LOOP_COND_DECL;
+	}
+	
 	@SuppressWarnings("rawtypes")
 	public Gettable<Iterable> getIteratorRef() {
 		return iteratorRef;
@@ -87,7 +91,7 @@ public class LoopConditionStatement extends AbstractStatement {
 	@Override
 	public void eval(Context context) {
 		// DO NOTHING
-		throw new RtException("LoopCondition#eval not supported.");
+		throw new EvalException(this, "LoopCondition#eval not supported.");
 	}
 	
 	@Override

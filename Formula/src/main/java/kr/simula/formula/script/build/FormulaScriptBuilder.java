@@ -19,7 +19,6 @@ import kr.simula.formula.antlr.FormulaScriptLexer;
 import kr.simula.formula.antlr.FormulaScriptParser;
 import kr.simula.formula.antlr.FormulaScriptParser.FormulaScriptContext;
 import kr.simula.formula.core.builder.AbstractFormulaBuilder;
-import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.builder.FormulaHandler;
 import kr.simula.formula.core.builder.FormulaSource;
 import kr.simula.formula.core.builder.RootBuildContext;
@@ -125,6 +124,7 @@ public class FormulaScriptBuilder extends AbstractFormulaBuilder<Module> {
 		TokenStream tokenStream = new CommonTokenStream(lexer);
 		FormulaScriptParser parser =new FormulaScriptParser(tokenStream);
 		parser.setHandler(handler);
+		parser.setSourceText(expression);
 		parser.addErrorListener(errorAdapter);
 		
 //		FormulaScriptBaseListener2 extractor = new FormulaScriptBaseListener2(parser);
@@ -138,7 +138,7 @@ public class FormulaScriptBuilder extends AbstractFormulaBuilder<Module> {
 			return ctx.module;
 		} catch (FormulaException e) {
 			FormulaException be = (FormulaException)e;
-			be.setLocation(parser.getCurrentToken());
+			be.setLocation(parser.currentLocation());
 			System.out.println(be);
 
 //			if( ctx != null){

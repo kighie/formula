@@ -22,31 +22,49 @@ package kr.simula.formula.core;
  *
  */
 public interface Node {
-	/**
-	 * Node's content value type
-	 */
-	public enum ValueType {
-		VOID, 
-		TEXT,
-		DATE,
-		NUMERIC,
-		LOGICAL,
-		OBJECT,
-		ARRAY, 
-		MAP,
-		FUNCTION,
-		UNKNOWN
-	}
+//	/**
+//	 * Node's content value type
+//	 */
+//	public enum ValueType {
+//		VOID, 
+//		TEXT,
+//		DATE,
+//		NUMERIC,
+//		LOGICAL,
+//		OBJECT,
+//		ARRAY, 
+//		MAP,
+//		FUNCTION,
+//		UNKNOWN
+//	}
 	
 	/**
 	 * Returns the value type of this node.
 	 * @return
 	 */
-	ValueType valueType();
+//	ValueType valueType();
 	
 	/**
 	 * Returns full expression string of this node 
 	 * @return
 	 */
 	String getExpression();
+	
+	/**
+	 * @return this node's grammar token
+	 * @see GrammarTokens
+	 */
+	String getToken();
+	
+	/**
+	 * @return this node's location
+	 */
+	SourceLocation getLocation();
+
+	/**
+	 * set this node's location
+	 * @param location
+	 * @return this node
+	 */
+	Node setLocation(SourceLocation location);
 }

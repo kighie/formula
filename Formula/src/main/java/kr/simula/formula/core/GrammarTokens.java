@@ -62,5 +62,10 @@ public interface GrammarTokens {
 	String VAR			= "VAR";
 	String VAR_DECL		= "VAR_DECL";
 	String ARG_DECL		= "ARG_DECL";
+	String FUNC_DECL	= "FUNC_DECL";
 	String RETURN		= "RETURN";
+
+	String ARRAY_GET 	= "GET[]";
+	String ARRAY_EL 	= "GET[x]";
+	
 }

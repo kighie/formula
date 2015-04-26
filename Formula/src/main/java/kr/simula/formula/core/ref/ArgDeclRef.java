@@ -14,8 +14,8 @@
  */
 package kr.simula.formula.core.ref;
 
+import kr.simula.formula.core.GrammarTokens;
 import kr.simula.formula.core.QName;
-import kr.simula.formula.core.util.ValueTypeUtils;
 
 /**
  * <pre></pre>
@@ -41,9 +41,14 @@ public class ArgDeclRef  extends GenericRef {
 	}
 	
 	@Override
-	public ValueType valueType() {
-		return ValueTypeUtils.getValueType(type);
+	public String getToken() {
+		return GrammarTokens.ARG_DECL;
 	}
+	
+//	@Override
+//	public ValueType valueType() {
+//		return ValueTypeUtils.getValueType(type);
+//	}
 	
 	@Override
 	public String getExpression() {

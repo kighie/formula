@@ -21,6 +21,7 @@ import kr.simula.formula.core.BlockContext;
 import kr.simula.formula.core.BlockStatement;
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.GrammarTokens;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.Statement;
 import kr.simula.formula.core.util.GettableUtils;
@@ -45,6 +46,11 @@ public class IfStatement extends AbstractBlock implements BlockStatement{
 	public IfStatement(Gettable<Boolean> condition) {
 		super();
 		this.condition = condition;
+	}
+
+	@Override
+	public String getToken() {
+		return GrammarTokens.IF;
 	}
 	
 	/**
@@ -148,6 +154,11 @@ public class IfStatement extends AbstractBlock implements BlockStatement{
 		
 
 		@Override
+		public String getToken() {
+			return GrammarTokens.ELSEIF;
+		}
+		
+		@Override
 		public String getExpression() {
 			StringBuilder buf = new StringBuilder();
 			buf.append("elseif(").append(elseIfCondition.getExpression()).append(") {\n");
@@ -191,6 +202,11 @@ public class IfStatement extends AbstractBlock implements BlockStatement{
 			evalBody(context);
 		}
 
+		@Override
+		public String getToken() {
+			return GrammarTokens.ELSE;
+		}
+		
 		@Override
 		public String toString() {
 			StringBuilder buf = new StringBuilder();

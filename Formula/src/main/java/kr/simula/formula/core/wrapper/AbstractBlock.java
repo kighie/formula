@@ -26,13 +26,13 @@ import kr.simula.formula.core.Statement;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public abstract class AbstractBlock implements Block {
+public abstract class AbstractBlock extends AbstractNode implements Block {
 	private List<Statement> stmtList = new LinkedList<Statement>();
-
-	@Override
-	public ValueType valueType() {
-		return ValueType.VOID;
-	}
+	
+//	@Override
+//	public ValueType valueType() {
+//		return ValueType.VOID;
+//	}
 
 	@Override
 	public void append(Statement node) {

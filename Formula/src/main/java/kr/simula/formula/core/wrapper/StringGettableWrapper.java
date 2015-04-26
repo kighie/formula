@@ -22,25 +22,23 @@ import kr.simula.formula.core.Gettable;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class StringGettableWrapper implements Gettable<String> {
+public class StringGettableWrapper extends AbstractGettableWrapper<String> {
 
-	private Gettable<?> original;
-	
 	
 	/**
 	 * @param original
 	 */
 	public StringGettableWrapper(Gettable<?> original) {
-		this.original = original;
+		super(original);
 	}
 
 	/**
 	 * @return ValueType#TEXT
 	 */
-	@Override
-	public ValueType valueType() {
-		return ValueType.TEXT;
-	}
+//	@Override
+//	public ValueType valueType() {
+//		return ValueType.TEXT;
+//	}
 
 	@Override
 	public String getExpression() {

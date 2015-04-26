@@ -19,12 +19,13 @@ import java.math.BigInteger;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
+import kr.simula.formula.FormulaException;
+import kr.simula.formula.core.EvalException;
+import kr.simula.formula.core.InternalException;
+import kr.simula.formula.func.FunctionNotImplementedException;
 import cern.colt.matrix.DoubleFactory2D;
 import cern.colt.matrix.DoubleMatrix2D;
 import cern.colt.matrix.linalg.Algebra;
-import kr.simula.formula.FormulaException;
-import kr.simula.formula.core.RtException;
-import kr.simula.formula.func.FunctionNotImplementedException;
 
 /**
  * @author kighie@gmail.com
@@ -103,21 +104,21 @@ public final class MathFunctions extends FunctionBase {
     	if(NEGAT_ONE.compareTo(number) <= 0 && ONE.compareTo(number) >= 0) {
     		 return BigDecimal.valueOf( Math.acos(number.doubleValue()) );
     	}
-       throw new RtException("acos(..) argument must be in range -1 to 1" );
+       throw new InternalException("acos(..) argument must be in range -1 to 1" );
     }
 
     public static BigDecimal acos(final BigDecimal number, final MathContext mc) {
     	if(NEGAT_ONE.compareTo(number) <= 0 && ONE.compareTo(number) >= 0) {
     		 return new BigDecimal( Math.acos(number.doubleValue()) , mc);
     	}
-       throw new RtException("acos(..) argument must be in range -1 to 1" );
+       throw new InternalException("acos(..) argument must be in range -1 to 1" );
     }
 
     public static BigDecimal acos(final BigDecimal number, final int scale, final RoundingMode rounding) {
     	if(NEGAT_ONE.compareTo(number) <= 0 && ONE.compareTo(number) >= 0) {
     		 return new BigDecimal( Math.acos(number.doubleValue())).setScale(scale, rounding);
     	}
-       throw new RtException("acos(..) argument must be in range -1 to 1" );
+       throw new InternalException("acos(..) argument must be in range -1 to 1" );
     }
     
     /**
@@ -375,7 +376,7 @@ public final class MathFunctions extends FunctionBase {
      */
     public static BigDecimal combin(final BigDecimal number, final BigDecimal number_chosen) {
     	if( number.compareTo(number_chosen) < 0){
-    		throw new RtException("combin(number,number_chosen) number must be greater than number_chosen");
+    		throw new InternalException("combin(number,number_chosen) number must be greater than number_chosen");
     	}
     	return new BigDecimal(combin(number.intValue(), number_chosen.intValue()));
     }

@@ -26,7 +26,7 @@ public class BaseSourceLocation implements SourceLocation {
 	private int charPositionInLine;
 	private int startIndex;
 	private int endIndex;
-	private String source;
+	private String text;
 	
 	
 	/**
@@ -78,21 +78,29 @@ public class BaseSourceLocation implements SourceLocation {
 	public void setEndIndex(int endIndex) {
 		this.endIndex = endIndex;
 	}
-
-
-	public String getSource() {
-		return source;
+	
+	public void setText(String text) {
+		this.text = text;
 	}
 
 
-	public void setSource(String source) {
-		this.source = source;
+	@Override
+	public String getText() {
+		return text;
 	}
-
-//	@Override
-//	public String toString() {
-//		StringBuilder buf = new StringBuilder();
-//		buf.append(str)
-//		return buf.toString();
-//	}
+	
+	@Override
+	public String toString() {
+		StringBuilder buf = new StringBuilder();
+		buf.append("[");
+		buf.append(line).append(":").append(charPositionInLine);
+		buf.append(",");
+		buf.append(startIndex).append(":").append(endIndex);
+		buf.append("]");
+		
+		if(text !=null){
+			buf.append(" ").append(text);
+		}
+		return buf.toString();
+	}
 }

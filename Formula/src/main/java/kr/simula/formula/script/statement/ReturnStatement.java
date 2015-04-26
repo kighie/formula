@@ -16,6 +16,7 @@ package kr.simula.formula.script.statement;
 
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.GrammarTokens;
 import kr.simula.formula.core.QName;
 
 /**
@@ -37,6 +38,11 @@ public class ReturnStatement extends AbstractStatement {
 		this.returnValueKey = returnValueKey;
 	}
 
+	@Override
+	public String getToken() {
+		return GrammarTokens.RETURN;
+	}
+	
 	@Override
 	public void eval(Context context) {
 		Object value = gettable.get(context);

@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import kr.simula.formula.core.Context;
+import kr.simula.formula.core.GrammarTokens;
 
 
 /**
@@ -29,14 +30,19 @@ import kr.simula.formula.core.Context;
 @SuppressWarnings("rawtypes")
 public class SimpleMapGettable  extends MapGettable<Map>{
 
-	@Override
-	public ValueType valueType() {
-		return ValueType.MAP;
-	}
+//	@Override
+//	public ValueType valueType() {
+//		return ValueType.MAP;
+//	}
 
 	@Override
 	public Class<? extends Map> type() {
 		return Map.class;
+	}
+	
+	@Override
+	public String getToken() {
+		return GrammarTokens.SIMPLE_MAP;
 	}
 	
 	@SuppressWarnings("unchecked")

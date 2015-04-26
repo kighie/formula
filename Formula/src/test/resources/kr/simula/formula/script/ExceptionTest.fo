@@ -67,7 +67,7 @@ println("====== Function Closure Array in function call ===========");
 
 
 foreach (function a in fnArray) {
-	println( " fnTest : EVEN : "  & fnTest(EVEN, 5) );
+	println( " fnTest : EVEN : "  & fnTest(MOD, 5) );
 	println( " fnTest : " & a & " :: " & fnTest(a, 5) );
 }
 
@@ -76,5 +76,3 @@ println("====== Function variable ===========");
 function delegateFn <- fnA;
 
 println(" delegateFn : "  & delegateFn(5));
-
-

@@ -16,7 +16,7 @@ package kr.simula.formula.core.util;
 
 import java.lang.reflect.Method;
 
-import kr.simula.formula.core.RtException;
+import kr.simula.formula.core.InternalException;
 
 /**
  * <pre></pre>
@@ -63,7 +63,7 @@ public class BeanPropertyDelegator<T> implements PropertyDelegator<T> {
 		try {
 			return (T)getter.invoke(bean, EMPTY_ARRAY);
 		} catch (Exception e) {
-			throw new RtException(e);
+			throw new InternalException(e);
 		}
 	}
 	
@@ -71,7 +71,7 @@ public class BeanPropertyDelegator<T> implements PropertyDelegator<T> {
 		try {
 			setter.invoke(bean, new Object[]{value});
 		} catch (Exception e) {
-			throw new RtException(e);
+			throw new InternalException(e);
 		}
 	}
 }

@@ -63,10 +63,10 @@ public class NumericFunctionCallFactory extends GenericFunctionCallFactory {
 			super(function, args);
 		}
 		
-		@Override
-		public ValueType valueType() {
-			return ValueType.NUMERIC;
-		}
+//		@Override
+//		public ValueType valueType() {
+//			return ValueType.NUMERIC;
+//		}
 		
 	}
 	

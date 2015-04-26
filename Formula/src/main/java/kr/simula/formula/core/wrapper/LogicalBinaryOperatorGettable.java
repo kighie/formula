@@ -42,9 +42,9 @@ public class LogicalBinaryOperatorGettable extends BinaryOperatorGettable<Boolea
 		return Boolean.class;
 	}
 
-	@Override
-	public ValueType valueType() {
-		return ValueType.LOGICAL;
-	}
+//	@Override
+//	public ValueType valueType() {
+//		return ValueType.LOGICAL;
+//	}
 
 }

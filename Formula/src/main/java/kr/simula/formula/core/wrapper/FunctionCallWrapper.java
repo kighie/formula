@@ -17,6 +17,7 @@ package kr.simula.formula.core.wrapper;
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Function;
 import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.GrammarTokens;
 
 /**
  * <pre>
@@ -24,7 +25,7 @@ import kr.simula.formula.core.Gettable;
  * @author Ikchan Kwon
  *
  */
-public abstract class FunctionCallWrapper<T> implements Gettable<T>{
+public abstract class FunctionCallWrapper<T> extends AbstractNode implements Gettable<T>{
 
 	protected final Function<T> function;
 	protected final Gettable<?>[] args;
@@ -38,6 +39,11 @@ public abstract class FunctionCallWrapper<T> implements Gettable<T>{
 		this.args = args;
 	}
 
+	@Override
+	public String getToken() {
+		return GrammarTokens.FUNC_CALL;
+	}
+	
 	/**
 	 * @return the bArgsLateEval
 	 */

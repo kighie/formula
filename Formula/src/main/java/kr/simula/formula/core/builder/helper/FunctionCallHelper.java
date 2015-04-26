@@ -26,7 +26,6 @@ import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.factory.FunctionCallFactory;
 import kr.simula.formula.core.factory.func.ClosureCallFactory;
 import kr.simula.formula.core.factory.func.LocalFunctionCallFactory;
-import kr.simula.formula.core.factory.func.VariableClosureCallFactory;
 import kr.simula.formula.core.ref.ClosureRef;
 import kr.simula.formula.core.ref.VariableRef;
 
@@ -42,7 +41,6 @@ public class FunctionCallHelper  {
 	protected FunctionCallFactory localFunctionCallFactory;
 
 	protected FunctionCallFactory closureCallFactory;
-	protected FunctionCallFactory variableClosureCallFactory;
 	
 	protected BuiltInFunctionRegistry globalFunctionRegistry;
 	
@@ -56,7 +54,6 @@ public class FunctionCallHelper  {
 	protected final void initDefaults() {
 		localFunctionCallFactory = initLocalFunctionCallFactory();
 		closureCallFactory = initClosureCallFactory();
-		variableClosureCallFactory = initVariableClosureCallFactory();
 	}
 	
 	/**
@@ -73,11 +70,6 @@ public class FunctionCallHelper  {
 		return new LocalFunctionCallFactory();
 	}
 
-	protected FunctionCallFactory initVariableClosureCallFactory() {
-		return new VariableClosureCallFactory();
-	}
-	
-	
 	protected FunctionCallFactory getLocalFunctionCallFactory() {
 		return localFunctionCallFactory;
 	}

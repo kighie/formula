@@ -17,7 +17,7 @@ package kr.simula.formula.core.wrapper;
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.Settable;
-import kr.simula.formula.core.util.ValueTypeUtils;
+import kr.simula.formula.core.SourceLocation;
 
 /**
  * <pre></pre>
@@ -36,16 +36,32 @@ public class SettableRefWrapper<T> implements Settable<T> {
 		this.ref = ref;
 	}
 
-	@Override
-	public ValueType valueType() {
-		return ValueTypeUtils.getValueType(ref.type());
-	}
+//	@Override
+//	public ValueType valueType() {
+//		return ValueTypeUtils.getValueType(ref.type());
+//	}
 	
 	@Override
 	public String getExpression() {
 		return ref.getExpression();
 	}
 
+	@Override
+	public String getToken() {
+		return ref.getToken();
+	}
+
+	@Override
+	public SourceLocation getLocation() {
+		return ref.getLocation();
+	}
+
+	@Override
+	public Settable<T> setLocation(SourceLocation location) {
+		ref.setLocation(location);
+		return this;
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public Class<? extends T> type() {

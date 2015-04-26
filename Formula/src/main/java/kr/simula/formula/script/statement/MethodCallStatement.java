@@ -15,6 +15,7 @@
 package kr.simula.formula.script.statement;
 
 import kr.simula.formula.core.Context;
+import kr.simula.formula.core.GrammarTokens;
 import kr.simula.formula.core.ref.MethodRef;
 
 /**
@@ -34,6 +35,11 @@ public class MethodCallStatement extends AbstractStatement {
 		this.methodRef = methodRef;
 	}
 
+	@Override
+	public String getToken() {
+		return GrammarTokens.MTHODE_CALL_STMT;
+	}
+	
 	@Override
 	public void eval(Context context) {
 		methodRef.eval(context);

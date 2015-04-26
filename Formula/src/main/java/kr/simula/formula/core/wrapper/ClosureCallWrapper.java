@@ -17,14 +17,13 @@ package kr.simula.formula.core.wrapper;
 import java.util.List;
 
 import kr.simula.formula.core.Context;
+import kr.simula.formula.core.EvalException;
 import kr.simula.formula.core.Function;
 import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.GrammarTokens;
 import kr.simula.formula.core.Ref;
-import kr.simula.formula.core.RtException;
-import kr.simula.formula.core.ref.ClosureRef;
 import kr.simula.formula.core.ref.GettableRef;
 import kr.simula.formula.core.ref.TypeLateBinding;
-import kr.simula.formula.core.util.ValueTypeUtils;
 
 /**
  * <pre></pre>
@@ -32,7 +31,7 @@ import kr.simula.formula.core.util.ValueTypeUtils;
  * @param <T>
  * @since 1.0
  */
-public class ClosureCallWrapper<T> implements Gettable<T>, TypeLateBinding<T> {
+public class ClosureCallWrapper<T> extends AbstractNode implements Gettable<T>, TypeLateBinding<T> {
 	protected final GettableRef<Function<?>> closureRef;
 	protected final Gettable<?>[] args;
 	private Class<? extends T> type;
@@ -46,10 +45,14 @@ public class ClosureCallWrapper<T> implements Gettable<T>, TypeLateBinding<T> {
 		this.args = args;
 	}
 	
-	@Override
-	public ValueType valueType() {
-		return ValueTypeUtils.getValueType(type);
-	}
+//	@Override
+//	public ValueType valueType() {
+//		return ValueTypeUtils.getValueType(type);
+//	}
+	
+	public String getToken() {
+		return GrammarTokens.FUNC_CALL;
+	};
 	
 	@Override
 	public Class<? extends T> type() {
@@ -89,7 +92,7 @@ public class ClosureCallWrapper<T> implements Gettable<T>, TypeLateBinding<T> {
 				return evalBuiltInFunction(function, context);
 			}
 		} else {
-			throw new RtException(closureRef + " is not registered.");
+			throw new EvalException(closureRef, closureRef + " is not registered.");
 		}
 	}
 	
@@ -98,7 +101,7 @@ public class ClosureCallWrapper<T> implements Gettable<T>, TypeLateBinding<T> {
 		int length = argDecls.size();
 		
 		if(args.length != length){
-			throw new RtException(closureRef.qualifiedName().getName() + " has " + args.length + " args."
+			throw new EvalException(this, closureRef.qualifiedName().getName() + " has " + args.length + " args."
 					+ " But original function needs " + length + "args.");
 		}
 		Ref argD;

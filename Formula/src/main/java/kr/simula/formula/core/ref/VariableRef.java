@@ -76,10 +76,10 @@ public class VariableRef<T> extends GenericRef implements GettableRef<T>, Settab
 			super(String.class, qname);
 		}
 		
-		@Override
-		public ValueType valueType() {
-			return ValueType.TEXT;
-		}
+//		@Override
+//		public ValueType valueType() {
+//			return ValueType.TEXT;
+//		}
 	}
 	
 
@@ -92,10 +92,10 @@ public class VariableRef<T> extends GenericRef implements GettableRef<T>, Settab
 			super(BigDecimal.class, qname);
 		}
 		
-		@Override
-		public ValueType valueType() {
-			return ValueType.NUMERIC;
-		}
+//		@Override
+//		public ValueType valueType() {
+//			return ValueType.NUMERIC;
+//		}
 	}
 
 	public static class BooleanVariable extends VariableRef<Boolean>{
@@ -107,10 +107,10 @@ public class VariableRef<T> extends GenericRef implements GettableRef<T>, Settab
 			super(Boolean.class, qname);
 		}
 		
-		@Override
-		public ValueType valueType() {
-			return ValueType.LOGICAL;
-		}
+//		@Override
+//		public ValueType valueType() {
+//			return ValueType.LOGICAL;
+//		}
 	}
 	
 	public static class DateVariable extends VariableRef<Date>{
@@ -122,10 +122,10 @@ public class VariableRef<T> extends GenericRef implements GettableRef<T>, Settab
 			super(Date.class, qname);
 		}
 		
-		@Override
-		public ValueType valueType() {
-			return ValueType.DATE;
-		}
+//		@Override
+//		public ValueType valueType() {
+//			return ValueType.DATE;
+//		}
 	}
 
 	public static class ObjectVariable extends VariableRef<Object>{
@@ -137,9 +137,9 @@ public class VariableRef<T> extends GenericRef implements GettableRef<T>, Settab
 			super(Object.class, qname);
 		}
 		
-		@Override
-		public ValueType valueType() {
-			return ValueType.OBJECT;
-		}
+//		@Override
+//		public ValueType valueType() {
+//			return ValueType.OBJECT;
+//		}
 	}
 }

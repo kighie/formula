@@ -65,7 +65,7 @@ public class ExprBinaryOperatorHelper extends BinaryOperatorHelper {
 				return val1.pow(val2.intValueExact());
 			}
 			
-			public String toString() { return "POW";};
+			public String getToken() { return "POW";};
 	};
 	
 	public static final Binary<BigDecimal,BigDecimal,BigDecimal> MULTIFLY = new Binary<BigDecimal,BigDecimal,BigDecimal>() {
@@ -76,7 +76,7 @@ public class ExprBinaryOperatorHelper extends BinaryOperatorHelper {
 				return val1.multiply(val2);
 			}
 			
-			public String toString() { return "MULTIFLY";};
+			public String getToken() { return "MULTIFLY";};
 	};
 	
 	public static final Binary<BigDecimal, BigDecimal, BigDecimal> DIVIDE = new Binary<BigDecimal, BigDecimal, BigDecimal>() {
@@ -87,20 +87,9 @@ public class ExprBinaryOperatorHelper extends BinaryOperatorHelper {
 			return val1.divide(val2, DIVIDE_MATH_CONTEXT);
 		}
 
-		public String toString() { return "DIVIDE";};
+		public String getToken() { return "DIVIDE";};
 	};
 
-//	public static final Binary<BigDecimal, BigDecimal, BigDecimal> MOD = new Binary<BigDecimal, BigDecimal, BigDecimal>() {
-//		private static final long serialVersionUID = 1L;
-//
-//		@Override
-//		public BigDecimal eval(BigDecimal val1, BigDecimal val2) {
-//			return val1.remainder(val2);
-//		}
-//
-//		public String toString() { return "MOD";};
-//	};
-	
 	public static final Binary<BigDecimal, BigDecimal, BigDecimal> ADD = new Binary<BigDecimal, BigDecimal, BigDecimal>() {
 		private static final long serialVersionUID = 1L;
 
@@ -109,7 +98,7 @@ public class ExprBinaryOperatorHelper extends BinaryOperatorHelper {
 			return val1.add(val2);
 		}
 
-		public String toString() { return "ADD";};
+		public String getToken() { return "ADD";};
 	};
 	
 
@@ -121,7 +110,7 @@ public class ExprBinaryOperatorHelper extends BinaryOperatorHelper {
 			return val1.subtract(val2);
 		}
 		
-		public String toString() { return "SUBTRACT";};
+		public String getToken() { return "SUBTRACT";};
 	};
 	
 
@@ -133,7 +122,7 @@ public class ExprBinaryOperatorHelper extends BinaryOperatorHelper {
 			return val1.equals(val2);
 		};
 		
-		public String toString() { return "EQUALS";}
+		public String getToken() { return "EQUALS";}
 
 	};
 
@@ -145,7 +134,7 @@ public class ExprBinaryOperatorHelper extends BinaryOperatorHelper {
 			return !val1.equals(val2);
 		};
 		
-		public String toString() { return "NOT_EQUALS";}
+		public String getToken() { return "NOT_EQUALS";}
 
 	};
 
@@ -158,7 +147,7 @@ public class ExprBinaryOperatorHelper extends BinaryOperatorHelper {
 			return (val1.compareTo(val2) >= 0);
 		};
 		
-		public String toString() { return "EQUALS_GT";}
+		public String getToken() { return "EQUALS_GT";}
 
 	};
 
@@ -171,7 +160,7 @@ public class ExprBinaryOperatorHelper extends BinaryOperatorHelper {
 			return (val1.compareTo(val2) > 0);
 		};
 		
-		public String toString() { return "GT";}
+		public String getToken() { return "GT";}
 
 	};
 	public static final Binary<Boolean, Comparable<?>, Comparable<?>> EQUALS_LT = new Binary<Boolean, Comparable<?>, Comparable<?>>() {
@@ -183,7 +172,7 @@ public class ExprBinaryOperatorHelper extends BinaryOperatorHelper {
 			return (val1.compareTo(val2) <= 0);
 		};
 		
-		public String toString() { return "EQUALS_LT";}
+		public String getToken() { return "EQUALS_LT";}
 
 	};
 
@@ -196,7 +185,7 @@ public class ExprBinaryOperatorHelper extends BinaryOperatorHelper {
 			return (val1.compareTo(val2) < 0);
 		};
 		
-		public String toString() { return "LT";}
+		public String getToken() { return "LT";}
 
 	};
 	
@@ -209,7 +198,7 @@ public class ExprBinaryOperatorHelper extends BinaryOperatorHelper {
 			return val1 && val2;
 		};
 		
-		public String toString() { return "AND";}
+		public String getToken() { return "AND";}
 
 	};
 	
@@ -222,7 +211,7 @@ public class ExprBinaryOperatorHelper extends BinaryOperatorHelper {
 			return val1 || val2;
 		};
 		
-		public String toString() { return "OR";}
+		public String getToken() { return "OR";}
 
 	};
 	
@@ -237,7 +226,7 @@ public class ExprBinaryOperatorHelper extends BinaryOperatorHelper {
 			return buf.toString();
 		};
 		
-		public String toString() { return "CONCAT";}
+		public String getToken() { return "CONCAT";}
 
 	};
 }

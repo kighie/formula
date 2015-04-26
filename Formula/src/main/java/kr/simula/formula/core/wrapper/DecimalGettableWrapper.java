@@ -25,23 +25,22 @@ import kr.simula.formula.core.util.TypeConverter;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class DecimalGettableWrapper implements Gettable<BigDecimal>{
-	
-	private Gettable<?> original;
+public class DecimalGettableWrapper extends AbstractGettableWrapper<BigDecimal> {
 	private TypeConverter<Object, BigDecimal> converter;
 	
 	/**
 	 * @param original
 	 */
 	public DecimalGettableWrapper(TypeConverter<Object, BigDecimal> converter, Gettable<?> original) {
-		this.original = original;
+		super(original);
 		this.converter = converter;
 	}
 
-	@Override
-	public ValueType valueType() {
-		return ValueType.NUMERIC;
-	}
+	
+//	@Override
+//	public ValueType valueType() {
+//		return ValueType.NUMERIC;
+//	}
 	
 	@Override
 	public String getExpression() {

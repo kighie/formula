@@ -17,8 +17,6 @@ package kr.simula.formula;
 import kr.simula.formula.core.SourceLocation;
 import kr.simula.formula.core.util.SourceLocationUtils;
 
-import org.antlr.v4.runtime.Token;
-
 /**
  * 
  * <pre>
@@ -30,7 +28,7 @@ public class FormulaException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	private SourceLocation sourceLocation;
+	protected SourceLocation sourceLocation;
 	
 	/**
 	 * 
@@ -77,11 +75,6 @@ public class FormulaException extends RuntimeException {
 		return this;
 	}
 
-	public FormulaException setLocation(Token token) {
-		this.sourceLocation = SourceLocationUtils.createSourceLocation(token);
-		return this;
-	}
-	
 	public SourceLocation getLocation() {
 		return sourceLocation;
 	}
@@ -91,12 +84,7 @@ public class FormulaException extends RuntimeException {
 		if(sourceLocation != null){
 			StringBuilder buf = new StringBuilder();
 			buf.append(super.toString());
-			buf.append( " at [").append(sourceLocation.getLine()).append(",").append(sourceLocation.getCharPositionInLine()).append("] ");
-			
-			String source = sourceLocation.getSource();
-			if(source != null){
-				buf.append(source);
-			}
+			buf.append( " at ").append(sourceLocation);
 			return buf.toString();
 		} else {
 			return super.toString();

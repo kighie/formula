@@ -17,6 +17,7 @@ package kr.simula.formula.core.wrapper;
 import java.math.BigDecimal;
 
 import kr.simula.formula.core.Context;
+import kr.simula.formula.core.GrammarTokens;
 import kr.simula.formula.core.Literal;
 
 /**
@@ -24,7 +25,7 @@ import kr.simula.formula.core.Literal;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class DecimalConstantExpr implements Literal<BigDecimal>{
+public class DecimalConstantExpr extends AbstractNode implements Literal<BigDecimal>{
 	private BigDecimal value;
 	private String exprStr;
 	
@@ -46,9 +47,14 @@ public class DecimalConstantExpr implements Literal<BigDecimal>{
 	}
 
 	@Override
-	public ValueType valueType() {
-		return ValueType.NUMERIC;
+	public String getToken() {
+		return GrammarTokens.LIT_NUMBER;
 	}
+	
+//	@Override
+//	public ValueType valueType() {
+//		return ValueType.NUMERIC;
+//	}
 
 	@Override
 	public String getExpression() {

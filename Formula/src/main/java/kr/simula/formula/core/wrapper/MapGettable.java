@@ -28,7 +28,7 @@ import kr.simula.formula.core.builder.BuildException;
  *
  */
 @SuppressWarnings("rawtypes")
-public abstract class MapGettable<T extends Map>  implements Gettable<T>{
+public abstract class MapGettable<T extends Map> extends AbstractNode  implements Gettable<T>{
 	protected Map<String, KeyValue<?>> entries = new LinkedHashMap<String, MapGettable.KeyValue<?>>();
 	
 	@Override

@@ -16,6 +16,7 @@ package kr.simula.formula.script.statement;
 
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.GrammarTokens;
 
 /**
  * <pre>
@@ -34,6 +35,11 @@ public class FunctionCallStatement extends AbstractStatement {
 		this.funcGettable = funcGettable;
 	}
 
+	@Override
+	public String getToken() {
+		return GrammarTokens.FUNCTION_CALL_STMT;
+	}
+	
 	@Override
 	public void eval(Context context) {
 		funcGettable.get(context);

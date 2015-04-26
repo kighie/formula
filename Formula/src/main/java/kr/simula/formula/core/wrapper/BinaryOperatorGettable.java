@@ -23,7 +23,7 @@ import kr.simula.formula.core.Operator.Binary;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public abstract class BinaryOperatorGettable<T, O1, O2> implements Gettable<T> {
+public abstract class BinaryOperatorGettable<T, O1, O2> extends AbstractNode implements Gettable<T> {
 
 	protected Binary<T, O1, O2> operator;
 	protected Gettable<? extends O1> operand1;
@@ -50,6 +50,12 @@ public abstract class BinaryOperatorGettable<T, O1, O2> implements Gettable<T> {
 			.append(" ").append(operand2.getExpression()).append(")");
 		return buf.toString();
 	}
+
+	@Override
+	public String getToken() {
+		return operator.getToken();
+	}
+	
 	
 	@Override
 	public T get(Context context) {

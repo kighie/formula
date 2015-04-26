@@ -24,24 +24,50 @@ import kr.simula.formula.FormulaException;
  * @date 2012. 10. 22.
  * @since	1.0
  */
-public class RtException extends FormulaException {
+public class EvalException extends FormulaException {
 
 	private static final long serialVersionUID = 1050340953390702771L;
-
-	public RtException() {
+	
+	private Node node;
+	
+	public EvalException(Node node) {
 		super();
+		setNode(node);
 	}
 
-	public RtException(String message, Throwable cause) {
+	public EvalException(Node node, String message, Throwable cause) {
 		super(message, cause);
+		setNode(node);
 	}
 
-	public RtException(String message) {
+	public EvalException(Node node, String message) {
 		super(message);
+		setNode(node);
 	}
 
-	public RtException(Throwable cause) {
+	public EvalException(Node node, Throwable cause) {
 		super(cause);
+		setNode(node);
 	}
+	
+	public void setNode(Node node) {
+		this.node = node;
+		setLocation(node.getLocation());
+	}
+	
+	@Override
+	public String toString() {
+		if(sourceLocation != null){
+			StringBuilder buf = new StringBuilder();
+			buf.append(getMessage());
 
+			if(node != null){
+				buf.append( " <").append(node.getToken()).append("> ");
+			}
+			buf.append( " at ").append(sourceLocation);
+			return buf.toString();
+		} else {
+			return super.toString();
+		}	
+	}
 }

@@ -28,5 +28,5 @@ public interface SourceLocation {
 	
 	int getEndIndex();
 	
-	String getSource();
+	String getText();
 }

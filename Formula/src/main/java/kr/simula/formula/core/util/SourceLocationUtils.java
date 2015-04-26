@@ -29,8 +29,8 @@ public class SourceLocationUtils {
 	public static SourceLocation createSourceLocation(Token token){
 		BaseSourceLocation loc = new BaseSourceLocation(token.getLine(), token.getCharPositionInLine(), 
 				token.getStartIndex(), token.getStopIndex());
-		loc.setSource(token.getText());
-		loc.setSource(token.getInputStream().getText(new Interval(token.getStartIndex() - token.getCharPositionInLine(), token.getStopIndex())));
+		loc.setText(token.getText());
+		loc.setText(token.getInputStream().getText(new Interval(token.getStartIndex() - token.getCharPositionInLine(), token.getStopIndex())));
 		return loc;
 	}
 

@@ -17,7 +17,7 @@ package kr.simula.formula.core.ref;
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.QName;
-import kr.simula.formula.core.RtException;
+import kr.simula.formula.core.EvalException;
 import kr.simula.formula.core.Settable;
 import kr.simula.formula.core.util.PropertyDelegator;
 import kr.simula.formula.core.util.RefUtils;
@@ -51,7 +51,7 @@ public class FieldRef<T> extends ExternalRef<T> implements Settable<T> {
 				}
 				propertyDelegator.set(bean, value);
 			} else {
-				throw new RtException("Ref[" + qname + "] has no parent.");
+				throw new EvalException(this, "Ref[" + qname + "] has no parent.");
 			}
 		}
 	}
@@ -75,7 +75,7 @@ public class FieldRef<T> extends ExternalRef<T> implements Settable<T> {
 					context.setReference(qname, value);
 				}
 			} else {
-				throw new RtException("Ref[" + qname + "] has no parent.");
+				throw new EvalException(this, "Ref[" + qname + "] has no parent.");
 			}
 		}
 

@@ -14,12 +14,11 @@
  */
 package kr.simula.formula.core.ref;
 
-import cern.colt.Arrays;
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Ref;
-import kr.simula.formula.core.RtException;
+import kr.simula.formula.core.EvalException;
 import kr.simula.formula.core.Statement;
 import kr.simula.formula.core.util.MethodDelegator;
 import kr.simula.formula.core.util.RefUtils;
@@ -74,7 +73,7 @@ public class MethodRef<T> extends ExternalRef<T> implements Ref, Gettable<T>, St
 			if(methodDelegator == null){
 				Class<?>[] argTypes = new Class[args.length];
 				i = 0;
-				for(Gettable g : args){
+				for(Gettable<?> g : args){
 					argTypes[i++] = g.type();
 				}
 				
@@ -83,7 +82,7 @@ public class MethodRef<T> extends ExternalRef<T> implements Ref, Gettable<T>, St
 			
 			returnValue = methodDelegator.eval(bean, argArr);
 		} else {
-			throw new RtException("Ref[" + qname + "] has no parent.");
+			throw new EvalException(this, "Ref[" + qname + "] has no parent.");
 		}
 //		System.err.println(bean + " : " + methodDelegator + " : " + Arrays.toString(argArr) + " \n\t" + returnValue);
 		return (T) returnValue;

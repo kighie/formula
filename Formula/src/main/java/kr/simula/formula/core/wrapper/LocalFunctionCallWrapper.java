@@ -20,8 +20,7 @@ import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Function;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Ref;
-import kr.simula.formula.core.RtException;
-import kr.simula.formula.core.util.ValueTypeUtils;
+import kr.simula.formula.core.EvalException;
 
 /**
  * <pre></pre>
@@ -30,7 +29,7 @@ import kr.simula.formula.core.util.ValueTypeUtils;
  * @since 1.0
  */
 public class LocalFunctionCallWrapper<T> extends FunctionCallWrapper<T> {
-	private ValueType valueType;
+//	private ValueType valueType;
 	
 	/**
 	 * @param function
@@ -38,13 +37,13 @@ public class LocalFunctionCallWrapper<T> extends FunctionCallWrapper<T> {
 	 */
 	public LocalFunctionCallWrapper(LocalFunction<T> function, Gettable<?>[] args) {
 		super(function, args);
-		valueType = ValueTypeUtils.getValueType(function.getReturnType());
+//		valueType = ValueTypeUtils.getValueType(function.getReturnType());
 	}
 	
-	@Override
-	public ValueType valueType() {
-		return valueType;
-	}
+//	@Override
+//	public ValueType valueType() {
+//		return valueType;
+//	}
 	
 	@Override
 	public T get(Context context) {
@@ -60,9 +59,9 @@ public class LocalFunctionCallWrapper<T> extends FunctionCallWrapper<T> {
 			
 			if( argD.type() == Function.class ) {
 				if(argV == null) {
-					throw new RtException(localFn.getName() + " argument '" + args[i].getExpression() + "' is not defined.");
+					throw new EvalException(this, localFn.getName() + " argument '" + args[i].getExpression() + "' is not defined.");
 				} else if(!(argV instanceof Function)) {
-					throw new RtException(localFn.getName() + " argument '" + args[i].getExpression() + "' is not function.");
+					throw new EvalException(this, localFn.getName() + " argument '" + args[i].getExpression() + "' is not function.");
 				}
 			}
 			context.setReference(argD.qualifiedName(), argV);

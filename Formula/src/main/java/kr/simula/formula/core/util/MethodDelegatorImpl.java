@@ -16,7 +16,7 @@ package kr.simula.formula.core.util;
 
 import java.lang.reflect.Method;
 
-import kr.simula.formula.core.RtException;
+import kr.simula.formula.core.InternalException;
 
 /**
  * <pre>
@@ -51,7 +51,7 @@ public class MethodDelegatorImpl<T>  implements MethodDelegator<T> {
 		try {
 			return (T)method.invoke(bean, args);
 		} catch (Exception e) {
-			throw new RtException(e);
+			throw new InternalException(e);
 		}
 	}
 	

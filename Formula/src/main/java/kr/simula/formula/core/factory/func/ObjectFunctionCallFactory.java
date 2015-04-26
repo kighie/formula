@@ -50,10 +50,10 @@ public class ObjectFunctionCallFactory extends GenericFunctionCallFactory {
 			super(function, args);
 		}
 		
-		@Override
-		public ValueType valueType() {
-			return ValueType.OBJECT;
-		}
+//		@Override
+//		public ValueType valueType() {
+//			return ValueType.OBJECT;
+//		}
 		
 	}
 	

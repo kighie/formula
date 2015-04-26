@@ -54,10 +54,10 @@ public class StringFunctionCallFactory extends GenericFunctionCallFactory {
 			super(function, args);
 		}
 		
-		@Override
-		public ValueType valueType() {
-			return ValueType.TEXT;
-		}
+//		@Override
+//		public ValueType valueType() {
+//			return ValueType.TEXT;
+//		}
 		
 	}
 	

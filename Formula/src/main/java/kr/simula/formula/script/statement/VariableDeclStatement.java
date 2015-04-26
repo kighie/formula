@@ -16,6 +16,7 @@ package kr.simula.formula.script.statement;
 
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.GrammarTokens;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.ref.VariableRef;
 import kr.simula.formula.core.util.GettableUtils;
@@ -39,11 +40,16 @@ public class VariableDeclStatement extends AbstractStatement {
 		this.varRef = varRef;
 		this.valueNode = valueNode;
 	}
-	
+
 	@Override
-	public ValueType valueType() {
-		return varRef.valueType();
+	public String getToken() {
+		return GrammarTokens.VAR_DECL;
 	}
+	
+//	@Override
+//	public ValueType valueType() {
+//		return varRef.valueType();
+//	}
 
 	public Class<?> type(){
 		return varRef.type();

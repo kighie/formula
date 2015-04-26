@@ -16,6 +16,7 @@ package kr.simula.formula.script.statement;
 
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.GrammarTokens;
 import kr.simula.formula.core.Settable;
 
 /**
@@ -38,6 +39,11 @@ public class AssignStatement<T> extends AbstractStatement {
 		this.gettable = gettable;
 	}
 
+	@Override
+	public String getToken() {
+		return GrammarTokens.ASSIGN_STMT;
+	}
+	
 	@Override
 	public void eval(Context context) {
 		T value = gettable.get(context);

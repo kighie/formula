@@ -53,10 +53,10 @@ public class DateFunctionCallFactory extends GenericFunctionCallFactory {
 			super(function, args);
 		}
 		
-		@Override
-		public ValueType valueType() {
-			return ValueType.DATE;
-		}
+//		@Override
+//		public ValueType valueType() {
+//			return ValueType.DATE;
+//		}
 		
 	}
 }

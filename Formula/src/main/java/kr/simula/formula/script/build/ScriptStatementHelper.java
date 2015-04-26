@@ -106,7 +106,7 @@ public class ScriptStatementHelper extends StatementHelper {
 	};
 
 	static StatementFactory assignFactory = new StatementFactory() {
-		@SuppressWarnings("rawtypes")
+		@SuppressWarnings({ "rawtypes", "unchecked" })
 		@Override
 		public AssignStatement create(BuildContext context, String token, Node[] args) {
 			Ref ref = (Ref)args[0];

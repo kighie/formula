@@ -42,9 +42,9 @@ public class StringBinaryOperatorGettable extends BinaryOperatorGettable<String,
 		return String.class;
 	}
 
-	@Override
-	public ValueType valueType() {
-		return ValueType.TEXT;
-	}
+//	@Override
+//	public ValueType valueType() {
+//		return ValueType.TEXT;
+//	}
 
 }

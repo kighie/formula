@@ -25,6 +25,7 @@ import java.util.Map;
 import javax.lang.model.type.NullType;
 
 import kr.simula.formula.core.Context;
+import kr.simula.formula.core.GrammarTokens;
 import kr.simula.formula.core.Literal;
 
 /**
@@ -32,13 +33,13 @@ import kr.simula.formula.core.Literal;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public abstract class AbstractLiteral<T> implements Literal<T>{
+public abstract class AbstractLiteral<T> extends AbstractNode implements Literal<T>{
 	public static final Literal<Object> NULL = new AbstractLiteral<Object>(null){
 		@Override
-		public ValueType valueType() {
-			return ValueType.VOID;
+		public String getToken() {
+			return GrammarTokens.LIT_NULL;
 		}
-
+		
 		@Override
 		public Class<? extends Object> type() {
 			return NullType.class;
@@ -73,16 +74,16 @@ public abstract class AbstractLiteral<T> implements Literal<T>{
 	public String toString() {
 		return value.toString();
 	}
-	
+
 	public static class StringLiteral extends AbstractLiteral<String> {
 		public StringLiteral(String value) {
 			super(value);
 		}
 
-		@Override
-		public ValueType valueType() {
-			return ValueType.TEXT;
-		}
+//		@Override
+//		public ValueType valueType() {
+//			return ValueType.TEXT;
+//		}
 		
 		@Override
 		public Class<String> type() {
@@ -98,6 +99,11 @@ public abstract class AbstractLiteral<T> implements Literal<T>{
 		@Override
 		public String toString() {
 			return "'" + value + "'";
+		}
+
+		@Override
+		public String getToken() {
+			return GrammarTokens.LIT_STRING;
 		}
 		
 	}
@@ -152,9 +158,14 @@ public abstract class AbstractLiteral<T> implements Literal<T>{
 			super(value);
 		}
 
+//		@Override
+//		public ValueType valueType() {
+//			return ValueType.NUMERIC;
+//		}
+
 		@Override
-		public ValueType valueType() {
-			return ValueType.NUMERIC;
+		public String getToken() {
+			return GrammarTokens.LIT_NUMBER;
 		}
 		
 		@Override
@@ -172,14 +183,19 @@ public abstract class AbstractLiteral<T> implements Literal<T>{
 			super(value);
 		}
 
-		@Override
-		public ValueType valueType() {
-			return ValueType.LOGICAL;
-		}
+//		@Override
+//		public ValueType valueType() {
+//			return ValueType.LOGICAL;
+//		}
 
 		@Override
 		public Class<Boolean> type() {
 			return Boolean.class;
+		}
+
+		@Override
+		public String getToken() {
+			return GrammarTokens.LIT_BOOLEAN;
 		}
 		
 	}
@@ -195,14 +211,20 @@ public abstract class AbstractLiteral<T> implements Literal<T>{
 			super(formatter.parse(value));
 		}
 
+//		@Override
+//		public ValueType valueType() {
+//			return ValueType.DATE;
+//		}
+
 		@Override
-		public ValueType valueType() {
-			return ValueType.DATE;
+		public String getToken() {
+			return GrammarTokens.LIT_DATE;
 		}
 		
 		@Override
 		public Class<Date> type() {
 			return Date.class;
 		}
+		
 	}
 }

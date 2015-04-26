@@ -20,14 +20,15 @@ import java.util.Iterator;
 
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Gettable;
-import kr.simula.formula.core.RtException;
+import kr.simula.formula.core.GrammarTokens;
+import kr.simula.formula.core.EvalException;
 
 /**
  * <pre></pre>
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class ArrayGettable<T, E> implements Gettable<T>{
+public class ArrayGettable<T, E> extends AbstractNode implements Gettable<T>{
 	private final Class<T> type;
 	private final Class<E> elementType;
 	private final Gettable<?>[] array;
@@ -42,11 +43,15 @@ public class ArrayGettable<T, E> implements Gettable<T>{
 		this.array = array;
 	}
 
-	@Override
-	public ValueType valueType() {
-		return ValueType.ARRAY;
-	}
+//	@Override
+//	public ValueType valueType() {
+//		return ValueType.ARRAY;
+//	}
 
+	public String getToken() {
+		return GrammarTokens.ARRAY_GET;
+	};
+	
 	@Override
 	public Class<? extends T> type() {
 		return type;
@@ -85,7 +90,7 @@ public class ArrayGettable<T, E> implements Gettable<T>{
 	
 	
 
-	static class ArrayIterable<T> implements Iterable<T> {
+	class ArrayIterable implements Iterable<T> {
 		T[] valArray;
 		
 		public ArrayIterable(T[] valArray) {
@@ -95,11 +100,11 @@ public class ArrayGettable<T, E> implements Gettable<T>{
 
 		@Override
 		public Iterator<T> iterator() {
-			return new ArrayIterator<T>(valArray);
+			return new ArrayIterator(valArray);
 		}		
 	}
 
-	static class ArrayIterator<T> implements Iterator<T> {
+	class ArrayIterator implements Iterator<T> {
 		T[] valArray;
 		int index;
 		
@@ -119,7 +124,7 @@ public class ArrayGettable<T, E> implements Gettable<T>{
 		
 		@Override
 		public void remove() {
-			throw new RtException("ArrayIterator does not support removing element.");
+			throw new EvalException(ArrayGettable.this, "ArrayIterator does not support removing element.");
 		}
 			
 	}

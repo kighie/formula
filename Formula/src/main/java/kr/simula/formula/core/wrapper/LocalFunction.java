@@ -18,10 +18,10 @@ import java.util.List;
 
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Function;
+import kr.simula.formula.core.GrammarTokens;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Ref;
-import kr.simula.formula.core.RtException;
-import kr.simula.formula.core.util.ValueTypeUtils;
+import kr.simula.formula.core.EvalException;
 
 /**
  * <pre>
@@ -34,7 +34,7 @@ public class LocalFunction<O> extends AbstractBlock implements Function<O>, Func
 	private Class<O> retType;
 	private String name;
 	private List<Ref> args;
-	private ValueType valueType;
+//	private ValueType valueType;
 	private final QName returnValueKey;
 	
 	
@@ -47,7 +47,7 @@ public class LocalFunction<O> extends AbstractBlock implements Function<O>, Func
 		this.retType = retType;
 		this.name = name;
 		this.args = args;
-		this.valueType = ValueTypeUtils.getValueType(retType);
+//		this.valueType = ValueTypeUtils.getValueType(retType);
 		this.returnValueKey = returnValueKey;
 	}
 	
@@ -59,9 +59,14 @@ public class LocalFunction<O> extends AbstractBlock implements Function<O>, Func
 	}
 
 	@Override
-	public ValueType valueType() {
-		return valueType;
+	public String getToken() {
+		return GrammarTokens.FUNC_DECL;
 	}
+	
+//	@Override
+//	public ValueType valueType() {
+//		return valueType;
+//	}
 	
 	@Override
 	public Class<O> getReturnType() {
@@ -91,7 +96,7 @@ public class LocalFunction<O> extends AbstractBlock implements Function<O>, Func
 
 	@Override
 	public O eval(Object... args) {
-		throw new RtException("LocalFunction#eval(Object[]) is not applicable.");
+		throw new EvalException(this, "LocalFunction#eval(Object[]) is not applicable.");
 	}
 
 	@Override

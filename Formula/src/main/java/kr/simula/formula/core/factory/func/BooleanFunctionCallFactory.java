@@ -52,10 +52,10 @@ public class BooleanFunctionCallFactory extends GenericFunctionCallFactory {
 			super(function, args);
 		}
 		
-		@Override
-		public ValueType valueType() {
-			return ValueType.LOGICAL;
-		}
+//		@Override
+//		public ValueType valueType() {
+//			return ValueType.LOGICAL;
+//		}
 		
 	}
 

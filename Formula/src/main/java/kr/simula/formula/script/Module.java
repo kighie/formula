@@ -29,6 +29,17 @@ public class Module extends AbstractBlock{
 		evalBody(context);
 	}
 
+//	void invokeException(Exception e){
+//		for( StackTraceElement ste : e.getStackTrace() ){
+//			ste.
+//		}
+//	}
+	
+	@Override
+	public String getToken() {
+		return ScriptTokens.MODULE;
+	}
+	
 	@Override
 	public String getExpression() {
 		StringBuilder buf = new StringBuilder();

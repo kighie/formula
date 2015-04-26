@@ -16,6 +16,7 @@ grammar FormulaScript;
 
 options {
 	language = Java;
+	superClass = kr.simula.formula.core.antlr.FormulaHandlerParser;
 }
 
 import Formula;
@@ -35,7 +36,6 @@ import Formula;
   	
 }
 
-
 @lexer::header {
 }
 
@@ -44,12 +44,12 @@ import Formula;
  * Formula Script
  *************************************** */
 formulaScript returns [Module module]
-	: { $module = (Module)handler.block(ScriptTokens.MODULE); }
+	: { $module = (Module)block(ScriptTokens.MODULE); }
 		(importStatement 	{ $module.append($importStatement.stmt); })*
 		(functionDecl 		{ $module.append($functionDecl.fnBlock); })*
 		blockContents[$module]
 		EOF
-	  { handler.endScope();}
+	  { endScope();}
 	;
 
 /* *************************************
@@ -65,17 +65,17 @@ importStatement	returns [Statement stmt]
 variableDecl	returns [VariableDeclStatement stmt]
 	: type IDENT 	
 	{ 
-		Ref varRef = handler.declare(ScriptTokens.VAR_DECL, $type.typeClz ,$IDENT.text); 
-		$stmt = (VariableDeclStatement)handler.statement(ScriptTokens.VAR_DECL, varRef);
+		Ref varRef = declare(ScriptTokens.VAR_DECL, $type.typeClz ,$IDENT.text); 
+		$stmt = (VariableDeclStatement)statement(ScriptTokens.VAR_DECL, varRef);
 	}
 	( '<-' formulaExpressionBase {	$stmt.setValueNode($formulaExpressionBase.result); })?
 	END_OF_STMT
 	;
 
 type returns [Class<?> typeClz]
-	: (IDENT 	{ $typeClz = handler.type($IDENT.text); })  
-	| (qualifiedName { $typeClz = handler.type($qualifiedName.text); }) 
-	('[' ']' 	{ $typeClz = handler.arrayType($typeClz); })?
+	: (IDENT 	{ $typeClz = type($IDENT.text); })  
+	| (qualifiedName { $typeClz = type($qualifiedName.text); }) 
+	('[' ']' 	{ $typeClz = arrayType($typeClz); })?
 	;
 
 /* *************************************
@@ -83,24 +83,24 @@ type returns [Class<?> typeClz]
  *************************************** */
 functionDecl	returns [BlockStatement fnBlock]
 	: { List<Ref> args = new LinkedList<Ref>(); 
-		handler.beginScope();
+		beginScope();
 	}
 	type IDENT '(' (argsDecl[args] )?  ')' '{'
 	{ 
-		$fnBlock = handler.declareFn($type.typeClz ,$IDENT.text, args); 
+		$fnBlock = declareFn($type.typeClz ,$IDENT.text, args); 
 	}
 	(blockContents[$fnBlock])?
 	(retrunStmt[$fnBlock])?
 	'}'
-		{	handler.endScope(); }
+		{	endScope(); }
 	;
 
 argsDecl [List<Ref> args]
 	: 
 	(
-		type IDENT { $args.add( handler.declare(ScriptTokens.ARG_DECL, $type.typeClz ,$IDENT.text)); }
+		type IDENT { $args.add( declare(ScriptTokens.ARG_DECL, $type.typeClz ,$IDENT.text)); }
 		(
-			',' type IDENT { $args.add( handler.declare(ScriptTokens.ARG_DECL, $type.typeClz ,$IDENT.text)); }
+			',' type IDENT { $args.add( declare(ScriptTokens.ARG_DECL, $type.typeClz ,$IDENT.text)); }
 		)*
 		
 	)
@@ -110,7 +110,7 @@ retrunStmt	[BlockStatement fnBlock]
 	: { Node arg = null; }
 		'return' ( formulaExpressionBase { arg = $formulaExpressionBase.result; } )?
 	{ 
-		$fnBlock.append( handler.statement( ScriptTokens.RETURN, fnBlock, arg ) ); 
+		$fnBlock.append( statement( ScriptTokens.RETURN, fnBlock, arg ) ); 
 	}
 	';'
 	;
@@ -138,10 +138,10 @@ blockContents [Block stmtHolder]
 
 ifStatement returns [IfStatement ifstmt]
 	: 	
-	'if' { handler.beginScope(); } 
+	'if' { beginScope(); } 
 		'(' logicalExpression ')' 
 		{
-			$ifstmt = (IfStatement)handler.statementBlock(ScriptTokens.IF, $logicalExpression.result); 
+			$ifstmt = (IfStatement)statementBlock(ScriptTokens.IF, $logicalExpression.result); 
 		}
 		'{'  blockContents[$ifstmt]? '}'
 	( 'elseif' '(' logicalExpression ')'
@@ -157,28 +157,28 @@ ifStatement returns [IfStatement ifstmt]
 		'{' blockContents[elseStmt]? '}'
 		
 	)?
-		{	handler.endScope(); }
+		{	endScope(); }
 	;
 
 
 foreachStatement returns [BlockStatement foreachStmt]
 	: 'foreach'  
-		{	handler.beginScope(); }
+		{	beginScope(); }
 		'(' loopCondition  ')' 
 		{
-			$foreachStmt = handler.statementBlock(ScriptTokens.FOREACH, $loopCondition.condition); 
+			$foreachStmt = statementBlock(ScriptTokens.FOREACH, $loopCondition.condition); 
 		}
 		'{' blockContents[$foreachStmt]? '}'
 		';'?
-		{	handler.endScope(); }
+		{	endScope(); }
 	;
 	
 	
 loopCondition 	returns [LoopConditionStatement condition]
 	: type IDENT 
 	{ 
-		Ref varRef = handler.declare(ScriptTokens.VAR_DECL, $type.typeClz ,$IDENT.text); 
-		$condition = (LoopConditionStatement)handler.statement(ScriptTokens.LOOP_COND_DECL, varRef);
+		Ref varRef = declare(ScriptTokens.VAR_DECL, $type.typeClz ,$IDENT.text); 
+		$condition = (LoopConditionStatement)statement(ScriptTokens.LOOP_COND_DECL, varRef);
 	}
 	'in'
 		(  iterableTerm 
@@ -198,11 +198,11 @@ loopCondition 	returns [LoopConditionStatement condition]
 
 
 methodCallStatement  returns [Statement stmt]
-	: methodCallExp END_OF_STMT { $stmt = handler.statement(ScriptTokens.MTHODE_CALL_STMT, $methodCallExp.result); }
+	: methodCallExp END_OF_STMT { $stmt = statement(ScriptTokens.MTHODE_CALL_STMT, $methodCallExp.result); }
 	;
 	
 functionCallStatement  returns [Statement stmt]
-	: funcCallExp END_OF_STMT { $stmt = handler.statement(ScriptTokens.FUNCTION_CALL_STMT, $funcCallExp.result); }
+	: funcCallExp END_OF_STMT { $stmt = statement(ScriptTokens.FUNCTION_CALL_STMT, $funcCallExp.result); }
 	;
 	
 	
@@ -221,11 +221,11 @@ assignStatement  returns [Statement stmt]
 leftAssign  returns [Statement stmt]
 	: { Ref settable = null; }
 	(
-		IDENT 			{ settable = handler.refer( $IDENT.text);}
+		IDENT 			{ settable = refer( $IDENT.text);}
 		| qualifiedName	{ settable = $qualifiedName.result;}
 	) 
 	'<-' formulaExpressionBase
-	{ $stmt = handler.statement(ScriptTokens.ASSIGN_STMT, settable, $formulaExpressionBase.result); }
+	{ $stmt = statement(ScriptTokens.ASSIGN_STMT, settable, $formulaExpressionBase.result); }
 	; 
  
 rightAssign  returns [Statement stmt]
@@ -233,10 +233,10 @@ rightAssign  returns [Statement stmt]
 	formulaExpressionBase 
 	'->'
 	(
-		IDENT			{ settable = handler.refer( $IDENT.text);}
+		IDENT			{ settable = refer( $IDENT.text);}
 		| qualifiedName	{ settable = $qualifiedName.result;}
 	)
-	{ $stmt = handler.statement(ScriptTokens.ASSIGN_STMT, settable, $formulaExpressionBase.result); }
+	{ $stmt = statement(ScriptTokens.ASSIGN_STMT, settable, $formulaExpressionBase.result); }
 	; 
  
 

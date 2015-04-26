@@ -16,6 +16,8 @@ package kr.simula.formula.expr;
 
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.Node;
+import kr.simula.formula.core.SourceLocation;
 
 /**
  * <pre></pre>
@@ -34,9 +36,24 @@ public class Expr implements Gettable<Object>{
 		this.body = body;
 	}
 
+//	@Override
+//	public ValueType valueType() {
+//		return body.valueType();
+//	}
+
 	@Override
-	public ValueType valueType() {
-		return body.valueType();
+	public String getToken() {
+		return body.getToken();
+	}
+	
+	@Override
+	public SourceLocation getLocation() {
+		return body.getLocation();
+	}
+	
+	@Override
+	public Node setLocation(SourceLocation location) {
+		return body.setLocation(location);
 	}
 	
 	@Override

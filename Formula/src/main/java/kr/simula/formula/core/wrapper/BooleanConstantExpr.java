@@ -16,13 +16,14 @@ package kr.simula.formula.core.wrapper;
 
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.GrammarTokens;
 
 /**
  * <pre></pre>
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class BooleanConstantExpr implements Gettable<Boolean>{
+public class BooleanConstantExpr extends AbstractNode implements Gettable<Boolean>{
 	private Boolean value;
 	private String exprStr;
 	
@@ -43,11 +44,15 @@ public class BooleanConstantExpr implements Gettable<Boolean>{
 		this.exprStr = exprStr;
 	}
 
-	@Override
-	public ValueType valueType() {
-		return ValueType.NUMERIC;
-	}
+//	@Override
+//	public ValueType valueType() {
+//		return ValueType.NUMERIC;
+//	}
 
+	public String getToken() {
+		return GrammarTokens.LIT_BOOLEAN;
+	};
+	
 	@Override
 	public String getExpression() {
 		return exprStr;

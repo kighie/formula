@@ -42,9 +42,9 @@ public class DecimalUnaryOperatorGettable extends UnaryOperatorGettable<BigDecim
 		return BigDecimal.class;
 	}
 
-	@Override
-	public ValueType valueType() {
-		return ValueType.NUMERIC;
-	}
+//	@Override
+//	public ValueType valueType() {
+//		return ValueType.NUMERIC;
+//	}
 	
 }

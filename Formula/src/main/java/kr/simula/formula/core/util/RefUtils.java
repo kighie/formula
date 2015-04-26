@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import kr.simula.formula.core.RtException;
+import kr.simula.formula.core.InternalException;
 
 /**
  * <pre></pre>
@@ -98,7 +98,7 @@ public class RefUtils {
 	public static PropertyDelegator getMapPropertyDelegator(Object bean, String fieldName){
 
 		if(!(bean instanceof Map)){
-			throw new RtException("MapPropertyDelegator needs map.");
+			throw new InternalException("MapPropertyDelegator needs map.");
 		}
 		return new MapPropertyDelegator(fieldName);
 		
@@ -143,13 +143,13 @@ public class RefUtils {
 				try {
 					method = clz.getMethod(methodName,new Class[]{Object.class});
 				} catch ( Exception e2) {
-					throw new RtException(e2);
+					throw new InternalException(e2);
 				}
 			} else {
-				throw new RtException(e);
+				throw new InternalException(e);
 			}
 		} catch ( Exception e) {
-			throw new RtException(e);
+			throw new InternalException(e);
 		}
 
 		Class<?> returnType = method.getReturnType();
@@ -162,7 +162,7 @@ public class RefUtils {
 		try {
 			return Class.forName(className);
 		} catch (ClassNotFoundException e) {
-			throw new RtException(e);
+			throw new InternalException(e);
 		}
 	}
 }

@@ -15,6 +15,7 @@
 package kr.simula.formula.script.statement;
 
 import kr.simula.formula.core.Statement;
+import kr.simula.formula.core.wrapper.AbstractNode;
 
 /**
  * <pre>
@@ -22,10 +23,10 @@ import kr.simula.formula.core.Statement;
  * @author Ikchan Kwon
  *
  */
-public abstract class AbstractStatement implements Statement {
-	@Override
-	public ValueType valueType() {
-		return ValueType.VOID;
-	}
+public abstract class AbstractStatement extends AbstractNode implements Statement {
+//	@Override
+//	public ValueType valueType() {
+//		return ValueType.VOID;
+//	}
 
 }

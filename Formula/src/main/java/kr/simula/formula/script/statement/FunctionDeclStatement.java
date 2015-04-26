@@ -18,9 +18,11 @@ import java.util.List;
 
 import kr.simula.formula.core.BlockStatement;
 import kr.simula.formula.core.Context;
+import kr.simula.formula.core.GrammarTokens;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.Statement;
+import kr.simula.formula.core.wrapper.AbstractNode;
 import kr.simula.formula.core.wrapper.LocalFunction;
 
 /**
@@ -29,7 +31,7 @@ import kr.simula.formula.core.wrapper.LocalFunction;
  * @author Ikchan Kwon
  *
  */
-public class FunctionDeclStatement implements BlockStatement {
+public class FunctionDeclStatement extends AbstractNode implements BlockStatement {
 	private final LocalFunction<?> localFunction;
 	private final QName returnValueKey;
 	
@@ -44,6 +46,12 @@ public class FunctionDeclStatement implements BlockStatement {
 		localFunction = new LocalFunction(retType, name, args, returnValueKey);
 	}
 
+
+	@Override
+	public String getToken() {
+		return GrammarTokens.FUNC_DECL;
+	}
+	
 	/**
 	 * @return the localFunction
 	 */
@@ -58,10 +66,10 @@ public class FunctionDeclStatement implements BlockStatement {
 		return localFunction.getName();
 	}
 
-	@Override
-	public ValueType valueType() {
-		return localFunction.valueType();
-	}
+//	@Override
+//	public ValueType valueType() {
+//		return localFunction.valueType();
+//	}
 
 	/**
 	 * @return the returnValueKey

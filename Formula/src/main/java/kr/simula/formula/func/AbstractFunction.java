@@ -14,8 +14,8 @@
  */
 package kr.simula.formula.func;
 
-import kr.simula.formula.FormulaException;
 import kr.simula.formula.core.Function;
+import kr.simula.formula.core.InternalException;
 
 /**
  * <pre>
@@ -39,25 +39,25 @@ public abstract class AbstractFunction<O> implements Function<O> {
 		return returnType;
 	}
 	
-	protected void checkArgCount(Object[] args, int count) throws FormulaException {
+	protected void checkArgCount(Object[] args, int count) throws InternalException {
         if (args == null && count != 0) {
-            throw new FormulaException(getClass().getSimpleName() +
+            throw new InternalException(getClass().getSimpleName() +
                     " function takes no arguments");
         }
 
         if (args.length != count)
-            throw new FormulaException(getClass().getSimpleName() +
+            throw new InternalException(getClass().getSimpleName() +
                     " function needs " + count + " arguments, but " + args.length);
     }
 	
-	protected void checkArgCountMoreThan(Object[] args, int count) throws FormulaException {
+	protected void checkArgCountMoreThan(Object[] args, int count) throws InternalException {
         if (args == null && count != 0) {
-            throw new FormulaException(getClass().getSimpleName() +
+            throw new InternalException(getClass().getSimpleName() +
                     " function takes no arguments");
         }
 
         if (args.length <= count)
-            throw new FormulaException(getClass().getSimpleName() +
+            throw new InternalException(getClass().getSimpleName() +
                     " function takes " + count + " arguments");
     }
 }

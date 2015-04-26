@@ -18,18 +18,19 @@ import java.util.List;
 
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.GrammarTokens;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Ref;
-import kr.simula.formula.core.RtException;
+import kr.simula.formula.core.EvalException;
 import kr.simula.formula.core.builder.BuildException;
-import kr.simula.formula.core.util.ValueTypeUtils;
+import kr.simula.formula.core.wrapper.AbstractNode;
 
 /**
  * <pre></pre>
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class ArrayElementRef<T> implements Ref, Gettable<T> {
+public class ArrayElementRef<T> extends AbstractNode implements Ref, Gettable<T> {
 	private Class<T> type;
 	private Gettable<?> parent;
 	private Gettable<Number> indexer;
@@ -50,11 +51,16 @@ public class ArrayElementRef<T> implements Ref, Gettable<T> {
 	public Class<? extends T> type() {
 		return type;
 	}
-	
+
 	@Override
-	public ValueType valueType() {
-		return ValueTypeUtils.getValueType(type);
+	public String getToken() {
+		return GrammarTokens.ARRAY_EL;
 	}
+	
+//	@Override
+//	public ValueType valueType() {
+//		return ValueTypeUtils.getValueType(type);
+//	}
 	
 	@Override
 	public String getExpression() {
@@ -79,7 +85,7 @@ public class ArrayElementRef<T> implements Ref, Gettable<T> {
 		} else if(array.getClass().isArray()){
 			value = ((T[])array)[index.intValue()];
 		} else {
-			throw new RtException(parent + " is not array.");
+			throw new EvalException(this, parent + " is not array.");
 		}
 		return value;
 	}

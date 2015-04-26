@@ -20,7 +20,8 @@ import kr.simula.formula.core.BlockContext;
 import kr.simula.formula.core.BlockStatement;
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Gettable;
-import kr.simula.formula.core.RtException;
+import kr.simula.formula.core.GrammarTokens;
+import kr.simula.formula.core.EvalException;
 import kr.simula.formula.core.ref.VariableRef;
 import kr.simula.formula.core.wrapper.AbstractBlock;
 
@@ -41,6 +42,11 @@ public class ForeachStatement extends AbstractBlock implements BlockStatement{
 		this.loopCondition = loopCond;
 	}
 
+	@Override
+	public String getToken() {
+		return GrammarTokens.FOREACH;
+	}
+	
 	@Override
 	public String getExpression() {
 		StringBuilder buf = new StringBuilder();
@@ -68,7 +74,7 @@ public class ForeachStatement extends AbstractBlock implements BlockStatement{
 				
 				doEval(blockCtx, varRef, Arrays.asList(array));
 			} else {
-				throw new RtException(iteratorRef + " is not iterable.");
+				throw new EvalException(iteratorRef, iteratorRef + " is not iterable.");
 			}
 		} else {
 			Gettable<?> arrayGettable = loopCondition.getArrayGettable();
@@ -76,7 +82,7 @@ public class ForeachStatement extends AbstractBlock implements BlockStatement{
 				Object[] array = ((Gettable<Object[]>)arrayGettable).get(blockCtx);
 				doEval(blockCtx, varRef, Arrays.asList(array));
 			} else {
-				throw new RtException(iteratorRef + " is not iterable nor int range.");
+				throw new EvalException(iteratorRef, iteratorRef + " is not iterable nor int range.");
 			}
 		}
 		

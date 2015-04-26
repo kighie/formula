@@ -5,9 +5,9 @@ import java.util.List;
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Function;
 import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.InternalException;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.Ref;
-import kr.simula.formula.core.RtException;
 import kr.simula.formula.core.util.GettableUtils;
 
 public class BuiltInFunctionSpi<O> implements Function<O>, FunctionSpi<O> {
@@ -42,7 +42,7 @@ public class BuiltInFunctionSpi<O> implements Function<O>, FunctionSpi<O> {
 	
 	@Override
 	public O eval(Object... args) {
-		throw new RtException("ClosureFunctionSpi#eval(Object[]) is not applicable.");
+		throw new InternalException("ClosureFunctionSpi#eval(Object[]) is not applicable.");
 	}
 
 	@Override

@@ -23,7 +23,7 @@ import kr.simula.formula.core.Operator.Unary;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public abstract class UnaryOperatorGettable<T, O1> implements Gettable<T> {
+public abstract class UnaryOperatorGettable<T, O1> extends AbstractNode implements Gettable<T> {
 
 	protected Unary<T, O1> operator;
 	protected Gettable<? extends O1> operand;
@@ -36,6 +36,11 @@ public abstract class UnaryOperatorGettable<T, O1> implements Gettable<T> {
 	
 	public T get(Context context) {
 		return operator.eval(operand.get(context));
+	}
+
+	@Override
+	public String getToken() {
+		return operator.getToken();
 	}
 	
 	@Override

@@ -26,6 +26,8 @@ import java.io.Serializable;
  */
 public interface Operator<T> extends Serializable {
 	
+	String getToken();
+	
 	public interface Unary<T, OP> extends Operator<T> {
 		T eval(OP val);
 	}

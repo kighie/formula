@@ -44,9 +44,9 @@ public class DecimalBinaryOperatorGettable extends BinaryOperatorGettable<BigDec
 		return BigDecimal.class;
 	}
 
-	@Override
-	public ValueType valueType() {
-		return ValueType.NUMERIC;
-	}
+//	@Override
+//	public ValueType valueType() {
+//		return ValueType.NUMERIC;
+//	}
 
 }

@@ -3,11 +3,13 @@ package kr.simula.formula.core.ref;
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Function;
 import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.GrammarTokens;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Ref;
+import kr.simula.formula.core.wrapper.AbstractNode;
 
 @SuppressWarnings("rawtypes")
-public class FunctionRef implements Ref, Gettable<Function> {
+public class FunctionRef extends AbstractNode implements Ref, Gettable<Function> {
 
 	protected final QName qname;
 	protected final Function<?> function;
@@ -18,11 +20,16 @@ public class FunctionRef implements Ref, Gettable<Function> {
 		this.function = function;
 	}
 	
-	@Override
-	public ValueType valueType() {
-		return ValueType.FUNCTION;
-	}
+//	@Override
+//	public ValueType valueType() {
+//		return ValueType.FUNCTION;
+//	}
 
+	@Override
+	public String getToken() {
+		return GrammarTokens.REF;
+	}
+	
 	@Override
 	public Class<Function> type() {
 		return Function.class;

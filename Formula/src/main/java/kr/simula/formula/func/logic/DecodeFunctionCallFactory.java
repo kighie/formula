@@ -90,10 +90,10 @@ public class DecodeFunctionCallFactory extends GenericFunctionCallFactory {
 			this.decisionMap = decisionMap;
 		}
 		
-		@Override
-		public ValueType valueType() {
-			return ValueType.OBJECT;
-		}
+//		@Override
+//		public ValueType valueType() {
+//			return ValueType.OBJECT;
+//		}
 		
 		@Override
 		public Object get(Context context) {

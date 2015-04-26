@@ -50,7 +50,7 @@ public class ExprUnaryOperatorHelper extends UnaryOperatorHelper {
 			return val.negate();
 		};
 		
-		public String toString() { return "NEGATE";}
+		public String getToken() { return "NEGATE";}
 
 	};
 
@@ -62,7 +62,7 @@ public class ExprUnaryOperatorHelper extends UnaryOperatorHelper {
 			return val.divide(DEC100, val.scale()+2 , RoundingMode.HALF_UP);
 		};
 		
-		public String toString() { return "PERCENT";}
+		public String getToken() { return "PERCENT";}
 
 	};
 	
@@ -74,7 +74,7 @@ public class ExprUnaryOperatorHelper extends UnaryOperatorHelper {
 			return (val != null) ? !val : true;
 		};
 		
-		public String toString() { return "NOT";}
+		public String getToken() { return "NOT";}
 
 	};
 }

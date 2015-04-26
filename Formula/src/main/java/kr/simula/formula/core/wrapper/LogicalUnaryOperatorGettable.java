@@ -40,9 +40,9 @@ public class LogicalUnaryOperatorGettable extends UnaryOperatorGettable<Boolean,
 		return Boolean.class;
 	}
 
-	@Override
-	public ValueType valueType() {
-		return ValueType.LOGICAL;
-	}
+//	@Override
+//	public ValueType valueType() {
+//		return ValueType.LOGICAL;
+//	}
 
 }

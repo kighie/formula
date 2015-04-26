@@ -14,15 +14,17 @@
  */
 package kr.simula.formula.core.ref;
 
+import kr.simula.formula.core.GrammarTokens;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Ref;
+import kr.simula.formula.core.wrapper.AbstractNode;
 
 /**
  * <pre></pre>
  * @author kighie@gmail.com
  * @since 1.0
  */
-public abstract class GenericRef implements Ref{
+public abstract class GenericRef extends AbstractNode implements Ref{
 
 	protected final QName qname;
 	
@@ -34,14 +36,19 @@ public abstract class GenericRef implements Ref{
 		this.qname = qname;
 	}
 
-	/**
-	 * @return {@link ValueType#UNKNOWN}
-	 */
-	@Override
-	public ValueType valueType() {
-		return ValueType.UNKNOWN;
-	}
+//	/**
+//	 * @return {@link ValueType#UNKNOWN}
+//	 */
+//	@Override
+//	public ValueType valueType() {
+//		return ValueType.UNKNOWN;
+//	}
 
+	@Override
+	public String getToken() {
+		return GrammarTokens.REF;
+	}
+	
 	@Override
 	public String getExpression() {
 		return qname.toString();

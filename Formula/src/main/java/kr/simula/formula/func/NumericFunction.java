@@ -18,7 +18,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
-import kr.simula.formula.core.RtException;
+import kr.simula.formula.core.InternalException;
 
 /**
  * <pre>
@@ -51,7 +51,7 @@ public abstract class NumericFunction extends AbstractFunction<BigDecimal>{
 		} else if(value instanceof Number){
 			return new BigDecimal(value.toString());
 		} else {
-			throw new RtException("Argument is not numeric value; " + value);
+			throw new InternalException("Argument is not numeric value; " + value);
 		}
 	}
 }

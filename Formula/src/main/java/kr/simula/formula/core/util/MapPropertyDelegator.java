@@ -16,7 +16,7 @@ package kr.simula.formula.core.util;
 
 import java.util.Map;
 
-import kr.simula.formula.core.RtException;
+import kr.simula.formula.core.InternalException;
 
 /**
  * <pre></pre>
@@ -53,7 +53,7 @@ public class MapPropertyDelegator<T> implements PropertyDelegator<T> {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public T get(Object map){
 		if(!(map instanceof Map)){
-			throw new RtException("MapPropertyDelegator needs map.");
+			throw new InternalException("MapPropertyDelegator needs map.");
 		}
 		
 		return (T)((Map)map).get(fieldName);
@@ -62,7 +62,7 @@ public class MapPropertyDelegator<T> implements PropertyDelegator<T> {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void set(Object map, Object value){
 		if(!(map instanceof Map)){
-			throw new RtException("MapPropertyDelegator needs map.");
+			throw new InternalException("MapPropertyDelegator needs map.");
 		}
 		((Map)map).put(fieldName, value);
 	}

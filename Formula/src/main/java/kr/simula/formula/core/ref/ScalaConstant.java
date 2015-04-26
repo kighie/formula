@@ -58,10 +58,10 @@ public abstract class ScalaConstant<T> extends GenericRef implements Gettable<T>
 			super(qname, value);
 		}
 		
-		@Override
-		public ValueType valueType() {
-			return ValueType.TEXT;
-		}
+//		@Override
+//		public ValueType valueType() {
+//			return ValueType.TEXT;
+//		}
 	}
 	
 
@@ -74,10 +74,10 @@ public abstract class ScalaConstant<T> extends GenericRef implements Gettable<T>
 			super(qname, value);
 		}
 		
-		@Override
-		public ValueType valueType() {
-			return ValueType.NUMERIC;
-		}
+//		@Override
+//		public ValueType valueType() {
+//			return ValueType.NUMERIC;
+//		}
 	}
 
 	public static class BooleanConstant extends ScalaConstant<Boolean>{
@@ -89,10 +89,10 @@ public abstract class ScalaConstant<T> extends GenericRef implements Gettable<T>
 			super(qname, value);
 		}
 		
-		@Override
-		public ValueType valueType() {
-			return ValueType.LOGICAL;
-		}
+//		@Override
+//		public ValueType valueType() {
+//			return ValueType.LOGICAL;
+//		}
 	}
 	
 	public static class DateConstant extends ScalaConstant<Date>{
@@ -104,10 +104,10 @@ public abstract class ScalaConstant<T> extends GenericRef implements Gettable<T>
 			super(qname, value);
 		}
 		
-		@Override
-		public ValueType valueType() {
-			return ValueType.DATE;
-		}
+//		@Override
+//		public ValueType valueType() {
+//			return ValueType.DATE;
+//		}
 	}
 
 }

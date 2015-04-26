@@ -16,7 +16,9 @@ package kr.simula.formula.core.ref;
 
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Function;
+import kr.simula.formula.core.GrammarTokens;
 import kr.simula.formula.core.QName;
+import kr.simula.formula.core.wrapper.AbstractNode;
 
 /**
  * <pre>
@@ -25,7 +27,7 @@ import kr.simula.formula.core.QName;
  *
  */
 @SuppressWarnings("rawtypes")
-public class ClosureRef implements GettableRef<Function> {
+public class ClosureRef extends AbstractNode implements GettableRef<Function> {
 
 	protected final QName qname;
 	
@@ -38,11 +40,15 @@ public class ClosureRef implements GettableRef<Function> {
 		this.qname = qname;
 	}
 
-	@Override
-	public ValueType valueType() {
-		return ValueType.FUNCTION;
-	}
+//	@Override
+//	public ValueType valueType() {
+//		return ValueType.FUNCTION;
+//	}
 
+	public String getToken() {
+		return GrammarTokens.REF;
+	};
+	
 	@Override
 	public Class<Function> type() {
 		return Function.class;
