@@ -67,5 +67,6 @@ public interface GrammarTokens {
 
 	String ARRAY_GET 	= "GET[]";
 	String ARRAY_EL 	= "GET[x]";
-	
+
+	String LAMBDA		= "LAMBDA";
 }

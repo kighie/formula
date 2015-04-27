@@ -1,0 +1,10 @@
+
+importJava java.lang.System;
+
+
+defn testFn( function fn, number a) : void {
+	System.out.println(fn(a));
+}
+
+
+testFn( defn(number a) { return a * 2; } , 13 );

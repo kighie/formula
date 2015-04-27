@@ -20,7 +20,6 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 
 import kr.simula.formula.FormulaException;
-import kr.simula.formula.core.EvalException;
 import kr.simula.formula.core.InternalException;
 import kr.simula.formula.func.FunctionNotImplementedException;
 import cern.colt.matrix.DoubleFactory2D;

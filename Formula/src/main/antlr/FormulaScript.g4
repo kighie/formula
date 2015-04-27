@@ -39,7 +39,6 @@ import Formula;
 @lexer::header {
 }
 
-
 /* *************************************
  * Formula Script
  *************************************** */
@@ -50,6 +49,7 @@ formulaScript returns [Module module]
 		EOF
 	  { endScope();}
 	;
+
 
 /* *************************************
  * import
@@ -98,10 +98,11 @@ functionDecl	returns [BlockStatement fnBlock]
 		beginScope();
 		Class<?> typeClz = Object.class;
 	}
-	'defn' IDENT '(' (argsDecl[args] )?  ')' (':' type { typeClz = $type.typeClz; })? 
-	'{'
+	'defn' IDENT 
+		( ( '(' ')' ) |  ( '(' argsDecl[args] ')' ) )
+		( (':' type { typeClz = $type.typeClz; } '{' ) | ( '{' )  )
 		{ $fnBlock = declareFn(typeClz ,$IDENT.text, args); }
-		(blockContents[$fnBlock])?
+		(blockContents[$fnBlock])
 		(retrunStmt[$fnBlock])?
 	'}'
 		{	endScope(); }
@@ -131,7 +132,6 @@ retrunStmt	[BlockStatement fnBlock]
  *************************************** */
 
  
- 
 blockContents [Block stmtHolder]
 	: 
 	(
@@ -156,18 +156,18 @@ ifStatement returns [IfStatement ifstmt]
 		{
 			$ifstmt = (IfStatement)statementBlock(ScriptTokens.IF, $logicalExpression.result); 
 		}
-		'{'  blockContents[$ifstmt]? '}'
+		'{'  blockContents[$ifstmt] '}'
 	( 'elseif' '(' logicalExpression ')'
 		{
 			IfStatement.ElseIf elseIfStmt = $ifstmt.createElseIf($logicalExpression.result);
 		} 
-		'{' blockContents[elseIfStmt]? '}'
+		'{' blockContents[elseIfStmt] '}'
 	)*
 	( 'else' 
 		{
 			IfStatement.Else elseStmt = $ifstmt.checkOutElse();
 		}
-		'{' blockContents[elseStmt]? '}'
+		'{' blockContents[elseStmt] '}'
 		
 	)?
 		{	endScope(); }
@@ -181,7 +181,7 @@ foreachStatement returns [BlockStatement foreachStmt]
 		{
 			$foreachStmt = statementBlock(ScriptTokens.FOREACH, $loopCondition.condition); 
 		}
-		'{' blockContents[$foreachStmt]? '}'
+		'{' blockContents[$foreachStmt] '}'
 		';'?
 		{	endScope(); }
 	;
@@ -217,8 +217,43 @@ methodCallStatement  returns [Statement stmt]
 functionCallStatement  returns [Statement stmt]
 	: funcCallExp END_OF_STMT { $stmt = statement(ScriptTokens.FUNCTION_CALL_STMT, $funcCallExp.result); }
 	;
-	
-	
+
+/*
+ * override arguments
+ */
+arguments  returns [List<Node> nodeList]
+	: { $nodeList = new LinkedList<Node>(); }
+		( 
+			(arg2 = operatorExpression { $nodeList.add($arg2.result); })
+			| (arg3 = lambdaArg { $nodeList.add($arg3.lambda); })
+		)
+		(',' 
+			(arg2 = operatorExpression { $nodeList.add($arg2.result); })
+			| (arg3 = lambdaArg { $nodeList.add($arg3.lambda); })
+		)*
+	;
+
+/*
+	Lambda Argument
+*/
+lambdaArg returns [Lambda lambda]
+	: 
+	{ 
+		List<Ref> args = new LinkedList<Ref>(); 
+		beginScope();
+		Class<?> typeClz = Object.class;
+	}
+	'defn' 
+		( ( '(' ')' ) |  ( '(' argsDecl[args] ')' ) )
+		( (':' type { typeClz = $type.typeClz; } '{' ) | ( '{' )  )
+		{ $lambda = lambda( LAMBDA , args, typeClz); }
+		(blockContents[$lambda])
+		(retrunStmt[$lambda])?
+	'}'
+		{	endScope(); }
+	;
+
+
 /* *************************************
  * assign
  *************************************** */

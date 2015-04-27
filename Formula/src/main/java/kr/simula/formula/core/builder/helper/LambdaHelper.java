@@ -17,7 +17,6 @@ package kr.simula.formula.core.builder.helper;
 import java.util.List;
 
 import kr.simula.formula.core.Lambda;
-import kr.simula.formula.core.Node;
 import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.builder.BuildException;
@@ -38,12 +37,12 @@ public class LambdaHelper extends AbstractHelper<LambdaFactory> {
 	 * @param infos
 	 * @return
 	 */
-	public Lambda create(BuildContext current, String token, List<Ref> args, Node[] infos) {
+	public Lambda create(BuildContext current, String token, List<Ref> args, Object ... extra) {
 		LambdaFactory factory = factories.get(token);
 		if(factory == null){
 			throw new BuildException("LambdaFactory for " + token + " is not registered.");
 		}
-		return factory.create(current, token, args, infos);
+		return factory.create(current, token, args, extra);
 	}
 
 }

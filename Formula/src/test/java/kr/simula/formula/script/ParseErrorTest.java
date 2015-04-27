@@ -14,10 +14,6 @@
  */
 package kr.simula.formula.script;
 
-import java.math.BigDecimal;
-
-import kr.simula.formula.core.QName;
-import kr.simula.formula.core.RootContext;
 import kr.simula.formula.util.StopWatch;
 
 import org.junit.Test;

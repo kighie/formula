@@ -14,6 +14,7 @@
  */
 package kr.simula.formula.core.builder;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -45,6 +46,12 @@ import kr.simula.formula.core.builder.helper.UnaryOperatorHelper;
  *
  */
 public abstract class AbstractFormulaHandler implements FormulaHandler {
+	
+
+	@SuppressWarnings("unchecked")
+	protected static final List<Node> EMPTY_NODE_LIST = Collections.EMPTY_LIST;
+	
+	
 	protected final RootBuildContext rootContext;
 
 	
@@ -210,12 +217,12 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	@SuppressWarnings("rawtypes")
 	@Override
 	public Gettable functionCall(String name, List<Node> args) {
-		return functionCallHelper.create(current, name, args);
+		return functionCallHelper.create(current, name, ( args==null) ? EMPTY_NODE_LIST : args );
 	}
 
 	@Override
 	public Ref methodCall(Ref parent, String name, List<Node> args) {
-		return methodCallHelper.create(current, parent, name, args);
+		return methodCallHelper.create(current, parent, name, ( args==null) ? EMPTY_NODE_LIST : args );
 	}
 	
 	@Override
@@ -229,8 +236,8 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	}
 	
 	@Override
-	public Lambda lambda(String token, List<Ref> args, Node... infos) {
-		return lambdaHelper.create(current, token, args, infos);
+	public Lambda lambda(String token, List<Ref> args, Object ... extra) {
+		return lambdaHelper.create(current, token, args, extra);
 	}
 
 

@@ -84,7 +84,7 @@ public class Tests {
 		for(int i=0;i<100000;i++){
 
 			BigDecimal real = new BigDecimal((double)13/11);
-//			System.out.println(real);
+			System.out.println(real);
 		}
 		
 	}
@@ -95,7 +95,7 @@ public class Tests {
 		for(int i=0;i<100000;i++){
 
 			so.ontolog.data.type.Real real = new so.ontolog.data.type.Real((double)13/11);
-//			System.out.println(real);
+			System.out.println(real);
 		}
 		
 	}

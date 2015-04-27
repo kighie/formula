@@ -230,10 +230,9 @@ public interface FormulaHandler {
 	 * </pre>
 	 * @param token
 	 * @param args
-	 * @param infos
 	 * @return
 	 */
-	Lambda lambda(String token, List<Ref> args, Node ... infos);
+	Lambda lambda(String token, List<Ref> args, Object ... extra);
 	
 	/**
 	 * <pre>

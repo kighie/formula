@@ -526,7 +526,7 @@ public class OntologParser extends Parser {
 				match(T__0);
 				setState(107);
 				((ConditionArgContext)_localctx).op2 = literalTerm();
-				((ConditionArgContext)_localctx).result =  handler.lambda(GrammarTokens.OP_EQ, null, ((ConditionArgContext)_localctx).op2.result); 
+				((ConditionArgContext)_localctx).result =  handler.lambda(GrammarTokens.OP_EQ, null); 
 				}
 				break;
 			case 2:
@@ -535,7 +535,7 @@ public class OntologParser extends Parser {
 				match(T__5);
 				setState(111);
 				((ConditionArgContext)_localctx).op2 = literalTerm();
-				((ConditionArgContext)_localctx).result =  handler.lambda(GrammarTokens.OP_EQ, null, ((ConditionArgContext)_localctx).op2.result); 
+				((ConditionArgContext)_localctx).result =  handler.lambda(GrammarTokens.OP_EQ, null); 
 				}
 				break;
 			case 3:
@@ -544,7 +544,7 @@ public class OntologParser extends Parser {
 				match(T__6);
 				setState(115);
 				((ConditionArgContext)_localctx).op2 = literalTerm();
-				((ConditionArgContext)_localctx).result =  handler.lambda(GrammarTokens.OP_NOT_EQ, null, ((ConditionArgContext)_localctx).op2.result); 
+				((ConditionArgContext)_localctx).result =  handler.lambda(GrammarTokens.OP_NOT_EQ, null); 
 				}
 				break;
 			case 4:
@@ -553,7 +553,7 @@ public class OntologParser extends Parser {
 				match(T__7);
 				setState(119);
 				((ConditionArgContext)_localctx).op2 = literalTerm();
-				((ConditionArgContext)_localctx).result =  handler.lambda(GrammarTokens.OP_NOT_EQ, null, ((ConditionArgContext)_localctx).op2.result); 
+				((ConditionArgContext)_localctx).result =  handler.lambda(GrammarTokens.OP_NOT_EQ, null); 
 				}
 				break;
 			case 5:
@@ -564,7 +564,7 @@ public class OntologParser extends Parser {
 				match(T__8);
 				setState(124);
 				((ConditionArgContext)_localctx).op2 = literalTerm();
-				((ConditionArgContext)_localctx).result =  handler.lambda(GrammarTokens.OP_NOT_EQ, null, ((ConditionArgContext)_localctx).op2.result); 
+				((ConditionArgContext)_localctx).result =  handler.lambda(GrammarTokens.OP_NOT_EQ, null); 
 				}
 				break;
 			case 6:
@@ -573,7 +573,7 @@ public class OntologParser extends Parser {
 				match(T__9);
 				setState(128);
 				((ConditionArgContext)_localctx).op2 = literalTerm();
-				((ConditionArgContext)_localctx).result =  handler.lambda(GrammarTokens.OP_GT, null, ((ConditionArgContext)_localctx).op2.result); 
+				((ConditionArgContext)_localctx).result =  handler.lambda(GrammarTokens.OP_GT, null); 
 				}
 				break;
 			case 7:
@@ -582,7 +582,7 @@ public class OntologParser extends Parser {
 				match(T__10);
 				setState(132);
 				((ConditionArgContext)_localctx).op2 = literalTerm();
-				((ConditionArgContext)_localctx).result =  handler.lambda(GrammarTokens.OP_EQ_GT, null, ((ConditionArgContext)_localctx).op2.result); 
+				((ConditionArgContext)_localctx).result =  handler.lambda(GrammarTokens.OP_EQ_GT, null); 
 				}
 				break;
 			case 8:
@@ -591,7 +591,7 @@ public class OntologParser extends Parser {
 				match(T__11);
 				setState(136);
 				((ConditionArgContext)_localctx).op2 = literalTerm();
-				((ConditionArgContext)_localctx).result =  handler.lambda(GrammarTokens.OP_LT, null, ((ConditionArgContext)_localctx).op2.result); 
+				((ConditionArgContext)_localctx).result =  handler.lambda(GrammarTokens.OP_LT, null); 
 				}
 				break;
 			case 9:
@@ -600,7 +600,7 @@ public class OntologParser extends Parser {
 				match(T__12);
 				setState(140);
 				((ConditionArgContext)_localctx).op2 = literalTerm();
-				((ConditionArgContext)_localctx).result =  handler.lambda(GrammarTokens.OP_EQ_LT, null, ((ConditionArgContext)_localctx).op2.result); 
+				((ConditionArgContext)_localctx).result =  handler.lambda(GrammarTokens.OP_EQ_LT, null); 
 				}
 				break;
 			}

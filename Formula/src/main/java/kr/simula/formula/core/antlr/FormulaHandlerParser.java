@@ -6,6 +6,7 @@ import java.util.Map;
 import kr.simula.formula.core.Block;
 import kr.simula.formula.core.BlockStatement;
 import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.GrammarTokens;
 import kr.simula.formula.core.Lambda;
 import kr.simula.formula.core.Literal;
 import kr.simula.formula.core.Node;
@@ -23,7 +24,7 @@ import org.antlr.v4.runtime.atn.ATN;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
-public class FormulaHandlerParser extends Parser {
+public class FormulaHandlerParser extends Parser implements GrammarTokens {
 	
 	private String sourceText;
 	private FormulaHandler handler;
@@ -126,9 +127,9 @@ public class FormulaHandlerParser extends Parser {
 		return (BlockStatement)handler.statementBlock(token, args).setLocation(currentLocation());
 	}
 
-	public Lambda lambda(String token, List<Ref> args, Node... infos) {
+	public Lambda lambda(String token, List<Ref> args, Object ... extra) {
 		
-		return (Lambda)handler.lambda(token, args, infos).setLocation(currentLocation());
+		return (Lambda)handler.lambda(token, args, extra).setLocation(currentLocation());
 	}
 
 	public Gettable<?> array(List<Node> elements) {

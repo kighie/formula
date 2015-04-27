@@ -19,6 +19,6 @@ package kr.simula.formula.core;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public interface Lambda extends Node {
+public interface Lambda extends BlockStatement {
 	void eval(Context makerContext, Context callerContext);
 }

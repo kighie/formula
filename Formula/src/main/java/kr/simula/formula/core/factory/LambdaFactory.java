@@ -17,7 +17,6 @@ package kr.simula.formula.core.factory;
 import java.util.List;
 
 import kr.simula.formula.core.Lambda;
-import kr.simula.formula.core.Node;
 import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.builder.BuildContext;
 
@@ -33,5 +32,5 @@ public interface LambdaFactory {
 	 * @param value
 	 * @return
 	 */
-	Lambda create(BuildContext current, String token, List<Ref> args, Node[] infos);
+	Lambda create(BuildContext current, String token, List<Ref> args, Object ... extra);
 }

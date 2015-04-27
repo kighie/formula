@@ -33,6 +33,7 @@ options {
 	import kr.simula.formula.util.*;
 }
 
+
 @parser::members {
 	public String strip( String text ) {
     	if( text != null && text.length() >= 2 ) {
@@ -88,50 +89,66 @@ formulaExpressionBase returns [Node result]
 	;
 
 funcCallExp returns [Gettable result]
-	: IDENT '(' arguments? ')' 
-		{ $result = functionCall($IDENT.text, $arguments.nodeList) ;}
+	: 
+	(IDENT '(' ')'  { $result = functionCall($IDENT.text, null) ;} )
+	| (IDENT '(' arguments ')'  { $result = functionCall($IDENT.text, $arguments.nodeList) ;} )
 	;
 
 methodCallExp returns [Node result]
-	: qualifiedName 	{ Ref parent = $qualifiedName.result; }
-	'.' IDENT 			{ String methodName = $IDENT.text; }
-	'(' arguments? ')'	{ $result = methodCall(parent, methodName, $arguments.nodeList) ; }
+	: 
+		( qualifiedName'.' IDENT 	'(' ')'	
+			{ $result = methodCall($qualifiedName.result, $IDENT.text, null) ; }
+		)
+		| ( qualifiedName'.' IDENT 	'(' arguments ')'	
+			{ $result = methodCall($qualifiedName.result, $IDENT.text, $arguments.nodeList) ; }
+		)
 	;
 
 arguments  returns [List<Node> nodeList]
 	: { $nodeList = new LinkedList<Node>(); }
-	( operatorExpression { $nodeList.add($operatorExpression.result); } 
-		(',' 
-			(arg2 = operatorExpression { $nodeList.add($arg2.result); })
-			| (arg3 = conditionArg { $nodeList.add($arg3.result); })
-		)*
-	)?
+		(arg2 = operatorExpression { $nodeList.add($arg2.result); })
+		(',' arg2 = operatorExpression { $nodeList.add($arg2.result); } )*
 	;
 
 
 /*
-	Condition Argument
+	Lambda Argument
 */
+lambdaArg returns [Lambda result]
+	: 
+		(
+			( IDENT )
+			| ( '(' IDENT ( ',' IDENT )* ')')
+		)
+		'->'
+		
+	;
+
+/*
+	Condition Argument
+
 conditionArg returns [Lambda result]
 	: 
 	( 
-		'='  op2 = literalTerm {$result = lambda(GrammarTokens.OP_EQ, null, $op2.result); }
-		|'is'  op2 = literalTerm {$result = lambda(GrammarTokens.OP_EQ, null, $op2.result); }
-		|'!=' op2 = literalTerm {$result = lambda(GrammarTokens.OP_NOT_EQ, null, $op2.result); }
-		|'<>' op2 = literalTerm {$result = lambda(GrammarTokens.OP_NOT_EQ, null, $op2.result); }
-		|'is' 'not' op2 = literalTerm {$result = lambda(GrammarTokens.OP_NOT_EQ, null, $op2.result); }
-		|'>'  op2 = literalTerm {$result = lambda(GrammarTokens.OP_GT, null, $op2.result); }
-		|'>=' op2 = literalTerm {$result = lambda(GrammarTokens.OP_EQ_GT, null, $op2.result); }
-		|'<'  op2 = literalTerm {$result = lambda(GrammarTokens.OP_LT, null, $op2.result); }
-		|'<=' op2 = literalTerm {$result = lambda(GrammarTokens.OP_EQ_LT, null, $op2.result); }
+		'='  op2 = literalTerm {$result = lambda(OP_EQ, null, $op2.result); }
+		|'is'  op2 = literalTerm {$result = lambda(OP_EQ, null, $op2.result); }
+		|'!=' op2 = literalTerm {$result = lambda(OP_NOT_EQ, null, $op2.result); }
+		|'<>' op2 = literalTerm {$result = lambda(OP_NOT_EQ, null, $op2.result); }
+		|'is' 'not' op2 = literalTerm {$result = lambda(OP_NOT_EQ, null, $op2.result); }
+		|'>'  op2 = literalTerm {$result = lambda(OP_GT, null, $op2.result); }
+		|'>=' op2 = literalTerm {$result = lambda(OP_EQ_GT, null, $op2.result); }
+		|'<'  op2 = literalTerm {$result = lambda(OP_LT, null, $op2.result); }
+		|'<=' op2 = literalTerm {$result = lambda(OP_EQ_LT, null, $op2.result); }
 	)
 	;
+*/
+
 
 literalTerm  returns [Node result]
-	: BOOLEAN 			{ $result = literal( GrammarTokens.LIT_BOOLEAN, $BOOLEAN.text); }
-	| STRING_LITERAL	{ $result = literal( GrammarTokens.LIT_STRING,  strip($STRING_LITERAL.text)); }
-	| NUMBER			{ $result = literal( GrammarTokens.LIT_NUMBER, $NUMBER.text); }
-	| NULL				{ $result = literal( GrammarTokens.LIT_NULL, null); }
+	: BOOLEAN 			{ $result = literal( LIT_BOOLEAN, $BOOLEAN.text); }
+	| STRING_LITERAL	{ $result = literal( LIT_STRING,  strip($STRING_LITERAL.text)); }
+	| NUMBER			{ $result = literal( LIT_NUMBER, $NUMBER.text); }
+	| NULL				{ $result = literal( LIT_NULL, null); }
 	| IDENT				{ $result = refer( $IDENT.text); }
 	;
 
@@ -157,7 +174,7 @@ formulaTerm returns [Node result]
 
 arrayRef   returns [Ref result]
 	: IDENT '[' 
-		(NUMBER 	{ $result = refer( $IDENT.text, literal( GrammarTokens.LIT_NUMBER, $NUMBER.text) ); } 
+		(NUMBER 	{ $result = refer( $IDENT.text, literal( LIT_NUMBER, $NUMBER.text) ); } 
 		| id2 = IDENT		{ $result = refer( $IDENT.text, refer( $id2.text) ); } 
 		)
 	 ']'
@@ -178,7 +195,7 @@ array   returns [Gettable result]
 	;
 	
 map   returns [Gettable result]
-	: '{' 	{ $result = map(GrammarTokens.SIMPLE_MAP);}
+	: '{' 	{ $result = map(SIMPLE_MAP);}
 		IDENT ':' formulaTerm	
 			{ mapEntry( $result, null, $IDENT.text, $formulaTerm.result ); }
 		(',' IDENT ':' formulaTerm 
@@ -204,38 +221,38 @@ unary  returns [Node result]
 		) 
 		{ 
 			if(negative){
-				$result = operator(GrammarTokens.OP_NUM_NEGATION, $result );
+				$result = operator(OP_NUM_NEGATION, $result );
 			} 
 		}
 	;
 
 percent  returns [Node result]
 	:	unary 	{ $result = $unary.result;  }
-    	('%' {$result = operator(GrammarTokens.OP_PERCENT, $result); } )?
+    	('%' {$result = operator(OP_PERCENT, $result); } )?
     ;
 
     
 exponential returns [Node result]
     :	percent 	{ $result = $percent.result;  }
     	(
-    		'^'		op2 = percent  	{$result = operator(GrammarTokens.OP_POW, $result, $op2.result); }
+    		'^'		op2 = percent  	{$result = operator(OP_POW, $result, $op2.result); }
     	)*
     ;
     
 multiplicative returns [Node result]
     :	exponential 	{ $result = $exponential.result;  }
     	(
-    		'*' 		op2 = exponential 	{$result = operator(GrammarTokens.OP_MULTI, $result, $op2.result); }
-    		| '/' 		op2 = exponential  	{$result = operator(GrammarTokens.OP_DIVIDE, $result, $op2.result); }
-//    		| '%'		op2 = exponential  	{$result = operator(GrammarTokens.OP_MOD, $result, $op2.result); }
+    		'*' 		op2 = exponential 	{$result = operator(OP_MULTI, $result, $op2.result); }
+    		| '/' 		op2 = exponential  	{$result = operator(OP_DIVIDE, $result, $op2.result); }
+//    		| '%'		op2 = exponential  	{$result = operator(OP_MOD, $result, $op2.result); }
     	)*
     ;
     
 additiveExpression returns [Node result]
     :   multiplicative { $result = $multiplicative.result;  }
     ( 
-    	'+' 	op2 = multiplicative	{$result = operator(GrammarTokens.OP_PLUS, $result, $op2.result); }
-    	| '-' 	op2 = multiplicative	{$result = operator(GrammarTokens.OP_MINUS, $result, $op2.result); }
+    	'+' 	op2 = multiplicative	{$result = operator(OP_PLUS, $result, $op2.result); }
+    	| '-' 	op2 = multiplicative	{$result = operator(OP_MINUS, $result, $op2.result); }
     )*
     ;
     
@@ -246,7 +263,7 @@ additiveExpression returns [Node result]
 stringExpression returns [Node result]
     :   additiveExpression { $result = $additiveExpression.result;  }
     ( 
-    	'&' op2 = additiveExpression {$result = operator(GrammarTokens.OP_CONCAT, $result, $op2.result); }
+    	'&' op2 = additiveExpression {$result = operator(OP_CONCAT, $result, $op2.result); }
     )* 
     ;
   
@@ -256,15 +273,15 @@ stringExpression returns [Node result]
 comparison returns [Node result]
 	: stringExpression  { $result = $stringExpression.result;  }
 	( 
-		'='  op2 = stringExpression {$result = operator(GrammarTokens.OP_EQ, $result, $op2.result); }
-		|'is'  op2 = stringExpression {$result = operator(GrammarTokens.OP_EQ, $result, $op2.result); }
-		|'!=' op2 = stringExpression {$result = operator(GrammarTokens.OP_NOT_EQ, $result, $op2.result); }
-		|'<>' op2 = stringExpression {$result = operator(GrammarTokens.OP_NOT_EQ, $result, $op2.result); }
-		|'is' 'not' op2 = stringExpression {$result = operator(GrammarTokens.OP_NOT_EQ, $result, $op2.result); }
-		|'>'  op2 = stringExpression {$result = operator(GrammarTokens.OP_GT, $result, $op2.result); }
-		|'>=' op2 = stringExpression {$result = operator(GrammarTokens.OP_EQ_GT, $result, $op2.result); }
-		|'<'  op2 = stringExpression {$result = operator(GrammarTokens.OP_LT, $result, $op2.result); }
-		|'<=' op2 = stringExpression {$result = operator(GrammarTokens.OP_EQ_LT, $result, $op2.result); }
+		'='  op2 = stringExpression {$result = operator(OP_EQ, $result, $op2.result); }
+		|'is'  op2 = stringExpression {$result = operator(OP_EQ, $result, $op2.result); }
+		|'!=' op2 = stringExpression {$result = operator(OP_NOT_EQ, $result, $op2.result); }
+		|'<>' op2 = stringExpression {$result = operator(OP_NOT_EQ, $result, $op2.result); }
+		|'is' 'not' op2 = stringExpression {$result = operator(OP_NOT_EQ, $result, $op2.result); }
+		|'>'  op2 = stringExpression {$result = operator(OP_GT, $result, $op2.result); }
+		|'>=' op2 = stringExpression {$result = operator(OP_EQ_GT, $result, $op2.result); }
+		|'<'  op2 = stringExpression {$result = operator(OP_LT, $result, $op2.result); }
+		|'<=' op2 = stringExpression {$result = operator(OP_EQ_LT, $result, $op2.result); }
 	)*
 	;
 	
@@ -272,7 +289,7 @@ notExpression returns [Node result]
 	: 
 	(
 		comparison { $result = $comparison.result;  }
-		| 'not' comparison {$result = operator(GrammarTokens.OP_NOT, $comparison.result); }
+		| 'not' comparison {$result = operator(OP_NOT, $comparison.result); }
 		
 	)
 	;
@@ -280,8 +297,8 @@ notExpression returns [Node result]
 logicalExpression returns [Node result]
 	: notExpression { $result = $notExpression.result;  }
 	( 
-		'and' 	op2 = operatorExpression {$result = operator(GrammarTokens.OP_AND, $result, $op2.result); }
-		|'or' 	op2 = operatorExpression {$result = operator(GrammarTokens.OP_OR, $result, $op2.result); }
+		'and' 	op2 = operatorExpression {$result = operator(OP_AND, $result, $op2.result); }
+		|'or' 	op2 = operatorExpression {$result = operator(OP_OR, $result, $op2.result); }
 		
 	)*
 	;
@@ -318,17 +335,25 @@ NULL : ('null'|'nil'|'NULL') ;
 BOOLEAN :	('true' | 'false' | 'TRUE' | 'FALSE') ;
 IDENT :  LETTER (LETTER|DIGIT)* ;
 
-WS  :  [ \t\r\n\u000C]+ -> skip
-    ;
+WS  :  WhiteSpace -> skip; //[ \t\r\n\u000C]+ -> skip ;
+
 
 MULTILINE_COMMENT
     :   '/*' .*? '*/' -> skip
     ;
 
 LINE_COMMENT
-    :   '//' ~[\r\n]* -> skip
+    :   '//' .*? EOL -> skip
     ;
-    
+
+fragment WhiteSpace       
+	:  ('\u0020' 
+	| '\u0009' 
+	| '\u000C'
+	| '\u000D'  
+	| '\u000A') 
+	;
+
 fragment EOL 	
 	:	(	( '\r\n' ) // DOS
 		|	'\r'    // OSX

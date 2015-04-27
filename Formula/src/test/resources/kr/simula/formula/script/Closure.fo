@@ -1,11 +1,14 @@
 
 defn println(object value) { 
-	if( not skipPrint ){
+	if( not skipPrint ){ 
+	
 		System.out.println(value);
 	}
 } 
 
-
+defn emptyFunc(){
+	//do nothing
+}
 
 defn localFunc(number argA, number argB) : number {
 	number retVal;
@@ -55,22 +58,12 @@ println("====== Function Closure Array ===========");
 
 println(fnTest );
 
-function[] fnArray <- [fnA,fnB,fnC];  
-
-
-
-
-
-
-
-
+function[] fnArray <- [fnA,fnB,fnC];
 foreach (function ar in fnArray ) {
 	println( ar & " : "  & ar(5) );
 };
 
-
 println("====== Function Closure Array in function call ==========="); 
-
 foreach (function a in fnArray) {
 	println( " fnTest : EVEN : "  & fnTest(EVEN, 5) );
 	println( " fnTest : " & a & " :: " & fnTest(a, 5) );
