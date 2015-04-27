@@ -49,6 +49,11 @@ public interface FormulaHandler {
 	 */
 	Block block(String token);
 	
+	/**
+	 * <pre>
+	 * Make new building context, when new scope begins.
+	 * </pre>
+	 */
 	void beginScope();
 	
 	
@@ -259,4 +264,9 @@ public interface FormulaHandler {
 	 * @return
 	 */
 	void mapEntry(Gettable<?> mapGettable, Class<?> entryType, String name, Node value);
+	
+	
+	void importJava(Ref ref);
+	
+	
 }

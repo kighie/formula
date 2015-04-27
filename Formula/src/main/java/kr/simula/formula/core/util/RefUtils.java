@@ -14,7 +14,9 @@
  */
 package kr.simula.formula.core.util;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.net.URI;
 import java.net.URL;
 import java.util.Date;
@@ -163,6 +165,48 @@ public class RefUtils {
 			return Class.forName(className);
 		} catch (ClassNotFoundException e) {
 			throw new InternalException(e);
+		}
+	}
+	
+	public static Object getStaticField(Class<?> type, String propertyName){
+		Field field = null;
+		
+		try {
+			field = type.getField(propertyName);
+		} catch (Exception e) {
+			throw new InternalException( type.getName() + "#" + propertyName , e);
+		}
+
+		if( Modifier.isStatic(field.getModifiers()) ){
+			try {
+				return field.get(null);
+			} catch (Exception e) {
+				throw new InternalException( type.getName() + "#" + propertyName , e);
+			}
+		} else {
+			throw new InternalException( type.getName() + "#" + propertyName + " is not static field.");
+		}
+	}
+	
+
+	public static Object callStaticMethod(Class<?> type, String methodName, Object ... args){
+		Method method = null;
+		Class<?>[] parameterTypes = new Class<?>[args.length];
+		
+		try {
+			method = type.getMethod(methodName, parameterTypes);
+		} catch (Exception e) {
+			throw new InternalException( type.getName() + "#" + methodName , e);
+		}
+
+		if( Modifier.isStatic(method.getModifiers()) ){
+			try {
+				return method.invoke(null, args);
+			} catch (Exception e) {
+				throw new InternalException( type.getName() + "#" + methodName + "(..)" , e);
+			}
+		} else {
+			throw new InternalException( type.getName() + "#" + methodName + " is not static method.");
 		}
 	}
 }

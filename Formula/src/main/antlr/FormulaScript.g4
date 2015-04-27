@@ -45,8 +45,7 @@ import Formula;
  *************************************** */
 formulaScript returns [Module module]
 	: { $module = (Module)block(ScriptTokens.MODULE); }
-		(importStatement 	{ $module.append($importStatement.stmt); })*
-		(functionDecl 		{ $module.append($functionDecl.fnBlock); })*
+		(importStatement )*
 		blockContents[$module]
 		EOF
 	  { endScope();}
@@ -55,8 +54,9 @@ formulaScript returns [Module module]
 /* *************************************
  * import
  *************************************** */
-importStatement	returns [Statement stmt]
-	: 'import' qualifiedName END_OF_STMT
+importStatement	
+	: 'importJava' qualifiedName END_OF_STMT
+		{ importJava($qualifiedName.result); }
 	;
 
 /* *************************************
@@ -129,6 +129,7 @@ blockContents [Block stmtHolder]
 		| methodCallStatement	{ $stmtHolder.append($methodCallStatement.stmt); }
 		| functionCallStatement	{ $stmtHolder.append($functionCallStatement.stmt); }
 		| variableDecl 			{ $stmtHolder.append($variableDecl.stmt); }
+		| functionDecl 			{ $stmtHolder.append($functionDecl.fnBlock); }
 	)*
 	;
 	

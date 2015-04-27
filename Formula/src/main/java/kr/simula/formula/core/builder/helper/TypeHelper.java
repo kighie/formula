@@ -20,8 +20,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import kr.simula.formula.core.Function;
+import kr.simula.formula.core.QName;
+import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.builder.BuildException;
+import kr.simula.formula.core.ref.TypeRef;
 import kr.simula.formula.core.util.ArrayUtils;
 import kr.simula.formula.core.util.RefUtils;
 
@@ -86,9 +89,17 @@ public class TypeHelper {
 	
 	public Class<?> getType(BuildContext context, String typeQname) {
 		Class<?> type = typeMap.get(typeQname);
+		
+		Ref ref = context.getRef(QName.getQName(typeQname));
+		
+		if(ref != null && ref instanceof TypeRef){
+			type = ref.type();
+		}
+		
 		if(type == null){
 			type = RefUtils.toClass(typeQname);
 		}
+		
 		if(type == null){
 			throw new BuildException("TypeFactory for " + typeQname + " is not registered.");
 		}

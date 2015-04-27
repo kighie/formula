@@ -145,6 +145,15 @@ public class FormulaHandlerParser extends Parser {
 			String name, Node value) {
 		handler.mapEntry(mapGettable, entryType, name, value);
 	}
+	
+	/**
+	 * @param ref
+	 * @see kr.simula.formula.core.builder.FormulaHandler#importJava(kr.simula.formula.core.Ref)
+	 */
+	public void importJava(Ref ref) {
+		handler.importJava(ref);
+	}
+
 
 	public SourceLocation currentLocation(){
 		BaseSourceLocation location = null;
@@ -153,6 +162,7 @@ public class FormulaHandlerParser extends Parser {
 			Token token = this.getCurrentToken();
 			location = new BaseSourceLocation(token.getLine(), token.getCharPositionInLine(), 
 					token.getStartIndex(), token.getStopIndex());
+			location.setText(token.getText());
 			return location;
 		} else {
 			location = new BaseSourceLocation(_ctx.start.getLine(), _ctx.start.getCharPositionInLine(), 

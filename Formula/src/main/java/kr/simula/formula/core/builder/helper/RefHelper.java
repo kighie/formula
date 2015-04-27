@@ -20,11 +20,15 @@ import kr.simula.formula.core.Node;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.builder.BuildContext;
+import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.ref.ArrayElementRef;
 import kr.simula.formula.core.ref.FieldRef;
 import kr.simula.formula.core.ref.FunctionRef;
 import kr.simula.formula.core.ref.ParameterRef;
+import kr.simula.formula.core.ref.StaticFieldGettable;
+import kr.simula.formula.core.ref.TypeRef;
 import kr.simula.formula.core.util.GettableUtils;
+import kr.simula.formula.core.util.RefUtils;
 
 /**
  * <pre>
@@ -95,7 +99,15 @@ public class RefHelper {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	protected Ref create(BuildContext context, Ref parent, QName qname){
 		if(parent != null){
-			return new FieldRef(qname, (Gettable<?>)parent);
+			if( parent instanceof Gettable<?>){
+				return new FieldRef(qname, (Gettable<?>)parent);
+			} else if(parent instanceof TypeRef ){
+				Object field = RefUtils.getStaticField(parent.type(), qname.getName());
+				return new StaticFieldGettable(qname, field);
+			} else {
+				throw new BuildException(qname + " cannot be unresolved.");
+			}
+			
 		} else {
 			Function<?> function = context.getLocalFn(qname.getName());
 			if(function != null){

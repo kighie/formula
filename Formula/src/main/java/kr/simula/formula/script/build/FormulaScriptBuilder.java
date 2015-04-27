@@ -28,6 +28,7 @@ import kr.simula.formula.core.builder.helper.BlockHelper;
 import kr.simula.formula.core.builder.helper.BuiltInFunctionRegistry;
 import kr.simula.formula.core.builder.helper.DeclarationHelper;
 import kr.simula.formula.core.builder.helper.FunctionCallHelper;
+import kr.simula.formula.core.builder.helper.ImportHelper;
 import kr.simula.formula.core.builder.helper.LambdaHelper;
 import kr.simula.formula.core.builder.helper.LiteralHelper;
 import kr.simula.formula.core.builder.helper.MapHelper;
@@ -36,6 +37,7 @@ import kr.simula.formula.core.builder.helper.RefHelper;
 import kr.simula.formula.core.builder.helper.StatementHelper;
 import kr.simula.formula.core.builder.helper.TypeHelper;
 import kr.simula.formula.core.builder.helper.UnaryOperatorHelper;
+import kr.simula.formula.core.util.BaseSourceLocation;
 import kr.simula.formula.expr.builder.ExprBinaryOperatorHelper;
 import kr.simula.formula.expr.builder.ExprLiteralHelper;
 import kr.simula.formula.expr.builder.ExprMapHelper;
@@ -103,16 +105,16 @@ public class FormulaScriptBuilder extends AbstractFormulaBuilder<Module> {
 
 	@Override
 	protected FormulaHandler newHandler(RootBuildContext rootContext,
-			BlockHelper blockHelper, LiteralHelper literalHelper,
-			RefHelper refHelper, TypeHelper typeHelper,
+			ImportHelper importHelper, BlockHelper blockHelper,
+			LiteralHelper literalHelper, RefHelper refHelper,
+			TypeHelper typeHelper,
 			BinaryOperatorHelper binaryOperatorHelper,
 			UnaryOperatorHelper unaryOperatorHelper,
-			FunctionCallHelper functionCallHelper,
-			MethodCallHelper methodCallHelper, StatementHelper statementHelper,
-			DeclarationHelper declarationHelper, ArrayHelper arrayHelper,
-			MapHelper mapHelper, LambdaHelper lambdaHelper) {
+			FunctionCallHelper functionCallHelper, MethodCallHelper methodCallHelper,
+			StatementHelper statementHelper, DeclarationHelper declarationHelper,
+			ArrayHelper arrayHelper, MapHelper mapHelper, LambdaHelper lambdaHelper) {
 		return new FormulaScriptHandler(rootContext, 
-				blockHelper, literalHelper, refHelper, typeHelper, binaryOperatorHelper, unaryOperatorHelper, 
+				importHelper, blockHelper, literalHelper, refHelper, typeHelper, binaryOperatorHelper, unaryOperatorHelper, 
 				functionCallHelper, methodCallHelper, statementHelper, declarationHelper, 
 				arrayHelper, mapHelper, lambdaHelper);
 	}
@@ -139,14 +141,10 @@ public class FormulaScriptBuilder extends AbstractFormulaBuilder<Module> {
 		} catch (FormulaException e) {
 			FormulaException be = (FormulaException)e;
 			be.setLocation(parser.currentLocation());
-			System.out.println(be);
-
-//			if( ctx != null){
-//				ParseTreeWalker walker = new ParseTreeWalker(); // create standard walker
-//				
-//				walker.walk(extractor, ctx); // initiate walk of tree with listener
-//			}
-			
+			throw be;
+		} catch (Exception e) {
+			FormulaException be = new FormulaException(e);
+			be.setLocation(parser.currentLocation());
 			throw be;
 		}
 	}

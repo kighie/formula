@@ -1,4 +1,4 @@
-// Generated from Ontolog.g4 by ANTLR 4.4
+// Generated from Ontolog.g4 by ANTLR 4.5
 package kr.simula.formula.antlr;
 
 //	package kr.simula.formula.antlr;
@@ -28,300 +28,300 @@ public class OntologBaseListener implements OntologListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExponential(@NotNull OntologParser.ExponentialContext ctx) { }
+	@Override public void enterFormulaExpression(OntologParser.FormulaExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExponential(@NotNull OntologParser.ExponentialContext ctx) { }
+	@Override public void exitFormulaExpression(OntologParser.FormulaExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFormulaTerm(@NotNull OntologParser.FormulaTermContext ctx) { }
+	@Override public void enterFormulaExpressionBase(OntologParser.FormulaExpressionBaseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFormulaTerm(@NotNull OntologParser.FormulaTermContext ctx) { }
+	@Override public void exitFormulaExpressionBase(OntologParser.FormulaExpressionBaseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLiteralTerm(@NotNull OntologParser.LiteralTermContext ctx) { }
+	@Override public void enterFuncCallExp(OntologParser.FuncCallExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLiteralTerm(@NotNull OntologParser.LiteralTermContext ctx) { }
+	@Override public void exitFuncCallExp(OntologParser.FuncCallExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterComparison(@NotNull OntologParser.ComparisonContext ctx) { }
+	@Override public void enterMethodCallExp(OntologParser.MethodCallExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitComparison(@NotNull OntologParser.ComparisonContext ctx) { }
+	@Override public void exitMethodCallExp(OntologParser.MethodCallExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFormulaExpression(@NotNull OntologParser.FormulaExpressionContext ctx) { }
+	@Override public void enterArguments(OntologParser.ArgumentsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFormulaExpression(@NotNull OntologParser.FormulaExpressionContext ctx) { }
+	@Override public void exitArguments(OntologParser.ArgumentsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAdditiveExpression(@NotNull OntologParser.AdditiveExpressionContext ctx) { }
+	@Override public void enterConditionArg(OntologParser.ConditionArgContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAdditiveExpression(@NotNull OntologParser.AdditiveExpressionContext ctx) { }
+	@Override public void exitConditionArg(OntologParser.ConditionArgContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterQualifiedName(@NotNull OntologParser.QualifiedNameContext ctx) { }
+	@Override public void enterLiteralTerm(OntologParser.LiteralTermContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitQualifiedName(@NotNull OntologParser.QualifiedNameContext ctx) { }
+	@Override public void exitLiteralTerm(OntologParser.LiteralTermContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArrayRef(@NotNull OntologParser.ArrayRefContext ctx) { }
+	@Override public void enterIterableTerm(OntologParser.IterableTermContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArrayRef(@NotNull OntologParser.ArrayRefContext ctx) { }
+	@Override public void exitIterableTerm(OntologParser.IterableTermContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNotExpression(@NotNull OntologParser.NotExpressionContext ctx) { }
+	@Override public void enterFormulaTerm(OntologParser.FormulaTermContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNotExpression(@NotNull OntologParser.NotExpressionContext ctx) { }
+	@Override public void exitFormulaTerm(OntologParser.FormulaTermContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterConditionArg(@NotNull OntologParser.ConditionArgContext ctx) { }
+	@Override public void enterArrayRef(OntologParser.ArrayRefContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitConditionArg(@NotNull OntologParser.ConditionArgContext ctx) { }
+	@Override public void exitArrayRef(OntologParser.ArrayRefContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterUnary(@NotNull OntologParser.UnaryContext ctx) { }
+	@Override public void enterArray(OntologParser.ArrayContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitUnary(@NotNull OntologParser.UnaryContext ctx) { }
+	@Override public void exitArray(OntologParser.ArrayContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMultiplicative(@NotNull OntologParser.MultiplicativeContext ctx) { }
+	@Override public void enterMap(OntologParser.MapContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMultiplicative(@NotNull OntologParser.MultiplicativeContext ctx) { }
+	@Override public void exitMap(OntologParser.MapContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFuncCallExp(@NotNull OntologParser.FuncCallExpContext ctx) { }
+	@Override public void enterQualifiedName(OntologParser.QualifiedNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFuncCallExp(@NotNull OntologParser.FuncCallExpContext ctx) { }
+	@Override public void exitQualifiedName(OntologParser.QualifiedNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPercent(@NotNull OntologParser.PercentContext ctx) { }
+	@Override public void enterUnary(OntologParser.UnaryContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPercent(@NotNull OntologParser.PercentContext ctx) { }
+	@Override public void exitUnary(OntologParser.UnaryContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLogicalExpression(@NotNull OntologParser.LogicalExpressionContext ctx) { }
+	@Override public void enterPercent(OntologParser.PercentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLogicalExpression(@NotNull OntologParser.LogicalExpressionContext ctx) { }
+	@Override public void exitPercent(OntologParser.PercentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStringExpression(@NotNull OntologParser.StringExpressionContext ctx) { }
+	@Override public void enterExponential(OntologParser.ExponentialContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStringExpression(@NotNull OntologParser.StringExpressionContext ctx) { }
+	@Override public void exitExponential(OntologParser.ExponentialContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOperatorExpression(@NotNull OntologParser.OperatorExpressionContext ctx) { }
+	@Override public void enterMultiplicative(OntologParser.MultiplicativeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitOperatorExpression(@NotNull OntologParser.OperatorExpressionContext ctx) { }
+	@Override public void exitMultiplicative(OntologParser.MultiplicativeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArray(@NotNull OntologParser.ArrayContext ctx) { }
+	@Override public void enterAdditiveExpression(OntologParser.AdditiveExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArray(@NotNull OntologParser.ArrayContext ctx) { }
+	@Override public void exitAdditiveExpression(OntologParser.AdditiveExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIterableTerm(@NotNull OntologParser.IterableTermContext ctx) { }
+	@Override public void enterStringExpression(OntologParser.StringExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIterableTerm(@NotNull OntologParser.IterableTermContext ctx) { }
+	@Override public void exitStringExpression(OntologParser.StringExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMethodCallExp(@NotNull OntologParser.MethodCallExpContext ctx) { }
+	@Override public void enterComparison(OntologParser.ComparisonContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMethodCallExp(@NotNull OntologParser.MethodCallExpContext ctx) { }
+	@Override public void exitComparison(OntologParser.ComparisonContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArguments(@NotNull OntologParser.ArgumentsContext ctx) { }
+	@Override public void enterNotExpression(OntologParser.NotExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArguments(@NotNull OntologParser.ArgumentsContext ctx) { }
+	@Override public void exitNotExpression(OntologParser.NotExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMap(@NotNull OntologParser.MapContext ctx) { }
+	@Override public void enterLogicalExpression(OntologParser.LogicalExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMap(@NotNull OntologParser.MapContext ctx) { }
+	@Override public void exitLogicalExpression(OntologParser.LogicalExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFormulaExpressionBase(@NotNull OntologParser.FormulaExpressionBaseContext ctx) { }
+	@Override public void enterOperatorExpression(OntologParser.OperatorExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFormulaExpressionBase(@NotNull OntologParser.FormulaExpressionBaseContext ctx) { }
+	@Override public void exitOperatorExpression(OntologParser.OperatorExpressionContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEveryRule(@NotNull ParserRuleContext ctx) { }
+	@Override public void enterEveryRule(ParserRuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitEveryRule(@NotNull ParserRuleContext ctx) { }
+	@Override public void exitEveryRule(ParserRuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void visitTerminal(@NotNull TerminalNode node) { }
+	@Override public void visitTerminal(TerminalNode node) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void visitErrorNode(@NotNull ErrorNode node) { }
+	@Override public void visitErrorNode(ErrorNode node) { }
 }

@@ -11,7 +11,7 @@ public class ExceptionTests extends AbstractScriptTests {
 		RootContext context = new RootContext();
 		context.setParameter("sampleObject", new SampleObject());
 		
-		testBasic("/kr/simula/formula/script/ExceptionTest.fo",context);
+//		testBasic("/kr/simula/formula/script/ExceptionTest.fo",context);
 	}
 	
 }

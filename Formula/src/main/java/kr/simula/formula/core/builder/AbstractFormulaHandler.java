@@ -30,6 +30,7 @@ import kr.simula.formula.core.builder.helper.BinaryOperatorHelper;
 import kr.simula.formula.core.builder.helper.BlockHelper;
 import kr.simula.formula.core.builder.helper.DeclarationHelper;
 import kr.simula.formula.core.builder.helper.FunctionCallHelper;
+import kr.simula.formula.core.builder.helper.ImportHelper;
 import kr.simula.formula.core.builder.helper.LambdaHelper;
 import kr.simula.formula.core.builder.helper.LiteralHelper;
 import kr.simula.formula.core.builder.helper.MapHelper;
@@ -61,6 +62,7 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 
 	protected final ArrayHelper arrayHelper;
 	protected final MapHelper mapHelper;
+	protected final ImportHelper importHelper;
 	
 	protected BuildContext current;
 	
@@ -82,6 +84,7 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	 * @param declarationHelper
 	 */
 	public AbstractFormulaHandler(RootBuildContext rootContext,
+			ImportHelper importHelper,
 			BlockHelper blockHelper, LiteralHelper literalHelper,
 			RefHelper refHelper, TypeHelper typeHelper,
 			BinaryOperatorHelper binaryOperatorHelper,
@@ -93,6 +96,7 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 			MapHelper mapHelper,
 			LambdaHelper lambdaHelper) {
 		this.current = this.rootContext = rootContext;
+		this.importHelper = importHelper;
 		this.blockHelper = blockHelper;
 		this.literalHelper = literalHelper;
 		this.refHelper = refHelper;
@@ -248,4 +252,8 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 		mapHelper.mapEntry(current, mapGettable, entryType, name, value);
 	}
 
+	@Override
+	public void importJava(Ref ref) {
+		importHelper.importJava(current, ref);
+	}
 }
