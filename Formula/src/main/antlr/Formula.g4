@@ -173,8 +173,8 @@ array   returns [Gettable result]
 			( formulaTerm 		{ elements.add($formulaTerm.result); } )
 			| ( from=NUMBER ':' to=NUMBER  { Range.setRange(elements, $from.text, $to.text) ; } ) 
 		)* 	
-		{	$result = array(elements); }
 	  ']'
+	  {	$result = array(elements); }
 	;
 	
 map   returns [Gettable result]

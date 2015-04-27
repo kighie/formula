@@ -2,7 +2,7 @@
 importJava java.lang.System;
 importJava kr.simula.formula.script.SampleObject;
 
-SampleObject varA;
+SampleObject varA ;
 varA <- sampleObject;
 
 System.out.println(varA.testMethod(10));

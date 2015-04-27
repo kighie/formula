@@ -1079,9 +1079,9 @@ public class FormulaParser extends kr.simula.formula.core.antlr.FormulaHandlerPa
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-				((ArrayContext)_localctx).result =  array(elements); 
-			setState(231);
+			setState(230);
 			match(T__14);
+				((ArrayContext)_localctx).result =  array(elements); 
 			}
 		}
 		catch (RecognitionException re) {
@@ -2096,7 +2096,7 @@ public class FormulaParser extends kr.simula.formula.core.antlr.FormulaHandlerPa
 		"\36\2\2\u00e0\u00e1\7\22\2\2\u00e1\u00e2\7\36\2\2\u00e2\u00e4\b\f\1\2"+
 		"\u00e3\u00db\3\2\2\2\u00e3\u00df\3\2\2\2\u00e4\u00e7\3\2\2\2\u00e5\u00e3"+
 		"\3\2\2\2\u00e5\u00e6\3\2\2\2\u00e6\u00e8\3\2\2\2\u00e7\u00e5\3\2\2\2\u00e8"+
-		"\u00e9\b\f\1\2\u00e9\u00ea\7\21\2\2\u00ea\27\3\2\2\2\u00eb\u00ec\7\23"+
+		"\u00e9\7\21\2\2\u00e9\u00ea\b\f\1\2\u00ea\27\3\2\2\2\u00eb\u00ec\7\23"+
 		"\2\2\u00ec\u00ed\b\r\1\2\u00ed\u00ee\7\"\2\2\u00ee\u00ef\7\22\2\2\u00ef"+
 		"\u00f0\5\22\n\2\u00f0\u00f9\b\r\1\2\u00f1\u00f2\7\7\2\2\u00f2\u00f3\7"+
 		"\"\2\2\u00f3\u00f4\7\22\2\2\u00f4\u00f5\5\22\n\2\u00f5\u00f6\b\r\1\2\u00f6"+

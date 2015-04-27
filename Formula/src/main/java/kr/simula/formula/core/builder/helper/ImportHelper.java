@@ -37,7 +37,6 @@ public class ImportHelper {
 		QName qname = ref.qualifiedName();
 		
 		Class<?> type = RefUtils.toClass(qname.getFullName());
-		System.out.println(ref);
 		TypeRef typeRef = new TypeRef(new QName(qname.getName()), type);
 		current.registerRef(typeRef.qualifiedName(), typeRef);
 	}

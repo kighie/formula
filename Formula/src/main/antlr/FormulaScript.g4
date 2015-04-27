@@ -63,7 +63,7 @@ importStatement
  * declare variable
  *************************************** */
 variableDecl	returns [VariableDeclStatement stmt]
-	: type IDENT 	
+	: type IDENT  
 	{ 
 		Ref varRef = declare(ScriptTokens.VAR_DECL, $type.typeClz ,$IDENT.text); 
 		$stmt = (VariableDeclStatement)statement(ScriptTokens.VAR_DECL, varRef);
@@ -71,6 +71,16 @@ variableDecl	returns [VariableDeclStatement stmt]
 	( '<-' formulaExpressionBase {	$stmt.setValueNode($formulaExpressionBase.result); })?
 	END_OF_STMT
 	;
+	/*
+	: { Class<?> tp = Object.class; } 
+	IDENT ':' (type 	{ tp = $type.typeClz ; })?
+	{ 
+		Ref varRef = declare(ScriptTokens.VAR_DECL, tp ,$IDENT.text); 
+		$stmt = (VariableDeclStatement)statement(ScriptTokens.VAR_DECL, varRef);
+	}
+	( '<-' formulaExpressionBase {	$stmt.setValueNode($formulaExpressionBase.result); })?
+	END_OF_STMT
+	; */
 
 type returns [Class<?> typeClz]
 	: (IDENT 	{ $typeClz = type($IDENT.text); })  
@@ -82,15 +92,17 @@ type returns [Class<?> typeClz]
  * declare function
  *************************************** */
 functionDecl	returns [BlockStatement fnBlock]
-	: { List<Ref> args = new LinkedList<Ref>(); 
-		beginScope();
-	}
-	type IDENT '(' (argsDecl[args] )?  ')' '{'
+	: 
 	{ 
-		$fnBlock = declareFn($type.typeClz ,$IDENT.text, args); 
+		List<Ref> args = new LinkedList<Ref>(); 
+		beginScope();
+		Class<?> typeClz = Object.class;
 	}
-	(blockContents[$fnBlock])?
-	(retrunStmt[$fnBlock])?
+	'defn' IDENT '(' (argsDecl[args] )?  ')' (':' type { typeClz = $type.typeClz; })? 
+	'{'
+		{ $fnBlock = declareFn(typeClz ,$IDENT.text, args); }
+		(blockContents[$fnBlock])?
+		(retrunStmt[$fnBlock])?
 	'}'
 		{	endScope(); }
 	;
@@ -216,7 +228,7 @@ assignStatement  returns [Statement stmt]
 		leftAssign 	{ $stmt = $leftAssign.stmt ; }
 		| rightAssign { $stmt = $rightAssign.stmt ; }
 	)
-	END_OF_STMT
+	
 	; 
  
 leftAssign  returns [Statement stmt]
@@ -226,7 +238,9 @@ leftAssign  returns [Statement stmt]
 		| qualifiedName	{ settable = $qualifiedName.result;}
 	) 
 	'<-' formulaExpressionBase
+	END_OF_STMT
 	{ $stmt = statement(ScriptTokens.ASSIGN_STMT, settable, $formulaExpressionBase.result); }
+	
 	; 
  
 rightAssign  returns [Statement stmt]
@@ -237,6 +251,7 @@ rightAssign  returns [Statement stmt]
 		IDENT			{ settable = refer( $IDENT.text);}
 		| qualifiedName	{ settable = $qualifiedName.result;}
 	)
+	END_OF_STMT
 	{ $stmt = statement(ScriptTokens.ASSIGN_STMT, settable, $formulaExpressionBase.result); }
 	; 
  

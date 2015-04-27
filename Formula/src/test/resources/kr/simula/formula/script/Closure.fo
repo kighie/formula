@@ -1,5 +1,5 @@
 
-void println(object value) { 
+defn println(object value) { 
 	if( not skipPrint ){
 		System.out.println(value);
 	}
@@ -7,7 +7,7 @@ void println(object value) {
 
 
 
-number localFunc(number argA, number argB) {
+defn localFunc(number argA, number argB) : number {
 	number retVal;
 	if(argA > argB) {
 		println(argA & 'X' & argB);
@@ -19,19 +19,19 @@ number localFunc(number argA, number argB) {
 	return retVal;
 } 
 
-number fnA(number a){
+defn  fnA(number a) : number{
 	return a * 3;
 }
 
-number fnB(number a){
+defn fnB(number a) : number{
 	return a * 7;
 }
 
-number fnC(number a){
+defn fnC(number a) : number{
 	return a * 13;
 }
 
-number fnTest(function fn, number num) {
+defn fnTest(function fn, number num) : number {
 	return fn(num / 3.1);
 }
 
@@ -55,16 +55,21 @@ println("====== Function Closure Array ===========");
 
 println(fnTest );
 
-function[] fnArray <- [fnA, fnB, fnC];
+function[] fnArray <- [fnA,fnB,fnC];  
 
 
-foreach (function ar in fnArray) {
+
+
+
+
+
+
+foreach (function ar in fnArray ) {
 	println( ar & " : "  & ar(5) );
 };
 
 
 println("====== Function Closure Array in function call ==========="); 
-
 
 foreach (function a in fnArray) {
 	println( " fnTest : EVEN : "  & fnTest(EVEN, 5) );

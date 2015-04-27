@@ -1,12 +1,12 @@
 
 /* System out wrapping */
-void println(object value) { 
+defn println(object value) { 
 	if( not skipPrint ){
 		System.out.println(value);
 	}
 } 
 
-void assert(text desc , object value, object expected) { 
+defn assert(text desc , object value, object expected) : boolean { 
 	boolean ok <- value = expected;
 	println( desc & '= ' & value & ' , expected=' & expected & ' assert=' & ok);
 	return ok;

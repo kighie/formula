@@ -1,12 +1,12 @@
 
 /* System out wrapping */
-void println(object value) { 
+defn println(object value) { 
 	if( not skipPrint ){
 		System.out.println(value);
 	}
 } 
 
-number testFn(number argA, number argB) {
+defn testFn(number argA, number argB) : number {
 	number retVal;
 	if(argA > argB) {
 		println(argA & 'X' & argB);
@@ -18,7 +18,7 @@ number testFn(number argA, number argB) {
 	return retVal;
 } 
 
-void testSimple() {
+defn testSimple() {
 	println('void return, empty args.'); 
 }
 

@@ -55,7 +55,7 @@ println("====== Function Closure Array ===========");
 
 println(fnTest );
 
-function[] fnArray <- [fnA, fnB, fnC];
+ fnArray:function[] <- [fnA, fnB, fnC];
 
 
 foreach (function ar in fnArray) {

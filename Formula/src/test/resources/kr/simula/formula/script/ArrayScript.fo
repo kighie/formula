@@ -1,6 +1,6 @@
 
 /* System out wrapping */
-void println(object value) { 
+defn println(object value) { 
 	if( not skipPrint ){
 		System.out.println(value);
 	}
@@ -8,10 +8,10 @@ void println(object value) {
 
 int[] numbers <- [0:10,21];
 
-int[] numbers2;
+int[] numbers2 ;
 numbers2 <- [6,7,8,9,10,1,2,3,4,5,11,3];
 
-int minusNum <- -4;
+int minusNum  <- -4;
 
 numbers4 <- [6,minusNum, 3];
 
