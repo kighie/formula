@@ -103,6 +103,11 @@ public class FormulaScriptBuilder extends AbstractFormulaBuilder<Module> {
 	}
 
 	@Override
+	protected LambdaHelper initLambdaHelper() {
+		return new ScriptLambdaHelper();
+	}
+	
+	@Override
 	protected FormulaHandler newHandler(RootBuildContext rootContext,
 			ImportHelper importHelper, BlockHelper blockHelper,
 			LiteralHelper literalHelper, RefHelper refHelper,

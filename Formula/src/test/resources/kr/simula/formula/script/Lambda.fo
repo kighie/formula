@@ -3,8 +3,17 @@ importJava java.lang.System;
 
 
 defn testFn( function fn, number a) : void {
+	fn(a);
+}
+
+
+testFn( defn(number a) { System.out.println( a * 2); } , 13 );
+
+/*
+defn testFn( function fn, number a) : void {
 	System.out.println(fn(a));
 }
 
 
 testFn( defn(number a) { return a * 2; } , 13 );
+*/
