@@ -18,6 +18,7 @@ import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Ref;
+import kr.simula.formula.core.Returnable;
 import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.builder.helper.StatementHelper;
@@ -30,7 +31,6 @@ import kr.simula.formula.script.ScriptTokens;
 import kr.simula.formula.script.statement.AssignStatement;
 import kr.simula.formula.script.statement.ForeachStatement;
 import kr.simula.formula.script.statement.FunctionCallStatement;
-import kr.simula.formula.script.statement.FunctionDeclStatement;
 import kr.simula.formula.script.statement.IfStatement;
 import kr.simula.formula.script.statement.LoopConditionStatement;
 import kr.simula.formula.script.statement.MethodCallStatement;
@@ -120,16 +120,16 @@ public class ScriptStatementHelper extends StatementHelper {
 		@Override
 		public ReturnStatement create(BuildContext context, String token, Node[] args) {
 			Gettable<?> gettable = null;
-			FunctionDeclStatement functionDeclStatement = null;
+			Returnable returnable = null;
 			
 			if(args != null && args.length > 1){
-				functionDeclStatement = (FunctionDeclStatement)args[0];
+				returnable = (Returnable)args[0];
 				gettable = GettableUtils.checkGettable(args[1]);
 			} else {
 				throw new BuildException("return statement needs functionDeclStatement and gettable.");
 			}
 
-			QName returnValueKey = functionDeclStatement.getReturnValueKey();
+			QName returnValueKey = returnable.getReturnValueKey();
 			ReturnStatement stmt = new ReturnStatement(returnValueKey, gettable);
 
 			return stmt;

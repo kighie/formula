@@ -57,7 +57,7 @@ public abstract class AbstractScriptTests {
 		
 		stopWatch.reset();
 		
-		context.setReference(new QName(new QName("System"), "out"), System.out);
+		//context.setReference(new QName(new QName("System"), "out"), System.out);
 		
 		script.eval(context);
 		

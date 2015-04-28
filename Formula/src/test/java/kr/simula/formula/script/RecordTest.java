@@ -12,14 +12,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kr.simula.formula.core;
+package kr.simula.formula.script;
 
-import kr.simula.formula.core.wrapper.FunctionSpi;
+import kr.simula.formula.core.RootContext;
+
+import org.junit.Test;
 
 /**
  * <pre></pre>
  * @author kighie@gmail.com
  * @since 1.0
  */
-public interface Lambda<O> extends BlockStatement, FunctionSpi<O>  {
+public class RecordTest extends AbstractScriptTests {
+
+	@Test
+	public void basic(){
+		RootContext context = new RootContext();
+		context.setParameter("sampleObject", new SampleObject());
+		
+		testBasic("/kr/simula/formula/script/Record.fo",context);
+	}
+	
 }

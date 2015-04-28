@@ -18,6 +18,7 @@ import java.util.List;
 
 import kr.simula.formula.core.Function;
 import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.Lambda;
 import kr.simula.formula.core.Node;
 import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.builder.BuildContext;
@@ -26,8 +27,10 @@ import kr.simula.formula.core.factory.FunctionCallFactory;
 import kr.simula.formula.core.ref.FunctionRef;
 import kr.simula.formula.core.ref.ParameterRef;
 import kr.simula.formula.core.util.GettableUtils;
+import kr.simula.formula.core.wrapper.LambdaGettable;
 import kr.simula.formula.core.wrapper.LocalFunction;
 import kr.simula.formula.core.wrapper.LocalFunctionCallWrapper;
+import kr.simula.formula.script.statement.FunctionDeclStatement;
 
 /**
  * <pre></pre>
@@ -61,22 +64,26 @@ public class LocalFunctionCallFactory implements FunctionCallFactory {
 		}
 		
 		Gettable<?>[] gettables = new Gettable<?>[refCount];
+		Node n;
 		
 		for(int i =0;i< refCount;i++){
 			Ref r = argRefs.get(i);
-			gettables[i] = GettableUtils.checkGettable(args.get(i), r.type());
-			
-			if((r.type() == Function.class) 
-					&& ParameterRef.class.isAssignableFrom( gettables[i].getClass()) ){
-				Ref g = (Ref)gettables[i];
-				Function<?> gFunc = context.getBuiltInFunction(g.qualifiedName().getFullName());
-				if(gFunc != null){
-					FunctionRef closure = new FunctionRef(g.qualifiedName(), gFunc);
-					gettables[i] = closure;
-				} else {
-					throw new BuildException("Function '" + g.qualifiedName() + "' is not found.");
+			n = args.get(i);
+			if(n instanceof Lambda){
+				gettables[i] = new LambdaGettable((Lambda)n);
+			} else {
+				gettables[i] = GettableUtils.checkGettable(n, r.type());
+				if((r.type() == Function.class) 
+						&& ParameterRef.class.isAssignableFrom( gettables[i].getClass()) ){
+					Ref g = (Ref)gettables[i];
+					Function<?> gFunc = context.getBuiltInFunction(g.qualifiedName().getFullName());
+					if(gFunc != null){
+						FunctionRef closure = new FunctionRef(g.qualifiedName(), gFunc);
+						gettables[i] = closure;
+					} else {
+						throw new BuildException("Function '" + g.qualifiedName() + "' is not found.");
+					}
 				}
-				
 			}
 		}
 		

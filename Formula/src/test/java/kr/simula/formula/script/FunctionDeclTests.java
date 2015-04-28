@@ -31,10 +31,10 @@ import org.junit.Test;
 public class FunctionDeclTests extends AbstractScriptTests {
 
 	static final String BASIC 
-			= "defn println(object value) {\n"
+			= "fndef println(object value) {\n"
 			+ "	System.out.println(value);"
 			+ "\n} "
-			+ "defn testFn(number argA, number argB) : number {"
+			+ "fndef testFn(number argA, number argB) : number {"
 			+ "	number retVal;"
 			+ "	if(argA > argB) {"
 			+ "		println(argA & 'X' & argB);"
@@ -45,7 +45,7 @@ public class FunctionDeclTests extends AbstractScriptTests {
 			+ "	}"
 			+ "	return retVal;"
 			+ "} \n"
-			+ "defn testSimple() {"
+			+ "fndef testSimple() {"
 			+ "	println('void return, empty args.'); "
 			+ "}\n"
 			+ "println( testFn(PA, 5) ); "

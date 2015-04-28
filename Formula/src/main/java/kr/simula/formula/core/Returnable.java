@@ -1,4 +1,4 @@
-/* 
+/* ******************************************************************************
  * Copyright (c) 2012 IkChan Kwon kighie@gmail.com
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,14 @@
  */
 package kr.simula.formula.core;
 
-import kr.simula.formula.core.wrapper.FunctionSpi;
-
 /**
+ * 
  * <pre></pre>
  * @author kighie@gmail.com
- * @since 1.0
+ *
  */
-public interface Lambda<O> extends BlockStatement, FunctionSpi<O>  {
+public interface Returnable {
+	
+	QName getReturnValueKey();
+	
 }

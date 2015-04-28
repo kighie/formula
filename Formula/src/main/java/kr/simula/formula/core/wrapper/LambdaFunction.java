@@ -18,11 +18,11 @@ import java.util.List;
 
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.EvalException;
-import kr.simula.formula.core.Function;
 import kr.simula.formula.core.GrammarTokens;
 import kr.simula.formula.core.Lambda;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Ref;
+import kr.simula.formula.core.Returnable;
 
 /**
  * <pre>
@@ -30,7 +30,7 @@ import kr.simula.formula.core.Ref;
  * @author Ikchan Kwon
  *
  */
-public class LambdaFunction<O> extends AbstractBlock implements Lambda, Function<O>, FunctionSpi<O>{
+public class LambdaFunction<O> extends AbstractBlock implements Lambda, Returnable {
 	private static final long serialVersionUID = 1L;
 	private Class<O> retType;
 	private String name;
@@ -104,11 +104,6 @@ public class LambdaFunction<O> extends AbstractBlock implements Lambda, Function
 		evalBody(context);
 	}
 	
-	@Override
-	public void eval(Context makerContext, Context callerContext) {
-		evalFunc(callerContext);
-	}
-	
 	@SuppressWarnings("unchecked")
 	public O getReturnValue(Context context){
 		O value = (O)context.getReference(returnValueKey);
@@ -125,5 +120,10 @@ public class LambdaFunction<O> extends AbstractBlock implements Lambda, Function
 		}
 		buf.append(")]");
 		return buf.toString();
+	}
+	
+	@Override
+	public QName getReturnValueKey() {
+		return returnValueKey;
 	}
 }

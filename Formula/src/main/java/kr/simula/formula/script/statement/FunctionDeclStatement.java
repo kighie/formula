@@ -21,6 +21,7 @@ import kr.simula.formula.core.Context;
 import kr.simula.formula.core.GrammarTokens;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Ref;
+import kr.simula.formula.core.Returnable;
 import kr.simula.formula.core.Statement;
 import kr.simula.formula.core.wrapper.AbstractNode;
 import kr.simula.formula.core.wrapper.LocalFunction;
@@ -31,7 +32,7 @@ import kr.simula.formula.core.wrapper.LocalFunction;
  * @author Ikchan Kwon
  *
  */
-public class FunctionDeclStatement extends AbstractNode implements BlockStatement {
+public class FunctionDeclStatement extends AbstractNode implements BlockStatement, Returnable {
 	private final LocalFunction<?> localFunction;
 	private final QName returnValueKey;
 	
@@ -74,6 +75,7 @@ public class FunctionDeclStatement extends AbstractNode implements BlockStatemen
 	/**
 	 * @return the returnValueKey
 	 */
+	@Override
 	public QName getReturnValueKey() {
 		return returnValueKey;
 	}

@@ -1,16 +1,18 @@
 
-defn println(object value) { 
+importJava java.lang.System;
+
+fndef println(object value) { 
 	if( not skipPrint ){ 
 	
 		System.out.println(value);
 	}
 } 
 
-defn emptyFunc(){
+fndef emptyFunc(){
 	//do nothing
 }
 
-defn localFunc(number argA, number argB) : number {
+fndef localFunc(number argA, number argB) : number {
 	number retVal;
 	if(argA > argB) {
 		println(argA & 'X' & argB);
@@ -22,19 +24,19 @@ defn localFunc(number argA, number argB) : number {
 	return retVal;
 } 
 
-defn  fnA(number a) : number{
+fndef  fnA(number a) : number{
 	return a * 3;
 }
 
-defn fnB(number a) : number{
+fndef fnB(number a) : number{
 	return a * 7;
 }
 
-defn fnC(number a) : number{
+fndef fnC(number a) : number{
 	return a * 13;
 }
 
-defn fnTest(function fn, number num) : number {
+fndef fnTest(function fn, number num) : number {
 	return fn(num / 3.1);
 }
 
@@ -56,7 +58,10 @@ println( "EXP(4) " & fnTest(EXP, 4) );
 
 println("====== Function Closure Array ===========");
 
-println(fnTest );
+
+
+
+println(fnTest);
 
 function[] fnArray <- [fnA,fnB,fnC];
 foreach (function ar in fnArray ) {

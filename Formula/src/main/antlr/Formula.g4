@@ -196,11 +196,13 @@ array   returns [Gettable result]
 	
 map   returns [Gettable result]
 	: '{' 	{ $result = map(SIMPLE_MAP);}
-		IDENT ':' formulaTerm	
-			{ mapEntry( $result, null, $IDENT.text, $formulaTerm.result ); }
-		(',' IDENT ':' formulaTerm 
-			{ mapEntry( $result, null, $IDENT.text, $formulaTerm.result ); }
-		)* 
+		(
+			IDENT ':' formulaTerm	
+				{ mapEntry( $result, null, $IDENT.text, $formulaTerm.result ); }
+			(',' IDENT ':' formulaTerm 
+				{ mapEntry( $result, null, $IDENT.text, $formulaTerm.result ); }
+			)*
+		)?
 	  '}'
 	;
 	

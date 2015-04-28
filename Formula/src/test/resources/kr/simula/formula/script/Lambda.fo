@@ -2,18 +2,16 @@
 importJava java.lang.System;
 
 
-defn testFn( function fn, number a) : void {
+fndef testFn( function fn, number a) : void {
 	fn(a);
 }
 
 
-testFn( defn(number a) { System.out.println( a * 2); } , 13 );
+testFn( fndef(number a) { System.out.println( a * 2); } , 13 );
 
-/*
-defn testFn( function fn, number a) : void {
-	System.out.println(fn(a));
+fndef testFn2( function fn, number a) : number {
+	return fn(a) / 4;
 }
 
 
-testFn( defn(number a) { return a * 2; } , 13 );
-*/
+System.out.println( testFn2( fndef(number a) { return a * 2; } , 13 ) );

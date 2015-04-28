@@ -1,0 +1,22 @@
+
+importJava java.net.URL;
+
+paramdef sampleObject as kr.simula.formula.script.SampleObject;
+
+
+typedef SampleDto {
+	number a : 2,
+	number b : 1,
+	int	   c ,
+	String d ,
+	number[]  nums : [1,2,3,4,5],
+	map    map1 : { a:1, b:2 },
+	map    map2 : {},
+	map[]    maps : [{ a:1, b:2 }, {a:1,c:2}],
+	function fn ,
+	URL url
+}
+
+//SampleDto aDto;
+
+sampleObject.testMethod(4);

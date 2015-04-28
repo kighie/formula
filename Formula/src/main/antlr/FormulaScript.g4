@@ -45,6 +45,7 @@ import Formula;
 formulaScript returns [Module module]
 	: { $module = (Module)block(ScriptTokens.MODULE); }
 		(importStatement )*
+		(paramDef)*
 		blockContents[$module]
 		EOF
 	  { endScope();}
@@ -98,7 +99,7 @@ functionDecl	returns [BlockStatement fnBlock]
 		beginScope();
 		Class<?> typeClz = Object.class;
 	}
-	'defn' IDENT 
+	'fndef' IDENT 
 		( ( '(' ')' ) |  ( '(' argsDecl[args] ')' ) )
 		( (':' type { typeClz = $type.typeClz; } '{' ) | ( '{' )  )
 		{ $fnBlock = declareFn(typeClz ,$IDENT.text, args); }
@@ -127,11 +128,22 @@ retrunStmt	[BlockStatement fnBlock]
 	}
 	';'
 	;
-/* *************************************
- * load function
- *************************************** */
 
- 
+typeDecl
+	: 'typedef' IDENT '{' 
+		type IDENT ( ':' formulaTerm	)?
+		(',' type IDENT ( ':' formulaTerm	)?
+			
+		)* 
+	'}'
+	END_OF_STMT?
+	;
+
+paramDef
+	: 'paramdef' IDENT 'as' type
+	END_OF_STMT
+	;
+
 blockContents [Block stmtHolder]
 	: 
 	(
@@ -142,9 +154,13 @@ blockContents [Block stmtHolder]
 		| functionCallStatement	{ $stmtHolder.append($functionCallStatement.stmt); }
 		| variableDecl 			{ $stmtHolder.append($variableDecl.stmt); }
 		| functionDecl 			{ $stmtHolder.append($functionDecl.fnBlock); }
+		| typeDecl
 	)*
 	;
-	
+
+
+
+
 /* *************************************
  * statements
  *************************************** */
@@ -243,7 +259,7 @@ lambdaArg returns [Lambda lambda]
 		beginScope();
 		Class<?> typeClz = Object.class;
 	}
-	'defn' 
+	'fndef' 
 		( ( '(' ')' ) |  ( '(' argsDecl[args] ')' ) )
 		( (':' type { typeClz = $type.typeClz; } '{' ) | ( '{' )  )
 		{ $lambda = lambda( LAMBDA , args, typeClz); }

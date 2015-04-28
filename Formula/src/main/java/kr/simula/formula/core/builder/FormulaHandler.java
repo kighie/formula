@@ -163,6 +163,16 @@ public interface FormulaHandler {
 	 * @return
 	 */
 	BlockStatement declareFn(Class<?> retType, String name, List<Ref> args);
+
+	/**
+	 * <pre>
+	 * Make an anonymous function or operator.
+	 * </pre>
+	 * @param token
+	 * @param args
+	 * @return
+	 */
+	Lambda lambda(String token, List<Ref> args, Object ... extra);
 	
 	/**
 	 * <pre>
@@ -223,16 +233,6 @@ public interface FormulaHandler {
 	 * @return
 	 */
 	BlockStatement statementBlock(String token, Node ... args);
-	
-	/**
-	 * <pre>
-	 * Make an anonymous function or operator.
-	 * </pre>
-	 * @param token
-	 * @param args
-	 * @return
-	 */
-	Lambda lambda(String token, List<Ref> args, Object ... extra);
 	
 	/**
 	 * <pre>

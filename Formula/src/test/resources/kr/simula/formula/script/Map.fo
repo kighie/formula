@@ -1,6 +1,6 @@
 
 /* System out wrapping */
-defn println(object value) { 
+fndef println(object value) { 
 	if( not skipPrint ){
 		System.out.println(value);
 	}
@@ -12,6 +12,11 @@ map simpleMap <- {
 	b:2,
 	c:3
 };
+
+
+map simpleMap <- {
+};
+
 
 println( simpleMap.keySet() );
 

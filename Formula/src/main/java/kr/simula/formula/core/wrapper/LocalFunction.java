@@ -25,6 +25,7 @@ import kr.simula.formula.core.EvalException;
 
 /**
  * <pre>
+ * TODO refactoring
  * </pre>
  * @author Ikchan Kwon
  *
