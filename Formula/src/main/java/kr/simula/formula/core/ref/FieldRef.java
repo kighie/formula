@@ -14,10 +14,12 @@
  */
 package kr.simula.formula.core.ref;
 
+import java.util.Map;
+
 import kr.simula.formula.core.Context;
+import kr.simula.formula.core.EvalException;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.QName;
-import kr.simula.formula.core.EvalException;
 import kr.simula.formula.core.Settable;
 import kr.simula.formula.core.util.PropertyDelegator;
 import kr.simula.formula.core.util.RefUtils;
@@ -42,17 +44,17 @@ public class FieldRef<T> extends ExternalRef<T> implements Settable<T> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void set(Context context, T value) {
-		if(value == null){
-			Object bean = getBean(context);
-			
-			if(bean != null){
-				if(propertyDelegator == null){
-					propertyDelegator = RefUtils.getPropertyDelegator(bean, qname.getName());
-				}
-				propertyDelegator.set(bean, value);
-			} else {
-				throw new EvalException(this, "Ref[" + qname + "] has no parent.");
+		Object bean = getBean(context);
+		
+		if(bean != null){
+			if(bean instanceof Map){
+				propertyDelegator = RefUtils.getMapPropertyDelegator(bean, qname.getName());
+			} else if(propertyDelegator == null){
+				propertyDelegator = RefUtils.getPropertyDelegator(bean, qname.getName());
 			}
+			propertyDelegator.set(bean, value);
+		} else {
+			throw new EvalException(this, "Ref[" + qname + "] has no parent.");
 		}
 	}
 

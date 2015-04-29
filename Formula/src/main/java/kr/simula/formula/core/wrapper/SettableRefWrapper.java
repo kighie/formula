@@ -14,10 +14,15 @@
  */
 package kr.simula.formula.core.wrapper;
 
+import java.util.Map;
+
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.Settable;
 import kr.simula.formula.core.SourceLocation;
+import kr.simula.formula.core.ref.ArrayElementRef;
+import kr.simula.formula.core.ref.FieldRef;
+import kr.simula.formula.core.ref.MapEntryRef;
 
 /**
  * <pre></pre>
@@ -26,21 +31,28 @@ import kr.simula.formula.core.SourceLocation;
  */
 public class SettableRefWrapper<T> implements Settable<T> {
 	private Ref ref;
+	private Setter<T> setter;
 	
 	/**
 	 * @param type
 	 * @param ref
 	 */
+	@SuppressWarnings("unchecked")
 	public SettableRefWrapper(Ref ref) {
 		super();
 		this.ref = ref;
+		
+		if(ref instanceof ArrayElementRef){
+			setter = new ArraySetter<T>((ArrayElementRef<T>) ref);
+		} else if(ref instanceof MapEntryRef){
+			setter = new MapSetter<T>((MapEntryRef) ref);
+		} else if(ref instanceof Settable){
+			setter = new SettableSetter<T>((Settable<T>) ref);
+		} else {
+			setter = new SimpleSetter<T>(ref);
+		}
 	}
 
-//	@Override
-//	public ValueType valueType() {
-//		return ValueTypeUtils.getValueType(ref.type());
-//	}
-	
 	@Override
 	public String getExpression() {
 		return ref.getExpression();
@@ -70,7 +82,72 @@ public class SettableRefWrapper<T> implements Settable<T> {
 
 	@Override
 	public void set(Context context, T value) {
-		context.setReference(ref.qualifiedName(), value);
+		setter.set(context, value);
+	}
+	
+	static interface Setter<E> {
+		void set(Context context, E value);
 	}
 
+	static class SimpleSetter<E> implements Setter<E> {
+		private Ref ref;
+		
+		public SimpleSetter(Ref ref) {
+			this.ref = ref;
+		}
+
+		@Override
+		public void set(Context context, E value) {
+			context.setReference(ref.qualifiedName(), value);
+		}
+		
+	}
+
+	static class ArraySetter<E> implements Setter<E> {
+		private ArrayElementRef<E> elementRef;
+		
+		public ArraySetter(ArrayElementRef<E> elementRef) {
+			this.elementRef = elementRef;
+		}
+
+		@Override
+		public void set(Context context, E value) {
+			Object[] array = (Object[])context.getReference(elementRef.qualifiedName().getParent());
+			int index = elementRef.getIndex(context).intValue();
+			array[index] = value;
+		}
+		
+	}
+
+	static class SettableSetter<E> implements Setter<E> {
+		private Settable<E> fieldRef;
+		
+		public SettableSetter(Settable<E> fieldRef) {
+			this.fieldRef = fieldRef;
+		}
+
+		@Override
+		public void set(Context context, E value) {
+			fieldRef.set(context, value);
+		}
+		
+	}
+	
+
+	static class MapSetter<E> implements Setter<E> {
+		private MapEntryRef  entryRef;
+		
+		public MapSetter(MapEntryRef  entryRef) {
+			this.entryRef = entryRef;
+		}
+
+		@SuppressWarnings({ "rawtypes", "unchecked" })
+		@Override
+		public void set(Context context, E value) {
+			Map map = (Map)context.getReference(entryRef.qualifiedName().getParent());
+			String prop = entryRef.getIndex(context);
+			map.put(prop, value);
+		}
+		
+	}
 }

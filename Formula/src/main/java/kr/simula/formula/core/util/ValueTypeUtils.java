@@ -14,8 +14,14 @@
  */
 package kr.simula.formula.core.util;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
+import kr.simula.formula.core.EvalException;
+
 
 /**
+ * TODO property set/get tuning
  * <pre>
  * </pre>
  * @author Ikchan Kwon
@@ -23,42 +29,68 @@ package kr.simula.formula.core.util;
  */
 public class ValueTypeUtils {
 
-//	private static final Map<Class<?>, Node.ValueType> classToValueTypeMap = 
-//			new HashMap<Class<?>, Node.ValueType>(13);
-//
-//
-//	static {
-//		classToValueTypeMap.put(Boolean.class, ValueType.LOGICAL);
-//		classToValueTypeMap.put(String.class, ValueType.TEXT);
-//		classToValueTypeMap.put(Double.class, ValueType.NUMERIC);
-//		classToValueTypeMap.put(Float.class, ValueType.NUMERIC);
-//		classToValueTypeMap.put(Integer.class, ValueType.NUMERIC);
-//		classToValueTypeMap.put(Long.class, ValueType.NUMERIC);
-//		classToValueTypeMap.put(Short.class, ValueType.NUMERIC);
-//		classToValueTypeMap.put(Date.class, ValueType.DATE);
-//		classToValueTypeMap.put(Object.class, ValueType.OBJECT);
-//		classToValueTypeMap.put(Void.class, ValueType.VOID);
-//	}
-//	
-//	/**
-//	 * <pre>
-//	 * Returns proper ValueType for clz.
-//	 * If clz is null, then returns ValueType#UNKNOWN
-//	 * If no matching value type, then returns {@link ValueType#OBJECT}
-//	 * </pre>
-//	 * @param clz
-//	 * @return
-//	 */
-//	public static ValueType getValueType(Class<?> clz){
-//		if(clz == null){
-//			return ValueType.UNKNOWN;
-//		}
-//		ValueType valType = classToValueTypeMap.get(clz);
-//		
-//		if(valType == null){
-//			valType =  ValueType.OBJECT;
-//		}
-//		
-//		return valType;
-//	}
+	public static Object convertPrimitive(Object value, Class<?> type){
+		if(value == null){
+			return 0;
+		}
+		
+		if( char.class.isAssignableFrom(type)){
+			return value.toString().charAt(0);
+		} else if( byte.class.isAssignableFrom(type)){
+			return value.toString().charAt(0);
+		} else {
+			if( !(value instanceof BigDecimal) ) {
+				value = new BigDecimal(value.toString());
+			}
+			
+			BigDecimal number = (BigDecimal)value;
+			
+			if(int.class.isAssignableFrom(type)){
+				return number.intValue();
+			} else if(long.class.isAssignableFrom(type)){
+				return number.longValue();
+			} else if(float.class.isAssignableFrom(type)){
+				return number.floatValue();
+			} else if(double.class.isAssignableFrom(type)){
+				return number.doubleValue();
+			}
+		}
+		
+		throw new EvalException("TODO : bean property converting mechanism.");
+	}
+	
+	public static Object convert(Object value, Class<?> type){
+		if(type.isPrimitive()){
+			return convertPrimitive(value, type);
+		}
+		
+		if(value == null){
+			return null;
+		}
+		
+		if(Number.class.isAssignableFrom(type)){
+			if( !(value instanceof BigDecimal) ) {
+				value = new BigDecimal(value.toString());
+			}
+			BigDecimal number = (BigDecimal)value;
+			
+			if(BigDecimal.class.isAssignableFrom(type) ) {
+				return number;
+			} else if(Integer.class.isAssignableFrom(type) ){
+				return number.intValue();
+			} else if(Double.class.isAssignableFrom(type) ){
+				return number.doubleValue();
+			} else if(BigInteger.class.isAssignableFrom(type) ){
+				return BigInteger.valueOf(number.longValue());
+			} else if(Float.class.isAssignableFrom(type) ){
+				return number.floatValue();
+			} else if(Long.class.isAssignableFrom(type) ){
+				return number.longValue();
+			}
+		} else if(String.class.isAssignableFrom(type)){
+			return value.toString();
+		}
+		
+		throw new EvalException("TODO : bean property converting mechanism.");
+	}
 }

@@ -15,11 +15,8 @@ map simpleMap <- {
 };
 
 
-map simpleMap2 <- {
-};
-
 text[] textArray <- ['a','b'];
-
+textArray[1] <- '3';
 
 println( textArray[1] );
 
@@ -37,3 +34,14 @@ foreach(object a in simpleMap.values() ) {
 
 println( 'SUM values : ' & SUM(simpleMap.values()) );
 println( 'AVERAGE values : ' & AVERAGE(simpleMap.values()) );
+
+
+map simpleMap2 <- {
+};
+
+println( "KEYS2 : " & simpleMap2.keySet() );
+simpleMap2["a"] <- 4;
+simpleMap2['b'] <- "tetst";
+simpleMap2.c <- 11;
+
+println( "KEYS2 [1]: " & simpleMap2.keySet() );

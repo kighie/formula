@@ -170,6 +170,7 @@ formulaTerm returns [Node result]
 	| arrayRef			{ $result = $arrayRef.result; }
 	| array 			{ $result = $array.result; }
 	| map				{ $result = $map.result; }
+	| record			{ $result = $record.result; }
 	;
 
 arrayRef   returns [Ref result]
@@ -209,7 +210,33 @@ map   returns [Gettable result]
 		)?
 	  '}'
 	;
-	
+
+
+record 	returns [Gettable result]
+	: (('R{') | ('r{')) 
+		( type fieldName = IDENT 
+			( ':' ( 
+				( formulaTerm {  } ) 
+				| ( lambdaArg )
+				)	
+			)?
+		
+		)
+		(',' type IDENT 
+			( ':' 	
+				( ( formulaTerm ) | ( lambdaArg ) )
+			)?
+		)* 
+	'}'
+	;
+
+
+type returns [Class<?> typeClz]
+	: (IDENT 	{ $typeClz = type($IDENT.text); })  
+	| (qualifiedName { $typeClz = type($qualifiedName.text); }) 
+	('[' ']' 	{ $typeClz = arrayType($typeClz); })?
+	;
+
 qualifiedName returns [Ref result]
 	: IDENT 	{ $result = refer( $IDENT.text); }
 	('.' IDENT	{ $result = refer( $result, $IDENT.text); } )* 

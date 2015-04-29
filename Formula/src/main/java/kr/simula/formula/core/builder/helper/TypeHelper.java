@@ -27,6 +27,7 @@ import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.ref.TypeRef;
 import kr.simula.formula.core.util.ArrayUtils;
 import kr.simula.formula.core.util.RefUtils;
+import so.ontolog.data.record.Record;
 
 /**
  * <pre></pre>
@@ -45,6 +46,8 @@ public class TypeHelper {
 	public static final String VOID = "void";
 	public static final String System = "System";
 	public static final String MAP = "map";
+	public static final String RECORD = "record";
+	public static final String TABLE = "table";
 	public static final String FUNCTION = "function";
 	
 	/**
@@ -63,6 +66,7 @@ public class TypeHelper {
 		registerType(VOID, Void.class);
 		registerType(System, System.class);
 		registerType(MAP, Map.class);
+		registerType(RECORD, Record.class);
 		registerType(FUNCTION, Function.class);
 
 		registerType("BigDecimal", BigDecimal.class);

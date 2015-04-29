@@ -79,22 +79,17 @@ variableDecl	returns [VariableDeclStatement stmt]
 	( '<-' formulaExpressionBase {	$stmt.setValueNode($formulaExpressionBase.result); })?
 	END_OF_STMT
 	;
-	/*
-	: { Class<?> tp = Object.class; } 
-	IDENT ':' (type 	{ tp = $type.typeClz ; })?
+/*
+mapDecl	returns [VariableDeclStatement stmt]
+	: 'map' IDENT  
 	{ 
-		Ref varRef = declare(ScriptTokens.VAR_DECL, tp ,$IDENT.text); 
+		Ref varRef = declare(VAR_DECL, java.util.Map.class ,$IDENT.text); 
 		$stmt = (VariableDeclStatement)statement(ScriptTokens.VAR_DECL, varRef);
 	}
-	( '<-' formulaExpressionBase {	$stmt.setValueNode($formulaExpressionBase.result); })?
+	( map {	$stmt.setValueNode($map.result); }  )
 	END_OF_STMT
-	; */
-
-type returns [Class<?> typeClz]
-	: (IDENT 	{ $typeClz = type($IDENT.text); })  
-	| (qualifiedName { $typeClz = type($qualifiedName.text); }) 
-	('[' ']' 	{ $typeClz = arrayType($typeClz); })?
 	;
+*/
 
 
 /* *************************************
@@ -155,6 +150,8 @@ typeDecl
 	'}'
 	END_OF_STMT?
 	;
+
+
 
 //{ settable = refer( $IDENT.text);}
 // { $stmt = statement(ScriptTokens.ASSIGN_STMT, settable, $formulaTerm.result); }
@@ -303,6 +300,7 @@ leftAssign  returns [Statement stmt]
 	(
 		IDENT 			{ settable = refer( $IDENT.text);}
 		| qualifiedName	{ settable = $qualifiedName.result;}
+		| arrayRef 		{ settable = $arrayRef.result;}
 	) 
 	'<-' formulaExpressionBase
 	END_OF_STMT
@@ -317,6 +315,7 @@ rightAssign  returns [Statement stmt]
 	(
 		IDENT			{ settable = refer( $IDENT.text);}
 		| qualifiedName	{ settable = $qualifiedName.result;}
+		| arrayRef 		{ settable = $arrayRef.result;}
 	)
 	END_OF_STMT
 	{ $stmt = statement(ScriptTokens.ASSIGN_STMT, settable, $formulaExpressionBase.result); }

@@ -66,6 +66,11 @@ public class ArrayElementRef<T> extends AbstractNode implements Ref, Gettable<T>
 		return buf.toString();
 	}
 	
+	public Number getIndex(Context context){
+		return indexer.get(context);
+	}
+	
+	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public T get(Context context) {

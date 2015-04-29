@@ -7,3 +7,9 @@ varA <- sampleObject;
 
 System.out.println(varA.testMethod(10));
 
+sampleObject.propA <- "test prop";
+sampleObject.propB <- 3;
+
+
+System.out.println(varA.propA);
+System.out.println(varA.propB);

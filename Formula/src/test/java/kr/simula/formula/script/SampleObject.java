@@ -23,7 +23,35 @@ import java.math.BigDecimal;
  */
 public class SampleObject {
 
+	private String propA;
+	private int propB;
 	
+	
+	
+	public String getPropA() {
+		return propA;
+	}
+
+
+
+	public void setPropA(String propA) {
+		this.propA = propA;
+	}
+
+
+
+	public int getPropB() {
+		return propB;
+	}
+
+
+
+	public void setPropB(int propB) {
+		this.propB = propB;
+	}
+
+
+
 	public BigDecimal testMethod(BigDecimal number){
 //		new Exception().printStackTrace();
 		return number.add(new BigDecimal(33));

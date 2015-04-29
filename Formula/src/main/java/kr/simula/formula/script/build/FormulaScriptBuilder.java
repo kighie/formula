@@ -81,11 +81,12 @@ public class FormulaScriptBuilder extends AbstractFormulaBuilder<Module> {
 	public DeclarationHelper initDeclarationHelper() {
 		return new ScriptDeclarationHelper();
 	}
-
+	
+	@Override
 	public TypeHelper initTypeHelper() {
-		return new ScriptTypeHelper();
+		return new TypeHelper();
 	}
-
+	
 	protected LiteralHelper initLiteralHelper() {
 		return new ExprLiteralHelper();
 	}

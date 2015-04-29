@@ -29,7 +29,11 @@ public class EvalException extends FormulaException {
 	private static final long serialVersionUID = 1050340953390702771L;
 	
 	private Node node;
-	
+
+	public EvalException(String message) {
+		super(message);
+	}
+
 	public EvalException(Node node) {
 		super();
 		setNode(node);

@@ -19,6 +19,7 @@ import java.lang.reflect.Method;
 import kr.simula.formula.core.InternalException;
 
 /**
+ * TODO property set/get tuning
  * <pre></pre>
  * @author kighie@gmail.com
  * @since 1.0
@@ -68,10 +69,17 @@ public class BeanPropertyDelegator<T> implements PropertyDelegator<T> {
 	}
 	
 	public void set(Object bean, Object value){
+		if(value != null){
+			if(!type.isAssignableFrom(value.getClass()) ){
+				value = ValueTypeUtils.convert(value, type);
+			}
+		}
+		
 		try {
 			setter.invoke(bean, new Object[]{value});
 		} catch (Exception e) {
 			throw new InternalException(e);
 		}
 	}
+	
 }

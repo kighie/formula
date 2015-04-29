@@ -62,6 +62,10 @@ public class MapEntryRef extends AbstractNode implements Ref, Gettable<Object> {
 		buf.append(parent.getExpression()).append("[").append(indexer).append("]");
 		return buf.toString();
 	}
+
+	public String getIndex(Context context){
+		return indexer.get(context);
+	}
 	
 	@SuppressWarnings({ "rawtypes" })
 	@Override
