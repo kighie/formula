@@ -176,15 +176,15 @@ public interface FormulaScriptListener extends ParseTreeListener {
 	 */
 	void exitArray(@NotNull FormulaScriptParser.ArrayContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link FormulaScriptParser#record}.
+	 * Enter a parse tree produced by {@link FormulaScriptParser#lambdaDecl}.
 	 * @param ctx the parse tree
 	 */
-	void enterRecord(@NotNull FormulaScriptParser.RecordContext ctx);
+	void enterLambdaDecl(@NotNull FormulaScriptParser.LambdaDeclContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link FormulaScriptParser#record}.
+	 * Exit a parse tree produced by {@link FormulaScriptParser#lambdaDecl}.
 	 * @param ctx the parse tree
 	 */
-	void exitRecord(@NotNull FormulaScriptParser.RecordContext ctx);
+	void exitLambdaDecl(@NotNull FormulaScriptParser.LambdaDeclContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FormulaScriptParser#iterableTerm}.
 	 * @param ctx the parse tree
@@ -405,6 +405,16 @@ public interface FormulaScriptListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitArgsDecl(@NotNull FormulaScriptParser.ArgsDeclContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FormulaScriptParser#proto}.
+	 * @param ctx the parse tree
+	 */
+	void enterProto(@NotNull FormulaScriptParser.ProtoContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaScriptParser#proto}.
+	 * @param ctx the parse tree
+	 */
+	void exitProto(@NotNull FormulaScriptParser.ProtoContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FormulaScriptParser#variableDecl}.
 	 * @param ctx the parse tree

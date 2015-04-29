@@ -21,7 +21,7 @@ import java.util.Map.Entry;
 import kr.simula.formula.core.Function;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Ref;
-import kr.simula.formula.core.builder.helper.BuiltInFunctionRegistry;
+import kr.simula.formula.core.function.BuiltInFunctionRegistry;
 
 /**
  * 

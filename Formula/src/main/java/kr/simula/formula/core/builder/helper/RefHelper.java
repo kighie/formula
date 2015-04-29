@@ -160,11 +160,12 @@ public class RefHelper {
 		if( Map.class.isAssignableFrom(parentCollection.type())){
 			MapEntryRef  entryRef = new MapEntryRef (parentCollection.qualifiedName(), 
 					GettableUtils.checkGettable(parentCollection), 
-					GettableUtils.checkGettable(index,String.class));
+					GettableUtils.getStringGettable(index));
 			return entryRef;
 		} else {
 			ArrayElementRef elementRef = new ArrayElementRef (parentCollection.qualifiedName(), 
-					GettableUtils.checkGettable(parentCollection), GettableUtils.checkGettable(index,Number.class));
+					GettableUtils.checkGettable(parentCollection), 
+					GettableUtils.getDecimalGettable(index));
 			return elementRef;
 		}
 	}

@@ -48,7 +48,6 @@ public class LocalFunction<O> extends AbstractBlock implements Function<O>, Func
 		this.retType = retType;
 		this.name = name;
 		this.args = args;
-//		this.valueType = ValueTypeUtils.getValueType(retType);
 		this.returnValueKey = returnValueKey;
 	}
 	
@@ -63,11 +62,6 @@ public class LocalFunction<O> extends AbstractBlock implements Function<O>, Func
 	public String getToken() {
 		return GrammarTokens.FUNC_DECL;
 	}
-	
-//	@Override
-//	public ValueType valueType() {
-//		return valueType;
-//	}
 	
 	@Override
 	public Class<O> getReturnType() {

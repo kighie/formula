@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.List;
 
 import kr.simula.formula.core.Function;
-import kr.simula.formula.core.builder.helper.FunctionLoader;
+import kr.simula.formula.core.function.FunctionLoader;
 
 import org.junit.Test;
 

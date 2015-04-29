@@ -137,14 +137,14 @@ typeDecl
 		( type fieldName = IDENT 
 			( ':' ( 
 				( formulaTerm {  } ) 
-				| ( lambdaArg )
+				| ( lambdaDecl )
 				)	
 			)?
 		
 		)
 		(',' type IDENT 
 			( ':' 	
-				( ( formulaTerm ) | ( lambdaArg ) )
+				( ( formulaTerm ) | ( lambdaDecl ) )
 			)?
 		)* 
 	'}'
@@ -248,24 +248,39 @@ functionCallStatement  returns [Statement stmt]
 	;
 
 /*
- * override arguments
+ * Override arguments
  */
 arguments  returns [List<Node> nodeList]
 	: { $nodeList = new LinkedList<Node>(); }
 		( 
 			(arg2 = operatorExpression { $nodeList.add($arg2.result); })
-			| (arg3 = lambdaArg { $nodeList.add($arg3.lambda); })
 		)
 		(',' 
 			(arg2 = operatorExpression { $nodeList.add($arg2.result); })
-			| (arg3 = lambdaArg { $nodeList.add($arg3.lambda); })
 		)*
 	;
+
+
+/*
+ * Override formulaTerm
+ */
+formulaTerm returns [Node result]
+	: literalTerm 			{ $result = $literalTerm.result; }
+	| qualifiedName		{ $result = $qualifiedName.result; }
+	| funcCallExp		{ $result = $funcCallExp.result; }
+	| methodCallExp		{ $result = $methodCallExp.result; }
+	| arrayRef			{ $result = $arrayRef.result; }
+	| array 			{ $result = $array.result; }
+	| map				{ $result = $map.result; }
+	| proto			{ $result = $proto.result; }
+	| lambdaDecl		{ $result = $lambdaDecl.lambda; }
+	;
+
 
 /*
 	Lambda Argument
 */
-lambdaArg returns [Lambda lambda]
+lambdaDecl returns [Lambda lambda]
 	: 
 	{ 
 		List<Ref> args = new LinkedList<Ref>(); 
@@ -282,6 +297,24 @@ lambdaArg returns [Lambda lambda]
 		{	endScope(); }
 	;
 
+
+proto 	returns [Gettable result]
+	: (('R{') | ('r{')) 
+		( type fieldName = IDENT 
+			( ':' formulaTerm {  } )?
+		)
+		(',' type IDENT 
+			( ':' formulaTerm {  } )?
+		)* 
+	'}'
+	;
+
+
+type returns [Class<?> typeClz]
+	: (IDENT 	{ $typeClz = type($IDENT.text); })  
+	| (qualifiedName { $typeClz = type($qualifiedName.text); }) 
+	('[' ']' 	{ $typeClz = arrayType($typeClz); })?
+	;
 
 /* *************************************
  * assign

@@ -25,11 +25,11 @@ println( "*** simpleMap['text key'] : " & simpleMap["text key"] );
 println( "KEYS : " & simpleMap.keySet() );
 
 foreach(object a in simpleMap.keySet() ) {
-	println("key:" & a);
+	println("key:" & a & ", value : " & simpleMap[a] );
 }
 
-foreach(object a in simpleMap.values() ) {
-	println("value:" & a);
+foreach(object v in simpleMap.values() ) {
+	println("value:" & v);
 }
 
 println( 'SUM values : ' & SUM(simpleMap.values()) );
@@ -45,3 +45,4 @@ simpleMap2['b'] <- "tetst";
 simpleMap2.c <- 11;
 
 println( "KEYS2 [1]: " & simpleMap2.keySet() );
+

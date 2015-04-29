@@ -19,7 +19,6 @@ import kr.simula.formula.core.antlr.ParsingErrorAdapter;
 import kr.simula.formula.core.builder.helper.ArrayHelper;
 import kr.simula.formula.core.builder.helper.BinaryOperatorHelper;
 import kr.simula.formula.core.builder.helper.BlockHelper;
-import kr.simula.formula.core.builder.helper.BuiltInFunctionRegistry;
 import kr.simula.formula.core.builder.helper.DeclarationHelper;
 import kr.simula.formula.core.builder.helper.FunctionCallHelper;
 import kr.simula.formula.core.builder.helper.ImportHelper;
@@ -31,6 +30,7 @@ import kr.simula.formula.core.builder.helper.RefHelper;
 import kr.simula.formula.core.builder.helper.StatementHelper;
 import kr.simula.formula.core.builder.helper.TypeHelper;
 import kr.simula.formula.core.builder.helper.UnaryOperatorHelper;
+import kr.simula.formula.core.function.BuiltInFunctionRegistry;
 
 /**
  * <pre>
@@ -42,7 +42,7 @@ public abstract class AbstractFormulaBuilder<N extends Node>
 	implements FormulaBuilder<N>, FormulaHandlerFactory {
 	
 	
-	private BuiltInFunctionRegistry globalFunctionRegistry;
+	private BuiltInFunctionRegistry builtinFunctionRegistry;
 	
 	private BlockHelper blockHelper;
 	private LiteralHelper literalHelper;
@@ -79,12 +79,12 @@ public abstract class AbstractFormulaBuilder<N extends Node>
 			return;
 		}
 		
-		this.globalFunctionRegistry = initGlobalFunctionRegistry();
+		this.builtinFunctionRegistry = initBuiltinFunctionRegistry();
 		this.literalHelper = initLiteralHelper();
 		this.refHelper = initRefHelper();
 		this.binaryOperatorHelper = initBinaryOperatorHelper();
 		this.unaryOperatorHelper = initUnaryOperatorHelper();
-		this.functionCallHelper = initFunctionCallHelper(globalFunctionRegistry);
+		this.functionCallHelper = initFunctionCallHelper(builtinFunctionRegistry);
 		this.methodCallHelper = initMethodCallHelper();
 		this.lambdaHelper = initLambdaHelper();
 		this.arrayHelper = initArrayHelper();
@@ -99,13 +99,18 @@ public abstract class AbstractFormulaBuilder<N extends Node>
 		
 		initialized = true;
 	}
+	
+	protected BuiltInFunctionRegistry initBuiltinFunctionRegistry() {
+		BuiltInFunctionRegistry registry = new BuiltInFunctionRegistry();
+		registry.initialize();
+		extendBuiltinFunction(registry);
+		return registry;
+	}
 
-	/**<pre>
-	 * </pre>
-	 * @return
-	 */
-	protected abstract BuiltInFunctionRegistry initGlobalFunctionRegistry();
-
+	protected void extendBuiltinFunction(BuiltInFunctionRegistry registry) {
+	}
+	
+	
 	/**<pre>
 	 * </pre>
 	 * @return
@@ -172,7 +177,7 @@ public abstract class AbstractFormulaBuilder<N extends Node>
 	@Override
 	public RootBuildContext createContext() {
 		RootBuildContext context = new RootBuildContext();
-		context.setFunctionRegistry(globalFunctionRegistry);
+		context.setFunctionRegistry(builtinFunctionRegistry);
 		
 		return context;
 	}

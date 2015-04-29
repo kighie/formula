@@ -28,6 +28,7 @@ import kr.simula.formula.core.ref.TypeRef;
 import kr.simula.formula.core.util.ArrayUtils;
 import kr.simula.formula.core.util.RefUtils;
 import so.ontolog.data.record.Record;
+import so.ontolog.data.table.Table;
 
 /**
  * <pre></pre>
@@ -67,6 +68,8 @@ public class TypeHelper {
 		registerType(System, System.class);
 		registerType(MAP, Map.class);
 		registerType(RECORD, Record.class);
+		registerType(TABLE, Table.class);
+		
 		registerType(FUNCTION, Function.class);
 
 		registerType("BigDecimal", BigDecimal.class);

@@ -214,13 +214,13 @@ public class FormulaScriptBaseListener implements FormulaScriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRecord(@NotNull FormulaScriptParser.RecordContext ctx) { }
+	@Override public void enterLambdaDecl(@NotNull FormulaScriptParser.LambdaDeclContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRecord(@NotNull FormulaScriptParser.RecordContext ctx) { }
+	@Override public void exitLambdaDecl(@NotNull FormulaScriptParser.LambdaDeclContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -485,6 +485,18 @@ public class FormulaScriptBaseListener implements FormulaScriptListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitArgsDecl(@NotNull FormulaScriptParser.ArgsDeclContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterProto(@NotNull FormulaScriptParser.ProtoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitProto(@NotNull FormulaScriptParser.ProtoContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

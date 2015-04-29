@@ -26,6 +26,7 @@ import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.factory.FunctionCallFactory;
 import kr.simula.formula.core.factory.func.ClosureCallFactory;
 import kr.simula.formula.core.factory.func.LocalFunctionCallFactory;
+import kr.simula.formula.core.function.BuiltInFunctionRegistry;
 import kr.simula.formula.core.ref.ClosureRef;
 import kr.simula.formula.core.ref.VariableRef;
 

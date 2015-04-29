@@ -27,7 +27,6 @@ import kr.simula.formula.core.builder.helper.BinaryOperatorHelper;
 import kr.simula.formula.core.builder.helper.BlockHelper;
 import kr.simula.formula.core.builder.helper.DeclarationHelper;
 import kr.simula.formula.core.builder.helper.FunctionCallHelper;
-import kr.simula.formula.core.builder.helper.BuiltInFunctionRegistry;
 import kr.simula.formula.core.builder.helper.ImportHelper;
 import kr.simula.formula.core.builder.helper.LambdaHelper;
 import kr.simula.formula.core.builder.helper.LiteralHelper;
@@ -37,6 +36,7 @@ import kr.simula.formula.core.builder.helper.RefHelper;
 import kr.simula.formula.core.builder.helper.StatementHelper;
 import kr.simula.formula.core.builder.helper.TypeHelper;
 import kr.simula.formula.core.builder.helper.UnaryOperatorHelper;
+import kr.simula.formula.core.function.BuiltInFunctionRegistry;
 import kr.simula.formula.expr.Expr;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
@@ -56,16 +56,11 @@ public class ExpressionBuilder extends AbstractFormulaBuilder<Expr> {
 	
 	
 	@Override
-	protected BuiltInFunctionRegistry initGlobalFunctionRegistry() {
-		BuiltInFunctionRegistry registry = new BuiltInFunctionRegistry(){
-			@Override
-			protected void initFunctions() {
-				loadAndRegisterFunctions(this.getClass().getClassLoader(), FUNC_CLASSPATH);
-			}
-		};
-		registry.initialize();
-		return registry;
+	protected void extendBuiltinFunction(
+			BuiltInFunctionRegistry registry) {
+		registry.loadAndRegisterFunctions(this.getClass().getClassLoader(), FUNC_CLASSPATH);
 	}
+
 	
 	protected LiteralHelper initLiteralHelper() {
 		return new ExprLiteralHelper();
