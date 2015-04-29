@@ -23,6 +23,7 @@ import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.builder.helper.StatementHelper;
 import kr.simula.formula.core.factory.StatementFactory;
+import kr.simula.formula.core.ref.DeclaredParameterRef;
 import kr.simula.formula.core.ref.MethodRef;
 import kr.simula.formula.core.ref.VariableRef;
 import kr.simula.formula.core.util.GettableUtils;
@@ -34,6 +35,7 @@ import kr.simula.formula.script.statement.FunctionCallStatement;
 import kr.simula.formula.script.statement.IfStatement;
 import kr.simula.formula.script.statement.LoopConditionStatement;
 import kr.simula.formula.script.statement.MethodCallStatement;
+import kr.simula.formula.script.statement.ParamDefStatement;
 import kr.simula.formula.script.statement.ReturnStatement;
 import kr.simula.formula.script.statement.VariableDeclStatement;
 
@@ -82,6 +84,16 @@ public class ScriptStatementHelper extends StatementHelper {
 			}
 			
 			VariableDeclStatement stmt = new VariableDeclStatement(varRef, valueNode);
+			return stmt;
+		}
+	};
+
+	static StatementFactory paramDefFactory = new StatementFactory() {
+		@Override
+		public ParamDefStatement create(BuildContext context, String token, Node[] args) {
+			DeclaredParameterRef<?> varRef = (DeclaredParameterRef<?>)args[0];
+			
+			ParamDefStatement stmt = new ParamDefStatement(varRef);
 			return stmt;
 		}
 	};
@@ -150,6 +162,7 @@ public class ScriptStatementHelper extends StatementHelper {
 		setFactory(ScriptTokens.FOREACH, foreachFactory);
 		setFactory(ScriptTokens.RETURN, returnFactory);
 		setFactory(ScriptTokens.ASSIGN_STMT, assignFactory);
+		setFactory(ScriptTokens.PARAM_DECL_STMT, paramDefFactory);
 		
 		
 	}

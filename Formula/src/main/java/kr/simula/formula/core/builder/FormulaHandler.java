@@ -154,6 +154,30 @@ public interface FormulaHandler {
 
 	/**
 	 * <pre>
+	 * Declares metadata
+	 * </pre>
+	 * @param token
+	 * @param name
+	 * @return
+	 */
+	BlockStatement declareType(String token, String name);
+	
+
+	/**
+	 * <pre>
+	 * Declares type field.
+	 * </pre>
+	 * @param type
+	 * @param name
+	 * @param value
+	 * @return
+	 */
+	Node declareField(Class<?> type, String name, Gettable<?> defaultValue);
+	
+	
+	
+	/**
+	 * <pre>
 	 * Declares Function
 	 * [Caution] You must call {@link #endBlock()} after completing block parsing.
 	 * </pre>
@@ -172,7 +196,7 @@ public interface FormulaHandler {
 	 * @param args
 	 * @return
 	 */
-	Lambda lambda(String token, List<Ref> args, Object ... extra);
+	Lambda<?> lambda(String token, List<Ref> args, Object ... extra);
 	
 	/**
 	 * <pre>

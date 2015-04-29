@@ -199,8 +199,19 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	}
 	
 	@Override
+	public BlockStatement declareType(String token, String name) {
+		return declarationHelper.createType(current, token, name);
+	}
+
+	
+	@Override
+	public Node declareField(Class<?> type, String name, Gettable<?> defaultValue) {
+		return declarationHelper.createField(current, type, name, defaultValue);
+	}
+
+
+	@Override
 	public BlockStatement declareFn(Class<?> retType, String name, List<Ref> args) {
-//		beginScope();
 		return declarationHelper.createFn(current, retType, name, args);
 	}
 	
@@ -236,7 +247,7 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	}
 	
 	@Override
-	public Lambda lambda(String token, List<Ref> args, Object ... extra) {
+	public Lambda<?> lambda(String token, List<Ref> args, Object ... extra) {
 		return lambdaHelper.create(current, token, args, extra);
 	}
 

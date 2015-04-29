@@ -27,6 +27,7 @@ public class RecordField implements Field {
 	private Class<?> type;
 	private int length = UNDEFINED_LENGTH;
 	private final String name;
+	private Object defaultValue;
 
 	public RecordField(String name) {
 		this.name = name;
@@ -59,6 +60,20 @@ public class RecordField implements Field {
 		this.length = length;
 	}
 	
+	/**
+	 * @return the defaultValue
+	 */
+	public Object getDefaultValue() {
+		return defaultValue;
+	}
+
+	/**
+	 * @param defaultValue the defaultValue to set
+	 */
+	public void setDefaultValue(Object defaultValue) {
+		this.defaultValue = defaultValue;
+	}
+
 	/**
 	 * if value is null nor type is null, returns true.
 	 * @param value

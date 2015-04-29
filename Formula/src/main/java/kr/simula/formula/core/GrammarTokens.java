@@ -50,19 +50,22 @@ public interface GrammarTokens {
 	String SIMPLE_MAP		= "SIMPLE_MAP";
 	
 	
-	String IF 			= "IF";
-	String ELSEIF 		= "ELSEIF";
-	String ELSE 		= "ELSE";
-	String FOREACH		= "FOREACH";
+	String IF 				= "IF";
+	String ELSEIF 			= "ELSEIF";
+	String ELSE 			= "ELSE";
+	String FOREACH			= "FOREACH";
 	String LOOP_COND_DECL		= "LOOP_COND_DECL";
 	String MTHODE_CALL_STMT	= "MTHODE_CALL_STMT";
 	String FUNCTION_CALL_STMT	= "FUNC_CALL_STMT";
-	String ASSIGN_STMT	= "ASSIGN_STMT";
+	String ASSIGN_STMT		= "ASSIGN_STMT";
 	
-	String VAR			= "VAR";
-	String VAR_DECL		= "VAR_DECL";
-	String ARG_DECL		= "ARG_DECL";
-	String FUNC_DECL	= "FUNC_DECL";
+	String VAR				= "VAR";
+	String VAR_DECL			= "VAR_DECL";
+	String ARG_DECL			= "ARG_DECL";
+	String FUNC_DECL		= "FUNC_DECL";
+	String PARAM_DECL		= "PARAM_DECL";
+	String PARAM_DECL_STMT	= "PARAM_DECL_STMT";
+	
 	String RETURN		= "RETURN";
 
 	String ARRAY_GET 	= "GET[]";

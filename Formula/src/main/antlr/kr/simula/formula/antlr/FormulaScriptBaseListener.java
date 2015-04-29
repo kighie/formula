@@ -58,6 +58,18 @@ public class FormulaScriptBaseListener implements FormulaScriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterParamDef(FormulaScriptParser.ParamDefContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitParamDef(FormulaScriptParser.ParamDefContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterVariableDecl(FormulaScriptParser.VariableDeclContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -125,18 +137,6 @@ public class FormulaScriptBaseListener implements FormulaScriptListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTypeDecl(FormulaScriptParser.TypeDeclContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterParamDef(FormulaScriptParser.ParamDefContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitParamDef(FormulaScriptParser.ParamDefContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

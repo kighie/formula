@@ -26,6 +26,7 @@ import kr.simula.formula.core.builder.helper.DeclarationHelper;
 import kr.simula.formula.core.factory.DeclarationFactory;
 import kr.simula.formula.core.factory.FunctionDeclFactory;
 import kr.simula.formula.core.ref.ArgDeclRef;
+import kr.simula.formula.core.ref.DeclaredParameterRef;
 import kr.simula.formula.core.ref.VariableRef;
 import kr.simula.formula.core.wrapper.LocalFunction;
 import kr.simula.formula.script.ScriptTokens;
@@ -84,6 +85,24 @@ public class ScriptDeclarationHelper extends DeclarationHelper {
 		
 	};
 
+	static DeclarationFactory paramDeclFactory = new DeclarationFactory() {
+
+		@SuppressWarnings({ "rawtypes", "unchecked" })
+		@Override
+		public Ref create(BuildContext context, Class<?> type,
+				String name) {
+			QName qname = new QName(name);
+			
+			if(context.getRef(qname) != null){
+				throw new BuildException("Parameter '" + name + "' is already registered.");
+			}
+			Ref ref = new DeclaredParameterRef(type,qname);
+			context.registerRef(qname, ref);
+			return ref;
+		}
+		
+	};
+
 	public static class DefaultFunctionDeclFactory implements FunctionDeclFactory {
 
 		@Override
@@ -109,6 +128,8 @@ public class ScriptDeclarationHelper extends DeclarationHelper {
 
 		setFactory(ScriptTokens.VAR_DECL, varDeclFactory);
 		setFactory(ScriptTokens.ARG_DECL, argDeclFactory);
+		setFactory(ScriptTokens.PARAM_DECL, paramDeclFactory);
+		
 	}
 	
 	

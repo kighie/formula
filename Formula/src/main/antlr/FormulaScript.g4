@@ -45,7 +45,7 @@ import Formula;
 formulaScript returns [Module module]
 	: { $module = (Module)block(ScriptTokens.MODULE); }
 		(importStatement )*
-		(paramDef)*
+		(paramDef	{ $module.append($paramDef.result); })*
 		blockContents[$module]
 		EOF
 	  { endScope();}
@@ -59,6 +59,13 @@ importStatement
 	: 'importJava' qualifiedName END_OF_STMT
 		{ importJava($qualifiedName.result); }
 	;
+
+paramDef	returns [Statement result]
+	: 'paramdef' IDENT 'as' type
+	END_OF_STMT
+	{ $result = statement(PARAM_DECL_STMT, declare(PARAM_DECL, $type.typeClz ,$IDENT.text) ); }
+	;
+
 
 /* *************************************
  * declare variable
@@ -131,21 +138,24 @@ retrunStmt	[BlockStatement fnBlock]
 	;
 
 typeDecl
-	: 'typedef' IDENT '{' 
-		type IDENT ( ':' formulaTerm	)?
-		(',' type IDENT ( ':' formulaTerm	)?
-			
+	: 'typedef' typeName = IDENT '{' 
+		type fieldName = IDENT 
+			( ':' ( ( formulaTerm {  } ) 
+				| ( lambdaArg )
+				)	
+			)?
+		(',' type IDENT 
+			( ':' 	
+				( ( formulaTerm ) | ( lambdaArg ) )
+			)?
 		)* 
 	'}'
 	END_OF_STMT?
 	;
 
-paramDef
-	: 'paramdef' IDENT 'as' type
-	END_OF_STMT
-	;
-
-
+//{ settable = refer( $IDENT.text);}
+// { $stmt = statement(ScriptTokens.ASSIGN_STMT, settable, $formulaTerm.result); }
+//$formulaTerm.result;
 
 blockContents [Block stmtHolder]
 	: 

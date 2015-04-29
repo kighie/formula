@@ -18,6 +18,8 @@ import java.util.List;
 
 import kr.simula.formula.core.BlockStatement;
 import kr.simula.formula.core.Function;
+import kr.simula.formula.core.Gettable;
+import kr.simula.formula.core.Node;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.builder.BuildContext;
@@ -57,6 +59,33 @@ public abstract class DeclarationHelper extends AbstractHelper<DeclarationFactor
 			throw new BuildException("DeclarationFactory for " + token + " is not registered.");
 		}
 		return factory.create(context, type, name);
+	}
+
+	/**<pre>
+	 * </pre>
+	 * @param current
+	 * @param token
+	 * @param name
+	 * @return
+	 */
+	public BlockStatement createType(BuildContext current, String token,
+			String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**<pre>
+	 * </pre>
+	 * @param current
+	 * @param type
+	 * @param name
+	 * @param defaultValue
+	 * @return
+	 */
+	public Node createField(BuildContext current, Class<?> type, String name,
+			Gettable<?> defaultValue) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/**<pre>
