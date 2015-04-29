@@ -740,15 +740,15 @@ public class FormulaScriptParser extends kr.simula.formula.core.antlr.FormulaHan
 	public static class TypeDeclContext extends ParserRuleContext {
 		public Token typeName;
 		public Token fieldName;
+		public List<TerminalNode> IDENT() { return getTokens(FormulaScriptParser.IDENT); }
+		public TerminalNode IDENT(int i) {
+			return getToken(FormulaScriptParser.IDENT, i);
+		}
 		public List<TypeContext> type() {
 			return getRuleContexts(TypeContext.class);
 		}
 		public TypeContext type(int i) {
 			return getRuleContext(TypeContext.class,i);
-		}
-		public List<TerminalNode> IDENT() { return getTokens(FormulaScriptParser.IDENT); }
-		public TerminalNode IDENT(int i) {
-			return getToken(FormulaScriptParser.IDENT, i);
 		}
 		public TerminalNode END_OF_STMT() { return getToken(FormulaScriptParser.END_OF_STMT, 0); }
 		public List<FormulaTermContext> formulaTerm() {
@@ -790,6 +790,7 @@ public class FormulaScriptParser extends kr.simula.formula.core.antlr.FormulaHan
 			((TypeDeclContext)_localctx).typeName = match(IDENT);
 			setState(188);
 			match(T__10);
+			{
 			setState(189);
 			type();
 			setState(190);
@@ -831,6 +832,7 @@ public class FormulaScriptParser extends kr.simula.formula.core.antlr.FormulaHan
 				}
 			}
 
+			}
 			setState(212);
 			_errHandler.sync(this);
 			_la = _input.LA(1);

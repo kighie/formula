@@ -139,11 +139,14 @@ retrunStmt	[BlockStatement fnBlock]
 
 typeDecl
 	: 'typedef' typeName = IDENT '{' 
-		type fieldName = IDENT 
-			( ':' ( ( formulaTerm {  } ) 
+		( type fieldName = IDENT 
+			( ':' ( 
+				( formulaTerm {  } ) 
 				| ( lambdaArg )
 				)	
 			)?
+		
+		)
 		(',' type IDENT 
 			( ':' 	
 				( ( formulaTerm ) | ( lambdaArg ) )
