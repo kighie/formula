@@ -63,6 +63,7 @@ public class GettableUtils {
 				((TypeLateBinding)gettable).setRequiredType(type);
 				return (Gettable<T>)node;
 			}
+
 			if(type.isAssignableFrom( nodeType )){
 				return (Gettable<T>)node;
 			}

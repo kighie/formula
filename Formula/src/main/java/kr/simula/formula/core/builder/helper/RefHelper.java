@@ -14,6 +14,8 @@
  */
 package kr.simula.formula.core.builder.helper;
 
+import java.util.Map;
+
 import kr.simula.formula.core.Function;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.Node;
@@ -24,6 +26,7 @@ import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.ref.ArrayElementRef;
 import kr.simula.formula.core.ref.FieldRef;
 import kr.simula.formula.core.ref.FunctionRef;
+import kr.simula.formula.core.ref.MapEntryRef;
 import kr.simula.formula.core.ref.ParameterRef;
 import kr.simula.formula.core.ref.StaticFieldGettable;
 import kr.simula.formula.core.ref.TypeRef;
@@ -153,10 +156,17 @@ public class RefHelper {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Ref get(BuildContext current, String name, Node index) {
-		Ref parentArray = get(current, name);
-		ArrayElementRef elementRef = new ArrayElementRef (parentArray.qualifiedName(), 
-				GettableUtils.checkGettable(parentArray), GettableUtils.checkGettable(index,Number.class));
-		return elementRef;
+		Ref parentCollection = get(current, name);
+		if( Map.class.isAssignableFrom(parentCollection.type())){
+			MapEntryRef  entryRef = new MapEntryRef (parentCollection.qualifiedName(), 
+					GettableUtils.checkGettable(parentCollection), 
+					GettableUtils.checkGettable(index,String.class));
+			return entryRef;
+		} else {
+			ArrayElementRef elementRef = new ArrayElementRef (parentCollection.qualifiedName(), 
+					GettableUtils.checkGettable(parentCollection), GettableUtils.checkGettable(index,Number.class));
+			return elementRef;
+		}
 	}
 
 

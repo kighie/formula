@@ -10,15 +10,22 @@ fndef println(object value) {
 map simpleMap <- {
 	a:1,
 	b:2,
-	c:3
+	c:3,
+	"text key" : 5
 };
 
 
-map simpleMap <- {
+map simpleMap2 <- {
 };
 
+text[] textArray <- ['a','b'];
 
-println( simpleMap.keySet() );
+
+println( textArray[1] );
+
+println( "*** simpleMap['text key'] : " & simpleMap["text key"] );
+
+println( "KEYS : " & simpleMap.keySet() );
 
 foreach(object a in simpleMap.keySet() ) {
 	println("key:" & a);

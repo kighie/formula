@@ -25,9 +25,10 @@ println( sum );
 
 number aaa <- numbers[2] * numbers[1] / 3.4 ;
 println(aaa);
-/*
-foreach(int a in numbers){
+
+foreach(int a in [1:5]){
 	number b <- (a / numbers2[a]);
 	println( ROUND(b, 2) & " , DOWN : " & ROUNDDOWN(b,2) & " , UP : " & ROUNDUP(b,2)  );
 }
-*/
+
+println(numbers[1]);

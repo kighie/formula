@@ -30,7 +30,6 @@ import kr.simula.formula.core.util.GettableUtils;
 import kr.simula.formula.core.wrapper.LambdaGettable;
 import kr.simula.formula.core.wrapper.LocalFunction;
 import kr.simula.formula.core.wrapper.LocalFunctionCallWrapper;
-import kr.simula.formula.script.statement.FunctionDeclStatement;
 
 /**
  * <pre></pre>

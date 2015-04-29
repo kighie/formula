@@ -14,15 +14,14 @@
  */
 package kr.simula.formula.core.ref;
 
-import java.util.List;
+import java.util.Map;
 
 import kr.simula.formula.core.Context;
+import kr.simula.formula.core.EvalException;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.GrammarTokens;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Ref;
-import kr.simula.formula.core.EvalException;
-import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.wrapper.AbstractNode;
 
 /**
@@ -30,27 +29,25 @@ import kr.simula.formula.core.wrapper.AbstractNode;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class ArrayElementRef<T> extends AbstractNode implements Ref, Gettable<T> {
-	private Class<T> type;
+public class MapEntryRef extends AbstractNode implements Ref, Gettable<Object> {
+	private Class<?> type = Object.class;
 	private Gettable<?> parent;
-	private Gettable<Number> indexer;
+	private Gettable<String> indexer;
 	private QName qname;
 	
 	/**
 	 * @param parent
 	 * @param indexer
 	 */
-	@SuppressWarnings("unchecked")
-	public ArrayElementRef(QName pqname, Gettable<?> parent, Gettable<Number> indexer) {
+	public MapEntryRef(QName pqname, Gettable<?> parent, Gettable<String> indexer) {
 		super();
 		this.parent = parent;
 		this.indexer = indexer;
 		this.qname = new QName(pqname, indexer.getExpression());
-		type = (Class<T>)parent.type();
 	}
 
 	@Override
-	public Class<? extends T> type() {
+	public Class<?> type() {
 		return type;
 	}
 
@@ -66,21 +63,19 @@ public class ArrayElementRef<T> extends AbstractNode implements Ref, Gettable<T>
 		return buf.toString();
 	}
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "rawtypes" })
 	@Override
-	public T get(Context context) {
+	public Object get(Context context) {
 		Object array = parent.get(context);
-		Number index = indexer.get(context);
+		String index = indexer.get(context);
 		
 		if(array == null){
 			return null;
 		}
-		T value = null;
+		Object value = null;
 		
-		if(array instanceof List){
-			value = (T)((List)array).get(index.intValue());
-		} else if(array.getClass().isArray()){
-			value = ((T[])array)[index.intValue()];
+		if(array instanceof Map){
+			value = ((Map)array).get(index);
 		} else {
 			throw new EvalException(this, parent + " is not array.");
 		}
@@ -92,10 +87,7 @@ public class ArrayElementRef<T> extends AbstractNode implements Ref, Gettable<T>
 		return qname;
 	}
 
-	public void setRequiredType(Class<T> requiredType) {
-		if((this.type != null) && (requiredType.isAssignableFrom( this.type) )){
-			throw new BuildException("Ambiguous Ref type:" + this.type + "<>" + requiredType );
-		}
+	public void setRequiredType(Class<?> requiredType) {
 		this.type = requiredType;
 	}
 	

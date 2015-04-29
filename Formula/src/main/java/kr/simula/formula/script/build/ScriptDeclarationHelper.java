@@ -21,6 +21,7 @@ import kr.simula.formula.core.Function;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.builder.BuildContext;
+import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.builder.helper.DeclarationHelper;
 import kr.simula.formula.core.factory.DeclarationFactory;
 import kr.simula.formula.core.factory.FunctionDeclFactory;
@@ -45,6 +46,10 @@ public class ScriptDeclarationHelper extends DeclarationHelper {
 		public Ref create(BuildContext context, Class<?> type,
 				String name) {
 			QName qname = new QName(name);
+			
+			if(context.getRef(qname) != null){
+				throw new BuildException("Variable '" + name + "' is already registered.");
+			}
 			Ref ref = new VariableRef(type,qname);
 			context.registerRef(qname, ref);
 			

@@ -176,6 +176,7 @@ arrayRef   returns [Ref result]
 	: IDENT '[' 
 		(NUMBER 	{ $result = refer( $IDENT.text, literal( LIT_NUMBER, $NUMBER.text) ); } 
 		| id2 = IDENT		{ $result = refer( $IDENT.text, refer( $id2.text) ); } 
+		| id3 = STRING_LITERAL	{ $result = refer( $IDENT.text, literal( LIT_STRING, strip($id3.text)) ); } 
 		)
 	 ']'
 	;
@@ -195,12 +196,15 @@ array   returns [Gettable result]
 	;
 	
 map   returns [Gettable result]
-	: '{' 	{ $result = map(SIMPLE_MAP);}
+	: '{' 	{ $result = map(SIMPLE_MAP); String key;}
 		(
-			IDENT ':' formulaTerm	
-				{ mapEntry( $result, null, $IDENT.text, $formulaTerm.result ); }
-			(',' IDENT ':' formulaTerm 
-				{ mapEntry( $result, null, $IDENT.text, $formulaTerm.result ); }
+			( ( IDENT {key = $IDENT.text; } ) | (STRING_LITERAL {key = strip($STRING_LITERAL.text); }) ) 
+			':' formulaTerm	
+				{ mapEntry( $result, null, key, $formulaTerm.result ); }
+			(',' 
+				(( IDENT {key = $IDENT.text; } ) | (STRING_LITERAL {key = strip($STRING_LITERAL.text); })) 
+				 ':' formulaTerm 
+				{ mapEntry( $result, null, key, $formulaTerm.result ); }
 			)*
 		)?
 	  '}'
