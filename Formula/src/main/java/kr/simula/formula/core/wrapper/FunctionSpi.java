@@ -13,7 +13,8 @@ public interface FunctionSpi<O> extends Function<O> {
 	 */
 	O eval(Object ... args);
 	
-
+	String getName();
+	
 	/**
 	 * @return the args
 	 */

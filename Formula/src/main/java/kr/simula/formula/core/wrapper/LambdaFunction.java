@@ -30,7 +30,7 @@ import kr.simula.formula.core.Returnable;
  * @author Ikchan Kwon
  *
  */
-public class LambdaFunction<O> extends AbstractBlock implements Lambda, Returnable {
+public class LambdaFunction<O> extends AbstractBlock implements Lambda<O>, Returnable {
 	private static final long serialVersionUID = 1L;
 	private Class<O> retType;
 	private String name;

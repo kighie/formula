@@ -43,7 +43,7 @@ public class FunctionCallHelper  {
 
 	protected FunctionCallFactory closureCallFactory;
 	
-	protected BuiltInFunctionRegistry globalFunctionRegistry;
+	protected BuiltInFunctionRegistry builtinFunctionRegistry;
 	
 	/**
 	 * 
@@ -80,8 +80,8 @@ public class FunctionCallHelper  {
 	 * @param globalFunctionRegistry
 	 */
 	public void setFunctionRegistry(
-			BuiltInFunctionRegistry globalFunctionRegistry) {
-		this.globalFunctionRegistry = globalFunctionRegistry;
+			BuiltInFunctionRegistry builtinFunctionRegistry) {
+		this.builtinFunctionRegistry = builtinFunctionRegistry;
 	}
 	
 	public Gettable<?> create(BuildContext context,  String name , List<Node> args){
@@ -112,7 +112,7 @@ public class FunctionCallHelper  {
 		}
 		
 		if(factory == null){
-			factory = globalFunctionRegistry.getFunctionCallFactory(name);
+			factory = builtinFunctionRegistry.getFunctionCallFactory(name);
 		}
 
 		if(factory == null){

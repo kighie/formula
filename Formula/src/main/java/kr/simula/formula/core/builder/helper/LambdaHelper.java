@@ -37,7 +37,7 @@ public class LambdaHelper extends AbstractHelper<LambdaFactory> {
 	 * @param infos
 	 * @return
 	 */
-	public Lambda create(BuildContext current, String token, List<Ref> args, Object ... extra) {
+	public Lambda<?> create(BuildContext current, String token, List<Ref> args, Object ... extra) {
 		LambdaFactory factory = factories.get(token);
 		if(factory == null){
 			throw new BuildException("LambdaFactory for " + token + " is not registered.");

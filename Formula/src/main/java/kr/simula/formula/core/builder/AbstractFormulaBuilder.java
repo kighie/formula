@@ -103,10 +103,15 @@ public abstract class AbstractFormulaBuilder<N extends Node>
 	protected BuiltInFunctionRegistry initBuiltinFunctionRegistry() {
 		BuiltInFunctionRegistry registry = new BuiltInFunctionRegistry();
 		registry.initialize();
+		initBuiltinFunctions(registry);
 		extendBuiltinFunction(registry);
 		return registry;
 	}
 
+	protected void initBuiltinFunctions(BuiltInFunctionRegistry registry) {
+		registry.loadAndRegisterFunctions(this.getClass().getClassLoader(), "kr.simula.formula.core.function.builtin");
+	}
+	
 	protected void extendBuiltinFunction(BuiltInFunctionRegistry registry) {
 	}
 	

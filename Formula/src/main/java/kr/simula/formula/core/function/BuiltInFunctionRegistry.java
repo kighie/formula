@@ -38,6 +38,7 @@ import kr.simula.formula.core.factory.func.GenericFunctionCallFactory;
 import kr.simula.formula.core.factory.func.NumericFunctionCallFactory;
 import kr.simula.formula.core.factory.func.ObjectFunctionCallFactory;
 import kr.simula.formula.core.factory.func.StringFunctionCallFactory;
+import kr.simula.formula.core.function.builtin.BuiltInFunction;
 
 /**
  * <pre>
@@ -119,10 +120,29 @@ public class BuiltInFunctionRegistry {
 	 * @param function
 	 */
 	public void registerFunction(Function<?> function) {
-		String fnName = function.getClass().getSimpleName();
-		registerFunction(fnName, function);
+		if(function instanceof BuiltInFunction){
+			registerBuiltinFunction((BuiltInFunction<?>)function);
+		} else {
+			String fnName = function.getClass().getSimpleName();
+			registerFunction(fnName, function);
+		}
 	}
 	
+	/**<pre>
+	 * </pre>
+	 * @param function
+	 */
+	public void registerBuiltinFunction(BuiltInFunction<?> function) {
+		Class<?> returnType = function.getReturnType();
+		Class<?>[] argTypes = function.getArgTypes();
+
+		FunctionCallFactory factory = createFactory(returnType, function, argTypes);
+		
+		factories.put(function.getName(), factory);
+		logger.log(Level.WARNING, "Register Function " + function.getClass().getName() + " for " + function.getName() );
+	}
+
+
 	/**
 	 * <pre>
 	 * Creates FunctionCallFactory for function and register it.

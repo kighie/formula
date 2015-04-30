@@ -1,8 +1,12 @@
 
-importJava java.lang.System;
 importJava java.net.URL;
 
 paramdef sampleObject as kr.simula.formula.script.SampleObject;
+
+
+println( sampleObject.testMethod(5) );
+
+assert(sampleObject.testMethod(5), 38 , "OK");
 
 
 record sampleRecord <- R{
@@ -52,7 +56,6 @@ table sampleTable2 <- newTable(sampleRecord);
 table sampleTable3 <- newTable(sampleTable);
 
 
-System.out.println( sampleObject.testMethod(5) );
 /*
 SampleDto sample <- {
 	c : 2,
