@@ -61,32 +61,17 @@ public abstract class DeclarationHelper extends AbstractHelper<DeclarationFactor
 		return factory.create(context, type, name);
 	}
 
-	/**<pre>
-	 * </pre>
-	 * @param current
-	 * @param token
-	 * @param name
-	 * @return
-	 */
-	public BlockStatement createType(BuildContext current, String token,
-			String name) {
+	public Gettable<?> declareProto(BuildContext current, String token,
+			List<?> fieldList) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	/**<pre>
-	 * </pre>
-	 * @param current
-	 * @param type
-	 * @param name
-	 * @param defaultValue
-	 * @return
-	 */
-	public Node createField(BuildContext current, Class<?> type, String name,
-			Gettable<?> defaultValue) {
+	public void protoField(BuildContext current, String token, List<?> fieldList, Class<?> type, String name, 
+			Node defaultValue, Object[] extra) {
 		// TODO Auto-generated method stub
-		return null;
 	}
+	
 
 	/**<pre>
 	 * </pre>

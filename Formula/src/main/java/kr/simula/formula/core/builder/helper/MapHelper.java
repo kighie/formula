@@ -17,7 +17,6 @@ package kr.simula.formula.core.builder.helper;
 import java.util.Map;
 
 import kr.simula.formula.core.Gettable;
-import kr.simula.formula.core.Node;
 import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.factory.MapGettableFactory;
@@ -56,9 +55,9 @@ public class MapHelper extends AbstractHelper<MapGettableFactory>{
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void mapEntry(BuildContext current, Gettable<?> mapGettable,
-			Class<?> entryType, String name, Node value) {
+			Class<?> entryType, String name, Gettable<?> value) {
 		if(mapGettable instanceof MapGettable){
-			((MapGettable)mapGettable).addEntry(entryType, name, (Gettable)value);
+			((MapGettable)mapGettable).addEntry(entryType, name, value);
 		}
 	}
 

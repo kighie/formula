@@ -131,7 +131,7 @@ retrunStmt	[BlockStatement fnBlock]
 	}
 	';'
 	;
-
+/*
 typeDecl
 	: 'typedef' typeName = IDENT '{' 
 		( type fieldName = IDENT 
@@ -150,7 +150,7 @@ typeDecl
 	'}'
 	END_OF_STMT?
 	;
-
+ */
 
 
 //{ settable = refer( $IDENT.text);}
@@ -167,7 +167,7 @@ blockContents [Block stmtHolder]
 		| functionCallStatement	{ $stmtHolder.append($functionCallStatement.stmt); }
 		| variableDecl 			{ $stmtHolder.append($variableDecl.stmt); }
 		| functionDecl 			{ $stmtHolder.append($functionDecl.fnBlock); }
-		| typeDecl
+		//| typeDecl
 	)*
 	;
 
@@ -272,7 +272,7 @@ formulaTerm returns [Node result]
 	| arrayRef			{ $result = $arrayRef.result; }
 	| array 			{ $result = $array.result; }
 	| map				{ $result = $map.result; }
-	| proto			{ $result = $proto.result; }
+	| recordProto			{ $result = $recordProto.result; }
 	| lambdaDecl		{ $result = $lambdaDecl.lambda; }
 	;
 
@@ -298,15 +298,32 @@ lambdaDecl returns [Lambda lambda]
 	;
 
 
-proto 	returns [Gettable result]
+recordProto 	returns [Gettable result]
 	: (('R{') | ('r{')) 
-		( type fieldName = IDENT 
-			( ':' formulaTerm {  } )?
-		)
-		(',' type IDENT 
-			( ':' formulaTerm {  } )?
-		)* 
+		{ List<?> fieldList = new LinkedList(); }
+		recordField[fieldList]
+		(',' recordField[fieldList] )* 
+		{ declareProto(RECORD, fieldList); }
 	'}'
+	;
+	
+recordField  [List<?> fieldList]
+	: 
+		( type IDENT 
+			{ protoField(RECORD, fieldList, $type.typeClz, $IDENT.text, null ); }
+		)
+		| ( type IDENT ':' recordFieldValue 
+			{ protoField(RECORD, fieldList, $type.typeClz, $IDENT.text, $recordFieldValue.result ); }
+		)
+	;
+	
+	
+recordFieldValue returns [Node result]
+	: literalTerm 			{ $result = $literalTerm.result; }
+	| array 			{ $result = $array.result; }
+	| map				{ $result = $map.result; }
+	| recordProto			{ $result = $recordProto.result; }
+	| lambdaDecl		{ $result = $lambdaDecl.lambda; }
 	;
 
 

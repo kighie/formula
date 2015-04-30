@@ -199,15 +199,18 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	}
 	
 	@Override
-	public BlockStatement declareType(String token, String name) {
-		return declarationHelper.createType(current, token, name);
+	public Gettable<?> declareProto(String token, List<?> fieldList) {
+		return declarationHelper.declareProto(current, token, fieldList);
+	}
+
+
+	@Override
+	public void protoField(String token, List<?> fieldList, Class<?> type, String name,
+			Node defaultValue, Object... extra) {
+		declarationHelper.protoField(current, token, fieldList, type, name, defaultValue, extra);
 	}
 
 	
-	@Override
-	public Node declareField(Class<?> type, String name, Gettable<?> defaultValue) {
-		return declarationHelper.createField(current, type, name, defaultValue);
-	}
 
 
 	@Override
@@ -264,10 +267,11 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 		return mapHelper.create(current, token);
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
-	public void mapEntry(Gettable<?> mapGettable, Class<?> entryType,
+	public void mapEntry(Gettable<Map> mapGettable, Class<?> entryType,
 			String name, Node value) {
-		mapHelper.mapEntry(current, mapGettable, entryType, name, value);
+		mapHelper.mapEntry(current, mapGettable, entryType, name, (Gettable<?>)value);
 	}
 
 	@Override

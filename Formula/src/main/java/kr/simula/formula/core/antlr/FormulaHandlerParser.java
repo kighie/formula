@@ -89,9 +89,23 @@ public class FormulaHandlerParser extends Parser implements GrammarTokens {
 	}
 
 	public Ref declare(String token, Class<?> type, String name) {
-		
 		return (Ref)handler.declare(token, type, name).setLocation(currentLocation());
 	}
+
+	
+
+	public Gettable<?> declareProto(String token, List<?> fieldList) {
+		return (Gettable<?>)handler.declareProto(token, fieldList).setLocation(currentLocation());
+	}
+
+
+
+	public void protoField(String token, List<?> fieldList, Class<?> type,
+			String name, Node defaultValue, Object... extra) {
+		handler.protoField(token, fieldList, type, name, defaultValue, extra);
+	}
+
+
 
 	public BlockStatement declareFn(Class<?> retType, String name,
 			List<Ref> args) {
@@ -127,9 +141,9 @@ public class FormulaHandlerParser extends Parser implements GrammarTokens {
 		return (BlockStatement)handler.statementBlock(token, args).setLocation(currentLocation());
 	}
 
-	public Lambda lambda(String token, List<Ref> args, Object ... extra) {
+	public Lambda<?> lambda(String token, List<Ref> args, Object ... extra) {
 		
-		return (Lambda)handler.lambda(token, args, extra).setLocation(currentLocation());
+		return (Lambda<?>)handler.lambda(token, args, extra).setLocation(currentLocation());
 	}
 
 	public Gettable<?> array(List<Node> elements) {
@@ -142,7 +156,8 @@ public class FormulaHandlerParser extends Parser implements GrammarTokens {
 		return (Gettable<Map>)handler.map(token).setLocation(currentLocation());
 	}
 
-	public void mapEntry(Gettable<?> mapGettable, Class<?> entryType,
+	@SuppressWarnings("rawtypes")
+	public void mapEntry(Gettable<Map> mapGettable, Class<?> entryType,
 			String name, Node value) {
 		handler.mapEntry(mapGettable, entryType, name, value);
 	}

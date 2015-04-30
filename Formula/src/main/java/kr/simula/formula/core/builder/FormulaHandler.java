@@ -154,25 +154,24 @@ public interface FormulaHandler {
 
 	/**
 	 * <pre>
-	 * Declares metadata
+	 * Declares prototype
 	 * </pre>
 	 * @param token
 	 * @param name
 	 * @return
 	 */
-	BlockStatement declareType(String token, String name);
+	Gettable<?> declareProto(String token, List<?>fieldList);
 	
 
 	/**
-	 * <pre>
-	 * Declares type field.
-	 * </pre>
+	 * Declares prototype field.
+	 * @param protoStatement
 	 * @param type
 	 * @param name
-	 * @param value
-	 * @return
+	 * @param defaultValue
+	 * @param extra
 	 */
-	Node declareField(Class<?> type, String name, Gettable<?> defaultValue);
+	void protoField(String token, List<?>fieldList, Class<?> type, String name, Node defaultValue, Object ... extra);
 	
 	
 	
@@ -286,7 +285,8 @@ public interface FormulaHandler {
 	 * @param value
 	 * @return
 	 */
-	void mapEntry(Gettable<?> mapGettable, Class<?> entryType, String name, Node value);
+	@SuppressWarnings("rawtypes")
+	void mapEntry(Gettable<Map> mapGettable, Class<?> entryType, String name, Node value);
 	
 	
 	void importJava(Ref ref);

@@ -72,4 +72,6 @@ public interface GrammarTokens {
 	String ARRAY_EL 	= "GET[x]";
 
 	String LAMBDA		= "LAMBDA";
+
+	String RECORD		= "RECORD";
 }
