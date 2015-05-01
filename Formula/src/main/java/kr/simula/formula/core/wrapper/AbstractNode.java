@@ -5,6 +5,10 @@ import kr.simula.formula.core.SourceLocation;
 
 public abstract class AbstractNode implements Node {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7186224443134871417L;
 	protected SourceLocation location;
 	
 	

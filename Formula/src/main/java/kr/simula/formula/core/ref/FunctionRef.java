@@ -11,6 +11,10 @@ import kr.simula.formula.core.wrapper.AbstractNode;
 @SuppressWarnings("rawtypes")
 public class FunctionRef extends AbstractNode implements Ref, Gettable<Function> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6215023078035182902L;
 	protected final QName qname;
 	protected final Function<?> function;
 	

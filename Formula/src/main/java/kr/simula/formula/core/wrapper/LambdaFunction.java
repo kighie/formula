@@ -53,6 +53,7 @@ public class LambdaFunction<O> extends AbstractBlock implements Lambda<O>, Retur
 	/**
 	 * @return the name
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -70,6 +71,7 @@ public class LambdaFunction<O> extends AbstractBlock implements Lambda<O>, Retur
 	/**
 	 * @return the args
 	 */
+	@Override
 	public List<Ref> getArgs() {
 		return args;
 	}

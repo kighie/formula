@@ -30,6 +30,10 @@ import kr.simula.formula.core.wrapper.AbstractNode;
  * @since 1.0
  */
 public class MapEntryRef extends AbstractNode implements Ref, Gettable<Object> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9218563634962128742L;
 	private Class<?> type = Object.class;
 	private Gettable<?> parent;
 	private Gettable<String> indexer;

@@ -24,6 +24,11 @@ import kr.simula.formula.core.wrapper.AbstractBlock;
  */
 public class Module extends AbstractBlock{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8466607179044909707L;
+
 	@Override
 	public void eval(Context context) {
 		evalBody(context);

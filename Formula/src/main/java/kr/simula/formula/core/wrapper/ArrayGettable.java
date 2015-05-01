@@ -29,6 +29,10 @@ import kr.simula.formula.core.EvalException;
  * @since 1.0
  */
 public class ArrayGettable<T, E> extends AbstractNode implements Gettable<T>{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5048686236011187402L;
 	private final Class<T> type;
 	private final Class<E> elementType;
 	private final Gettable<?>[] array;
@@ -48,6 +52,7 @@ public class ArrayGettable<T, E> extends AbstractNode implements Gettable<T>{
 //		return ValueType.ARRAY;
 //	}
 
+	@Override
 	public String getToken() {
 		return GrammarTokens.ARRAY_GET;
 	};

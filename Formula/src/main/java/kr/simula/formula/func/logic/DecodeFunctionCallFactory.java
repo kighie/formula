@@ -74,6 +74,10 @@ public class DecodeFunctionCallFactory extends GenericFunctionCallFactory {
 	}
 
 	public static class DecodeFunctionCallWrapper extends FunctionCallWrapper<Object> {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -6704982909284986669L;
 		private Map<Object, Gettable<?>> decisionMap;
 		private Gettable<?> criteria;
 		

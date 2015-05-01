@@ -42,6 +42,9 @@ public class Record implements Map<String, Object>{
 		this.values = values;
 	}
 
+	public RecordMetadata getMetadata() {
+		return metadata;
+	}
 	
 	public String getName() {
 		return metadata.getName();

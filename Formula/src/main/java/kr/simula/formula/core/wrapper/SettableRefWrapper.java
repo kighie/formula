@@ -21,7 +21,6 @@ import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.Settable;
 import kr.simula.formula.core.SourceLocation;
 import kr.simula.formula.core.ref.ArrayElementRef;
-import kr.simula.formula.core.ref.FieldRef;
 import kr.simula.formula.core.ref.MapEntryRef;
 
 /**
@@ -30,6 +29,10 @@ import kr.simula.formula.core.ref.MapEntryRef;
  * @since 1.0
  */
 public class SettableRefWrapper<T> implements Settable<T> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4948583787362396280L;
 	private Ref ref;
 	private Setter<T> setter;
 	

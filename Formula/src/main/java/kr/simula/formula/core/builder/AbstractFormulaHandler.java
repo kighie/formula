@@ -36,6 +36,7 @@ import kr.simula.formula.core.builder.helper.LambdaHelper;
 import kr.simula.formula.core.builder.helper.LiteralHelper;
 import kr.simula.formula.core.builder.helper.MapHelper;
 import kr.simula.formula.core.builder.helper.MethodCallHelper;
+import kr.simula.formula.core.builder.helper.PrototypeHelper;
 import kr.simula.formula.core.builder.helper.RefHelper;
 import kr.simula.formula.core.builder.helper.StatementHelper;
 import kr.simula.formula.core.builder.helper.TypeHelper;
@@ -65,6 +66,7 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	protected final MethodCallHelper methodCallHelper ;
 	protected final StatementHelper statementHelper;
 	protected final DeclarationHelper declarationHelper;
+	protected final PrototypeHelper prototypeHelper;
 	protected final LambdaHelper lambdaHelper;
 
 	protected final ArrayHelper arrayHelper;
@@ -101,7 +103,8 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 			DeclarationHelper declarationHelper,
 			ArrayHelper arrayHelper,
 			MapHelper mapHelper,
-			LambdaHelper lambdaHelper) {
+			LambdaHelper lambdaHelper,
+			PrototypeHelper prototypeHelper) {
 		this.current = this.rootContext = rootContext;
 		this.importHelper = importHelper;
 		this.blockHelper = blockHelper;
@@ -117,6 +120,7 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 		this.arrayHelper = arrayHelper;
 		this.mapHelper = mapHelper;
 		this.lambdaHelper = lambdaHelper;
+		this.prototypeHelper = prototypeHelper;
 	}
 
 
@@ -126,11 +130,13 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	}
 	
 
+	@Override
 	public void beginScope(){
 		ScopeBuildContext scope = new ScopeBuildContext(current);
 		current = scope;
 	}
 	
+	@Override
 	public void endScope(){
 		BuildContext parent = current.getParent();
 		if(parent == null){
@@ -200,14 +206,14 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	
 	@Override
 	public Gettable<?> declareProto(String token, List<?> fieldList) {
-		return declarationHelper.declareProto(current, token, fieldList);
+		return prototypeHelper.createProto(current, token, fieldList);
 	}
 
 
 	@Override
 	public void protoField(String token, List<?> fieldList, Class<?> type, String name,
 			Node defaultValue, Object... extra) {
-		declarationHelper.protoField(current, token, fieldList, type, name, defaultValue, extra);
+		prototypeHelper.protoField(current, token, fieldList, type, name, defaultValue, extra);
 	}
 
 	

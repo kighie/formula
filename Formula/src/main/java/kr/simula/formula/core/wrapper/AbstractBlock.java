@@ -26,6 +26,7 @@ import kr.simula.formula.core.Statement;
  * @author kighie@gmail.com
  * @since 1.0
  */
+@SuppressWarnings("serial")
 public abstract class AbstractBlock extends AbstractNode implements Block {
 	private List<Statement> stmtList = new LinkedList<Statement>();
 	

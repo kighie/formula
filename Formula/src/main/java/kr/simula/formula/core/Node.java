@@ -14,6 +14,8 @@
  */
 package kr.simula.formula.core;
 
+import java.io.Serializable;
+
 /**
  * <pre>
  * Common interface of all Node classes.
@@ -21,7 +23,7 @@ package kr.simula.formula.core;
  * @author kighie@gmail.com
  *
  */
-public interface Node {
+public interface Node extends Serializable {
 //	/**
 //	 * Node's content value type
 //	 */

@@ -54,6 +54,7 @@ public class LocalFunction<O> extends AbstractBlock implements Function<O>, Func
 	/**
 	 * @return the name
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -71,6 +72,7 @@ public class LocalFunction<O> extends AbstractBlock implements Function<O>, Func
 	/**
 	 * @return the args
 	 */
+	@Override
 	public List<Ref> getArgs() {
 		return args;
 	}

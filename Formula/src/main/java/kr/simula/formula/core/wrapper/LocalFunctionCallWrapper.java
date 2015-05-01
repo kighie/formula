@@ -32,6 +32,12 @@ public class LocalFunctionCallWrapper<T> extends FunctionCallWrapper<T> {
 //	private ValueType valueType;
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1307915304993423665L;
+
+
+	/**
 	 * @param function
 	 * @param args
 	 */
@@ -72,6 +78,7 @@ public class LocalFunctionCallWrapper<T> extends FunctionCallWrapper<T> {
 	}
 	
 
+	@Override
 	protected String getFunctionName(){
 		return ((LocalFunction<T>)function).getName();
 	}

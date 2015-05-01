@@ -15,6 +15,7 @@
 package kr.simula.formula.core.wrapper;
 
 import kr.simula.formula.core.Context;
+import kr.simula.formula.core.EvalException;
 import kr.simula.formula.core.Function;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.GrammarTokens;
@@ -25,8 +26,12 @@ import kr.simula.formula.core.GrammarTokens;
  * @author Ikchan Kwon
  *
  */
-public abstract class FunctionCallWrapper<T> extends AbstractNode implements Gettable<T>{
+public class FunctionCallWrapper<T> extends AbstractNode implements Gettable<T>{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5763726567208260517L;
 	protected final Function<T> function;
 	protected final Gettable<?>[] args;
 	protected boolean bArgsLateEval;
@@ -94,9 +99,14 @@ public abstract class FunctionCallWrapper<T> extends AbstractNode implements Get
 		for(Gettable<?> n : args){
 			argArr[i++] = n.get(context);
 		}
-		return function.eval(argArr);
+		try {
+			return function.eval(argArr);
+		} catch (Exception e) {
+			throw new EvalException(this, e);
+		}
 	}
 
+	@Override
 	public String toString(){
 		StringBuilder buf = new StringBuilder();
 		buf.append("(").append(function.getClass().getName());

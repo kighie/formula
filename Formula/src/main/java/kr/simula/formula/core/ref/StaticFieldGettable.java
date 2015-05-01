@@ -27,6 +27,10 @@ import kr.simula.formula.core.QName;
  */
 public class StaticFieldGettable<T> extends GenericRef implements Gettable<T>{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7833408836929284593L;
 	private T staticField;
 	
 	/**

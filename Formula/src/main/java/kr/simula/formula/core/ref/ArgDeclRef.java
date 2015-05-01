@@ -23,6 +23,10 @@ import kr.simula.formula.core.QName;
  * @since 1.0
  */
 public class ArgDeclRef  extends GenericRef {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 535106876225275853L;
 	protected Class<?> type;
 	
 	/**
@@ -36,6 +40,7 @@ public class ArgDeclRef  extends GenericRef {
 	/**
 	 * @return the type
 	 */
+	@Override
 	public Class<?> type() {
 		return type;
 	}

@@ -3,6 +3,7 @@ package kr.simula.formula.core.wrapper;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.SourceLocation;
 
+@SuppressWarnings("serial")
 public abstract class AbstractGettableWrapper<T> implements Gettable<T> {
 
 	protected final Gettable<?> original;

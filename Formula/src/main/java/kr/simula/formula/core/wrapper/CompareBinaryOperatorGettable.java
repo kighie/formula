@@ -26,6 +26,11 @@ public class CompareBinaryOperatorGettable extends BinaryOperatorGettable<Boolea
 
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4322052140192738851L;
+
+	/**
 	 * @param operator
 	 * @param operand1
 	 * @param operand2

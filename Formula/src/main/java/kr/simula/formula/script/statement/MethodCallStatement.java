@@ -26,6 +26,10 @@ import kr.simula.formula.core.ref.MethodRef;
  */
 public class MethodCallStatement extends AbstractStatement {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1307750552898970349L;
 	private MethodRef<?> methodRef;
 	
 	/**

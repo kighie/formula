@@ -33,41 +33,13 @@ public class NumericFunctionCallFactory extends GenericFunctionCallFactory {
 		super(function, validators, bArgsLateEval);
 	}
 
-//	/**
-//	 * @param function
-//	 * @param validators
-//	 * @param requiredArgCount
-//	 */
-//	public NumericFunctionCallFactory(Function<?> function,
-//			ArgumentValidator<?>[] validators, int requiredArgCount) {
-//		super(function, validators, requiredArgCount);
-//	}
-	
 	@SuppressWarnings("unchecked")
 	@Override
-	protected NumericFunctionCallWrapper createImpl(Function<?> function, Gettable<?>[] gettables) {
+	protected FunctionCallWrapper<BigDecimal> createImpl(Function<?> function, Gettable<?>[] gettables) {
 		if( !BigDecimal.class.isAssignableFrom(function.getReturnType()) ){
 			throw new BuildException("Function " + functionName() + "'s return type must be BigDecimal.");
 		}
-		return new NumericFunctionCallWrapper((Function<BigDecimal>)function, gettables);
-	}
-	
-
-	public static class NumericFunctionCallWrapper extends FunctionCallWrapper<BigDecimal> {
-		/**
-		 * @param function
-		 * @param args
-		 */
-		public NumericFunctionCallWrapper(Function<BigDecimal> function,
-				Gettable<?>[] args) {
-			super(function, args);
-		}
-		
-//		@Override
-//		public ValueType valueType() {
-//			return ValueType.NUMERIC;
-//		}
-		
+		return new FunctionCallWrapper<BigDecimal>((Function<BigDecimal>)function, gettables);
 	}
 	
 }

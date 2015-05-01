@@ -18,8 +18,6 @@ import java.util.List;
 
 import kr.simula.formula.core.BlockStatement;
 import kr.simula.formula.core.Function;
-import kr.simula.formula.core.Gettable;
-import kr.simula.formula.core.Node;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.builder.BuildContext;
@@ -61,17 +59,6 @@ public abstract class DeclarationHelper extends AbstractHelper<DeclarationFactor
 		return factory.create(context, type, name);
 	}
 
-	public Gettable<?> declareProto(BuildContext current, String token,
-			List<?> fieldList) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void protoField(BuildContext current, String token, List<?> fieldList, Class<?> type, String name, 
-			Node defaultValue, Object[] extra) {
-		// TODO Auto-generated method stub
-	}
-	
 
 	/**<pre>
 	 * </pre>

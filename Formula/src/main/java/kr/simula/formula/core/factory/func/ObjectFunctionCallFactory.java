@@ -35,26 +35,8 @@ public class ObjectFunctionCallFactory extends GenericFunctionCallFactory {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	protected ObjectFunctionCallWrapper createImpl(Function<?> function, Gettable<?>[] gettables) {
-		return new ObjectFunctionCallWrapper((Function<Object>)function, gettables);
-	}
-	
-
-	public static class ObjectFunctionCallWrapper extends FunctionCallWrapper<Object> {
-		/**
-		 * @param function
-		 * @param args
-		 */
-		public ObjectFunctionCallWrapper(Function<Object> function,
-				Gettable<?>[] args) {
-			super(function, args);
-		}
-		
-//		@Override
-//		public ValueType valueType() {
-//			return ValueType.OBJECT;
-//		}
-		
+	protected FunctionCallWrapper<Object> createImpl(Function<?> function, Gettable<?>[] gettables) {
+		return new FunctionCallWrapper<Object>((Function<Object>)function, gettables);
 	}
 	
 }

@@ -33,6 +33,10 @@ import kr.simula.formula.core.wrapper.LocalFunction;
  *
  */
 public class FunctionDeclStatement extends AbstractNode implements BlockStatement, Returnable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6041820661244925049L;
 	private final LocalFunction<?> localFunction;
 	private final QName returnValueKey;
 	

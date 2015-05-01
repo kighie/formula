@@ -31,6 +31,10 @@ import kr.simula.formula.core.util.RefUtils;
  */
 public class MethodRef<T> extends ExternalRef<T> implements Ref, Gettable<T>, Statement {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8087706601256865249L;
 	protected final Gettable<?> parent;
 	protected final Gettable<?>[] args;
 	private MethodDelegator<?> methodDelegator;

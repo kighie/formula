@@ -34,7 +34,11 @@ import kr.simula.formula.core.Literal;
  * @since 1.0
  */
 public abstract class AbstractLiteral<T> extends AbstractNode implements Literal<T>{
+	private static final long serialVersionUID = 473383319479443064L;
+
 	public static final Literal<Object> NULL = new AbstractLiteral<Object>(null){
+		private static final long serialVersionUID = -7718728325262030420L;
+
 		@Override
 		public String getToken() {
 			return GrammarTokens.LIT_NULL;
@@ -56,6 +60,7 @@ public abstract class AbstractLiteral<T> extends AbstractNode implements Literal
 		this.value = value;
 	}
 
+	@Override
 	public T getValue(){
 		return value;
 	}
@@ -76,6 +81,8 @@ public abstract class AbstractLiteral<T> extends AbstractNode implements Literal
 	}
 
 	public static class StringLiteral extends AbstractLiteral<String> {
+		private static final long serialVersionUID = -9087887733634147019L;
+
 		public StringLiteral(String value) {
 			super(value);
 		}
@@ -111,6 +118,7 @@ public abstract class AbstractLiteral<T> extends AbstractNode implements Literal
 
 	public static class NumberLiteral extends AbstractLiteral<BigDecimal> {
 
+		private static final long serialVersionUID = 641298535480157623L;
 		public final static NumberLiteral ZERO = new NumberLiteral(BigDecimal.ZERO);
 		public final static NumberLiteral ONE = new NumberLiteral(BigDecimal.ONE);
 		public final static NumberLiteral TWO = new NumberLiteral(new BigDecimal(2));
@@ -176,6 +184,10 @@ public abstract class AbstractLiteral<T> extends AbstractNode implements Literal
 	}
 
 	public static class BooleanLiteral extends AbstractLiteral<Boolean> {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 3826493857572646576L;
 		public static final BooleanLiteral TRUE = new BooleanLiteral(true);
 		public static final BooleanLiteral FALSE = new BooleanLiteral(false);
 		
@@ -201,6 +213,10 @@ public abstract class AbstractLiteral<T> extends AbstractNode implements Literal
 	}
 
 	public static class DateLiteral extends AbstractLiteral<Date> {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 8405918607730594670L;
 		private static final DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 		public DateLiteral(Date value) {

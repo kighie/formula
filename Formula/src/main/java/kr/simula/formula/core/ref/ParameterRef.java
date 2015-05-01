@@ -27,6 +27,11 @@ import kr.simula.formula.core.Settable;
  */
 public class ParameterRef<T> extends ExternalRef<T> implements Settable<T>{
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8004495197894321418L;
+
+	/**
 	 * @param qname
 	 */
 	public ParameterRef(QName qname) {

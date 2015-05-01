@@ -31,6 +31,10 @@ import kr.simula.formula.core.wrapper.AbstractNode;
  * @since 1.0
  */
 public class ArrayElementRef<T> extends AbstractNode implements Ref, Gettable<T> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1043618079563100423L;
 	private Class<T> type;
 	private Gettable<?> parent;
 	private Gettable<Number> indexer;

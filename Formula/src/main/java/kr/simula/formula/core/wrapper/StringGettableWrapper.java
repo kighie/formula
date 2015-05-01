@@ -25,6 +25,8 @@ import kr.simula.formula.core.Gettable;
 public class StringGettableWrapper extends AbstractGettableWrapper<String> {
 
 	
+	private static final long serialVersionUID = 3930384595208687275L;
+
 	/**
 	 * @param original
 	 */

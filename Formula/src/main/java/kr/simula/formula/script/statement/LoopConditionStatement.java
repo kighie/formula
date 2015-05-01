@@ -29,6 +29,10 @@ import kr.simula.formula.core.util.GettableUtils;
  * @since 1.0
  */
 public class LoopConditionStatement extends AbstractStatement {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1287038703776425966L;
 	@SuppressWarnings("rawtypes")
 	private VariableRef varRef;
 	@SuppressWarnings("rawtypes")

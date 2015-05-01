@@ -26,6 +26,10 @@ import kr.simula.formula.core.wrapper.AbstractNode;
  */
 public abstract class GenericRef extends AbstractNode implements Ref{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7140503230020974508L;
 	protected final QName qname;
 	
 	

@@ -35,30 +35,10 @@ public class StringFunctionCallFactory extends GenericFunctionCallFactory {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	protected StringFunctionCallWrapper createImpl(Function<?> function, Gettable<?>[] gettables) {
+	protected FunctionCallWrapper<String> createImpl(Function<?> function, Gettable<?>[] gettables) {
 		if( !String.class.isAssignableFrom(function.getReturnType()) ){
 			throw new BuildException("Function " + functionName() + "'s return type must be String.");
 		}
-		return new StringFunctionCallWrapper((Function<String>)function, gettables);
+		return new FunctionCallWrapper<String>((Function<String>)function, gettables);
 	}
-	
-
-
-	public static class StringFunctionCallWrapper extends FunctionCallWrapper<String> {
-		/**
-		 * @param function
-		 * @param args
-		 */
-		public StringFunctionCallWrapper(Function<String> function,
-				Gettable<?>[] args) {
-			super(function, args);
-		}
-		
-//		@Override
-//		public ValueType valueType() {
-//			return ValueType.TEXT;
-//		}
-		
-	}
-	
 }

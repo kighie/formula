@@ -34,29 +34,12 @@ public class BooleanFunctionCallFactory extends GenericFunctionCallFactory {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	protected BooleanFunctionCallWrapper createImpl(Function<?> function, Gettable<?>[] gettables) {
+	protected FunctionCallWrapper<Boolean> createImpl(Function<?> function, Gettable<?>[] gettables) {
 		if( !Boolean.class.isAssignableFrom(function.getReturnType()) ){
 			throw new BuildException("Function " + functionName() + "'s return type must be Boolean.");
 		}
-		return new BooleanFunctionCallWrapper((Function<Boolean>)function, gettables);
+		return new FunctionCallWrapper<Boolean>((Function<Boolean>)function, gettables);
 	}
 	
-
-	public static class BooleanFunctionCallWrapper extends FunctionCallWrapper<Boolean> {
-		/**
-		 * @param function
-		 * @param args
-		 */
-		public BooleanFunctionCallWrapper(Function<Boolean> function,
-				Gettable<?>[] args) {
-			super(function, args);
-		}
-		
-//		@Override
-//		public ValueType valueType() {
-//			return ValueType.LOGICAL;
-//		}
-		
-	}
 
 }

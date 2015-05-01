@@ -24,6 +24,8 @@ import kr.simula.formula.core.wrapper.AbstractNode;
  *
  */
 public abstract class AbstractStatement extends AbstractNode implements Statement {
+
+	private static final long serialVersionUID = 5815911820546423265L;
 //	@Override
 //	public ValueType valueType() {
 //		return ValueType.VOID;

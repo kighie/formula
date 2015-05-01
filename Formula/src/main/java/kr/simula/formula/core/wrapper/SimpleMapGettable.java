@@ -29,11 +29,7 @@ import kr.simula.formula.core.GrammarTokens;
  */
 @SuppressWarnings("rawtypes")
 public class SimpleMapGettable  extends MapGettable<Map>{
-
-//	@Override
-//	public ValueType valueType() {
-//		return ValueType.MAP;
-//	}
+	private static final long serialVersionUID = 363074871819428291L;
 
 	@Override
 	public Class<? extends Map> type() {

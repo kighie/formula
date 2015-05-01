@@ -26,6 +26,10 @@ import kr.simula.formula.core.Settable;
  */
 public class AssignStatement<T> extends AbstractStatement {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6980758203301549496L;
 	private Settable<T> settable;
 	private Gettable<? extends T> gettable;
 	

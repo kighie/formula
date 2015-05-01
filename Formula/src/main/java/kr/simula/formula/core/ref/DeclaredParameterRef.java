@@ -25,6 +25,10 @@ import kr.simula.formula.core.QName;
  *
  */
 public class DeclaredParameterRef<T> extends GenericRef implements Gettable<T> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1232605568953963624L;
 	private Class<T> type;
 	
 	/**

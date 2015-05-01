@@ -11,6 +11,7 @@ public interface FunctionSpi<O> extends Function<O> {
 	/**
 	 * may not implemented.
 	 */
+	@Override
 	O eval(Object ... args);
 	
 	String getName();

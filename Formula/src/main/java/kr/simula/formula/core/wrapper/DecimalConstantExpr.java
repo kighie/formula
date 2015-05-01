@@ -26,6 +26,10 @@ import kr.simula.formula.core.Literal;
  * @since 1.0
  */
 public class DecimalConstantExpr extends AbstractNode implements Literal<BigDecimal>{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -578411137855807850L;
 	private BigDecimal value;
 	private String exprStr;
 	

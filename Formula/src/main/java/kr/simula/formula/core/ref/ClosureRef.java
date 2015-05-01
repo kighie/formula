@@ -29,6 +29,10 @@ import kr.simula.formula.core.wrapper.AbstractNode;
 @SuppressWarnings("rawtypes")
 public class ClosureRef extends AbstractNode implements GettableRef<Function> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 630837874234949042L;
 	protected final QName qname;
 	
 	
@@ -45,6 +49,7 @@ public class ClosureRef extends AbstractNode implements GettableRef<Function> {
 //		return ValueType.FUNCTION;
 //	}
 
+	@Override
 	public String getToken() {
 		return GrammarTokens.REF;
 	};

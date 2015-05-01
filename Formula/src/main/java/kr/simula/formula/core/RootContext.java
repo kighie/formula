@@ -34,10 +34,12 @@ public class RootContext implements Context {
 		attributes.put(name, value);
 	}
 
+	@Override
 	public Object getAttribute(String name) {
 		return attributes.get(name);
 	}
 
+	@Override
 	public Object getReference(QName qname) {
 		Object value = refMap.get(qname);
 //		if(value == null){
@@ -55,6 +57,7 @@ public class RootContext implements Context {
 		return refMap.get(new QName(name));
 	}
 
+	@Override
 	public void setReference(QName qname, Object value) {
 		refMap.put(qname, value);
 	}

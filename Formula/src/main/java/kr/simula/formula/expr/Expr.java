@@ -25,6 +25,10 @@ import kr.simula.formula.core.SourceLocation;
  * @since 1.0
  */
 public class Expr implements Gettable<Object>{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8479827209570185436L;
 	private Gettable<?> body;
 	
 	

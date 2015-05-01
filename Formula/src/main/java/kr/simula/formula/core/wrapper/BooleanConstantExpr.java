@@ -24,6 +24,10 @@ import kr.simula.formula.core.GrammarTokens;
  * @since 1.0
  */
 public class BooleanConstantExpr extends AbstractNode implements Gettable<Boolean>{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1089688074126812539L;
 	private Boolean value;
 	private String exprStr;
 	
@@ -49,6 +53,7 @@ public class BooleanConstantExpr extends AbstractNode implements Gettable<Boolea
 //		return ValueType.NUMERIC;
 //	}
 
+	@Override
 	public String getToken() {
 		return GrammarTokens.LIT_BOOLEAN;
 	};

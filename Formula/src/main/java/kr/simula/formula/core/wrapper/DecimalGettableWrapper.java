@@ -26,6 +26,10 @@ import kr.simula.formula.core.util.TypeConverter;
  * @since 1.0
  */
 public class DecimalGettableWrapper extends AbstractGettableWrapper<BigDecimal> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7317740588336851561L;
 	private TypeConverter<Object, BigDecimal> converter;
 	
 	/**

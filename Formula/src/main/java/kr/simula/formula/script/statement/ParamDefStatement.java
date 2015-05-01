@@ -26,6 +26,10 @@ import kr.simula.formula.core.ref.DeclaredParameterRef;
  *
  */
 public class ParamDefStatement extends AbstractStatement {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6492412879181386702L;
 	private DeclaredParameterRef<?> paramRef;
 	
 	/**

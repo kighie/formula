@@ -35,28 +35,10 @@ public class DateFunctionCallFactory extends GenericFunctionCallFactory {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	protected DateFunctionCallWrapper createImpl(Function<?> function, Gettable<?>[] gettables) {
+	protected FunctionCallWrapper<Date> createImpl(Function<?> function, Gettable<?>[] gettables) {
 		if( !Date.class.isAssignableFrom(function.getReturnType()) ){
 			throw new BuildException("Function " + functionName() + "'s return type must be Date.");
 		}
-		return new DateFunctionCallWrapper((Function<Date>)function, gettables);
-	}
-	
-
-	public static class DateFunctionCallWrapper extends FunctionCallWrapper<Date> {
-		/**
-		 * @param function
-		 * @param args
-		 */
-		public DateFunctionCallWrapper(Function<Date> function,
-				Gettable<?>[] args) {
-			super(function, args);
-		}
-		
-//		@Override
-//		public ValueType valueType() {
-//			return ValueType.DATE;
-//		}
-		
+		return new FunctionCallWrapper<Date>((Function<Date>)function, gettables);
 	}
 }

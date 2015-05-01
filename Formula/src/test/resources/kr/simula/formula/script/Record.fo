@@ -44,21 +44,24 @@ table sampleTable <- R{
 	URL url
 };
 
+println("sampleRecord 1. ::" & sampleRecord);
+
+record sampleRecord2 <- newRecord(sampleRecord);
+
 sampleRecord <- {
 	c : 2,
 	d : "aaaa"
 };
 
-record sampleRecord2 <- newRecord(sampleRecord);
+
+
+record sampleRecord3 <- newRecord(sampleRecord);
+
+
 
 table sampleTable2 <- newTable(sampleRecord);
 
+
+
 table sampleTable3 <- newTable(sampleTable);
 
-
-/*
-SampleDto sample <- {
-	c : 2,
-	d : "aaaa"
-}
-*/

@@ -25,6 +25,11 @@ import kr.simula.formula.core.Operator.Unary;
 public class LogicalUnaryOperatorGettable extends UnaryOperatorGettable<Boolean, Boolean> {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3356221202639948105L;
+
+	/**
 	 * @param operator
 	 * @param operand1
 	 * @param operand2

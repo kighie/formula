@@ -27,8 +27,13 @@ import kr.simula.formula.core.SourceLocation;
  * @author Ikchan Kwon
  *
  */
+@SuppressWarnings("rawtypes")
 public class LambdaGettable implements  Gettable<Lambda>{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4166307450722262006L;
 	private Lambda lambda;
 	
 	/**

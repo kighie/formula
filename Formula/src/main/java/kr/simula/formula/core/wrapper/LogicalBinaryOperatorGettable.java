@@ -26,6 +26,11 @@ public class LogicalBinaryOperatorGettable extends BinaryOperatorGettable<Boolea
 
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4002708794109452402L;
+
+	/**
 	 * @param operator
 	 * @param operand1
 	 * @param operand2

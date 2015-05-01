@@ -32,6 +32,10 @@ import kr.simula.formula.core.ref.TypeLateBinding;
  * @since 1.0
  */
 public class ClosureCallWrapper<T> extends AbstractNode implements Gettable<T>, TypeLateBinding<T> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5345606569254867627L;
 	protected final GettableRef<Function<?>> closureRef;
 	protected final Gettable<?>[] args;
 	private Class<? extends T> type;
@@ -50,6 +54,7 @@ public class ClosureCallWrapper<T> extends AbstractNode implements Gettable<T>, 
 //		return ValueTypeUtils.getValueType(type);
 //	}
 	
+	@Override
 	public String getToken() {
 		return GrammarTokens.FUNC_CALL;
 	};

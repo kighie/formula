@@ -28,6 +28,7 @@ import kr.simula.formula.core.builder.helper.LambdaHelper;
 import kr.simula.formula.core.builder.helper.LiteralHelper;
 import kr.simula.formula.core.builder.helper.MapHelper;
 import kr.simula.formula.core.builder.helper.MethodCallHelper;
+import kr.simula.formula.core.builder.helper.PrototypeHelper;
 import kr.simula.formula.core.builder.helper.RefHelper;
 import kr.simula.formula.core.builder.helper.StatementHelper;
 import kr.simula.formula.core.builder.helper.TypeHelper;
@@ -66,11 +67,12 @@ public class ExpressionHandler extends AbstractFormulaHandler {
 			UnaryOperatorHelper unaryOperatorHelper,
 			FunctionCallHelper functionCallHelper, MethodCallHelper methodCallHelper,
 			StatementHelper statementHelper, DeclarationHelper declarationHelper,
-			ArrayHelper arrayHelper, MapHelper mapHelper, LambdaHelper lambdaHelper) {
+			ArrayHelper arrayHelper, MapHelper mapHelper, LambdaHelper lambdaHelper,
+			PrototypeHelper prototypeHelper) {
 		super(rootContext, importHelper, blockHelper, literalHelper, refHelper, typeHelper,
 				binaryOperatorHelper, unaryOperatorHelper, functionCallHelper,
 				methodCallHelper, statementHelper, declarationHelper, arrayHelper,
-				mapHelper, lambdaHelper);
+				mapHelper, lambdaHelper, prototypeHelper);
 	}
 
 	@Override

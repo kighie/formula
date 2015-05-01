@@ -57,6 +57,7 @@ public class RootBuildContext implements BuildContext {
 	 * @return
 	 * @see java.util.Map#get(java.lang.Object)
 	 */
+	@Override
 	public Function<?> getLocalFn(String fnName) {
 		return functionMap.get(fnName);
 	}
@@ -67,6 +68,7 @@ public class RootBuildContext implements BuildContext {
 	 * @return
 	 * @see java.util.Map#put(java.lang.Object, java.lang.Object)
 	 */
+	@Override
 	public void registerLocalFn(String key, Function<?> value) {
 		functionMap.put(key, value);
 	}

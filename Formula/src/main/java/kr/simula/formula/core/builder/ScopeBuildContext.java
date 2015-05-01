@@ -42,6 +42,7 @@ public class ScopeBuildContext implements BuildContext {
 	/**
 	 * @return the parent
 	 */
+	@Override
 	public BuildContext getParent() {
 		return parent;
 	}
@@ -51,6 +52,7 @@ public class ScopeBuildContext implements BuildContext {
 	 * @param fn
 	 * @see kr.simula.formula.core.builder.BuildContext#registerLocalFn(java.lang.String, kr.simula.formula.core.Function)
 	 */
+	@Override
 	public void registerLocalFn(String name, Function<?> fn) {
 		if(functionMap.containsKey(name)){
 			throw new BuildException("Local function '" + name + " is already registered.");
@@ -63,6 +65,7 @@ public class ScopeBuildContext implements BuildContext {
 	 * @return
 	 * @see kr.simula.formula.core.builder.BuildContext#getLocalFn(java.lang.String)
 	 */
+	@Override
 	public Function<?> getLocalFn(String name) {
 		Function<?> function = functionMap.get(name);
 		
@@ -78,6 +81,7 @@ public class ScopeBuildContext implements BuildContext {
 		return parent.getBuiltInFunction(fnName);
 	}
 	
+	@Override
 	public Ref getRef(QName qname){
 		Ref ref = referenceMap.get(qname);
 		if(ref == null){
@@ -88,10 +92,12 @@ public class ScopeBuildContext implements BuildContext {
 		return ref;
 	}
 
+	@Override
 	public Iterable<Entry<QName, Ref>> references() {
 		return new Refs();
 	}
 
+	@Override
 	public void registerRef(QName qname, Ref ref){
 		referenceMap.put(qname, ref);
 	}

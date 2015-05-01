@@ -28,6 +28,11 @@ public class DecimalBinaryOperatorGettable extends BinaryOperatorGettable<BigDec
 
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3750742142108103042L;
+
+	/**
 	 * @param operator
 	 * @param operand1
 	 * @param operand2

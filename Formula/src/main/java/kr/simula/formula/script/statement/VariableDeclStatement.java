@@ -28,6 +28,10 @@ import kr.simula.formula.core.util.GettableUtils;
  *
  */
 public class VariableDeclStatement extends AbstractStatement {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1531306931907977141L;
 	@SuppressWarnings("rawtypes")
 	private VariableRef varRef;
 	private Gettable<?> valueNode;

@@ -14,9 +14,6 @@
  */
 package kr.simula.formula.core.ref;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
 import kr.simula.formula.core.Context;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Settable;
@@ -27,6 +24,10 @@ import kr.simula.formula.core.Settable;
  * @since 1.0
  */
 public class VariableRef<T> extends GenericRef implements GettableRef<T>, Settable<T>{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4458545471076570289L;
 	protected Class<? extends T> valueType;
 	
 	/**
@@ -67,79 +68,4 @@ public class VariableRef<T> extends GenericRef implements GettableRef<T>, Settab
 		return "{var:" + ((valueType != null) ? valueType.getSimpleName() : "Undefined") + " " + qname + "}";
 	}
 	
-	public static class StringVariable extends VariableRef<String>{
-		/**
-		 * @param qname
-		 * @param value
-		 */
-		public StringVariable(QName qname) {
-			super(String.class, qname);
-		}
-		
-//		@Override
-//		public ValueType valueType() {
-//			return ValueType.TEXT;
-//		}
-	}
-	
-
-	public static class NumberVariable extends VariableRef<BigDecimal>{
-		/**
-		 * @param qname
-		 * @param value
-		 */
-		public NumberVariable(QName qname) {
-			super(BigDecimal.class, qname);
-		}
-		
-//		@Override
-//		public ValueType valueType() {
-//			return ValueType.NUMERIC;
-//		}
-	}
-
-	public static class BooleanVariable extends VariableRef<Boolean>{
-		/**
-		 * @param qname
-		 * @param value
-		 */
-		public BooleanVariable(QName qname) {
-			super(Boolean.class, qname);
-		}
-		
-//		@Override
-//		public ValueType valueType() {
-//			return ValueType.LOGICAL;
-//		}
-	}
-	
-	public static class DateVariable extends VariableRef<Date>{
-		/**
-		 * @param qname
-		 * @param value
-		 */
-		public DateVariable(QName qname) {
-			super(Date.class, qname);
-		}
-		
-//		@Override
-//		public ValueType valueType() {
-//			return ValueType.DATE;
-//		}
-	}
-
-	public static class ObjectVariable extends VariableRef<Object>{
-		/**
-		 * @param qname
-		 * @param value
-		 */
-		public ObjectVariable(QName qname) {
-			super(Object.class, qname);
-		}
-		
-//		@Override
-//		public ValueType valueType() {
-//			return ValueType.OBJECT;
-//		}
-	}
 }

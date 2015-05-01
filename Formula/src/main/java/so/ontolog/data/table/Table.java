@@ -5,7 +5,7 @@ import java.util.Iterator;
 import so.ontolog.data.record.Record;
 import so.ontolog.data.record.RecordMetadata;
 
-public abstract class Table implements Iterable<Record> {
+public class Table implements Iterable<Record> {
 
 	protected final RecordMetadata metadata;
 	

@@ -26,6 +26,7 @@ import kr.simula.formula.core.builder.helper.LambdaHelper;
 import kr.simula.formula.core.builder.helper.LiteralHelper;
 import kr.simula.formula.core.builder.helper.MapHelper;
 import kr.simula.formula.core.builder.helper.MethodCallHelper;
+import kr.simula.formula.core.builder.helper.PrototypeHelper;
 import kr.simula.formula.core.builder.helper.RefHelper;
 import kr.simula.formula.core.builder.helper.StatementHelper;
 import kr.simula.formula.core.builder.helper.TypeHelper;
@@ -58,6 +59,7 @@ public abstract class AbstractFormulaBuilder<N extends Node>
 	private DeclarationHelper declarationHelper;
 	private TypeHelper typeHelper;
 	private ImportHelper importHelper;
+	private PrototypeHelper prototypeHelper;
 	
 	
 	private boolean initialized;
@@ -97,6 +99,7 @@ public abstract class AbstractFormulaBuilder<N extends Node>
 		
 		this.importHelper = initImportHelper();
 		
+		this.prototypeHelper = initPrototypeHelper();
 		initialized = true;
 	}
 	
@@ -162,20 +165,24 @@ public abstract class AbstractFormulaBuilder<N extends Node>
 		return new MapHelper();
 	}
 
+	protected PrototypeHelper initPrototypeHelper() {
+		return null;
+	}
+	
 
-	public BlockHelper initBlockHelper() {
+	protected BlockHelper initBlockHelper() {
 		return null;
 	}
 
-	public StatementHelper initStatementHelper() {
+	protected StatementHelper initStatementHelper() {
 		return null;
 	}
 
-	public DeclarationHelper initDeclarationHelper() {
+	protected DeclarationHelper initDeclarationHelper() {
 		return null;
 	}
 
-	public TypeHelper initTypeHelper() {
+	protected TypeHelper initTypeHelper() {
 		return null;
 	}
 	
@@ -197,7 +204,8 @@ public abstract class AbstractFormulaBuilder<N extends Node>
 		return newHandler(rootContext, 
 				importHelper, blockHelper, literalHelper, refHelper, 
 				typeHelper, binaryOperatorHelper, unaryOperatorHelper, functionCallHelper, 
-				methodCallHelper, statementHelper, declarationHelper, arrayHelper, mapHelper, lambdaHelper);
+				methodCallHelper, statementHelper, declarationHelper, arrayHelper, mapHelper, lambdaHelper,
+				prototypeHelper);
 	}
 
 	protected abstract FormulaHandler newHandler(RootBuildContext rootContext,
@@ -208,7 +216,8 @@ public abstract class AbstractFormulaBuilder<N extends Node>
 			UnaryOperatorHelper unaryOperatorHelper,
 			FunctionCallHelper functionCallHelper, MethodCallHelper methodCallHelper,
 			StatementHelper statementHelper, DeclarationHelper declarationHelper,
-			ArrayHelper arrayHelper, MapHelper mapHelper, LambdaHelper lambdaHelper);
+			ArrayHelper arrayHelper, MapHelper mapHelper, LambdaHelper lambdaHelper, 
+			PrototypeHelper prototypeHelper);
 	
 	
 	

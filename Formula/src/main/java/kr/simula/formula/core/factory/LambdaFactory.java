@@ -32,5 +32,5 @@ public interface LambdaFactory {
 	 * @param value
 	 * @return
 	 */
-	Lambda create(BuildContext current, String token, List<Ref> args, Object ... extra);
+	Lambda<?> create(BuildContext current, String token, List<Ref> args, Object ... extra);
 }

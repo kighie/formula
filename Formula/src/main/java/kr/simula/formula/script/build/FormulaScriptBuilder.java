@@ -32,6 +32,7 @@ import kr.simula.formula.core.builder.helper.LambdaHelper;
 import kr.simula.formula.core.builder.helper.LiteralHelper;
 import kr.simula.formula.core.builder.helper.MapHelper;
 import kr.simula.formula.core.builder.helper.MethodCallHelper;
+import kr.simula.formula.core.builder.helper.PrototypeHelper;
 import kr.simula.formula.core.builder.helper.RefHelper;
 import kr.simula.formula.core.builder.helper.StatementHelper;
 import kr.simula.formula.core.builder.helper.TypeHelper;
@@ -64,20 +65,20 @@ public class FormulaScriptBuilder extends AbstractFormulaBuilder<Module> {
 		registry.loadAndRegisterFunctions(this.getClass().getClassLoader(), FUNC_CLASSPATH);
 	}
 
-	public BlockHelper initBlockHelper() {
+	protected BlockHelper initBlockHelper() {
 		return new ScriptBlockHelper();
 	}
 
-	public StatementHelper initStatementHelper() {
+	protected StatementHelper initStatementHelper() {
 		return new ScriptStatementHelper();
 	}
 
-	public DeclarationHelper initDeclarationHelper() {
+	protected DeclarationHelper initDeclarationHelper() {
 		return new ScriptDeclarationHelper();
 	}
 	
 	@Override
-	public TypeHelper initTypeHelper() {
+	protected TypeHelper initTypeHelper() {
 		return new TypeHelper();
 	}
 	
@@ -103,6 +104,11 @@ public class FormulaScriptBuilder extends AbstractFormulaBuilder<Module> {
 	}
 	
 	@Override
+	protected PrototypeHelper initPrototypeHelper() {
+		return new ScriptPrototypeHelper();
+	}
+	
+	@Override
 	protected FormulaHandler newHandler(RootBuildContext rootContext,
 			ImportHelper importHelper, BlockHelper blockHelper,
 			LiteralHelper literalHelper, RefHelper refHelper,
@@ -111,11 +117,12 @@ public class FormulaScriptBuilder extends AbstractFormulaBuilder<Module> {
 			UnaryOperatorHelper unaryOperatorHelper,
 			FunctionCallHelper functionCallHelper, MethodCallHelper methodCallHelper,
 			StatementHelper statementHelper, DeclarationHelper declarationHelper,
-			ArrayHelper arrayHelper, MapHelper mapHelper, LambdaHelper lambdaHelper) {
+			ArrayHelper arrayHelper, MapHelper mapHelper, LambdaHelper lambdaHelper,
+			PrototypeHelper prototypeHelper) {
 		return new FormulaScriptHandler(rootContext, 
 				importHelper, blockHelper, literalHelper, refHelper, typeHelper, binaryOperatorHelper, unaryOperatorHelper, 
 				functionCallHelper, methodCallHelper, statementHelper, declarationHelper, 
-				arrayHelper, mapHelper, lambdaHelper);
+				arrayHelper, mapHelper, lambdaHelper, prototypeHelper);
 	}
 
 	@Override

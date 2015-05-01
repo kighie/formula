@@ -27,6 +27,11 @@ import kr.simula.formula.core.Operator.Unary;
 public class DecimalUnaryOperatorGettable extends UnaryOperatorGettable<BigDecimal, BigDecimal> {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8869372213525597084L;
+
+	/**
 	 * @param operator
 	 * @param operand1
 	 * @param operand2

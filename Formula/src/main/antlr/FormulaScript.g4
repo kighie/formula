@@ -300,10 +300,16 @@ lambdaDecl returns [Lambda lambda]
 
 recordProto 	returns [Gettable result]
 	: (('R{') | ('r{')) 
-		{ List<?> fieldList = new LinkedList(); }
+		{ 
+			List<?> fieldList = new LinkedList(); 
+			beginScope();
+		}
 		recordField[fieldList]
 		(',' recordField[fieldList] )* 
-		{ declareProto(RECORD, fieldList); }
+		{ 
+			endScope();
+			$result = declareProto(RECORD, fieldList); 
+		}
 	'}'
 	;
 	

@@ -27,6 +27,10 @@ import kr.simula.formula.core.QName;
  */
 public class ReturnStatement extends AbstractStatement {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3487808308853873781L;
 	private final Gettable<?> gettable;
 	private final QName returnValueKey;
 	

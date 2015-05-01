@@ -33,6 +33,10 @@ import kr.simula.formula.core.wrapper.AbstractBlock;
  */
 public class ForeachStatement extends AbstractBlock implements BlockStatement{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7430282325996175368L;
 	private LoopConditionStatement loopCondition;
 	
 	/**

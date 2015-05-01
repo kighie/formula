@@ -26,6 +26,10 @@ import kr.simula.formula.core.GrammarTokens;
  */
 public class FunctionCallStatement extends AbstractStatement {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2218997756365504836L;
 	private Gettable<?> funcGettable;
 	
 	/**

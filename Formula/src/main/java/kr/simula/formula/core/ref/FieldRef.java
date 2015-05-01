@@ -30,6 +30,10 @@ import kr.simula.formula.core.util.RefUtils;
  * @since 1.0
  */
 public class FieldRef<T> extends ExternalRef<T> implements Settable<T> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1482438378120894486L;
 	protected final Gettable<?> parent;
 	protected PropertyDelegator<T> propertyDelegator;
 	

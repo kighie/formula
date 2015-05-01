@@ -1397,7 +1397,10 @@ public class FormulaScriptParser extends kr.simula.formula.core.antlr.FormulaHan
 			default:
 				throw new NoViableAltException(this);
 			}
-			 List<?> fieldList = new LinkedList(); 
+			 
+						List<?> fieldList = new LinkedList(); 
+						beginScope();
+					
 			setState(341); recordField(fieldList);
 			setState(346);
 			_errHandler.sync(this);
@@ -1413,7 +1416,10 @@ public class FormulaScriptParser extends kr.simula.formula.core.antlr.FormulaHan
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			 declareProto(RECORD, fieldList); 
+			 
+						endScope();
+						((RecordProtoContext)_localctx).result =  declareProto(RECORD, fieldList); 
+					
 			setState(350); match(T__31);
 			}
 		}

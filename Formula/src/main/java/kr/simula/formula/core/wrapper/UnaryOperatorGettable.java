@@ -25,6 +25,7 @@ import kr.simula.formula.core.Operator.Unary;
  */
 public abstract class UnaryOperatorGettable<T, O1> extends AbstractNode implements Gettable<T> {
 
+	private static final long serialVersionUID = 4720749136838241978L;
 	protected Unary<T, O1> operator;
 	protected Gettable<? extends O1> operand;
 	
@@ -34,6 +35,7 @@ public abstract class UnaryOperatorGettable<T, O1> extends AbstractNode implemen
 		this.operand = operand1;
 	}
 	
+	@Override
 	public T get(Context context) {
 		return operator.eval(operand.get(context));
 	}

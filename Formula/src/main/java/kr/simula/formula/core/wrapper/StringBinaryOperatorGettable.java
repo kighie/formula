@@ -24,6 +24,7 @@ import kr.simula.formula.core.Operator.Binary;
  */
 public class StringBinaryOperatorGettable extends BinaryOperatorGettable<String, Object, Object> {
 
+	private static final long serialVersionUID = 1242107283210444381L;
 
 	/**
 	 * @param operator

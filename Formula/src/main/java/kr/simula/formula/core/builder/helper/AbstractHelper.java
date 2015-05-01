@@ -17,6 +17,8 @@ package kr.simula.formula.core.builder.helper;
 import java.util.HashMap;
 import java.util.Map;
 
+import kr.simula.formula.core.builder.BuildException;
+
 /**
  * <pre></pre>
  * @author kighie@gmail.com
@@ -38,7 +40,12 @@ public abstract class AbstractHelper<FACTORY_TYPE> {
 	}
 	
 	public FACTORY_TYPE getFactory(String expToken) {
-		return factories.get(expToken);
+		FACTORY_TYPE factory = factories.get(expToken);
+		if(factory == null){
+			throw new BuildException("Factory for " + expToken + " is not registered.");
+		}
+		
+		return factory;
 	}
 	
 	public FACTORY_TYPE setFactory(String expToken, FACTORY_TYPE factory) {

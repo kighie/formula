@@ -35,6 +35,10 @@ import kr.simula.formula.core.wrapper.AbstractBlock;
  */
 public class IfStatement extends AbstractBlock implements BlockStatement{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3944279605088982554L;
 	private Gettable<Boolean> condition;
 	private List<ElseIf> elseIfList ;
 	private Else elseStmt;
@@ -146,6 +150,10 @@ public class IfStatement extends AbstractBlock implements BlockStatement{
 	
 	
 	public class ElseIf  extends AbstractBlock implements Statement {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 4703597429637430754L;
 		private Gettable<Boolean> elseIfCondition;
 
 		public ElseIf(Gettable<Boolean> elseIfCondition) {
@@ -188,6 +196,11 @@ public class IfStatement extends AbstractBlock implements BlockStatement{
 	}
 
 	public class Else extends AbstractBlock implements Statement {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -7911878708653131993L;
+
 		@Override
 		public String getExpression() {
 			StringBuilder buf = new StringBuilder();

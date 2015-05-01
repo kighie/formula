@@ -25,6 +25,10 @@ import kr.simula.formula.core.Operator.Binary;
  */
 public abstract class BinaryOperatorGettable<T, O1, O2> extends AbstractNode implements Gettable<T> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3117925013922355766L;
 	protected Binary<T, O1, O2> operator;
 	protected Gettable<? extends O1> operand1;
 	protected Gettable<? extends O2> operand2;
