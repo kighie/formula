@@ -36,3 +36,21 @@ println(numbers[1]);
 
 numbers[2] <- 3;
 println(numbers[2]);
+
+
+
+
+object[] numbers2AR <- [[0:10],[1,2,3,4]];
+
+println(numbers2AR[0][1]);
+
+foreach(int[] a in numbers2AR){
+	foreach(int aa in a){
+		println(aa);
+	}
+}
+
+foreach(int a in numbers2AR[0]){
+	println(a);
+}
+

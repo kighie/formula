@@ -14,6 +14,8 @@
  */
 package kr.simula.formula.core.ref;
 
+import kr.simula.formula.core.Context;
+import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.GrammarTokens;
 import kr.simula.formula.core.QName;
 
@@ -22,17 +24,17 @@ import kr.simula.formula.core.QName;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class ArgDeclRef  extends GenericRef {
+public class ArgDeclRef<T>  extends GenericRef implements Gettable<T>{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 535106876225275853L;
-	protected Class<?> type;
+	protected Class<? extends T> type;
 	
 	/**
 	 * @param qname
 	 */
-	public ArgDeclRef(Class<?> type, QName qname) {
+	public ArgDeclRef(Class<? extends T> type, QName qname) {
 		super(qname);
 		this.type = type;
 	}
@@ -41,7 +43,7 @@ public class ArgDeclRef  extends GenericRef {
 	 * @return the type
 	 */
 	@Override
-	public Class<?> type() {
+	public Class<? extends T> type() {
 		return type;
 	}
 	
@@ -50,15 +52,16 @@ public class ArgDeclRef  extends GenericRef {
 		return GrammarTokens.ARG_DECL;
 	}
 	
-//	@Override
-//	public ValueType valueType() {
-//		return ValueTypeUtils.getValueType(type);
-//	}
-	
 	@Override
 	public String getExpression() {
 		StringBuilder buf = new StringBuilder();
 		buf.append(type.getName()).append(" ").append(qname);
 		return buf.toString();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public T get(Context context) {
+		return (T)context.getReference(qname);
 	}
 }

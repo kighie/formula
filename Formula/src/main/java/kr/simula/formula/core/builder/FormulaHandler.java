@@ -109,16 +109,6 @@ public interface FormulaHandler {
 
 	/**
 	 * <pre>
-	 * Builds Reference with array index
-	 * </pre>
-	 * @param name
-	 * @param index
-	 * @return
-	 */
-	Ref refer(String name, Node index);
-	
-	/**
-	 * <pre>
 	 * Builds Reference
 	 * </pre>
 	 * @param token
@@ -130,15 +120,13 @@ public interface FormulaHandler {
 
 	/**
 	 * <pre>
-	 * Builds Reference with array index
+	 * Builds Reference with array/map index
 	 * </pre>
-	 * @param parent
 	 * @param name
 	 * @param index
 	 * @return
 	 */
-	Ref refer(Ref parent, String name, Node index);
-	
+	Ref referIndexed(Ref parent, Node index);
 	
 	/**
 	 * <pre>

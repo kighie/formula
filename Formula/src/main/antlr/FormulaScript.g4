@@ -91,7 +91,6 @@ mapDecl	returns [VariableDeclStatement stmt]
 	;
 */
 
-
 /* *************************************
  * declare function
  *************************************** */
@@ -228,13 +227,6 @@ loopCondition 	returns [LoopConditionStatement condition]
 				$condition.setIteratorRef($iterableTerm.result);
 			}
 		)
-		/*
-		| ( '=' from=NUMBER ':' to=NUMBER
-			{
-				Range range = Range.create($from.text, $to.text);
-				$condition.setRange(range);
-			}
-		) */
 	;
 
 

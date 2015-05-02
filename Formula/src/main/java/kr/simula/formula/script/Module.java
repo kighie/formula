@@ -23,10 +23,6 @@ import kr.simula.formula.core.wrapper.AbstractBlock;
  * @since 1.0
  */
 public class Module extends AbstractBlock{
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8466607179044909707L;
 
 	@Override
@@ -34,12 +30,6 @@ public class Module extends AbstractBlock{
 		evalBody(context);
 	}
 
-//	void invokeException(Exception e){
-//		for( StackTraceElement ste : e.getStackTrace() ){
-//			ste.
-//		}
-//	}
-	
 	@Override
 	public String getToken() {
 		return ScriptTokens.MODULE;

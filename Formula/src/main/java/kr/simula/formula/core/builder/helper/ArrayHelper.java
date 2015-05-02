@@ -58,13 +58,14 @@ public class ArrayHelper {
 					if( gtype == null) {
 						gtype = Object.class;
 					} else if(!etype.isAssignableFrom(gtype)) {
-						gtype = Object.class;
+						etype = Object.class;
+					} else if(gtype.isArray()) {
+						etype = Object.class;
 					}
 				} else {
 					etype = gtype;
 				}
 			}
-			
 		}
 		
 		String atypeStr = "[L" + etype.getName() + ";";

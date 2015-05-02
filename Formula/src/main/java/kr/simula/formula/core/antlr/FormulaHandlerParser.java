@@ -73,20 +73,16 @@ public class FormulaHandlerParser extends Parser implements GrammarTokens {
 		return (Ref)handler.refer(name).setLocation(currentLocation());
 	}
 
-	public Ref refer(String name, Node index) {
-		
-		return (Ref)handler.refer(name, index).setLocation(currentLocation());
-	}
-
 	public Ref refer(Ref parent, String name) {
 		
 		return (Ref)handler.refer(parent, name).setLocation(currentLocation());
 	}
 
-	public Ref refer(Ref parent, String name, Node index) {
+	public Ref referIndexed(Ref parent, Node index) {
 		
-		return (Ref)handler.refer(parent, name, index).setLocation(currentLocation());
+		return (Ref)handler.referIndexed(parent, index).setLocation(currentLocation());
 	}
+
 
 	public Ref declare(String token, Class<?> type, String name) {
 		return (Ref)handler.declare(token, type, name).setLocation(currentLocation());

@@ -188,15 +188,10 @@ public abstract class AbstractFormulaHandler implements FormulaHandler {
 	}
 	
 	@Override
-	public Ref refer(String name, Node index) {
-		return refHelper.get(current,name, index);
+	public Ref referIndexed(Ref parent, Node index) {
+		return refHelper.getIndexed(current, parent, index);
 	}
 
-
-	@Override
-	public Ref refer(Ref parent, String name, Node index) {
-		return refHelper.get(current, parent, name, index);
-	}
 
 
 	@Override

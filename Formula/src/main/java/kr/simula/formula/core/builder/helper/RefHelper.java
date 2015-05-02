@@ -14,6 +14,7 @@
  */
 package kr.simula.formula.core.builder.helper;
 
+import java.util.List;
 import java.util.Map;
 
 import kr.simula.formula.core.Function;
@@ -24,6 +25,7 @@ import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.ref.ArrayElementRef;
+import kr.simula.formula.core.ref.ElementRef;
 import kr.simula.formula.core.ref.FieldRef;
 import kr.simula.formula.core.ref.FunctionRef;
 import kr.simula.formula.core.ref.MapEntryRef;
@@ -146,45 +148,82 @@ public class RefHelper {
 	}
 
 
-	/**<pre>
-	 * Build array reference 
-	 * </pre>
+
+	/**
+	 * Build array/map reference 
 	 * @param current
-	 * @param name
+	 * @param parent
 	 * @param index
 	 * @return
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public Ref get(BuildContext current, String name, Node index) {
-		Ref parentCollection = get(current, name);
-		if( Map.class.isAssignableFrom(parentCollection.type())){
-			MapEntryRef  entryRef = new MapEntryRef (parentCollection.qualifiedName(), 
-					GettableUtils.checkGettable(parentCollection), 
+	public Ref getIndexed(BuildContext current, Ref parent, Node index) {
+		
+		if(parent.type() == null){
+			System.out.println("### getIndexed :: parent=" + parent + "  " + parent.getClass());
+		}
+		if( Map.class.isAssignableFrom(parent.type())){
+			MapEntryRef  entryRef = new MapEntryRef (parent.qualifiedName(), 
+					GettableUtils.checkGettable(parent), 
 					GettableUtils.getStringGettable(index));
 			return entryRef;
 		} else {
-			ArrayElementRef elementRef = new ArrayElementRef (parentCollection.qualifiedName(), 
-					GettableUtils.checkGettable(parentCollection), 
-					GettableUtils.getDecimalGettable(index));
-			return elementRef;
+			if(parent.type().isArray() || List.class.isAssignableFrom(parent.type())){
+				ArrayElementRef elementRef = new ArrayElementRef (parent.qualifiedName(), 
+						GettableUtils.checkGettable(parent), 
+						GettableUtils.getDecimalGettable(index));
+				return elementRef;
+			} else {
+				ElementRef elementRef = new ElementRef (parent.qualifiedName(), 
+						GettableUtils.checkGettable(parent), 
+						GettableUtils.checkGettable(index));
+				return elementRef;
+			}
 		}
 	}
+	
+	
 
+//	/**<pre>
+//	 * Build array reference 
+//	 * </pre>
+//	 * @param current
+//	 * @param name
+//	 * @param index
+//	 * @return
+//	 */
+//	@SuppressWarnings({ "rawtypes", "unchecked" })
+//	public Ref get(BuildContext current, String name, Node index) {
+//		Ref parentCollection = get(current, name);
+//		if( Map.class.isAssignableFrom(parentCollection.type())){
+//			MapEntryRef  entryRef = new MapEntryRef (parentCollection.qualifiedName(), 
+//					GettableUtils.checkGettable(parentCollection), 
+//					GettableUtils.getStringGettable(index));
+//			return entryRef;
+//		} else {
+//			ArrayElementRef elementRef = new ArrayElementRef (parentCollection.qualifiedName(), 
+//					GettableUtils.checkGettable(parentCollection), 
+//					GettableUtils.getDecimalGettable(index));
+//			return elementRef;
+//		}
+//	}
+//
+//
+//	/**<pre>
+//	 * Build array reference
+//	 * </pre>
+//	 * @param current
+//	 * @param parent
+//	 * @param name
+//	 * @param index
+//	 * @return
+//	 */
+//	@SuppressWarnings({ "unchecked", "rawtypes" })
+//	public Ref get(BuildContext current, Ref parent, String name, Node index) {
+//		Ref parentArray = get(current, parent, name);
+//		ArrayElementRef elementRef = new ArrayElementRef (parentArray.qualifiedName(), 
+//				GettableUtils.checkGettable(parentArray), GettableUtils.checkGettable(index,Number.class));
+//		return elementRef;
+//	}
 
-	/**<pre>
-	 * Build array reference
-	 * </pre>
-	 * @param current
-	 * @param parent
-	 * @param name
-	 * @param index
-	 * @return
-	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public Ref get(BuildContext current, Ref parent, String name, Node index) {
-		Ref parentArray = get(current, parent, name);
-		ArrayElementRef elementRef = new ArrayElementRef (parentArray.qualifiedName(), 
-				GettableUtils.checkGettable(parentArray), GettableUtils.checkGettable(index,Number.class));
-		return elementRef;
-	}
 }

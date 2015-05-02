@@ -54,15 +54,6 @@ public class ScriptDeclarationHelper extends DeclarationHelper {
 			Ref ref = new VariableRef(type,qname);
 			context.registerRef(qname, ref);
 			
-//			QName qname;
-//			Ref ref;
-//			if(Function.class.isAssignableFrom(type)){
-//				qname = QName.getClosureQName(name);
-//				ref = new ClosureRef(qname);
-//			} else {
-//				qname = new QName(name);
-//				ref = new VariableRef(type,qname);
-//			}
 			return ref;
 		}
 		
@@ -70,8 +61,9 @@ public class ScriptDeclarationHelper extends DeclarationHelper {
 
 	static DeclarationFactory argDeclFactory = new DeclarationFactory() {
 
+		@SuppressWarnings({ "unchecked", "rawtypes" })
 		@Override
-		public ArgDeclRef create(BuildContext context, Class<?> type,
+		public ArgDeclRef<?> create(BuildContext context, Class<?> type,
 				String name) {
 			QName qname;
 			if(Function.class.isAssignableFrom(type)){
@@ -79,7 +71,9 @@ public class ScriptDeclarationHelper extends DeclarationHelper {
 			} else {
 				qname = new QName(name);
 			}
-			ArgDeclRef arg = new ArgDeclRef(type,qname);
+			
+			ArgDeclRef<?> arg = new ArgDeclRef(type,qname);
+			context.registerRef(qname, arg);
 			return arg;
 		}
 		

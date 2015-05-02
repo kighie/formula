@@ -30,12 +30,12 @@ import kr.simula.formula.core.wrapper.AbstractNode;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class ArrayElementRef<T> extends AbstractNode implements Ref, Gettable<T> {
+public class ArrayElementRef<T> extends AbstractNode implements Ref, Gettable<T>, TypeLateBinding<T> {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -1043618079563100423L;
-	private Class<T> type;
+	private Class<? extends T> type;
 	private Gettable<?> parent;
 	private Gettable<Number> indexer;
 	private QName qname;
@@ -101,7 +101,8 @@ public class ArrayElementRef<T> extends AbstractNode implements Ref, Gettable<T>
 		return qname;
 	}
 
-	public void setRequiredType(Class<T> requiredType) {
+	@Override
+	public void setRequiredType(Class<? extends T> requiredType) {
 		if((this.type != null) && (requiredType.isAssignableFrom( this.type) )){
 			throw new BuildException("Ambiguous Ref type:" + this.type + "<>" + requiredType );
 		}

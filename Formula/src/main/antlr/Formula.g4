@@ -158,6 +158,7 @@ iterableTerm returns [Node result]
 	| qualifiedName		{ $result = $qualifiedName.result; }
 	| funcCallExp		{ $result = $funcCallExp.result; }
 	| methodCallExp		{ $result = $methodCallExp.result; }
+	| arrayRef 			{ $result = $arrayRef.result; }
 	| array 			{ $result = $array.result; }
 	;
 
@@ -173,12 +174,13 @@ formulaTerm returns [Node result]
 	;
 
 arrayRef   returns [Ref result]
-	: IDENT '[' 
-		(NUMBER 	{ $result = refer( $IDENT.text, literal( LIT_NUMBER, $NUMBER.text) ); } 
-		| id2 = IDENT		{ $result = refer( $IDENT.text, refer( $id2.text) ); } 
-		| id3 = STRING_LITERAL	{ $result = refer( $IDENT.text, literal( LIT_STRING, strip($id3.text)) ); } 
+	: qualifiedName { $result = $qualifiedName.result; }
+	 ( '[' 
+		(NUMBER 	{ $result = referIndexed( $result , literal( LIT_NUMBER, $NUMBER.text) ); } 
+		| id2 = IDENT		{ $result = referIndexed( $result , refer( $id2.text) ); } 
+		| id3 = STRING_LITERAL	{ $result = referIndexed( $result , literal( LIT_STRING, strip($id3.text)) ); } 
 		)
-	 ']'
+	 ']')*
 	;
 	
 array   returns [Gettable result]

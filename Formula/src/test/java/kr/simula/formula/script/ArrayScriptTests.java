@@ -29,8 +29,8 @@ public class ArrayScriptTests extends AbstractScriptTests {
 	}
 	
 
-	@Test
-	public void performance(){
-		performanceTest("/kr/simula/formula/script/ArrayScript.fo", 1000);
-	}
+//	@Test
+//	public void performance(){
+//		performanceTest("/kr/simula/formula/script/ArrayScript.fo", 1000);
+//	}
 }
