@@ -15,6 +15,7 @@
 package kr.simula.formula.script.statement;
 
 import kr.simula.formula.core.Context;
+import kr.simula.formula.core.EvalException;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.GrammarTokens;
 import kr.simula.formula.core.Settable;
@@ -50,8 +51,14 @@ public class AssignStatement<T> extends AbstractStatement {
 	
 	@Override
 	public void eval(Context context) {
-		T value = gettable.get(context);
-		settable.set(context, value);
+		try {
+			T value = gettable.get(context);
+			settable.set(context, value);
+		} catch (EvalException e) {
+			throw e;
+		} catch (Exception e){
+			throw new EvalException(this,e);
+		}
 	}
 	
 	@Override

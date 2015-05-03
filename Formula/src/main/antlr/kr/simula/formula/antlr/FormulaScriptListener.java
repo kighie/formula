@@ -86,6 +86,16 @@ public interface FormulaScriptListener extends ParseTreeListener {
 	 */
 	void exitAdditiveExpression(@NotNull FormulaScriptParser.AdditiveExpressionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link FormulaScriptParser#protoExtention}.
+	 * @param ctx the parse tree
+	 */
+	void enterProtoExtention(@NotNull FormulaScriptParser.ProtoExtentionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FormulaScriptParser#protoExtention}.
+	 * @param ctx the parse tree
+	 */
+	void exitProtoExtention(@NotNull FormulaScriptParser.ProtoExtentionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link FormulaScriptParser#recordField}.
 	 * @param ctx the parse tree
 	 */

@@ -15,6 +15,7 @@
 package kr.simula.formula.core.ref;
 
 import kr.simula.formula.core.Context;
+import kr.simula.formula.core.InternalException;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Settable;
 
@@ -45,6 +46,11 @@ public class VariableRef<T> extends GenericRef implements GettableRef<T>, Settab
 	
 	@Override
 	public void set(Context context, T value) {
+		if( valueType != null && value != null){
+			if(!valueType.isAssignableFrom(value.getClass())){
+				throw new InternalException("Value " + value + " cannot be set to " + qname);
+			}
+		}
 		context.setReference(qname, value);
 	}
 

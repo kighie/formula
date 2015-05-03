@@ -23,6 +23,7 @@ import kr.simula.formula.core.Operator.Binary;
 import kr.simula.formula.core.builder.helper.BinaryOperatorHelper;
 import kr.simula.formula.core.factory.op.CompareBinaryOperatorFactory;
 import kr.simula.formula.core.factory.op.DecimalBinaryOperatorFactory;
+import kr.simula.formula.core.factory.op.EqualsBinaryOperatorFactory;
 import kr.simula.formula.core.factory.op.LogicalBinaryOperatorFactory;
 import kr.simula.formula.core.factory.op.StringBinaryOperatorFactory;
 
@@ -45,8 +46,8 @@ public class ExprBinaryOperatorHelper extends BinaryOperatorHelper {
 //		setFactory(GrammarTokens.OP_MOD, new DecimalBinaryOperatorFactory(MOD));
 		setFactory(GrammarTokens.OP_PLUS, new DecimalBinaryOperatorFactory(ADD));
 		setFactory(GrammarTokens.OP_MINUS, new DecimalBinaryOperatorFactory(SUBTRACT));
-		setFactory(GrammarTokens.OP_EQ, new CompareBinaryOperatorFactory(EQUALS));
-		setFactory(GrammarTokens.OP_NOT_EQ, new CompareBinaryOperatorFactory(NOT_EQUALS));
+		setFactory(GrammarTokens.OP_EQ, new EqualsBinaryOperatorFactory(EQUALS));
+		setFactory(GrammarTokens.OP_NOT_EQ, new EqualsBinaryOperatorFactory(NOT_EQUALS));
 		setFactory(GrammarTokens.OP_EQ_GT, new CompareBinaryOperatorFactory(EQUALS_GT));
 		setFactory(GrammarTokens.OP_GT, new CompareBinaryOperatorFactory(GT));
 		setFactory(GrammarTokens.OP_EQ_LT, new CompareBinaryOperatorFactory(EQUALS_LT));
@@ -114,11 +115,11 @@ public class ExprBinaryOperatorHelper extends BinaryOperatorHelper {
 	};
 	
 
-	public static final Binary<Boolean, Comparable<?>, Comparable<?>> EQUALS = new Binary<Boolean, Comparable<?>, Comparable<?>>() {
+	public static final Binary<Boolean, Object, Object> EQUALS = new Binary<Boolean, Object, Object>() {
 		private static final long serialVersionUID = 1L;
 
 		@Override
-		public Boolean eval(Comparable<?> val1, Comparable<?> val2) {
+		public Boolean eval(Object val1, Object val2) {
 			return val1.equals(val2);
 		};
 		
@@ -126,11 +127,11 @@ public class ExprBinaryOperatorHelper extends BinaryOperatorHelper {
 
 	};
 
-	public static final Binary<Boolean, Comparable<?>, Comparable<?>> NOT_EQUALS = new Binary<Boolean, Comparable<?>, Comparable<?>>() {
+	public static final Binary<Boolean, Object, Object> NOT_EQUALS = new Binary<Boolean, Object, Object>() {
 		private static final long serialVersionUID = 1L;
 
 		@Override
-		public Boolean eval(Comparable<?> val1, Comparable<?> val2) {
+		public Boolean eval(Object val1, Object val2) {
 			return !val1.equals(val2);
 		};
 		

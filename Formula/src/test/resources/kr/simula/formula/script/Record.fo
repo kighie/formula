@@ -16,15 +16,62 @@ record sampleRecord <- R{
 	String d ,
 	number[]  nums : [1,2,3,4,5],
 	map    map1 : { a:1, b:2 },
-	map[]    maps : [{ a:1, b:2 }, {a:1,c:2}],
+	map    map2 : {},
+	map[]    maps : [{ a:1, b:2 }, {a:1,c:2}, {}],
 	record recA : R{
-		number a
+		number a,
+		text b
 	},
 	function fn : fndef(number a){
 		System.out.println(a);
 	},
 	URL url
 };
+
+println("sampleRecord 1. ::" & sampleRecord);
+
+record sampleRecord2 <- newRecord(sampleRecord);
+
+sampleRecord <- {
+	a : 32,
+	b : 7,
+	c : 2,
+	d : "aaaa"
+};
+
+
+println(sampleRecord);
+
+record sampleRecord3 <- newRecord(sampleRecord);
+
+println(sampleRecord3);
+
+sampleRecord.recA.a <- 17;
+
+println(sampleRecord.recA);
+
+
+sampleRecord3.recA.a <- 19;
+
+println(sampleRecord3.recA);
+
+
+sampleRecord <- {
+	a : 32,
+	b : 7,
+	c : 2,
+	recA : { a:31 }
+};
+
+println(sampleRecord);
+
+/*
+
+table sampleTable2 <- newTable(sampleRecord);
+
+
+
+table sampleTable3 <- newTable(sampleTable);
 
 
 table sampleTable <- R{
@@ -43,25 +90,4 @@ table sampleTable <- R{
 	},
 	URL url
 };
-
-println("sampleRecord 1. ::" & sampleRecord);
-
-record sampleRecord2 <- newRecord(sampleRecord);
-
-sampleRecord <- {
-	c : 2,
-	d : "aaaa"
-};
-
-
-
-record sampleRecord3 <- newRecord(sampleRecord);
-
-
-
-table sampleTable2 <- newTable(sampleRecord);
-
-
-
-table sampleTable3 <- newTable(sampleTable);
-
+*/

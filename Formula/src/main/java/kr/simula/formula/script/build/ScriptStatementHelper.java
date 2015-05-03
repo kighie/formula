@@ -19,6 +19,7 @@ import kr.simula.formula.core.Node;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.Returnable;
+import kr.simula.formula.core.Settable;
 import kr.simula.formula.core.builder.BuildContext;
 import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.builder.helper.StatementHelper;
@@ -27,6 +28,7 @@ import kr.simula.formula.core.ref.DeclaredParameterRef;
 import kr.simula.formula.core.ref.MethodRef;
 import kr.simula.formula.core.ref.VariableRef;
 import kr.simula.formula.core.util.GettableUtils;
+import kr.simula.formula.core.wrapper.RecordSettableRefWrapper;
 import kr.simula.formula.core.wrapper.SettableRefWrapper;
 import kr.simula.formula.script.ScriptTokens;
 import kr.simula.formula.script.statement.AssignStatement;
@@ -38,6 +40,8 @@ import kr.simula.formula.script.statement.MethodCallStatement;
 import kr.simula.formula.script.statement.ParamDefStatement;
 import kr.simula.formula.script.statement.ReturnStatement;
 import kr.simula.formula.script.statement.VariableDeclStatement;
+import so.ontolog.data.record.Record;
+import so.ontolog.data.table.Table;
 
 /**
  * <pre></pre>
@@ -122,8 +126,26 @@ public class ScriptStatementHelper extends StatementHelper {
 		@Override
 		public AssignStatement create(BuildContext context, String token, Node[] args) {
 			Ref ref = (Ref)args[0];
+			Class<?> refType = ref.type();
+			Settable<?> settable;
+			
+			if(refType != null){
+				if(Record.class.isAssignableFrom(refType)){
+					settable = new RecordSettableRefWrapper(ref);
+				} else if(Table.class.isAssignableFrom(refType)){
+					settable = new SettableRefWrapper(ref);
+				} else {
+					settable = new SettableRefWrapper(ref);
+				}
+			} else {
+				System.out.println(ref + " refType=" + refType + " refclass=" + ref.getClass());
+				settable = new SettableRefWrapper(ref);
+			}
+			
+			
+			
 			Gettable<?> gettable = (Gettable<?>)args[1];
-			AssignStatement stmt = new AssignStatement(new SettableRefWrapper(ref), gettable);
+			AssignStatement stmt = new AssignStatement(settable, gettable);
 			return stmt;
 		}
 	};

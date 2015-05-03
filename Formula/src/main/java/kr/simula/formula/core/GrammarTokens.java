@@ -73,5 +73,5 @@ public interface GrammarTokens {
 
 	String LAMBDA		= "LAMBDA";
 
-	String RECORD		= "RECORD";
+	String RECORD		= "R";
 }

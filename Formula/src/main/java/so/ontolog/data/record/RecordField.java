@@ -24,12 +24,14 @@ public class RecordField implements Field {
 	public static final Class<?> UNDEFINED_TYPE = Undefined.class;
 	public static final Object UNDEFINED_VAL = Undefined.VALUE;
 	
-	private Class<?> type;
-	private int length = UNDEFINED_LENGTH;
+	private final Class<?> type;
 	private final String name;
+	private int length = UNDEFINED_LENGTH;
 	private Object defaultValue;
 
-	public RecordField(String name) {
+
+	public RecordField(String name , Class<?> type) {
+		this.type = type;
 		this.name = name;
 	}
 
@@ -46,10 +48,6 @@ public class RecordField implements Field {
 
 	public Class<?> type() {
 		return type;
-	}
-
-	public void setType(Class<?> type) {
-		this.type = type;
 	}
 
 	public int length() {

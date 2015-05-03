@@ -7,7 +7,7 @@ fndef println(object value) {
 } 
 
 fndef assert(text desc , object value, object expected) : boolean { 
-	boolean ok <- value = expected;
+	boolean ok <- (value = expected);
 	println( desc & '= ' & value & ' , expected=' & expected & ' assert=' & ok);
 	return ok;
 } 

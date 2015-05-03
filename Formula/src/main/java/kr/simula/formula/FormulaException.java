@@ -14,6 +14,7 @@
  */
 package kr.simula.formula;
 
+import kr.simula.formula.core.Node;
 import kr.simula.formula.core.SourceLocation;
 import kr.simula.formula.core.util.SourceLocationUtils;
 
@@ -57,6 +58,11 @@ public class FormulaException extends RuntimeException {
 	 */
 	public FormulaException(Throwable cause) {
 		super(cause);
+	}
+
+	public FormulaException setLocation(Node node) {
+		this.sourceLocation = node.getLocation();
+		return this;
 	}
 
 	public FormulaException setLocation(SourceLocation token) {

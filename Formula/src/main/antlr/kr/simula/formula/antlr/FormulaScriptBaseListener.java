@@ -106,6 +106,18 @@ public class FormulaScriptBaseListener implements FormulaScriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterProtoExtention(@NotNull FormulaScriptParser.ProtoExtentionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitProtoExtention(@NotNull FormulaScriptParser.ProtoExtentionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterRecordField(@NotNull FormulaScriptParser.RecordFieldContext ctx) { }
 	/**
 	 * {@inheritDoc}

@@ -27,7 +27,7 @@ import java.util.Set;
  * @author kighie@gmail.com
  *
  */
-public class Record implements Map<String, Object>{
+public class Record implements Map<String, Object>, Cloneable {
 
 	protected final RecordMetadata metadata;
 	protected Object[] values;
@@ -110,19 +110,36 @@ public class Record implements Map<String, Object>{
 		return set(index, key, value);
 	}
 
+	@SuppressWarnings("unchecked")
 	protected Object set(int index, String key, Object value) {
 		if(index < 0){
 			throw new IllegalArgumentException(key + " is not found.");
 		}
 		
 		RecordField f = metadata.get(index);
+		Object old = values[index];
 		
-		if( f != null && !f.checkType(value) ){
+		if(Record.class.isAssignableFrom(f.type()) ){
+			Record recordField = ((Record)old);
+			if(value == null){
+				recordField.clear();
+			} else if(value instanceof Map){
+				Map<String,Object> map = (Map<String,Object>)value;
+				for(Map.Entry<String, Object> e : map.entrySet()){
+					recordField.put(e.getKey(), e.getValue());
+				}
+			} else {
+				throw new IllegalArgumentException("Field '" + key + "' is " 
+						+ f.type().getName() + ", but value is " + value.getClass().getName());
+			}
+			
+			value = recordField;
+		} else if(!f.checkType(value) ){
 			throw new IllegalArgumentException("Field '" + key + "' is " 
 					+ f.type().getName() + ", but value is " + value.getClass().getName());
 		}
 		
-		Object old = values[index];
+		
 		values[index] = value;
 		return old;
 	}
@@ -130,12 +147,24 @@ public class Record implements Map<String, Object>{
 	@Override
 	public void putAll(Map<? extends String, ? extends Object> m) {
 		int index = 0;
+		Object value;
 		for( String key : metadata.keySet() ){
-			set(index, key, m.get(key));
+			value = m.get(key);
+			if(value != null){
+				set(index, key, m.get(key));
+			}
+			
 			index++;
 		}
 	}
-
+	
+	@Override
+	public Record clone() {
+		Object[] newVals = (Object[])Arrays.copyOf(values, values.length);
+		Record newOne = new Record(metadata, newVals);
+		return newOne;
+	}
+	
 	@Override
 	public Object remove(Object key) {
 		return put((String)key, null);
@@ -151,7 +180,31 @@ public class Record implements Map<String, Object>{
 		return Arrays.asList(values);
 	}
 
-	
+	@Override
+	public String toString() {
+		StringBuilder buf = new StringBuilder();
+		buf.append("{");
+		
+		int length = metadata.size();
+		boolean first = true;
+		Object value;
+		
+		for(int i=0;i<length;i++){
+			value = values[i];
+			if(value!=null){
+				if(!first){
+					buf.append(",");
+				} else {
+					first = false;
+				}
+				buf.append(metadata.getKey(i)).append("=").append(value);
+			}
+		}
+		
+		buf.append("}");
+		
+		return buf.toString();
+	}
 	
 
     protected final class EntrySet extends AbstractSet<Map.Entry<String,Object>> {

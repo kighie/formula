@@ -38,5 +38,5 @@ public class RecordGettable extends AbstractNode implements Gettable<Record> {
 	public Record get(Context context) {
 		return record;
 	}
-
+	
 }

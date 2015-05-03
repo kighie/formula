@@ -29,11 +29,8 @@ import kr.simula.formula.core.builder.BuildException;
  */
 @SuppressWarnings("rawtypes")
 public abstract class MapGettable<T extends Map> extends AbstractNode  implements Gettable<T>{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6669558772762012238L;
-	protected Map<String, KeyValue<?>> entries = new LinkedHashMap<String, MapGettable.KeyValue<?>>();
+	protected Map<String, KeyValue<?>> entries = new LinkedHashMap<String, KeyValue<?>>();
 	
 	@Override
 	public String getExpression() {
@@ -62,22 +59,4 @@ public abstract class MapGettable<T extends Map> extends AbstractNode  implement
 		entries.put(key, keyValue);
 	}
 	
-	protected static class KeyValue<E> {
-		protected final Class<E> type;
-		protected final String key;
-		protected final Gettable<E> value;
-		
-		/**
-		 * @param type
-		 * @param key
-		 * @param value
-		 */
-		public KeyValue(Class<E> type, String key, Gettable<E> value) {
-			super();
-			this.type = type;
-			this.key = key;
-			this.value = value;
-		}
-		
-	}
 }

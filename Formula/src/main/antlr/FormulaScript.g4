@@ -264,7 +264,8 @@ formulaTerm returns [Node result]
 	| arrayRef			{ $result = $arrayRef.result; }
 	| array 			{ $result = $array.result; }
 	| map				{ $result = $map.result; }
-	| recordProto			{ $result = $recordProto.result; }
+	| recordProto		{ $result = $recordProto.result; }
+	| protoExtention	{ $result = $protoExtention.result; }
 	| lambdaDecl		{ $result = $lambdaDecl.lambda; }
 	;
 
@@ -324,6 +325,9 @@ recordFieldValue returns [Node result]
 	| lambdaDecl		{ $result = $lambdaDecl.lambda; }
 	;
 
+protoExtention 	returns [Gettable result]
+	: 
+	;
 
 type returns [Class<?> typeClz]
 	: (IDENT 	{ $typeClz = type($IDENT.text); })  

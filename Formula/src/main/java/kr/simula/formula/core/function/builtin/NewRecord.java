@@ -1,7 +1,6 @@
 package kr.simula.formula.core.function.builtin;
 
 import so.ontolog.data.record.Record;
-import so.ontolog.data.record.RecordMetadata;
 
 
 public class NewRecord implements BuiltInFunction<Record> {
@@ -27,8 +26,7 @@ public class NewRecord implements BuiltInFunction<Record> {
 	@Override
 	public Record eval(Object... args) {
 		Record record = (Record)args[0];
-		RecordMetadata meta = record.getMetadata();
-		return new Record(meta);
+		return record.clone();
 	}
 
 	

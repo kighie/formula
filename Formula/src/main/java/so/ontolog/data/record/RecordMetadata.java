@@ -1,5 +1,7 @@
 package so.ontolog.data.record;
 
+import java.util.List;
+
 import so.ontolog.data.common.FieldMap;
 import so.ontolog.data.util.StringArraySet;
 
@@ -30,4 +32,23 @@ public class RecordMetadata extends FieldMap<RecordField>{
 		return name;
 	}
 
+	public static RecordMetadata newMetadata(String name, List<RecordField> fieldList){
+		int length = fieldList.size();
+		RecordField[] fieldArray = new RecordField[length];
+		fieldList.toArray(fieldArray);
+		
+		return newMetadata(name, fieldArray);
+	}
+	
+
+	public static RecordMetadata newMetadata(String name, RecordField[] fieldArray){
+		int length = fieldArray.length;
+		String[] strArray = new String[length];
+		
+		for(int i =0; i< length; i++){
+			strArray[i] = fieldArray[i].name();
+		}
+		
+		return new RecordMetadata(name, strArray, fieldArray);
+	}
 }

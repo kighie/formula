@@ -17,11 +17,13 @@ package kr.simula.formula.core.wrapper;
 import java.util.Map;
 
 import kr.simula.formula.core.Context;
+import kr.simula.formula.core.InternalException;
 import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.Settable;
 import kr.simula.formula.core.SourceLocation;
 import kr.simula.formula.core.ref.ArrayElementRef;
 import kr.simula.formula.core.ref.MapEntryRef;
+import so.ontolog.data.common.Undefined;
 
 /**
  * <pre></pre>
@@ -33,29 +35,34 @@ public class SettableRefWrapper<T> implements Settable<T> {
 	 * 
 	 */
 	private static final long serialVersionUID = 4948583787362396280L;
-	private Ref ref;
-	private Setter<T> setter;
+	protected final Ref ref;
+	protected final Setter<T> setter;
 	
 	/**
 	 * @param type
 	 * @param ref
 	 */
-	@SuppressWarnings("unchecked")
 	public SettableRefWrapper(Ref ref) {
 		super();
 		this.ref = ref;
-		
+		this.setter = createSetter(ref);
+	}
+
+	@SuppressWarnings("unchecked")
+	protected Setter<T> createSetter(Ref ref){
+		Setter<T> setter;
 		if(ref instanceof ArrayElementRef){
 			setter = new ArraySetter<T>((ArrayElementRef<T>) ref);
 		} else if(ref instanceof MapEntryRef){
-			setter = new MapSetter<T>((MapEntryRef) ref);
+			setter = new MapEntrySetter<T>((MapEntryRef) ref);
 		} else if(ref instanceof Settable){
 			setter = new SettableSetter<T>((Settable<T>) ref);
 		} else {
 			setter = new SimpleSetter<T>(ref);
 		}
+		return setter;
 	}
-
+	
 	@Override
 	public String getExpression() {
 		return ref.getExpression();
@@ -88,19 +95,30 @@ public class SettableRefWrapper<T> implements Settable<T> {
 		setter.set(context, value);
 	}
 	
-	static interface Setter<E> {
+	protected static interface Setter<E> {
 		void set(Context context, E value);
 	}
 
 	static class SimpleSetter<E> implements Setter<E> {
 		private Ref ref;
+		private Class<?> refType;
 		
 		public SimpleSetter(Ref ref) {
 			this.ref = ref;
+			refType = ref.type();
+			if(refType == Undefined.class){
+				refType = null;
+			}
 		}
 
 		@Override
 		public void set(Context context, E value) {
+			if( refType != null ){
+				if(!refType.isAssignableFrom(value.getClass())){
+					throw new InternalException("Value " + value + " cannot be set to " + ref);
+				}
+			}
+			System.out.println(refType + " set " + value);
 			context.setReference(ref.qualifiedName(), value);
 		}
 		
@@ -137,10 +155,10 @@ public class SettableRefWrapper<T> implements Settable<T> {
 	}
 	
 
-	static class MapSetter<E> implements Setter<E> {
+	static class MapEntrySetter<E> implements Setter<E> {
 		private MapEntryRef  entryRef;
 		
-		public MapSetter(MapEntryRef  entryRef) {
+		public MapEntrySetter(MapEntryRef  entryRef) {
 			this.entryRef = entryRef;
 		}
 

@@ -14,9 +14,6 @@
  */
 package kr.simula.formula.core;
 
-import javax.lang.model.type.NullType;
-import javax.lang.model.type.TypeKind;
-import javax.lang.model.type.TypeVisitor;
 
 
 
@@ -28,23 +25,6 @@ import javax.lang.model.type.TypeVisitor;
  */
 public interface Context {
 
-	public static final Object NULL = new NullType(){
-		@Override
-		public TypeKind getKind() {
-			return TypeKind.NULL;
-		}
-
-		@Override
-		public <R, P> R accept(TypeVisitor<R, P> v, P p) {
-			return null;
-		}
-		
-		@Override
-		public String toString() {
-			return "null";
-		};
-	};
-	
 	Object getAttribute(String name);
 
 	Object getReference(QName name);
@@ -56,9 +36,4 @@ public interface Context {
 	
 	void clear();
 	
-//	Object getVariable(QName name);
-//	
-//	void setVariable(QName name, Object value);
-//	
-//	Iterable<Entry<QName, Object>> variables() ;
 }
