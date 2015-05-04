@@ -43,7 +43,7 @@ public class OntologSqlParser extends kr.simula.formula.core.antlr.FormulaHandle
 		T__12=31, T__11=32, T__10=33, T__9=34, T__8=35, T__7=36, T__6=37, T__5=38, 
 		T__4=39, T__3=40, T__2=41, T__1=42, T__0=43, END_OF_STMT=44, NUMBER=45, 
 		STRING_LITERAL=46, NULL=47, BOOLEAN=48, IDENT=49, WS=50, MULTILINE_COMMENT=51, 
-		LINE_COMMENT=52, NEGATION=53;
+		LINE_COMMENT=52;
 	public static final String[] tokenNames = {
 		"<INVALID>", "'/'", "'as'", "'foreach'", "'elseif'", "'return'", "'importJava'", 
 		"'SQL{'", "'!='", "'{'", "'='", "'}'", "'^'", "'if'", "'fndef'", "'<='", 
@@ -51,7 +51,7 @@ public class OntologSqlParser extends kr.simula.formula.core.antlr.FormulaHandle
 		"'<-'", "':'", "'>='", "'['", "'<'", "']'", "'>'", "'or'", "'<>'", "'%'", 
 		"'in'", "'else'", "'R{'", "')'", "'sql{'", "'and'", "'+'", "'not'", "'-'", 
 		"';'", "NUMBER", "STRING_LITERAL", "NULL", "BOOLEAN", "IDENT", "WS", "MULTILINE_COMMENT", 
-		"LINE_COMMENT", "NEGATION"
+		"LINE_COMMENT"
 	};
 	public static final int
 		RULE_protoExtention = 0, RULE_formulaScript = 1, RULE_importStatement = 2, 
@@ -1039,8 +1039,8 @@ public class OntologSqlParser extends kr.simula.formula.core.antlr.FormulaHandle
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(268); ((MethodCallStatementContext)_localctx).methodCallExp = methodCallExp();
-			setState(269); match(END_OF_STMT);
 			 ((MethodCallStatementContext)_localctx).stmt =  statement(ScriptTokens.MTHODE_CALL_STMT, ((MethodCallStatementContext)_localctx).methodCallExp.result); 
+			setState(270); match(END_OF_STMT);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1082,8 +1082,8 @@ public class OntologSqlParser extends kr.simula.formula.core.antlr.FormulaHandle
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(272); ((FunctionCallStatementContext)_localctx).funcCallExp = funcCallExp();
-			setState(273); match(END_OF_STMT);
 			 ((FunctionCallStatementContext)_localctx).stmt =  statement(ScriptTokens.FUNCTION_CALL_STMT, ((FunctionCallStatementContext)_localctx).funcCallExp.result); 
+			setState(274); match(END_OF_STMT);
 			}
 		}
 		catch (RecognitionException re) {
@@ -3585,7 +3585,7 @@ public class OntologSqlParser extends kr.simula.formula.core.antlr.FormulaHandle
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\67\u0308\4\2\t\2"+
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\66\u0308\4\2\t\2"+
 		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -3699,9 +3699,9 @@ public class OntologSqlParser extends kr.simula.formula.core.antlr.FormulaHandle
 		"\u0102\3\2\2\2\u0103\u0104\3\2\2\2\u0104\u0105\3\2\2\2\u0105\u0106\b\f"+
 		"\1\2\u0106\27\3\2\2\2\u0107\u0108\5*\26\2\u0108\u0109\7\63\2\2\u0109\u010a"+
 		"\b\r\1\2\u010a\u010b\7%\2\2\u010b\u010c\5> \2\u010c\u010d\b\r\1\2\u010d"+
-		"\31\3\2\2\2\u010e\u010f\58\35\2\u010f\u0110\7.\2\2\u0110\u0111\b\16\1"+
-		"\2\u0111\33\3\2\2\2\u0112\u0113\5\66\34\2\u0113\u0114\7.\2\2\u0114\u0115"+
-		"\b\17\1\2\u0115\35\3\2\2\2\u0116\u0117\b\20\1\2\u0117\u0118\5Z.\2\u0118"+
+		"\31\3\2\2\2\u010e\u010f\58\35\2\u010f\u0110\b\16\1\2\u0110\u0111\7.\2"+
+		"\2\u0111\33\3\2\2\2\u0112\u0113\5\66\34\2\u0113\u0114\b\17\1\2\u0114\u0115"+
+		"\7.\2\2\u0115\35\3\2\2\2\u0116\u0117\b\20\1\2\u0117\u0118\5Z.\2\u0118"+
 		"\u0119\b\20\1\2\u0119\u0120\3\2\2\2\u011a\u011b\7\30\2\2\u011b\u011c\5"+
 		"Z.\2\u011c\u011d\b\20\1\2\u011d\u011f\3\2\2\2\u011e\u011a\3\2\2\2\u011f"+
 		"\u0122\3\2\2\2\u0120\u011e\3\2\2\2\u0120\u0121\3\2\2\2\u0121\37\3\2\2"+

@@ -40,8 +40,7 @@ public class FormulaScriptParser extends kr.simula.formula.core.antlr.FormulaHan
 		T__18=24, T__17=25, T__16=26, T__15=27, T__14=28, T__13=29, T__12=30, 
 		T__11=31, T__10=32, T__9=33, T__8=34, T__7=35, T__6=36, T__5=37, T__4=38, 
 		T__3=39, T__2=40, T__1=41, T__0=42, END_OF_STMT=43, NUMBER=44, STRING_LITERAL=45, 
-		NULL=46, BOOLEAN=47, IDENT=48, WS=49, MULTILINE_COMMENT=50, LINE_COMMENT=51, 
-		NEGATION=52;
+		NULL=46, BOOLEAN=47, IDENT=48, WS=49, MULTILINE_COMMENT=50, LINE_COMMENT=51;
 	public static final String[] tokenNames = {
 		"<INVALID>", "'/'", "'#proto - to be implemented'", "'as'", "'foreach'", 
 		"'elseif'", "'return'", "'importJava'", "'!='", "'{'", "'='", "'}'", "'^'", 
@@ -49,7 +48,7 @@ public class FormulaScriptParser extends kr.simula.formula.core.antlr.FormulaHan
 		"'r{'", "','", "'.'", "'->'", "'<-'", "':'", "'>='", "'['", "'<'", "']'", 
 		"'>'", "'or'", "'<>'", "'%'", "'in'", "'else'", "'R{'", "')'", "'and'", 
 		"'+'", "'not'", "'-'", "';'", "NUMBER", "STRING_LITERAL", "NULL", "BOOLEAN", 
-		"IDENT", "WS", "MULTILINE_COMMENT", "LINE_COMMENT", "NEGATION"
+		"IDENT", "WS", "MULTILINE_COMMENT", "LINE_COMMENT"
 	};
 	public static final int
 		RULE_formulaScript = 0, RULE_importStatement = 1, RULE_paramDef = 2, RULE_variableDecl = 3, 
@@ -979,8 +978,8 @@ public class FormulaScriptParser extends kr.simula.formula.core.antlr.FormulaHan
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(262); ((MethodCallStatementContext)_localctx).methodCallExp = methodCallExp();
-			setState(263); match(END_OF_STMT);
 			 ((MethodCallStatementContext)_localctx).stmt =  statement(ScriptTokens.MTHODE_CALL_STMT, ((MethodCallStatementContext)_localctx).methodCallExp.result); 
+			setState(264); match(END_OF_STMT);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1022,8 +1021,8 @@ public class FormulaScriptParser extends kr.simula.formula.core.antlr.FormulaHan
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(266); ((FunctionCallStatementContext)_localctx).funcCallExp = funcCallExp();
-			setState(267); match(END_OF_STMT);
 			 ((FunctionCallStatementContext)_localctx).stmt =  statement(ScriptTokens.FUNCTION_CALL_STMT, ((FunctionCallStatementContext)_localctx).funcCallExp.result); 
+			setState(268); match(END_OF_STMT);
 			}
 		}
 		catch (RecognitionException re) {
@@ -3559,7 +3558,7 @@ public class FormulaScriptParser extends kr.simula.formula.core.antlr.FormulaHan
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\66\u0304\4\2\t\2"+
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\65\u0304\4\2\t\2"+
 		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -3671,8 +3670,8 @@ public class FormulaScriptParser extends kr.simula.formula.core.antlr.FormulaHan
 		"\u00ff\3\2\2\2\u00ff\u0100\b\13\1\2\u0100\25\3\2\2\2\u0101\u0102\5*\26"+
 		"\2\u0102\u0103\7\62\2\2\u0103\u0104\b\f\1\2\u0104\u0105\7%\2\2\u0105\u0106"+
 		"\5> \2\u0106\u0107\b\f\1\2\u0107\27\3\2\2\2\u0108\u0109\58\35\2\u0109"+
-		"\u010a\7-\2\2\u010a\u010b\b\r\1\2\u010b\31\3\2\2\2\u010c\u010d\5\66\34"+
-		"\2\u010d\u010e\7-\2\2\u010e\u010f\b\16\1\2\u010f\33\3\2\2\2\u0110\u0111"+
+		"\u010a\b\r\1\2\u010a\u010b\7-\2\2\u010b\31\3\2\2\2\u010c\u010d\5\66\34"+
+		"\2\u010d\u010e\b\16\1\2\u010e\u010f\7-\2\2\u010f\33\3\2\2\2\u0110\u0111"+
 		"\b\17\1\2\u0111\u0112\5Z.\2\u0112\u0113\b\17\1\2\u0113\u011a\3\2\2\2\u0114"+
 		"\u0115\7\30\2\2\u0115\u0116\5Z.\2\u0116\u0117\b\17\1\2\u0117\u0119\3\2"+
 		"\2\2\u0118\u0114\3\2\2\2\u0119\u011c\3\2\2\2\u011a\u0118\3\2\2\2\u011a"+

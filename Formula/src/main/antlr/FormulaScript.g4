@@ -166,7 +166,6 @@ blockContents [Block stmtHolder]
 		| functionCallStatement	{ $stmtHolder.append($functionCallStatement.stmt); }
 		| variableDecl 			{ $stmtHolder.append($variableDecl.stmt); }
 		| functionDecl 			{ $stmtHolder.append($functionDecl.fnBlock); }
-		//| typeDecl
 	)*
 	;
 
@@ -232,11 +231,13 @@ loopCondition 	returns [LoopConditionStatement condition]
 
 
 methodCallStatement  returns [Statement stmt]
-	: methodCallExp END_OF_STMT { $stmt = statement(ScriptTokens.MTHODE_CALL_STMT, $methodCallExp.result); }
+	: methodCallExp  { $stmt = statement(ScriptTokens.MTHODE_CALL_STMT, $methodCallExp.result); }
+	END_OF_STMT
 	;
 	
 functionCallStatement  returns [Statement stmt]
-	: funcCallExp END_OF_STMT { $stmt = statement(ScriptTokens.FUNCTION_CALL_STMT, $funcCallExp.result); }
+	: funcCallExp  { $stmt = statement(ScriptTokens.FUNCTION_CALL_STMT, $funcCallExp.result); } 
+	END_OF_STMT
 	;
 
 /*

@@ -63,11 +63,11 @@ options {
 //	package kr.simula.formula.antlr;
 }
 
-
+/*
 tokens {
   	NEGATION
 }
-
+ */
 
 /* *************************************
  * Formula Expression

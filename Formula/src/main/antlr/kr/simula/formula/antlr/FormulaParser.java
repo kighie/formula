@@ -32,13 +32,13 @@ public class FormulaParser extends kr.simula.formula.core.antlr.FormulaHandlerPa
 		T__19=9, T__18=10, T__17=11, T__16=12, T__15=13, T__14=14, T__13=15, T__12=16, 
 		T__11=17, T__10=18, T__9=19, T__8=20, T__7=21, T__6=22, T__5=23, T__4=24, 
 		T__3=25, T__2=26, T__1=27, T__0=28, NUMBER=29, STRING_LITERAL=30, NULL=31, 
-		BOOLEAN=32, IDENT=33, WS=34, MULTILINE_COMMENT=35, LINE_COMMENT=36, NEGATION=37;
+		BOOLEAN=32, IDENT=33, WS=34, MULTILINE_COMMENT=35, LINE_COMMENT=36;
 	public static final String[] tokenNames = {
 		"<INVALID>", "'/'", "'!='", "'{'", "'}'", "'='", "'^'", "'<='", "'&'", 
 		"'('", "'is'", "'*'", "','", "'.'", "'->'", "':'", "'>='", "'['", "'<'", 
 		"']'", "'>'", "'or'", "'<>'", "'%'", "')'", "'and'", "'+'", "'not'", "'-'", 
 		"NUMBER", "STRING_LITERAL", "NULL", "BOOLEAN", "IDENT", "WS", "MULTILINE_COMMENT", 
-		"LINE_COMMENT", "NEGATION"
+		"LINE_COMMENT"
 	};
 	public static final int
 		RULE_formulaExpression = 0, RULE_formulaExpressionBase = 1, RULE_funcCallExp = 2, 
@@ -1884,7 +1884,7 @@ public class FormulaParser extends kr.simula.formula.core.antlr.FormulaHandlerPa
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\'\u019e\4\2\t\2\4"+
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3&\u019e\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\3\2\3\2\3"+

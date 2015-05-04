@@ -3,7 +3,6 @@ importJava java.net.URL;
 
 paramdef sampleObject as kr.simula.formula.script.SampleObject;
 
-
 println( sampleObject.testMethod(5) );
 
 assert(sampleObject.testMethod(5), 38 , "OK");
@@ -65,10 +64,20 @@ sampleRecord <- {
 
 println(sampleRecord);
 
-println(sampleRecord.maps[0]);
 println(sampleRecord.nums[2]);
 
+println(sampleRecord.nums[1]);
+
+println(sampleRecord.nums[0]);
+
+println(sampleRecord.maps[1]);
+
+println(sampleRecord.maps[2]);
+
 /*
+
+
+
 
 table sampleTable2 <- newTable(sampleRecord);
 
@@ -94,3 +103,4 @@ table sampleTable <- R{
 	URL url
 };
 */
+
