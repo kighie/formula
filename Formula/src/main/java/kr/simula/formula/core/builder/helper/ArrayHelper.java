@@ -49,6 +49,9 @@ public class ArrayHelper {
 		int index=0;
 
 		for(Node n : elements){
+			if(n == null){
+				System.out.println(elements);
+			}
 			Gettable<?> g = GettableUtils.checkGettable(n);
 			array[index++] = g;
 			Class<?> gtype = g.type();

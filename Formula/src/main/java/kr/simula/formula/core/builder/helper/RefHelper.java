@@ -57,10 +57,10 @@ public class RefHelper {
 		Ref ref = context.getRef(qname);
 
 		if(ref != null){
+//			System.out.println("RefHelper#get cached ref=" + ref + "  " + ref.getClass() + "  " + ref.getLocation());
 			return ref;
 		}
-
-
+		
 		ref = newRef(context, null, qname);
 		return ref;
 	}
@@ -80,8 +80,9 @@ public class RefHelper {
 		Ref ref = context.getRef(qname);
 
 		if(ref != null){
+//			System.out.println("RefHelper#get cached ref=" + ref + "  " + ref.getClass());
 			return ref;
-		}
+		} 
 		
 		ref = newRef(context, parent, qname);
 
@@ -103,12 +104,22 @@ public class RefHelper {
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	protected Ref create(BuildContext context, Ref parent, QName qname){
+		Ref newRef = null;
 		if(parent != null){
 			if( parent instanceof Gettable<?>){
-				return new FieldRef(qname, (Gettable<?>)parent);
+//				System.out.println("RefHelper#create parent=" + parent 
+//						+ "  " + parent.getClass() 
+//						+ "  " + parent.getLocation());
+//				
+//				if(parent.type() != null && Record.class.isAssignableFrom(parent.type())){
+//					System.out.println("RefHelper#create Record  parent=" + parent + " qname=" + qname);
+//					System.out.println("\t" + context.references());
+//				}
+				
+				newRef = new FieldRef(qname, (Gettable<?>)parent);
 			} else if(parent instanceof TypeRef ){
 				Object field = RefUtils.getStaticField(parent.type(), qname.getName());
-				return new StaticFieldGettable(qname, field);
+				newRef = new StaticFieldGettable(qname, field);
 			} else {
 				throw new BuildException(qname + " cannot be unresolved.");
 			}
@@ -117,11 +128,72 @@ public class RefHelper {
 			Function<?> function = context.getLocalFn(qname.getName());
 			if(function != null){
 				FunctionRef closure = new FunctionRef(qname, function);
-				return closure;
+				newRef = closure;
 			} else {
-				return new ParameterRef(qname);
+				newRef = new ParameterRef(qname);
 			}
 		}
+
+		return newRef;
+	}
+
+	/**
+	 * Build array/map reference 
+	 * @param current
+	 * @param parent
+	 * @param index
+	 * @return
+	 */
+	public Ref getIndexed(BuildContext context, Ref parent, Node index) {
+		QName qname = makeQName(context, parent, index.toString());
+		Ref ref = context.getRef(qname);
+
+		if(ref != null){
+			return ref;
+		}
+		
+		return createIndexed(context, parent, index);
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	protected Ref createIndexed(BuildContext context, Ref parent, Node index) {
+		Ref newRef = null;
+		QName parentQName = parent.qualifiedName();
+		Class<?>parentType = parent.type();
+		
+//		System.out.println("RefHelper#getIndexed parent=" + parent 
+//				+ "  " + parent.getClass()
+//				+ " parentType=" + parentType);
+		
+		if(parentType == null){
+			ElementRef elementRef = new ElementRef (parentQName, 
+					GettableUtils.checkGettable(parent), 
+					GettableUtils.checkGettable(index));
+			newRef = elementRef;
+		} else {
+			if( Map.class.isAssignableFrom(parentType)){
+				MapEntryRef  entryRef = new MapEntryRef (parentQName, 
+						GettableUtils.checkGettable(parent), 
+						GettableUtils.getStringGettable(index));
+				newRef = entryRef;
+			} else {
+				if(parent.type().isArray() || List.class.isAssignableFrom(parentType)){
+					ArrayElementRef elementRef = new ArrayElementRef (parentQName, 
+							GettableUtils.checkGettable(parent), 
+							GettableUtils.getDecimalGettable(index));
+					newRef = elementRef;
+				} else {
+					ElementRef elementRef = new ElementRef (parentQName, 
+							GettableUtils.checkGettable(parent), 
+							GettableUtils.checkGettable(index));
+					newRef = elementRef;
+				}
+			}
+		}
+		
+		
+		context.registerRef(new QName(parentQName, index.toString()), newRef);
+		return newRef;
 	}
 	
 	/**<pre>
@@ -149,38 +221,6 @@ public class RefHelper {
 
 
 
-	/**
-	 * Build array/map reference 
-	 * @param current
-	 * @param parent
-	 * @param index
-	 * @return
-	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public Ref getIndexed(BuildContext current, Ref parent, Node index) {
-		
-		if(parent.type() == null){
-			System.out.println("### getIndexed :: parent=" + parent + "  " + parent.getClass());
-		}
-		if( Map.class.isAssignableFrom(parent.type())){
-			MapEntryRef  entryRef = new MapEntryRef (parent.qualifiedName(), 
-					GettableUtils.checkGettable(parent), 
-					GettableUtils.getStringGettable(index));
-			return entryRef;
-		} else {
-			if(parent.type().isArray() || List.class.isAssignableFrom(parent.type())){
-				ArrayElementRef elementRef = new ArrayElementRef (parent.qualifiedName(), 
-						GettableUtils.checkGettable(parent), 
-						GettableUtils.getDecimalGettable(index));
-				return elementRef;
-			} else {
-				ElementRef elementRef = new ElementRef (parent.qualifiedName(), 
-						GettableUtils.checkGettable(parent), 
-						GettableUtils.checkGettable(index));
-				return elementRef;
-			}
-		}
-	}
 	
 	
 

@@ -21,6 +21,7 @@ import kr.simula.formula.core.EvalException;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.QName;
 import kr.simula.formula.core.Settable;
+import kr.simula.formula.core.builder.BuildException;
 import kr.simula.formula.core.util.PropertyDelegator;
 import kr.simula.formula.core.util.RefUtils;
 
@@ -43,18 +44,32 @@ public class FieldRef<T> extends ExternalRef<T> implements Settable<T> {
 	public FieldRef(QName qname, Gettable<?> parent) {
 		super(qname);
 		this.parent = parent;
+		if(parent == null){
+			throw new BuildException("FieldRef parent is null.");
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
+	protected void checkPropertyDelegator(Class<?> parentType){
+		if(parentType != null){
+//			if(Record.class.isAssignableFrom(parentType)){
+//				System.out.println("FieldRef #initPropertyDelegator  parent=" + parent + " qname=" + qname);
+//			} else 
+			if(Map.class.isAssignableFrom(parentType)){
+				propertyDelegator = RefUtils.getMapPropertyDelegator(parentType, qname.getName());
+			} else {
+				propertyDelegator = RefUtils.getBeanPropertyDelegator(parentType, qname.getName());
+			}
+		}
+	}
+	
 	@Override
 	public void set(Context context, T value) {
 		Object bean = getBean(context);
 		
 		if(bean != null){
-			if(bean instanceof Map){
-				propertyDelegator = RefUtils.getMapPropertyDelegator(bean, qname.getName());
-			} else if(propertyDelegator == null){
-				propertyDelegator = RefUtils.getPropertyDelegator(bean, qname.getName());
+			if(propertyDelegator == null){
+				checkPropertyDelegator(bean.getClass());
 			}
 			propertyDelegator.set(bean, value);
 		} else {
@@ -72,7 +87,7 @@ public class FieldRef<T> extends ExternalRef<T> implements Settable<T> {
 			
 			if(bean != null){
 				if(propertyDelegator == null){
-					propertyDelegator = RefUtils.getPropertyDelegator(bean, qname.getName());
+					checkPropertyDelegator(bean.getClass());
 				}
 				
 				value = propertyDelegator.get(bean);
@@ -89,9 +104,6 @@ public class FieldRef<T> extends ExternalRef<T> implements Settable<T> {
 	}
 
 	protected Object getBean(Context context){
-		if(parent != null){
-			return parent.get(context);
-		}
-		return null;
+		return parent.get(context);
 	}
 }

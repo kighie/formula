@@ -138,7 +138,6 @@ public class ScriptStatementHelper extends StatementHelper {
 					settable = new SettableRefWrapper(ref);
 				}
 			} else {
-				System.out.println(ref + " refType=" + refType + " refclass=" + ref.getClass());
 				settable = new SettableRefWrapper(ref);
 			}
 			

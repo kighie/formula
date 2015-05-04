@@ -118,7 +118,7 @@ public class SettableRefWrapper<T> implements Settable<T> {
 					throw new InternalException("Value " + value + " cannot be set to " + ref);
 				}
 			}
-			System.out.println(refType + " set " + value);
+//			System.out.println(refType + " set " + value);
 			context.setReference(ref.qualifiedName(), value);
 		}
 		

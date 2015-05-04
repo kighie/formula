@@ -88,18 +88,18 @@ public class RefUtils {
 	}
 
 	@SuppressWarnings({ "rawtypes" })
-	public static PropertyDelegator getPropertyDelegator(Object bean, String fieldName){
-		if( bean instanceof Map ){
-			return getMapPropertyDelegator(bean, fieldName);
+	public static PropertyDelegator getPropertyDelegator(Class<?> clz, String fieldName){
+		if(!Map.class.isAssignableFrom(clz)){
+			return getMapPropertyDelegator(clz, fieldName);
 		} else {
-			return getBeanPropertyDelegator(bean, fieldName);
+			return getBeanPropertyDelegator(clz, fieldName);
 		}
 	}
 
 	@SuppressWarnings({ "rawtypes" })
-	public static PropertyDelegator getMapPropertyDelegator(Object bean, String fieldName){
+	public static PropertyDelegator getMapPropertyDelegator(Class<?>clz, String fieldName){
 
-		if(!(bean instanceof Map)){
+		if(!Map.class.isAssignableFrom(clz)){
 			throw new InternalException("MapPropertyDelegator needs map.");
 		}
 		return new MapPropertyDelegator(fieldName);
@@ -107,13 +107,12 @@ public class RefUtils {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static BeanPropertyDelegator getBeanPropertyDelegator(Object bean, String fieldName){
+	public static BeanPropertyDelegator getBeanPropertyDelegator(Class<?>clz, String fieldName){
 		StringBuilder buf = new StringBuilder(fieldName);
 		char u = Character.toUpperCase(buf.charAt(0)) ;
 		buf.setCharAt(0, u);
 		String getterName = "get" + buf.toString();
 		String setterName = "set" + buf.toString();
-		Class<?>clz = bean.getClass();
 		
 		Class<?> type = null;
 		Method getter = getGetter(clz, getterName);

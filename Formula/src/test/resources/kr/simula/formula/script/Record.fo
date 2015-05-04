@@ -17,7 +17,7 @@ record sampleRecord <- R{
 	number[]  nums : [1,2,3,4,5],
 	map    map1 : { a:1, b:2 },
 	map    map2 : {},
-	map[]    maps : [{ a:1, b:2 }, {a:1,c:2}, {}],
+	map[]    maps : [{ a:1, b:2 }, {a:3,c:4}, {}],
 	record recA : R{
 		number a,
 		text b
@@ -64,6 +64,9 @@ sampleRecord <- {
 };
 
 println(sampleRecord);
+
+println(sampleRecord.maps[0]);
+println(sampleRecord.nums[2]);
 
 /*
 

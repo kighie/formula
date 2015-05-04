@@ -326,7 +326,7 @@ recordFieldValue returns [Node result]
 	;
 
 protoExtention 	returns [Gettable result]
-	: 
+	: '#proto - to be implemented'
 	;
 
 type returns [Class<?> typeClz]
