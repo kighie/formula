@@ -13,8 +13,8 @@ import kr.simula.formula.core.Node;
 import kr.simula.formula.core.Ref;
 import kr.simula.formula.core.SourceLocation;
 import kr.simula.formula.core.Statement;
-import kr.simula.formula.core.builder.FormulaHandler;
-import kr.simula.formula.core.util.BaseSourceLocation;
+import kr.simula.formula.core.builder.BuildHandler;
+import kr.simula.formula.core.util.SimpleSourceLocation;
 
 import org.antlr.v4.runtime.Parser;
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -27,14 +27,14 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 public class FormulaHandlerParser extends Parser implements GrammarTokens {
 	
 	private String sourceText;
-	private FormulaHandler handler;
+	private BuildHandler handler;
 	
 	public FormulaHandlerParser(TokenStream input) {
 		super(input);
 	}
 	
 
-  	public void setHandler(FormulaHandler formulaHandler){
+  	public void setHandler(BuildHandler formulaHandler){
   		this.handler = formulaHandler;
   	}
   	
@@ -160,7 +160,7 @@ public class FormulaHandlerParser extends Parser implements GrammarTokens {
 	
 	/**
 	 * @param ref
-	 * @see kr.simula.formula.core.builder.FormulaHandler#importJava(kr.simula.formula.core.Ref)
+	 * @see kr.simula.formula.core.builder.BuildHandler#importJava(kr.simula.formula.core.Ref)
 	 */
 	public void importJava(Ref ref) {
 		handler.importJava(ref);
@@ -168,16 +168,16 @@ public class FormulaHandlerParser extends Parser implements GrammarTokens {
 
 
 	public SourceLocation currentLocation(){
-		BaseSourceLocation location = null;
+		SimpleSourceLocation location = null;
 		
 		if(_ctx == null){
 			Token token = this.getCurrentToken();
-			location = new BaseSourceLocation(token.getLine(), token.getCharPositionInLine(), 
+			location = new SimpleSourceLocation(token.getLine(), token.getCharPositionInLine(), 
 					token.getStartIndex(), token.getStopIndex());
 			location.setText(token.getText());
 			return location;
 		} else {
-			location = new BaseSourceLocation(_ctx.start.getLine(), _ctx.start.getCharPositionInLine(), 
+			location = new SimpleSourceLocation(_ctx.start.getLine(), _ctx.start.getCharPositionInLine(), 
 					_ctx.start.getStartIndex(), _ctx.start.getStopIndex());
 			
 			int end = -1;

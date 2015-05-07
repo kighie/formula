@@ -195,12 +195,12 @@ public abstract class AbstractFormulaBuilder<N extends Node>
 	}
 	
 	@Override
-	public FormulaHandler newHandler() {
+	public BuildHandler newHandler() {
 		return newHandler(createContext());
 	}
 	
 	@Override
-	public FormulaHandler newHandler(RootBuildContext rootContext) {
+	public BuildHandler newHandler(RootBuildContext rootContext) {
 		return newHandler(rootContext, 
 				importHelper, blockHelper, literalHelper, refHelper, 
 				typeHelper, binaryOperatorHelper, unaryOperatorHelper, functionCallHelper, 
@@ -208,7 +208,7 @@ public abstract class AbstractFormulaBuilder<N extends Node>
 				prototypeHelper);
 	}
 
-	protected abstract FormulaHandler newHandler(RootBuildContext rootContext,
+	protected abstract BuildHandler newHandler(RootBuildContext rootContext,
 			ImportHelper importHelper, BlockHelper blockHelper,
 			LiteralHelper literalHelper, RefHelper refHelper,
 			TypeHelper typeHelper,
@@ -223,25 +223,25 @@ public abstract class AbstractFormulaBuilder<N extends Node>
 	
 	@Override
 	public N build(String expression) {
-		FormulaHandler handler = newHandler();
+		BuildHandler handler = newHandler();
 		return build(handler, expression);
 	}
 	
 	@Override
 	public N build(FormulaSource source) {
-		FormulaHandler handler = newHandler();
+		BuildHandler handler = newHandler();
 		return build(handler, source);
 	}
 
 	@Override
 	public N build(FormulaSource source, RootBuildContext rootContext) {
-		FormulaHandler handler = newHandler(rootContext);
+		BuildHandler handler = newHandler(rootContext);
 		return build(handler, source);
 	}
 
-	protected abstract N build(FormulaHandler handler, String expression);
+	protected abstract N build(BuildHandler handler, String expression);
 	
-	protected abstract N build(FormulaHandler handler, FormulaSource source);
+	protected abstract N build(BuildHandler handler, FormulaSource source);
 	
 	
 }

@@ -21,7 +21,7 @@ import kr.simula.formula.core.SourceLocation;
  * @author kighie@gmail.com
  * @since 1.0
  */
-public class BaseSourceLocation implements SourceLocation {
+public class SimpleSourceLocation implements SourceLocation {
 	private int line;
 	private int charPositionInLine;
 	private int startIndex;
@@ -35,7 +35,7 @@ public class BaseSourceLocation implements SourceLocation {
 	 * @param startIndex
 	 * @param endIndex
 	 */
-	public BaseSourceLocation(int line, int charPositionInLine, int startIndex,
+	public SimpleSourceLocation(int line, int charPositionInLine, int startIndex,
 			int endIndex) {
 		super();
 		this.line = line;
@@ -49,7 +49,7 @@ public class BaseSourceLocation implements SourceLocation {
 	 * @param line
 	 * @param charPositionInLine
 	 */
-	public BaseSourceLocation(int line, int charPositionInLine) {
+	public SimpleSourceLocation(int line, int charPositionInLine) {
 		this(charPositionInLine, charPositionInLine, -1, -1);
 	}
 

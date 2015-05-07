@@ -30,7 +30,7 @@ import kr.simula.formula.core.Statement;
  * @author kighie@gmail.com
  *
  */
-public interface FormulaHandler {
+public interface BuildHandler {
 	
 	/**
 	 * <pre>

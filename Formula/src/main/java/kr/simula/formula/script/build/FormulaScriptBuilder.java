@@ -19,7 +19,7 @@ import kr.simula.formula.antlr.FormulaScriptLexer;
 import kr.simula.formula.antlr.FormulaScriptParser;
 import kr.simula.formula.antlr.FormulaScriptParser.FormulaScriptContext;
 import kr.simula.formula.core.builder.AbstractFormulaBuilder;
-import kr.simula.formula.core.builder.FormulaHandler;
+import kr.simula.formula.core.builder.BuildHandler;
 import kr.simula.formula.core.builder.FormulaSource;
 import kr.simula.formula.core.builder.RootBuildContext;
 import kr.simula.formula.core.builder.helper.ArrayHelper;
@@ -109,7 +109,7 @@ public class FormulaScriptBuilder extends AbstractFormulaBuilder<Module> {
 	}
 	
 	@Override
-	protected FormulaHandler newHandler(RootBuildContext rootContext,
+	protected BuildHandler newHandler(RootBuildContext rootContext,
 			ImportHelper importHelper, BlockHelper blockHelper,
 			LiteralHelper literalHelper, RefHelper refHelper,
 			TypeHelper typeHelper,
@@ -126,7 +126,7 @@ public class FormulaScriptBuilder extends AbstractFormulaBuilder<Module> {
 	}
 
 	@Override
-	protected Module build(FormulaHandler handler, String expression) {
+	protected Module build(BuildHandler handler, String expression) {
 		CharStream input = new ANTLRInputStream(expression);
 		FormulaScriptLexer lexer = new FormulaScriptLexer(input);
 		TokenStream tokenStream = new CommonTokenStream(lexer);
@@ -156,7 +156,7 @@ public class FormulaScriptBuilder extends AbstractFormulaBuilder<Module> {
 	}
 
 	@Override
-	protected Module build(FormulaHandler handler, FormulaSource source) {
+	protected Module build(BuildHandler handler, FormulaSource source) {
 		return build(handler, source.getSourceString());
 	}
 }

@@ -27,7 +27,7 @@ import org.antlr.v4.runtime.misc.Interval;
 public class SourceLocationUtils {
 	
 	public static SourceLocation createSourceLocation(Token token){
-		BaseSourceLocation loc = new BaseSourceLocation(token.getLine(), token.getCharPositionInLine(), 
+		SimpleSourceLocation loc = new SimpleSourceLocation(token.getLine(), token.getCharPositionInLine(), 
 				token.getStartIndex(), token.getStopIndex());
 		loc.setText(token.getText());
 		loc.setText(token.getInputStream().getText(new Interval(token.getStartIndex() - token.getCharPositionInLine(), token.getStopIndex())));
@@ -36,12 +36,12 @@ public class SourceLocationUtils {
 
 	public static SourceLocation createSourceLocation(int line, int charPositionInLine, 
 			int startIndex, int endIndex){
-		BaseSourceLocation loc = new BaseSourceLocation(line, charPositionInLine, startIndex, endIndex);
+		SimpleSourceLocation loc = new SimpleSourceLocation(line, charPositionInLine, startIndex, endIndex);
 		return loc;
 	}
 
 	public static SourceLocation createSourceLocation(int line, int charPositionInLine){
-		BaseSourceLocation loc = new BaseSourceLocation(line, charPositionInLine);
+		SimpleSourceLocation loc = new SimpleSourceLocation(line, charPositionInLine);
 		return loc;
 	}
 	

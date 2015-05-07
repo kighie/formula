@@ -19,7 +19,7 @@ import kr.simula.formula.antlr.FormulaParser;
 import kr.simula.formula.antlr.FormulaParser.FormulaExpressionContext;
 import kr.simula.formula.core.Gettable;
 import kr.simula.formula.core.builder.AbstractFormulaBuilder;
-import kr.simula.formula.core.builder.FormulaHandler;
+import kr.simula.formula.core.builder.BuildHandler;
 import kr.simula.formula.core.builder.FormulaSource;
 import kr.simula.formula.core.builder.RootBuildContext;
 import kr.simula.formula.core.builder.helper.ArrayHelper;
@@ -80,7 +80,7 @@ public class ExpressionBuilder extends AbstractFormulaBuilder<Expr> {
 	}
 
 	@Override
-	protected FormulaHandler newHandler(RootBuildContext rootContext,
+	protected BuildHandler newHandler(RootBuildContext rootContext,
 			ImportHelper importHelper, BlockHelper blockHelper,
 			LiteralHelper literalHelper, RefHelper refHelper,
 			TypeHelper typeHelper,
@@ -104,7 +104,7 @@ public class ExpressionBuilder extends AbstractFormulaBuilder<Expr> {
 	 * @param expression
 	 * @return
 	 */
-	protected Expr build(FormulaHandler handler, String expression){
+	protected Expr build(BuildHandler handler, String expression){
 		CharStream input = new ANTLRInputStream(expression);
 		FormulaLexer lexer = new FormulaLexer(input);
 		TokenStream tokenStream = new CommonTokenStream(lexer);
@@ -118,7 +118,7 @@ public class ExpressionBuilder extends AbstractFormulaBuilder<Expr> {
 	}
 	
 	@Override
-	protected Expr build(FormulaHandler handler, FormulaSource source) {
+	protected Expr build(BuildHandler handler, FormulaSource source) {
 		return build(handler, source.getSourceString());
 	}
 }

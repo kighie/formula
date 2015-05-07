@@ -46,7 +46,7 @@ import kr.simula.formula.core.builder.helper.UnaryOperatorHelper;
  * @author kighie@gmail.com
  *
  */
-public abstract class AbstractFormulaHandler implements FormulaHandler {
+public abstract class AbstractFormulaHandler implements BuildHandler {
 	
 
 	@SuppressWarnings("unchecked")

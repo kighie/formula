@@ -21,8 +21,8 @@ package kr.simula.formula.core.builder;
  */
 public interface FormulaHandlerFactory {
 
-	public abstract FormulaHandler newHandler(RootBuildContext rootContext) ;
+	public abstract BuildHandler newHandler(RootBuildContext rootContext) ;
 
-	public abstract FormulaHandler newHandler() ;
+	public abstract BuildHandler newHandler() ;
 	
 }
